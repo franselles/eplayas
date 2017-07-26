@@ -1,0 +1,17 @@
+<h3>PARTES DIARIO LIMPIEZA DE PLAYAS. DIA {{ fecha | date: 'dd/MM/yyyy' }}</h3>
+<h4>TURNO {{ turno | uppercase }}</h4>
+
+<div>
+  <div *ngFor="let playa of listaPlayas; let i=index">
+      <app-resumen-dia-partes [playa]="playa._id"></app-resumen-dia-partes>
+  </div>
+</div>
+<br>
+<div>
+    TOTAL PESOS DEL DIA
+  <div>
+    RSU: {{ totalBas?.total_rsu_manual }} KGs. - CRIBADORAS: {{ totalBas?.total_rsu_criba }} KGs. - SELECTIVO: {{ totalBas?.total_selectivo }} KGs. -
+    ALGAS: {{ totalBas?.total_algas_teoricas }} KGs.
+  </div>
+</div>
+RA. BENIDORM. SL

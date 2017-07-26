@@ -1,0 +1,53 @@
+<p>
+  operarios-detalle works!
+</p>
+
+<form novalidate [formGroup]="operariosForm" (ngSubmit)="onSubmit(operariosForm)">
+  <div>
+    <label>
+      Nombre
+    </label>
+    <input
+      type="text"
+      placeholder="Introduce nombre"
+      name="nombre"
+      formControlName="nombre">
+    <div *ngIf="operariosForm.controls['nombre'].hasError('required') && operariosForm.controls['nombre'].touched">Campo nombre necesario.
+    </div>
+  </div>
+  <div>
+    <label>
+      Direccion
+    </label>
+    <input
+      type="text"
+      placeholder="Introduce direccion"
+      name="direccion"
+      formControlName="direccion">
+  </div>
+  <div>
+    <label>
+      Telefono
+    </label>
+    <input
+      type="text"
+      placeholder="Introduce telefono"
+      name="telefono"
+      formControlName="telefono">
+  </div>
+  <div>
+    <label>
+      Puesto
+    </label>
+    <input
+      type="text"
+      placeholder="Introduce puesto"
+      name="puesto"
+      formControlName="puesto">
+  </div>
+  <div>
+    <button type="submit" [disabled]="!operariosForm.valid">Aceptar</button>
+    <button type="button" (click)="onCancelar()">Cancelar</button>
+    <button type="button" (click)="onBorrar(operariosForm)">BORRAR</button>
+  </div>
+</form>

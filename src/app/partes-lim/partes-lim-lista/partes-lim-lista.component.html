@@ -1,0 +1,20 @@
+<p>
+  Selecciona fecha para ver los partes
+</p>
+
+<nav>
+  <a [routerLink]="['detalle']">Nuevo</a> 
+</nav>
+<br>
+<input [(ngModel)]="fecha" type="date" (change)="actualizaLista()">
+<br>
+<div>
+  <div *ngFor="let parte of listaPartes">
+    <div>
+      Operario : {{ parte.operario }} - Turno: {{ parte.turno }} - Playa: {{ parte.lugar }} - 
+      <a [routerLink]="['/dash/limpieza/detalle', parte._id]">
+        Editar
+      </a>    
+    </div>
+  </div>
+</div>

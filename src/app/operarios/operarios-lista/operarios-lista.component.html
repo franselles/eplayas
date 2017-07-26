@@ -1,0 +1,14 @@
+<nav>
+  <a [routerLink]="['detalle']">Nuevo</a> 
+</nav>
+
+<div>
+  <div *ngFor="let operario of listaOperarios">
+    <div>
+      Operario : {{ operario.nombre }} - 
+      <a [routerLink]="['/dash/operarios/detalle', operario._id]">
+        Editar
+      </a>    
+    </div>
+  </div>
+</div>

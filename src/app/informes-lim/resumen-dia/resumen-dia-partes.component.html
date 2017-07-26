@@ -1,0 +1,12 @@
+<h4>PLAYA DE {{ playa.lugar | uppercase}}</h4>
+<div *ngFor="let item of playas; let i=index">
+  <app-resumen-dia-detalle [parte]="item"></app-resumen-dia-detalle>
+</div>
+<br>
+<div>
+    TOTAL PESOS DE LA PLAYA
+  <div>
+    RSU: {{ rsuP }} KGs. - CRIBADORAS: {{ rsu_criP }} KGs. - SELECTIVO: {{ selP }} KGs. -
+    ALGAS: {{ algasP }} KGs.
+  </div>
+</div>

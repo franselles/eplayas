@@ -1,0 +1,31 @@
+<div>
+  <div>
+    <h2>ACCESO A LA APLICACION GESTION LIMPIEZA DE PLAYAS. RA BENIDORM. 2017</h2>
+  </div>
+  <div></div>
+  <div>
+    <div>
+      Introduzca clave de acceso
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(loginForm)">
+  <div>
+    <label>
+      Clave
+    </label>
+    <input
+      type="password"
+      placeholder="Introduce clave"
+      name="password"
+      formControlName="password">
+    <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Campo clave necesario.</div>
+    <div *ngIf="errorPass" class="ui yellow message">Clave incorrecta.</div>
+  </div>
+  <button type="submit">Aceptar</button>
+</form>
+
+<div>
+  <h3>Nueva version 1.1.x en desarrollo</h3>
+</div>

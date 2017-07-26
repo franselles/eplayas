@@ -1,0 +1,28 @@
+  <div>
+    <br>
+    <div>
+      <div>
+        <div>
+          <label>Fecha</label>
+          <input type="date" name="fecha" placeholder="dia resumen" #fecha>
+        </div>
+        <div>
+          <label>Fecha</label>
+          <select name="turno" #turno>
+            <option>Mañana</option>
+            <option>Noche</option>    
+          </select>
+        </div>
+        <div>
+          <label>Municipio</label>
+          <select name="municipio" #municipio>
+            <option>Benidorm</option>
+            <option>Finestrat</option>    
+          </select>
+        </div>        
+        <button type="button" (click)="abreRes(fecha.value, turno.value, municipio.value)">Abrir Informe Diario</button>
+      </div>      
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
