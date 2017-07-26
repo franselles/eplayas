@@ -87,7 +87,7 @@ export class PartesLimDetalleComponent implements OnInit {
       if ({}.hasOwnProperty.call(parte.estadisticas, i)) {
         this.nuevaEstadistica(parte.estadisticas[i].estadistica);
       }
-    };
+    }
 
 
     this.parteForm.patchValue({
@@ -118,6 +118,26 @@ export class PartesLimDetalleComponent implements OnInit {
   }
 
   get estadisticas(): FormArray { return this.parteForm.get('estadisticas') as FormArray; }
+
+  /*
+  TEMPORADAS
+  */
+
+  setOperariosTemporada(o: number) {
+    switch (o) {
+      case 1:
+        this.parteForm.patchValue({
+          numero_ops: 13
+        });
+        break;
+      case 2:
+        this.parteForm.patchValue({
+          numero_ops: 27
+        });
+        break;
+    }
+  }
+
 
   /*
    GESTION CAMPOS Estadisticas
