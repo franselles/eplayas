@@ -17,4 +17,8 @@ export class ResumenComponent implements OnInit {
     this.router.navigate(['dash/imformeslimpieza/diario/', fecha, turno, municipio]);
   }
 
+  abreMes(fecha: string, turno: string, municipio: string) {
+    this.router.navigate(['dash/imformeslimpieza/mensual/', fecha, turno, municipio]);
+  }
+
 }

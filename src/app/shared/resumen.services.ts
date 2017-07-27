@@ -33,8 +33,14 @@ export class ResumenService {
       .catch(error => this.handleError(error));
   }
 
+    getMesPlaya(year: string, month: string, turno: string, municipio: string) {
+    return this.http.get(this.BASE_URL + 'mes/' + year + '/' + month + '/' + turno + '/' + municipio)
+      .map(response => response.json())
+      .catch(error => this.handleError(error));
+  }
+
   private handleError(error: any) {
     console.error(error);
-    return Observable.throw('Server error (' + error.status + '): ' + error.text())
+    return Observable.throw('Server error (' + error.status + '): ' + error.text());
   }
 }

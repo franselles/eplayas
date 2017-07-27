@@ -13,9 +13,10 @@ import { ResumenDiaDetalleComponent } from './resumen-dia/resumen-dia-detalle.co
 
 const routes: Routes = [
   {path: '', component: ResumenComponent, canActivate: [LoggedInGuard], children: [
-    {path: 'diario/:dia/:turno/:municipio', component: ResumenDiaComponent}
+    {path: 'diario/:dia/:turno/:municipio', component: ResumenDiaComponent},
+    {path: 'mensual/:dia/:turno/:municipio', component: ResumenMesComponent}
   ]}
-]
+];
 
 @NgModule({
   imports: [

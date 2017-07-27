@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Parte, Total } from './../../shared/models';
 import { ResumenService } from './../../shared/resumen.services';
@@ -18,7 +18,7 @@ export class ResumenDiaComponent implements OnInit {
   public totalBas: Total;
   public listaPlayas: any[];
 
-  constructor(private resumenService: ResumenService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private resumenService: ResumenService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
