@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: '', component: DashComponent, children: [
       {path: 'operarios', loadChildren: './../../operarios/operarios.module#OperariosModule'},
       {path: 'limpieza', loadChildren: './../../partes-lim/partes-lim.module#PartesLimModule'},
-      {path: 'imformeslimpieza', loadChildren: './../../informes-lim/informes-lim.module#InformesLimModule'},
+      {path: 'informeslimpieza', loadChildren: './../../informes-lim/informes-lim.module#InformesLimModule'},
       {path: 'analisislimpieza', loadChildren: './../../analisis/analisis.module#AnalisisModule'},
       {path: 'mantenimiento', loadChildren: './../../partes-man/partes-man.module#PartesManModule'},
       {path: 'taller', loadChildren: './../../taller/taller.module#TallerModule'},

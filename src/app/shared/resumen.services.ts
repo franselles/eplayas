@@ -33,8 +33,8 @@ export class ResumenService {
       .catch(error => this.handleError(error));
   }
 
-    getMesPlaya(year: string, month: string, turno: string, municipio: string) {
-    return this.http.get(this.BASE_URL + 'mes/' + year + '/' + month + '/' + turno + '/' + municipio)
+    getMesPlaya(year: string, month: string, turno: string, lugar: string, municipio: string) {
+    return this.http.get(this.BASE_URL + 'mes/' + year + '/' + month + '/' + turno + '/' +  lugar + '/' + municipio)
       .map(response => response.json())
       .catch(error => this.handleError(error));
   }

@@ -7,9 +7,10 @@
           <input type="date" name="fecha" placeholder="dia resumen" #fecha>
         </div>
         <div>
-          <label>Fecha</label>
+          <label>Turno</label>
           <select name="turno" #turno>
             <option>Mañana</option>
+            <option>Tarde</option>
             <option>Noche</option>    
           </select>
         </div>
@@ -21,7 +22,15 @@
           </select>
         </div>        
         <button type="button" (click)="abreRes(fecha.value, turno.value, municipio.value)">Abrir Informe Diario</button>
-        <button type="button" (click)="abreMes(fecha.value, turno.value, municipio.value)">Abrir Informe Mensual</button>
+        <div>
+          <label>Playa</label>
+          <select name="lugar" #lugar>
+            <option value="Levante y Calas">Levante y Calas</option>
+            <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
+            <option value="Finestrat">Finestrat</option>     
+          </select>
+        </div>          
+        <button type="button" (click)="abreMes(fecha.value, turno.value, lugar.value, municipio.value)">Abrir Informe Mensual</button>
       </div>      
     </div>
   </div>

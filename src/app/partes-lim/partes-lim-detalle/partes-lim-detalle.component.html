@@ -42,6 +42,7 @@
       name="turno"
       formControlName="turno">
       <option value="Mañana">Mañana</option>
+      <option value="Tarde">Tarde</option>
       <option value="Noche">Noche</option>
     </select>
     <div *ngIf="parteForm.controls['turno'].hasError('required') && parteForm.controls['turno'].touched">Campo turno necesario.</div>    

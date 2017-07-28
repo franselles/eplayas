@@ -14,11 +14,11 @@ export class ResumenComponent implements OnInit {
   }
 
   abreRes(fecha: string, turno: string, municipio: string) {
-    this.router.navigate(['dash/imformeslimpieza/diario/', fecha, turno, municipio]);
+    this.router.navigate(['dash/informeslimpieza/diario/', fecha, turno, municipio]);
   }
 
-  abreMes(fecha: string, turno: string, municipio: string) {
-    this.router.navigate(['dash/imformeslimpieza/mensual/', fecha, turno, municipio]);
+  abreMes(fecha: string, turno: string, lugar: string, municipio: string) {
+    this.router.navigate(['dash/informeslimpieza/mensual/', fecha, turno, lugar, municipio]);
   }
 
 }

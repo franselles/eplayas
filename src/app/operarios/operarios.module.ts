@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: '', component: OperariosListaComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle', component: OperariosDetalleComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle/:id', component: OperariosDetalleComponent, canActivate: [LoggedInGuard]}
-]
+];
 
 @NgModule({
   imports: [

@@ -17,6 +17,7 @@ export class ResumenMesComponent implements OnInit {
   public month: string;
   public year: string;
   public turno: string;
+  public lugar: string;
   public municipio: string;
 
   constructor(private resumenService: ResumenService, private route: ActivatedRoute) { }
@@ -28,24 +29,21 @@ export class ResumenMesComponent implements OnInit {
 
       this.fecha = params['fecha'];
 
-      console.log(this.fecha);
-
       strFecha = this.fecha.split('-');
 
       this.year = strFecha[0];
       this.month = strFecha[1];
 
       this.turno = params['turno'];
+      this.lugar = params['lugar'];
       this.municipio = params['municipio'];
 
-      console.log(this.year, this.month, this.turno, this.municipio);
-
-      this.abreMes(this.year, this.month, this.turno, this.municipio);
+      this.abreMes(this.year, this.month, this.turno, this.lugar, this.municipio);
     });
   }
 
-  abreMes(year: string, month: string, turno: string, municipio: string) {
-    this.resumenService.getMesPlaya(year, month, turno, municipio)
+  abreMes(year: string, month: string, turno: string, lugar: string, municipio: string) {
+    this.resumenService.getMesPlaya(year, month, turno, lugar, municipio)
       .subscribe(data => {
         this.partes = data;
       }, err => console.log(err));

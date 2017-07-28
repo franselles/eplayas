@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: '', component: PartesLimListaComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle', component: PartesLimDetalleComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle/:id', component: PartesLimDetalleComponent, canActivate: [LoggedInGuard]}
-]
+];
 
 @NgModule({
   imports: [

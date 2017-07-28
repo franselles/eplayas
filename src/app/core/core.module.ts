@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dash', loadChildren: './../core/dash/dash.module#DashModule', canActivate: [LoggedInGuard]},
   {path: 'login', loadChildren: './../login/login.module#LoginModule'}
-]
+];
 
 @NgModule({
   imports: [
