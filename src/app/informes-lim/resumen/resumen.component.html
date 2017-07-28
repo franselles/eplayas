@@ -4,7 +4,7 @@
       <div>
         <div>
           <label>Fecha</label>
-          <input type="date" name="fecha" placeholder="dia resumen" #fecha>
+          <input type="date" name="fecha" placeholder="dia resumen" [(ngModel)]="fecha">         
         </div>
         <div>
           <label>Turno</label>
@@ -21,7 +21,7 @@
             <option>Finestrat</option>    
           </select>
         </div>        
-        <button type="button" (click)="abreRes(fecha.value, turno.value, municipio.value)">Abrir Informe Diario</button>
+        <button type="button" (click)="abreRes(fecha, turno.value, municipio.value)">Abrir Informe Diario</button>
         <div>
           <label>Playa</label>
           <select name="lugar" #lugar>
@@ -30,7 +30,7 @@
             <option value="Finestrat">Finestrat</option>     
           </select>
         </div>          
-        <button type="button" (click)="abreMes(fecha.value, turno.value, lugar.value, municipio.value)">Abrir Informe Mensual</button>
+        <button type="button" (click)="abreMes(fecha, turno.value, lugar.value, municipio.value)">Abrir Informe Mensual</button>
       </div>      
     </div>
   </div>

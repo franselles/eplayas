@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { GlobalsPartes } from '../shared/globalspartes.services';
 import { BdService } from '../shared/bd.services';
 import { ResumenService } from '../shared/resumen.services';
 import { NgModule } from '@angular/core';
@@ -22,7 +24,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations: [
     ResumenDiaComponent,
@@ -33,7 +36,8 @@ const routes: Routes = [
   ],
   providers: [
     ResumenService,
-    BdService
+    BdService,
+    GlobalsPartes
   ]
 })
 export class InformesLimModule { }

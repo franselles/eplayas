@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { GlobalsPartes } from './../../shared/globalspartes.services';
+
 @Component({
   selector: 'app-resumen',
   templateUrl: './resumen.component.html',
@@ -8,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class ResumenComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  public fecha: string;
+
+  constructor(private router: Router, private globalPartes: GlobalsPartes) { }
 
   ngOnInit() {
+    this.fecha =  this.globalPartes.fecha;
   }
 
   abreRes(fecha: string, turno: string, municipio: string) {
