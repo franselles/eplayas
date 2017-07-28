@@ -360,7 +360,7 @@ app.get("/api/resumen/dia/:dia/:turno/:lugar", function(req, res) {
 
 /* Abrimos resumen-mes-partes */
 app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, res) {
-  db.collection(PARTES_COLLECTION).find({"year": req.params.year, "month": req.params.month, "turno": req.params.turno, "lugar": req.params.lugar, "municipio": req.params.municipio}).sort({"tipo": 1}).toArray(function(err, docs) {
+  db.collection(PARTES_COLLECTION).find({"year": req.params.year, "month": req.params.month, "turno": req.params.turno, "lugar": req.params.lugar, "municipio": req.params.municipio}).sort({"fecha": 1}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get partes del dia.");
     } else {
