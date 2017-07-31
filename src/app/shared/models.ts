@@ -45,6 +45,7 @@ export interface Total {
     total_rsu_criba: number;
     total_selectivo: number;
     total_algas_teoricas: number;
+    total_algas_pesadas: number;
 }
 
 export interface Parte {

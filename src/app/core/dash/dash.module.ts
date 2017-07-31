@@ -10,7 +10,7 @@ const routes: Routes = [
       {path: 'operarios', loadChildren: './../../operarios/operarios.module#OperariosModule'},
       {path: 'limpieza', loadChildren: './../../partes-lim/partes-lim.module#PartesLimModule'},
       {path: 'informeslimpieza', loadChildren: './../../informes-lim/informes-lim.module#InformesLimModule'},
-      {path: 'analisislimpieza', loadChildren: './../../analisis/analisis.module#AnalisisModule'},
+      {path: 'analisis', loadChildren: './../../analisis/analisis.module#AnalisisModule'},
       {path: 'mantenimiento', loadChildren: './../../partes-man/partes-man.module#PartesManModule'},
       {path: 'taller', loadChildren: './../../taller/taller.module#TallerModule'},
       {path: 'hamacas', loadChildren: './../../hamacas/hamacas.module#HamacasModule'}

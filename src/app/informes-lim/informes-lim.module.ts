@@ -5,7 +5,7 @@ import { ResumenService } from '../shared/resumen.services';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpModule, JsonpModule, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { LoggedInGuard } from '../shared/logged-in.guard';
 import { ResumenDiaComponent } from './resumen-dia/resumen-dia.component';
 import { ResumenMesComponent } from './resumen-mes/resumen-mes.component';

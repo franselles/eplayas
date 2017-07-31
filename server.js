@@ -349,7 +349,11 @@ app.get("/api/resumen/diario/:dia/:turno/:municipio", function(req, res) {
 
 /* Abrimos resumen-dia-partes */
 app.get("/api/resumen/dia/:dia/:turno/:lugar", function(req, res) {
-  db.collection(PARTES_COLLECTION).find({"fecha": req.params.dia, "turno": req.params.turno, "lugar": req.params.lugar}).sort({"tipo": 1}).toArray(function(err, docs) {
+  db.collection(PARTES_COLLECTION).find({
+    "fecha": req.params.dia,
+    "turno": req.params.turno,
+    "lugar": req.params.lugar
+    }).sort({"tipo": 1}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get partes del dia.");
     } else {
@@ -360,7 +364,13 @@ app.get("/api/resumen/dia/:dia/:turno/:lugar", function(req, res) {
 
 /* Abrimos resumen-mes-partes */
 app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, res) {
-  db.collection(PARTES_COLLECTION).find({"year": req.params.year, "month": req.params.month, "turno": req.params.turno, "lugar": req.params.lugar, "municipio": req.params.municipio}).sort({"fecha": 1}).toArray(function(err, docs) {
+  db.collection(PARTES_COLLECTION).find({
+    "year": req.params.year,
+    "month": req.params.month,
+    "turno": req.params.turno,
+    "lugar": req.params.lugar,
+    "municipio": req.params.municipio
+    }).sort({"fecha": 1}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get partes del dia.");
     } else {
@@ -369,33 +379,7 @@ app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, 
   });
 });
 
-app.get("/api/resumen/dia/basura/playa/:dia/:turno/:lugar", function(req, res) {
-  db.collection(PARTES_COLLECTION).aggregate(
-    [
-      {
-        $match : { 
-          fecha : req.params.dia,
-          turno :  req.params.turno,
-          lugar :  req.params.lugar
-         }
-      },
-      {
-        $group: {
-          _id: "$fecha",
-          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
-          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
-          total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"}
-      }}
-    ], function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Failed to get aggregate del dia and playa.");
-        } else {
-          res.status(200).json(docs);
-        }
-    });
-});
-
+/* Abrimos resumen-mes-totales-pesos */
 app.get("/api/resumen/dia/basura/total/:dia/:turno/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
     [
@@ -412,7 +396,8 @@ app.get("/api/resumen/dia/basura/total/:dia/:turno/:municipio", function(req, re
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"}
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
       }}
     ], function(err, docs) {
         if (err) {
@@ -423,6 +408,7 @@ app.get("/api/resumen/dia/basura/total/:dia/:turno/:municipio", function(req, re
     });
 });
 
+/* Ver si tiene utilidad */
 app.get("/api/resumen/mes/basura/total/:mes/:ano/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
     [
@@ -439,7 +425,8 @@ app.get("/api/resumen/mes/basura/total/:mes/:ano/:municipio", function(req, res)
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"}
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
       }}
     ], function(err, docs) {
         if (err) {
@@ -450,12 +437,7 @@ app.get("/api/resumen/mes/basura/total/:mes/:ano/:municipio", function(req, res)
     });
 });
 
-// RESUMEN MES API ROUTES BELOW
-
-/*  "/api/resumen/mes/:mes/:ano/:turno/:playa"
- *    GET: finds all resumen del mes
- */
-
+/* Ver si tiene utilidad */
 app.get("/api/resumen/mes/:mes/:ano/:turno/:playa", function(req, res) {
   db.collection(PARTES_COLLECTION).find({
     "month": req.params.mes,
@@ -470,6 +452,133 @@ app.get("/api/resumen/mes/:mes/:ano/:turno/:playa", function(req, res) {
       res.status(200).json(docs);
     }
   });
+});
+
+
+// ANALISIS API ROUTES BELOW
+
+/*  "/api/analisis"
+ *    GET: finds all resumen del periodo
+ */
+
+app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gt: req.params.fechad, $lt: req.params.fechah},
+          municipio: req.params.municipio
+         }
+      },
+      {
+        $group: {
+          _id: "$municipio",
+          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
+          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
+          total_selectivo: {$sum: "$pesos.selectivo"},
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}
+      }}
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/analisis/pesos/:fechad/:fechah/:lugar/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gt: req.params.fechad, $lt: req.params.fechah},
+          lugar: req.params.lugar,
+          municipio: req.params.municipio
+         }
+      },
+      {
+        $group: {
+          _id: "$lugar",
+          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
+          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
+          total_selectivo: {$sum: "$pesos.selectivo"},
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+      }}
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/analisis/estadisticas/:fechad/:fechah/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match: {
+            fecha: {$gt: req.params.fechad, $lt: req.params.fechah},
+            municipio: req.params.municipio              
+        }
+      },
+      {
+        $unwind: "$estadisticas"
+      },
+      {
+        $group: {
+            _id: "$estadisticas.estadistica",
+            count: {"$sum": 1}
+        }   
+      },
+      {
+        $sort: {
+            _id: 1
+        }
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del estadisticas fechas.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/analisis/estadisticas/:fechad/:fechah/:lugar/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match: {
+            fecha: {$gt: req.params.fechad, $lt: req.params.fechah},
+            lugar: req.params.lugar,            
+            municipio: req.params.municipio              
+        }
+      },
+      {
+        $unwind: "$estadisticas"
+      },
+      {
+        $group: {
+            _id: "$estadisticas.estadistica",
+            count: {"$sum": 1}
+        }   
+      },
+      {
+        $sort: {
+            _id: 1
+        }
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del estadisticas fechas.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
 });
 
 // VEHICULOS API ROUTES BELOW
