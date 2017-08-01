@@ -14,9 +14,15 @@ export class PesosMunComponent implements OnInit {
   private fechad: string;
   private fechah: string;
   private lugar: string;
-  private municipio: string;
+  public  municipio: string;
 
-  public pesos: Total;
+  public pesos: Total = {
+    total_rsu_manual: 0,
+    total_rsu_criba: 0,
+    total_selectivo: 0,
+    total_algas_pesadas: 0,
+    total_algas_teoricas: 0
+  };
 
   constructor(private route: ActivatedRoute, private analisisServices: AnalisisService) { }
 
@@ -35,7 +41,6 @@ export class PesosMunComponent implements OnInit {
     this.analisisServices.getPesosMunicipio(fechad, fechah, municipio).
       subscribe(data =>  {
         this.pesos = data[0];
-        console.log(this.pesos);
       }, err => console.log(err));
   }
 

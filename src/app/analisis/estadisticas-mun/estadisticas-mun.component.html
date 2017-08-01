@@ -1,3 +1,7 @@
 <p>
-  estadisticas-mun works!
+ESTADISTICAS TOTALES PLAYAS {{ municipio }}
 </p>
+
+<div *ngFor="let estadistica of estadisticas">
+{{ estadistica._id }} número de incidencias: {{ estadistica.count }}
+</div>

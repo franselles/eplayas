@@ -466,7 +466,7 @@ app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function(req, res) {
     [
       {
         $match : { 
-          fecha : {$gt: req.params.fechad, $lt: req.params.fechah},
+          fecha : {$gte: req.params.fechad, $lte: req.params.fechah},
           municipio: req.params.municipio
          }
       },
@@ -488,12 +488,12 @@ app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function(req, res) {
     });
 });
 
-app.get("/api/analisis/pesos/:fechad/:fechah/:lugar/:municipio", function(req, res) {
+app.get("/api/analisis/pesos/playas/:fechad/:fechah/:lugar/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
     [
       {
         $match : { 
-          fecha : {$gt: req.params.fechad, $lt: req.params.fechah},
+          fecha : {$gte: req.params.fechad, $lte: req.params.fechah},
           lugar: req.params.lugar,
           municipio: req.params.municipio
          }
@@ -521,7 +521,7 @@ app.get("/api/analisis/estadisticas/:fechad/:fechah/:municipio", function(req, r
     [
       {
         $match: {
-            fecha: {$gt: req.params.fechad, $lt: req.params.fechah},
+            fecha: {$gte: req.params.fechad, $lte: req.params.fechah},
             municipio: req.params.municipio              
         }
       },
@@ -548,12 +548,12 @@ app.get("/api/analisis/estadisticas/:fechad/:fechah/:municipio", function(req, r
     });
 });
 
-app.get("/api/analisis/estadisticas/:fechad/:fechah/:lugar/:municipio", function(req, res) {
+app.get("/api/analisis/estadisticas/playas/:fechad/:fechah/:lugar/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
     [
       {
         $match: {
-            fecha: {$gt: req.params.fechad, $lt: req.params.fechah},
+            fecha: {$gte: req.params.fechad, $lte: req.params.fechah},
             lugar: req.params.lugar,            
             municipio: req.params.municipio              
         }

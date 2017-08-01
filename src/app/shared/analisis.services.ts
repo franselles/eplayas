@@ -22,7 +22,7 @@ export class AnalisisService {
   }
 
   getPesosPlaya(fechad: string, fechah: string, lugar: string, municipio: string) {
-    return this.http.get(this.BASE_URL + 'pesos/' + fechad + '/' + fechah + '/' + lugar + '/' + municipio)
+    return this.http.get(this.BASE_URL + 'pesos/playas/' + fechad + '/' + fechah + '/' + lugar + '/' + municipio)
       .map(response => response.json())
       .catch(error => this.handleError(error));
   }
@@ -34,7 +34,7 @@ export class AnalisisService {
   }
 
   getEstadisticasPlaya(fechad: string, fechah: string, lugar: string, municipio: string) {
-    return this.http.get(this.BASE_URL + 'estadisticas/' + fechad + '/' + fechah + '/' + lugar + '/' + municipio)
+    return this.http.get(this.BASE_URL + 'estadisticas/playas/' + fechad + '/' + fechah + '/' + lugar + '/' + municipio)
       .map(response => response.json())
       .catch(error => this.handleError(error));
   }

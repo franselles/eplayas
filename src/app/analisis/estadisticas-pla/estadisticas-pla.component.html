@@ -1,3 +1,7 @@
 <p>
-  estadisticas-pla works!
+ESTADISTICAS TOTALES PLAYA {{ lugar }} DE {{ municipio }}
 </p>
+
+<div *ngFor="let estadistica of estadisticas">
+{{ estadistica._id }} número de incidencias: {{ estadistica.count }}
+</div>
