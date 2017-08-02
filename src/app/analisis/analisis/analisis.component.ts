@@ -8,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalisisComponent implements OnInit {
 
+  public visible: boolean;
+  public textoOculta: string;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.visible = true;
+    this.textoOculta = '[-] ocultar';
   }
 
   abreAnalisis(tipo: string, fechad: string, fechah: string, municipio: string, lugar: string) {
@@ -27,6 +32,17 @@ export class AnalisisComponent implements OnInit {
       case '4':
         this.router.navigate(['dash/analisis/estadisticas_pla/', fechad, fechah, municipio, lugar]);
         break;
+    }
+  }
+
+  oculta(event) {
+    event.preventDefault();
+    if (this.visible) {
+      this.visible = false;
+      this.textoOculta = '[+] mostrar';
+    } else {
+      this.visible = true;
+      this.textoOculta = '[-] ocultar';
     }
   }
 }

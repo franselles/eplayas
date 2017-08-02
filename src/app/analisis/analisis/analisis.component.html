@@ -1,39 +1,44 @@
-<p>
-  Analisis estadisticos de pesos, incidencias, etc
-</p>
 <div>
-  <label>Fecha inicial</label>
-  <input type="date" #fechad>
+  <a href="" (click)="oculta($event)">{{ textoOculta }}</a>
 </div>
-<div>
-  <label>Fecha final</label>
-  <input type="date" #fechah>
+<div *ngIf="visible">
+  <p>
+    Analisis estadisticos de pesos, incidencias, etc
+  </p>
+  <div>
+    <label>Fecha inicial</label>
+    <input type="date" #fechad>
+  </div>
+  <div>
+    <label>Fecha final</label>
+    <input type="date" #fechah>
+  </div>
+  <div>
+    <label>Datos de tipo </label>
+    <select #tipo>
+      <option value="1">Pesos totales</option>
+      <option value="2">Pesos por playa</option>    
+      <option value="3">Estadísticas totales</option>       
+      <option value="4">Estadísticas por playa</option>     
+    </select>
+  </div>
+  <div>
+    <label>Municipio</label>
+    <select #municipio>
+      <option>Benidorm</option>
+      <option>Finestrat</option>    
+    </select>
+  </div> 
+  <div>
+    <label>Playa</label>
+    <select #lugar>
+      <option value="Levante y Calas">Levante y Calas</option>
+      <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
+      <option value="Finestrat">Finestrat</option>     
+    </select>
+  </div>
+  <br>
+  <button type="button" (click)="abreAnalisis(tipo.value, fechad.value, fechah.value, municipio.value, lugar.value)">MUESTRA DATOS</button> 
 </div>
-<div>
-  <label>Datos de tipo </label>
-  <select #tipo>
-    <option value="1">Pesos totales</option>
-    <option value="2">Pesos por playa</option>    
-    <option value="3">Estadísticas totales</option>       
-    <option value="4">Estadísticas por playa</option>     
-  </select>
-</div>
-<div>
-  <label>Municipio</label>
-  <select #municipio>
-    <option>Benidorm</option>
-    <option>Finestrat</option>    
-  </select>
-</div> 
-<div>
-  <label>Playa</label>
-  <select #lugar>
-    <option value="Levante y Calas">Levante y Calas</option>
-    <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
-    <option value="Finestrat">Finestrat</option>     
-  </select>
-</div>
-
-<button type="button" (click)="abreAnalisis(tipo.value, fechad.value, fechah.value, municipio.value, lugar.value)">MUESTRA DATOS</button>
 
 <router-outlet></router-outlet>

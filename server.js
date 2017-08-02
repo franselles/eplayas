@@ -488,6 +488,39 @@ app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function(req, res) {
     });
 });
 
+app.get("/api/analisis/pesos/anual/:fechad/:fechah/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gte: req.params.fechad, $lte: req.params.fechah},
+          municipio: req.params.municipio
+         }
+      },
+      {
+        $group: {
+          _id: {year: "$year", month: "$month"},
+          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
+          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
+          total_selectivo: {$sum: "$pesos.selectivo"},
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}
+        }
+      },
+      {
+        $sort: {
+            _id: 1
+        }
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
 app.get("/api/analisis/pesos/playas/:fechad/:fechah/:lugar/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
     [
@@ -501,6 +534,34 @@ app.get("/api/analisis/pesos/playas/:fechad/:fechah/:lugar/:municipio", function
       {
         $group: {
           _id: "$lugar",
+          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
+          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
+          total_selectivo: {$sum: "$pesos.selectivo"},
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+      }}
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/analisis/pesos/playas/anual/:fechad/:fechah/:lugar/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gte: req.params.fechad, $lte: req.params.fechah},
+          lugar: req.params.lugar,
+          municipio: req.params.municipio
+         }
+      },
+      {
+        $group: {
+          _id: {year: "$year", month: "$month"},
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
@@ -531,6 +592,38 @@ app.get("/api/analisis/estadisticas/:fechad/:fechah/:municipio", function(req, r
       {
         $group: {
             _id: "$estadisticas.estadistica",
+            count: {"$sum": 1}
+        }   
+      },
+      {
+        $sort: {
+            _id: 1
+        }
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del estadisticas fechas.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/analisis/estadisticas/anual/:fechad/:fechah/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match: {
+            fecha: {$gte: req.params.fechad, $lte: req.params.fechah},
+            municipio: req.params.municipio              
+        }
+      },
+      {
+        $unwind: "$estadisticas"
+      },
+      {
+        $group: {
+            _id: {estadistica: "$estadisticas.estadistica", year: "$year", month: "$month"},
             count: {"$sum": 1}
         }   
       },

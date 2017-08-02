@@ -11,11 +11,26 @@ import { GlobalsPartes } from './../../shared/globalspartes.services';
 export class ResumenComponent implements OnInit {
 
   public fecha: string;
+  public visible: boolean;
+  public textoOculta: string;
 
   constructor(private router: Router, private globalPartes: GlobalsPartes) { }
 
   ngOnInit() {
     this.fecha =  this.globalPartes.fecha;
+    this.visible = true;
+    this.textoOculta = '[-] ocultar';
+  }
+
+  oculta(event) {
+    event.preventDefault();
+    if (this.visible) {
+      this.visible = false;
+      this.textoOculta = '[+] mostrar';
+    } else {
+      this.visible = true;
+      this.textoOculta = '[-] ocultar';
+    }
   }
 
   abreRes(fecha: string, turno: string, municipio: string) {
