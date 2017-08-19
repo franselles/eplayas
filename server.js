@@ -362,6 +362,66 @@ app.get("/api/resumen/dia/:dia/:turno/:lugar", function(req, res) {
   });
 });
 
+/* Abrimos resumen-dia-partes revisitesd */
+app.get("/api/resumen/dia2/:dia/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : req.params.dia,
+          municipio: req.params.municipio
+        }
+      },
+      {
+        $group: {
+          _id: {lugar: "$lugar", turno: "$turno"},
+          observacion: {
+            $push: {observacion_ayto: "$observacion_ayto"}
+          },
+          total_operarios: {$sum: "$numero_ops"},
+          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
+          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
+          total_selectivo: {$sum: "$pesos.selectivo"},
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+        }
+      },
+      {
+        $group: {
+          _id: "$_id.lugar",
+          topp: {$sum: "$total_operarios"},
+          trmp: {$sum: "$total_rsu_manual"},
+          trcp: {$sum: "$total_rsu_criba"},
+          tsp: {$sum: "$total_selectivo"},
+          tatp: {$sum: "$total_algas_teoricas"},
+          tapp: {$sum: "$total_algas_pesadas"},            
+          datos: {
+            $push: {
+              turno: "$_id.turno",
+              observacion: "$observacion",
+              top: "$total_operarios",
+              trm: "$total_rsu_manual",
+              trc: "$total_rsu_criba",
+              ts: "$total_selectivo",
+              tat: "$total_algas_teoricas",
+              tap: "$total_algas_pesadas"
+            }
+          }
+        }
+      },
+      {
+        $sort: {"_id.lugar": 1}
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+
 /* Abrimos resumen-mes-partes */
 app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).find({
@@ -379,6 +439,36 @@ app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, 
   });
 });
 
+/* Abrimos resumen-mes-partes revisitesd */
+app.get("/api/resumen/mes/2/:year/:month/:turno/:lugar/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate([
+    {
+      $match: {
+      year: req.params.year,
+      month: req.params.month,
+      turno: req.params.turno,
+      lugar: req.params.lugar,
+      municipio: req.params.municipio,
+      observacion_ayto: {$ne: ""}}      
+    },
+    {
+    $group:{
+      _id: "$fecha",
+      observaciones: {$push: {observacion_ayto: "$observacion_ayto"}}
+      }
+    },
+    {
+      $sort: {_id: 1}
+    }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate /diario/:dia/:turno/:municipio.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
 /* Abrimos resumen-mes-totales-pesos */
 app.get("/api/resumen/dia/basura/total/:dia/:turno/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
@@ -387,6 +477,34 @@ app.get("/api/resumen/dia/basura/total/:dia/:turno/:municipio", function(req, re
         $match : { 
           fecha : req.params.dia,
           turno: req.params.turno,
+          municipio: req.params.municipio
+         }
+      },
+      {
+        $group: {
+          _id: "$fecha",
+          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
+          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
+          total_selectivo: {$sum: "$pesos.selectivo"},
+          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+      }}
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+/* Abrimos resumen-mes-totales-pesos revisited */
+app.get("/api/resumen/dia2/basura/total/:dia/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : req.params.dia,
           municipio: req.params.municipio
          }
       },

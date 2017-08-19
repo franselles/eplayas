@@ -1,10 +1,10 @@
-import { EplayasPage } from './app.po';
+import { AppPage } from './app.po';
 
 describe('eplayas App', () => {
-  let page: EplayasPage;
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new EplayasPage();
+    page = new AppPage();
   });
 
   it('should display welcome message', () => {

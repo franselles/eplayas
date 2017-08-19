@@ -10,8 +10,6 @@ import { LoggedInGuard } from '../shared/logged-in.guard';
 import { ResumenDiaComponent } from './resumen-dia/resumen-dia.component';
 import { ResumenMesComponent } from './resumen-mes/resumen-mes.component';
 import { ResumenComponent } from './resumen/resumen.component';
-import { ResumenDiaPartesComponent } from './resumen-dia/resumen-dia-partes.component';
-import { ResumenDiaDetalleComponent } from './resumen-dia/resumen-dia-detalle.component';
 
 const routes: Routes = [
   {path: '', component: ResumenComponent, canActivate: [LoggedInGuard], children: [
@@ -30,9 +28,7 @@ const routes: Routes = [
   declarations: [
     ResumenDiaComponent,
     ResumenMesComponent,
-    ResumenComponent,
-    ResumenDiaPartesComponent,
-    ResumenDiaDetalleComponent
+    ResumenComponent
   ],
   providers: [
     ResumenService,

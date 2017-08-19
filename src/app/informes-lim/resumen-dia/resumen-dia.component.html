@@ -1,14 +1,26 @@
 <h3>PARTES DIARIO LIMPIEZA DE PLAYAS. DIA {{ fecha | date: 'dd/MM/yyyy' }}</h3>
-<h4>TURNO {{ turno | uppercase }}</h4>
+<h4>MUNICIPIO DE {{ municipio | uppercase }}</h4>
 
-<div>
-  <div *ngFor="let playa of listaPlayas; let i=index">
-      <app-resumen-dia-partes [playa]="playa._id"></app-resumen-dia-partes>
+<div *ngFor="let playa of datos; let i=index">
+  PLAYA {{ playa._id | uppercase}}
+  <div *ngFor="let turno of playa.datos; let i=index">
+    TURNO {{ turno.turno | uppercase}}
+    <div>
+      
+    </div>
+    <div *ngFor="let detalle of turno.observacion; let i=index">
+      {{ detalle.observacion_ayto }}
+    </div>
   </div>
+  TOTAL PESOS PLAYA
+  <div>
+    RSU: {{ playa?.trmp }} KGs. - CRIBADORAS: {{ playa?.trcp }} KGs. - SELECTIVO: {{ playa?.tsp }} KGs. -
+    ALGAS: {{ playa?.tatp }} KGs.
+  </div>  
 </div>
 <br>
 <div>
-    TOTAL PESOS DEL DIA
+  TOTAL PESOS DEL DIA
   <div>
     RSU: {{ totalBas?.total_rsu_manual }} KGs. - CRIBADORAS: {{ totalBas?.total_rsu_criba }} KGs. - SELECTIVO: {{ totalBas?.total_selectivo }} KGs. -
     ALGAS: {{ totalBas?.total_algas_teoricas }} KGs.
