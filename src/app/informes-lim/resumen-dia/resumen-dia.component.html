@@ -12,7 +12,7 @@
     <div *ngIf="turno.turno == noche">
       2 CRIBADORAS
     </div>
-    <div>
+    <div *ngIf="turno.top > 0" > 
       {{ turno.top }} OPERARIOS
     </div>    
     <div>
