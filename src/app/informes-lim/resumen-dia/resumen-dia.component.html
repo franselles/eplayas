@@ -9,14 +9,20 @@
     <div>
       TURNO {{ turno.turno | uppercase}}
     </div>
-    <div>
-      INCIDENCIA
+    <div *ngIf="turno.turno == noche">
+      2 CRIBADORAS
     </div>
-    <ul>
-    <li *ngFor="let detalle of turno.observacion; let i=index">
-      <pre>{{ detalle.observacion_ayto }}</pre>
-    </li>
-    </ul>
+    <div>
+      {{ turno.top }} OPERARIOS
+    </div>    
+    <div>
+      INCIDENCIAS
+    </div>
+    <div *ngFor="let detalle of turno.observacion; let i=index">
+      <div *ngIf="detalle.observacion_ayto.length > 0">
+        <pre>- {{ detalle.observacion_ayto | uppercase}}</pre>
+      </div>
+    </div>
   </div>
   <div>
     TOTAL PESOS PLAYA {{ playa._id | uppercase}}

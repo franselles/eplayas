@@ -19,6 +19,7 @@ export class ResumenDiaComponent implements OnInit {
   // public listaPlayas: any[];
 
   public datos: any[];
+  public noche = 'Noche';
 
   constructor(private resumenService: ResumenService, private route: ActivatedRoute) { }
 
