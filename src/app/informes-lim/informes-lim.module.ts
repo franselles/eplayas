@@ -13,7 +13,7 @@ import { ResumenComponent } from './resumen/resumen.component';
 
 const routes: Routes = [
   {path: '', component: ResumenComponent, canActivate: [LoggedInGuard], children: [
-    {path: 'diario/:dia/:turno/:municipio', component: ResumenDiaComponent},
+    {path: 'diario/:dia/:municipio', component: ResumenDiaComponent},
     {path: 'mensual/:fecha/:turno/:lugar/:municipio', component: ResumenMesComponent}
   ]}
 ];

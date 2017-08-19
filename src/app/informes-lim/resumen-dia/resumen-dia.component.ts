@@ -27,15 +27,14 @@ export class ResumenDiaComponent implements OnInit {
 
    this.route.params.subscribe(params => {
       this.fecha = params['dia'];
-      this.turno = params['turno'];
       this.municipio = params['municipio'];
 
-      this.abreRes(this.fecha, this.turno, this.municipio);
+      this.abreRes(this.fecha, this.municipio);
     });
 
   }
 
-  abreRes(fecha: string, turno: string, municipio: string) {
+  abreRes(fecha: string, municipio: string) {
 
     this.resumenService.getResPlaya(fecha, municipio)
       .subscribe(data => {
