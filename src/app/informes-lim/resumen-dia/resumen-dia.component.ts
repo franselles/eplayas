@@ -35,27 +35,13 @@ export class ResumenDiaComponent implements OnInit {
   }
 
   abreRes(fecha: string, turno: string, municipio: string) {
-    /*
-    this.resumenService.getResPlayas(fecha, turno, municipio)
-      .subscribe(data => {
-        this.listaPlayas = data;
-      }, err => console.log(err));
-    */
 
-    this.resumenService.getResPlaya2(fecha, municipio)
+    this.resumenService.getResPlaya(fecha, municipio)
       .subscribe(data => {
         this.datos = data;
-        console.log(this.datos);
       }, err => console.log(err));
 
-    /*
-    this.resumenService.getResbas(fecha, turno, municipio)
-      .subscribe(data => {
-        this.totalBas = data[0];
-      }, err => console.log(err));
-    */
-
-    this.resumenService.getResbas2(fecha, municipio)
+    this.resumenService.getResbas(fecha, municipio)
       .subscribe(data => {
         this.totalBas = data[0];
       }, err => console.log(err));

@@ -348,22 +348,7 @@ app.get("/api/resumen/diario/:dia/:turno/:municipio", function(req, res) {
 });
 
 /* Abrimos resumen-dia-partes */
-app.get("/api/resumen/dia/:dia/:turno/:lugar", function(req, res) {
-  db.collection(PARTES_COLLECTION).find({
-    "fecha": req.params.dia,
-    "turno": req.params.turno,
-    "lugar": req.params.lugar
-    }).sort({"tipo": 1}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get partes del dia.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
-
-/* Abrimos resumen-dia-partes revisitesd */
-app.get("/api/resumen/dia2/:dia/:municipio", function(req, res) {
+app.get("/api/resumen/dia/:dia/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
     [
       {
@@ -470,36 +455,7 @@ app.get("/api/resumen/mes/2/:year/:month/:turno/:lugar/:municipio", function(req
 });
 
 /* Abrimos resumen-mes-totales-pesos */
-app.get("/api/resumen/dia/basura/total/:dia/:turno/:municipio", function(req, res) {
-  db.collection(PARTES_COLLECTION).aggregate(
-    [
-      {
-        $match : { 
-          fecha : req.params.dia,
-          turno: req.params.turno,
-          municipio: req.params.municipio
-         }
-      },
-      {
-        $group: {
-          _id: "$fecha",
-          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
-          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
-          total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
-      }}
-    ], function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Failed to get aggregate del dia.");
-        } else {
-          res.status(200).json(docs);
-        }
-    });
-});
-
-/* Abrimos resumen-mes-totales-pesos revisited */
-app.get("/api/resumen/dia2/basura/total/:dia/:municipio", function(req, res) {
+app.get("/api/resumen/dia/basura/total/:dia/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate(
     [
       {

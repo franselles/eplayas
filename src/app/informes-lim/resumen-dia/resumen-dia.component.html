@@ -2,17 +2,25 @@
 <h4>MUNICIPIO DE {{ municipio | uppercase }}</h4>
 
 <div *ngFor="let playa of datos; let i=index">
-  PLAYA {{ playa._id | uppercase}}
+  <p>
+    PLAYA {{ playa._id | uppercase}}
+  </p>
   <div *ngFor="let turno of playa.datos; let i=index">
-    TURNO {{ turno.turno | uppercase}}
     <div>
-      
+      TURNO {{ turno.turno | uppercase}}
     </div>
-    <div *ngFor="let detalle of turno.observacion; let i=index">
-      {{ detalle.observacion_ayto }}
+    <div>
+      INCIDENCIA
     </div>
+    <ul>
+    <li *ngFor="let detalle of turno.observacion; let i=index">
+      <pre>{{ detalle.observacion_ayto }}</pre>
+    </li>
+    </ul>
   </div>
-  TOTAL PESOS PLAYA
+  <div>
+    TOTAL PESOS PLAYA {{ playa._id | uppercase}}
+  </div>
   <div>
     RSU: {{ playa?.trmp }} KGs. - CRIBADORAS: {{ playa?.trcp }} KGs. - SELECTIVO: {{ playa?.tsp }} KGs. -
     ALGAS: {{ playa?.tatp }} KGs.
@@ -20,7 +28,9 @@
 </div>
 <br>
 <div>
-  TOTAL PESOS DEL DIA
+  <div>
+    TOTAL PESOS DEL DIA {{ fecha | date: 'dd/MM/yyyy' }}
+  </div>
   <div>
     RSU: {{ totalBas?.total_rsu_manual }} KGs. - CRIBADORAS: {{ totalBas?.total_rsu_criba }} KGs. - SELECTIVO: {{ totalBas?.total_selectivo }} KGs. -
     ALGAS: {{ totalBas?.total_algas_teoricas }} KGs.

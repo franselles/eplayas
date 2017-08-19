@@ -21,26 +21,14 @@ export class ResumenService {
       .catch(error => this.handleError(error));
   }
 
-  getResPlaya(dia: string, turno: string, playa: string) {
-    return this.http.get(this.BASE_URL + 'dia/' + dia + '/' + turno + '/' + playa)
+  getResPlaya(dia: string, municipio: string) {
+    return this.http.get(this.BASE_URL + 'dia/' + dia + '/' + municipio)
       .map(response => response.json())
       .catch(error => this.handleError(error));
   }
 
-  getResPlaya2(dia: string, municipio: string) {
-    return this.http.get(this.BASE_URL + 'dia2/' + dia + '/' + municipio)
-      .map(response => response.json())
-      .catch(error => this.handleError(error));
-  }
-
-  getResbas(dia: string, turno: string, municipio: string) {
-    return this.http.get(this.BASE_URL + 'dia/basura/total/' + dia + '/' + turno + '/' + municipio)
-      .map(response => response.json())
-      .catch(error => this.handleError(error));
-  }
-
-  getResbas2(dia: string, municipio: string) {
-    return this.http.get(this.BASE_URL + 'dia2/basura/total/' + dia + '/' + municipio)
+  getResbas(dia: string, municipio: string) {
+    return this.http.get(this.BASE_URL + 'dia/basura/total/' + dia + '/' + municipio)
       .map(response => response.json())
       .catch(error => this.handleError(error));
   }
