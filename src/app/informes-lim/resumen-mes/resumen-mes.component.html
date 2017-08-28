@@ -1,11 +1,9 @@
-<h3>PARTES MENSUAL LIMPIEZA DE {{ lugar | uppercase }}. {{ municipio | uppercase }}. MES {{ month }} AÑO {{ year }}</h3>
-<h4>TURNO {{ turno | uppercase }}</h4>
+<h4>PARTES MENSUAL LIMPIEZA DE {{ lugar | uppercase }}. {{ municipio | uppercase }}. MES {{ month }} AÑO {{ year }}</h4>
+<h5>TURNO {{ turno | uppercase }}</h5>
 <div>
   <div *ngFor="let item of partes; let i=index">
     <div>
-      <div>{{ item.fecha }}
-      - Limpieza: {{ item.tipo }} - 
-      {{ item.observacion_ayto }}</div>
+      <div>{{ item.fecha }} - {{ item.observacion_ayto | uppercase}}</div>
     </div>
   </div>
 </div>
