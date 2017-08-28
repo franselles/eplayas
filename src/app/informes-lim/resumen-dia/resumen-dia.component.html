@@ -1,10 +1,10 @@
-<h3>PARTES DIARIO LIMPIEZA DE PLAYAS. DIA {{ fecha | date: 'dd/MM/yyyy' }}</h3>
+<h4>PARTES DIARIO LIMPIEZA DE PLAYAS. DIA {{ fecha | date: 'dd/MM/yyyy' }}</h4>
 <h4>MUNICIPIO DE {{ municipio | uppercase }}</h4>
 
 <div *ngFor="let playa of datos; let i=index">
-  <p>
+  <div class="alert alert-info" role="alert">
     PLAYA {{ playa._id | uppercase}}
-  </p>
+  </div>
   <div *ngFor="let turno of playa.datos; let i=index">
     <div>
       TURNO {{ turno.turno | uppercase}}
@@ -15,31 +15,43 @@
     <div *ngIf="turno.top > 0" > 
       {{ turno.top }} OPERARIOS
     </div>    
-    <div>
+    <h4>
       INCIDENCIAS
-    </div>
+    </h4>
     <div *ngFor="let detalle of turno.observacion; let i=index">
       <div *ngIf="detalle.observacion_ayto.length > 0">
-        <pre>- {{ detalle.observacion_ayto | uppercase}}</pre>
+        <div>
+          <pre>
+            {{ detalle.observacion_ayto | uppercase}}
+          </pre>
+        </div>
       </div>
     </div>
   </div>
   <div>
+    <h5>
     TOTAL PESOS PLAYA {{ playa._id | uppercase}}
+    </h5>
   </div>
   <div>
     RSU: {{ playa?.trmp }} KGs. - CRIBADORAS: {{ playa?.trcp }} KGs. - SELECTIVO: {{ playa?.tsp }} KGs. -
-    ALGAS: {{ playa?.tatp }} KGs.
+    ALGAS: {{ playa?.tapp }} KGs. - ALGAS TEORRICAS: {{ playa?.tatp }} KGs.
   </div>  
+  <br>
 </div>
 <br>
 <div>
   <div>
+    <h5>
     TOTAL PESOS DEL DIA {{ fecha | date: 'dd/MM/yyyy' }}
+    </h5>
   </div>
   <div>
     RSU: {{ totalBas?.total_rsu_manual }} KGs. - CRIBADORAS: {{ totalBas?.total_rsu_criba }} KGs. - SELECTIVO: {{ totalBas?.total_selectivo }} KGs. -
-    ALGAS: {{ totalBas?.total_algas_teoricas }} KGs.
+    ALGAS: {{ totalBas?.total_algas_pesadas }} KGs. - ALGAS: {{ totalBas?.total_algas_teoricas }} KGs.
   </div>
 </div>
+<br>
+<p>
 RA. BENIDORM. SL
+</p>

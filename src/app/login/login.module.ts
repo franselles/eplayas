@@ -5,6 +5,8 @@ import { AuthenticationService } from '../shared/authentication.services';
 import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AlertModule } from 'ngx-bootstrap';
+
 const routes: Routes = [
   {path: '', component: LoginComponent}
 ];
@@ -13,6 +15,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    AlertModule.forRoot(),
     FormsModule,
     ReactiveFormsModule
   ],
