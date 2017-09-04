@@ -367,8 +367,8 @@ app.get("/api/resumen/dia/:dia/:municipio", function(req, res) {
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
         }
       },
       {
@@ -429,12 +429,13 @@ app.get("/api/resumen/mes/2/:year/:month/:turno/:lugar/:municipio", function(req
   db.collection(PARTES_COLLECTION).aggregate([
     {
       $match: {
-      year: req.params.year,
-      month: req.params.month,
-      turno: req.params.turno,
-      lugar: req.params.lugar,
-      municipio: req.params.municipio,
-      observacion_ayto: {$ne: ""}}      
+        year: req.params.year,
+        month: req.params.month,
+        turno: req.params.turno,
+        lugar: req.params.lugar,
+        municipio: req.params.municipio,
+        observacion_ayto: {$ne: ""}
+      }      
     },
     {
     $group:{
@@ -448,6 +449,68 @@ app.get("/api/resumen/mes/2/:year/:month/:turno/:lugar/:municipio", function(req
     ], function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate /diario/:dia/:turno/:municipio.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+/* Abrimos resumen-diario-totales-pesos */
+app.get("/api/resumen/mes/agrupado/total/:year/:month/:municipio", function(req, res) {
+  db.collection(PARTES_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          year: req.params.year,
+          month: req.params.month,
+          municipio: req.params.municipio
+        }
+      },
+      {
+        $group: {
+          _id: {fecha: "$fecha", lugar: "$lugar", turno: "$turno"},
+          total_operarios: {$sum: "$numero_ops"},
+          total_rsu_manual: {$sum: "$pesos.rsu_manual"},
+          total_rsu_criba: {$sum: "$pesos.rsu_criba"},
+          total_selectivo: {$sum: "$pesos.selectivo"},
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
+        }
+      },
+      {
+        sort: {
+          fecha: "-1"
+        }
+      },      
+      {
+        $group: {
+          _id: {fecha: "$_id.fecha", lugar: "$_id.lugar"},
+          topp: {$sum: "$total_operarios"},
+          trmp: {$sum: "$total_rsu_manual"},
+          trcp: {$sum: "$total_rsu_criba"},
+          tsp: {$sum: "$total_selectivo"},
+          tatp: {$sum: "$total_algas_teoricas"},
+          tapp: {$sum: "$total_algas_pesadas"},            
+          datos: {
+            $push: {
+              turno: "$_id.turno",
+              observacion: "$observacion",
+              top: "$total_operarios",
+              trm: "$total_rsu_manual",
+              trc: "$total_rsu_criba",
+              ts: "$total_selectivo",
+              tat: "$total_algas_teoricas",
+              tap: "$total_algas_pesadas"
+            }
+          }
+        }
+      },
+      {
+        $sort: {"_id.lugar": 1}
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
@@ -470,8 +533,8 @@ app.get("/api/resumen/dia/basura/total/:dia/:municipio", function(req, res) {
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
     ], function(err, docs) {
         if (err) {
@@ -499,8 +562,8 @@ app.get("/api/resumen/mes/basura/total/:mes/:ano/:municipio", function(req, res)
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
     ], function(err, docs) {
         if (err) {
@@ -550,8 +613,8 @@ app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function(req, res) {
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}
       }}
     ], function(err, docs) {
         if (err) {
@@ -577,8 +640,8 @@ app.get("/api/analisis/pesos/anual/:fechad/:fechah/:municipio", function(req, re
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}
         }
       },
       {
@@ -611,8 +674,8 @@ app.get("/api/analisis/pesos/playas/:fechad/:fechah/:lugar/:municipio", function
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
     ], function(err, docs) {
         if (err) {
@@ -639,8 +702,8 @@ app.get("/api/analisis/pesos/playas/anual/:fechad/:fechah/:lugar/:municipio", fu
           total_rsu_manual: {$sum: "$pesos.rsu_manual"},
           total_rsu_criba: {$sum: "$pesos.rsu_criba"},
           total_selectivo: {$sum: "$pesos.selectivo"},
-          total_algas_teoricas: {$sum: "pesos.algas_teoricas"},
-          total_algas_pesadas: {$sum: "pesos.algas_pesadas"}          
+          total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
+          total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
     ], function(err, docs) {
         if (err) {

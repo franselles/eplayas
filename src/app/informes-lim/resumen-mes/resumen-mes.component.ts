@@ -11,7 +11,7 @@ import { ResumenService } from './../../shared/resumen.services';
 })
 export class ResumenMesComponent implements OnInit {
 
-  public partes: Parte[];
+  public resumen: any[];
 
   private fecha: string;
   public month: string;
@@ -45,7 +45,7 @@ export class ResumenMesComponent implements OnInit {
   abreMes(year: string, month: string, turno: string, lugar: string, municipio: string) {
     this.resumenService.getMesPlaya(year, month, turno, lugar, municipio)
       .subscribe(data => {
-        this.partes = data;
+        this.resumen = data;
       }, err => console.log(err));
 
   }

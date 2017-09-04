@@ -228,8 +228,8 @@
       formControlName="bolsas"> 
   </div>
   <div>
-    <button type="submit" [disabled]="!parteForm.valid">GUARDAR</button>
-    <button type="button" (click)="onCancelar()">CANCELAR</button>
-    <button type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion">BORRAR</button>
+    <button class="btn btn-success" type="submit" [disabled]="!parteForm.valid">GUARDAR</button>
+    <button class="btn btn-warning" type="button" (click)="onCancelar()">CANCELAR</button>
+    <button class="btn btn-danger" type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion">BORRAR</button>
   </div>    
 </form>
