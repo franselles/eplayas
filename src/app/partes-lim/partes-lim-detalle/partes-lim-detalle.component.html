@@ -2,8 +2,8 @@
   Detalle del parte
 </p>
 
-<form novalidate [formGroup]="parteForm" (ngSubmit)="onSubmit(parteForm)">
-  <div>
+<form novalidate [formGroup]="parteForm" (ngSubmit)="onSubmit(parteForm)" class="ui form">
+  <div class="field">
     <label for="municipio">Municipio</label>
     <select
       placeholder="Introduce municipio"
@@ -14,7 +14,7 @@
     </select>
     <div *ngIf="parteForm.controls['municipio'].hasError('required') && parteForm.controls['municipio'].touched">Campo municipio necesario.</div>    
   </div>   
-  <div>
+  <div class="field">
     <label for="fecha">Fecha</label>
     <input
       type="date"
@@ -23,7 +23,7 @@
       formControlName="fecha">
     <div *ngIf="parteForm.controls['fecha'].hasError('required') && parteForm.controls['fecha'].touched">Campo fecha necesario.</div>
   </div>
-  <div>
+  <div class="field">
     <label for="lugar">Playa</label>
     <select
       placeholder="Introduce playa"
@@ -35,7 +35,7 @@
     </select>
     <div *ngIf="parteForm.controls['lugar'].hasError('required') && parteForm.controls['lugar'].touched">Campo playa necesario.</div>    
   </div> 
-  <div>
+  <div class="field">
     <label for="turno">Turno</label>
     <select
       placeholder="Introduce turno"
@@ -47,7 +47,7 @@
     </select>
     <div *ngIf="parteForm.controls['turno'].hasError('required') && parteForm.controls['turno'].touched">Campo turno necesario.</div>    
   </div>  
-  <div>
+  <div class="field">
     <label for="tipo">Tipo de limpieza</label>
     <select
       placeholder="Introduce tipo"
@@ -58,7 +58,7 @@
     </select>
     <div *ngIf="parteForm.controls['tipo'].hasError('required') && parteForm.controls['tipo'].touched">Campo tipo necesario.</div>    
   </div>   
-  <div>
+  <div class="field">
     <label for="operario">Conductor</label>
     <select
       placeholder="Introduce conductor"
@@ -67,7 +67,7 @@
       <option *ngFor="let unOperario of listaOperarios; let i=index" [ngValue]="unOperario.nombre">{{ unOperario.nombre }}</option>
     </select>    
   </div>   
-  <div>
+  <div class="field">
     <label for="vehiculo">Vehiculo</label>
     <select
       placeholder="Introduce vehiculo"
@@ -76,17 +76,17 @@
       <option *ngFor="let unVehiculo of listaVehiculos; let i=index" [ngValue]="unVehiculo.matricula">{{ unVehiculo.matricula }} - {{ unVehiculo.nombre }}</option>    
     </select>
   </div>   
-  <div>
+  <div class="field">
     <label for="numero_ops">Numero de operarios</label>
     <input
       type="number"
       placeholder="Numero de operarios"
       name="numero_ops"
       formControlName="numero_ops">
-      <button type="button" (click)="setOperariosTemporada(1)">TEMPORADA BAJA</button>
-      <button type="button" (click)="setOperariosTemporada(2)">TEMPORADA ALTA</button>
+      <button type="button" (click)="setOperariosTemporada(1)" class="ui green button">TEMPORADA BAJA</button>
+      <button type="button" (click)="setOperariosTemporada(2)" class="ui green button">TEMPORADA ALTA</button>
   </div>  
-  <div>
+  <div class="field">
     <label for="observacion_ayto">Ayuntamiento</label>
     <textarea
       name="observacion_ayto"
@@ -95,7 +95,7 @@
       formControlName="observacion_ayto">
     </textarea>
   </div> 
-  <div>
+  <div class="field">
     <label for="observacion_ra">RA</label>
     <textarea
       name="observacion_ra"
@@ -104,14 +104,14 @@
       formControlName="observacion_ra">
     </textarea>
   </div>     
-  <div formArrayName="estadisticas">
+  <div formArrayName="estadisticas" class="field">
     <label>Incidencias para control estadistico</label>
     <div>
       <select #estadisticaSeleccionada>
         <option *ngFor="let unaEstadistica of listaEstadisticas; let i=index">{{ unaEstadistica.nombre }}</option>
       </select>
     </div>
-    <button type="button" (click)="onMasEstadsitica(estadisticaSeleccionada.value)">Añade
+    <button type="button" (click)="onMasEstadsitica(estadisticaSeleccionada.value)" class="ui blue button">Añade
       iniccidencia
     </button>
     <div *ngFor="let estadisticaControl of estadisticas.controls; let i=index">
@@ -122,12 +122,12 @@
             formControlName="estadistica"
             readonly>
         <div>
-          <button type="button" (click)="onQuitaEstadistica(i)">Quitar</button>
+          <button type="button" (click)="onQuitaEstadistica(i)" class="ui red button">Quitar</button>
         </div>
       </div>
     </div>
   </div>  
-  <div formGroupName="pesos">
+  <div formGroupName="pesos" class="field">
     <p>
       PESOS
     </p>
@@ -182,7 +182,7 @@
         formControlName="algas_teoricas">
       </div>
   </div>
-  <div formGroupName="horarios">
+  <div formGroupName="horarios" class="field">
     <p>
       HORARIOS
     </p>
@@ -217,7 +217,7 @@
         formControlName="llegada_almacen">
     </div>
   </div>
-  <div>
+  <div class="field">
     <label for="bolsas">
       Bolsas de basura utilizadas
     </label>
@@ -228,8 +228,8 @@
       formControlName="bolsas"> 
   </div>
   <div>
-    <button class="btn btn-success" type="submit" [disabled]="!parteForm.valid">GUARDAR</button>
-    <button class="btn btn-warning" type="button" (click)="onCancelar()">CANCELAR</button>
-    <button class="btn btn-danger" type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion">BORRAR</button>
+    <button class="ui blue button" type="submit" [disabled]="!parteForm.valid">GUARDAR</button>
+    <button class="ui yellow button" type="button" (click)="onCancelar()">CANCELAR</button>
+    <button class="ui red button" type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion">BORRAR</button>
   </div>    
 </form>

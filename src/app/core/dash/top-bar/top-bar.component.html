@@ -1,13 +1,15 @@
 <h2>
   Menu principal
 </h2>
-<nav>
-  <a [routerLink]="['/dash/operarios']">Operarios</a> 
-  <a [routerLink]="['/dash/limpieza']">Limpieza</a> 
-  <a [routerLink]="['/dash/informeslimpieza']">Informes</a>  
-  <a [routerLink]="['/dash/analisis']">Analisis</a>
-  <a [routerLink]="['/dash/mantenimiento']">Mantenimiento</a>  
-  <a [routerLink]="['/dash/taller']">Taller</a>
-  <a [routerLink]="['/dash/hamacas']">Hamacas</a>  
-  <a href="" (click)="logOut()">Salir</a>
-</nav>
+<div class="ui secondary pointing menu">
+  <a [routerLink]="['/dash/operarios']" class="item">Operarios</a> 
+  <a [routerLink]="['/dash/limpieza']" class="item">Limpieza</a> 
+  <a [routerLink]="['/dash/informeslimpieza']" class="item">Informes</a>  
+  <a [routerLink]="['/dash/analisis']" class="item">Analisis</a>
+  <a [routerLink]="['/dash/mantenimiento']" class="item">Mantenimiento</a>  
+  <a [routerLink]="['/dash/taller']" class="item">Taller</a>
+  <a [routerLink]="['/dash/hamacas']" class="item">Hamacas</a>    
+  <div class="right menu">
+    <a href="" (click)="logOut()" class="ui item">Salir</a>
+  </div>
+</div>

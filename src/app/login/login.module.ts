@@ -5,7 +5,7 @@ import { AuthenticationService } from '../shared/authentication.services';
 import { LoginComponent } from './login.component';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AlertModule } from 'ngx-bootstrap';
+import { SuiMessageModule } from 'ng2-semantic-ui';
 
 const routes: Routes = [
   {path: '', component: LoginComponent}
@@ -15,9 +15,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    AlertModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SuiMessageModule
   ],
   declarations: [LoginComponent],
   providers: [ AuthenticationService ]

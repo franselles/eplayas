@@ -5,13 +5,10 @@
   <a [routerLink]="['detalle']">Nuevo</a> 
 </nav>
 <br>
-<div>
-  <div *ngFor="let operario of listaOperarios">
-    <div>
-      Operario : {{ operario.nombre }} - 
-      <a [routerLink]="['/dash/operarios/detalle', operario._id]">
-        Editar
-      </a>    
+<div class="ui relaxed divided list">
+  <div class="item" *ngFor="let operario of listaOperarios">
+    <div class="content">
+      <a [routerLink]="['/dash/operarios/detalle', operario._id]" class="header">{{ operario.nombre }}</a>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@
 <h4>MUNICIPIO DE {{ municipio | uppercase }}</h4>
 
 <div *ngFor="let playa of datos; let i=index">
-  <div class="alert alert-info" role="alert">
+  <div>
     PLAYA {{ playa._id | uppercase}}
   </div>
   <div *ngFor="let turno of playa.datos; let i=index">
