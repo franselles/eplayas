@@ -3,12 +3,15 @@ import { HttpModule } from '@angular/http';
 import { AnalisisService } from '../shared/analisis.services';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AnalisisComponent } from './analisis/analisis.component';
 import { PesosMunComponent } from './pesos-mun/pesos-mun.component';
 import { PesosPlaComponent } from './pesos-pla/pesos-pla.component';
 import { EstadisticasMunComponent } from './estadisticas-mun/estadisticas-mun.component';
 import { EstadisticasPlaComponent } from './estadisticas-pla/estadisticas-pla.component';
+
+import { SuiSelectModule } from 'ng2-semantic-ui';
 
 const routes: Routes = [
   {path: '', component: AnalisisComponent, children: [
@@ -23,7 +26,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    HttpModule
+    HttpModule,
+    SuiSelectModule,
+    FormsModule
   ],
   declarations: [
     AnalisisComponent,

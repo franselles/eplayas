@@ -15,6 +15,8 @@ import { PartesLimDetalleComponent } from './partes-lim-detalle/partes-lim-detal
 import { PartesLimListaComponent } from './partes-lim-lista/partes-lim-lista.component';
 import { PartesLimComponent } from './partes-lim/partes-lim.component';
 
+import { SuiSelectModule, SuiDatepickerModule, SuiMessageModule } from 'ng2-semantic-ui';
+
 /*
 const routes: Routes = [
   {path: '', component: PartesLimComponent, canActivate: [LoggedInGuard], children: [
@@ -38,7 +40,10 @@ const routes: Routes = [
     FormsModule,
     HttpModule,
     JsonpModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SuiSelectModule,
+    SuiDatepickerModule,
+    SuiMessageModule
   ],
   providers: [
     BdService,

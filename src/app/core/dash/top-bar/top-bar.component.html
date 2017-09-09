@@ -1,15 +1,36 @@
-<h2>
-  Menu principal
-</h2>
-<div class="ui secondary pointing menu">
-  <a [routerLink]="['/dash/operarios']" class="item">Operarios</a> 
-  <a [routerLink]="['/dash/limpieza']" class="item">Limpieza</a> 
-  <a [routerLink]="['/dash/informeslimpieza']" class="item">Informes</a>  
-  <a [routerLink]="['/dash/analisis']" class="item">Analisis</a>
-  <a [routerLink]="['/dash/mantenimiento']" class="item">Mantenimiento</a>  
-  <a [routerLink]="['/dash/taller']" class="item">Taller</a>
-  <a [routerLink]="['/dash/hamacas']" class="item">Hamacas</a>    
+<div class="ui small menu">
+  <a class="item"  [routerLink]="['/dash/operarios']" >
+    Operarios
+  </a>
+  <a class="item" [routerLink]="['/dash/limpieza']">
+    Limpieza
+  </a>
+  <a class="item" [routerLink]="['/dash/informeslimpieza']">
+    Informes
+  </a>
+  <a class="item" [routerLink]="['/dash/analisis']">
+    Analisis
+  </a>
+  <a class="item" [routerLink]="['/dash/mantenimiento']">
+    Mantenimiento
+  </a>      
+  <a class="item" [routerLink]="['/dash/taller']">
+    Taller
+  </a> 
+  <a class="item" [routerLink]="['/dash/hamacas']">
+    Hamacas
+  </a>     
   <div class="right menu">
-    <a href="" (click)="logOut()" class="ui item">Salir</a>
+    <div class="ui dropdown item" suiDropdown>
+      Opciones <i class="dropdown icon"></i>
+      <div class="menu" suiDropdownMenu>
+        <a class="item">A</a>
+        <a class="item">B</a>
+        <a class="item">C</a>
+      </div>
+    </div>
+    <div class="item">
+        <div class="ui red button" (click)="logOut()">Salir</div>
+    </div>
   </div>
 </div>

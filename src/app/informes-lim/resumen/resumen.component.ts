@@ -11,6 +11,9 @@ import { GlobalsPartes } from './../../shared/globalspartes.services';
 export class ResumenComponent implements OnInit {
 
   public fecha: string;
+  public lugar: string;
+  public municipio: string;
+  public turno: string;
   public visible: boolean;
   public textoOculta: string;
 

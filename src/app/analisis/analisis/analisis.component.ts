@@ -10,6 +10,9 @@ export class AnalisisComponent implements OnInit {
 
   public visible: boolean;
   public textoOculta: string;
+  public tipo: string;
+  public municipio: string;
+  public lugar: string;
 
   constructor(private router: Router) { }
 
@@ -20,16 +23,16 @@ export class AnalisisComponent implements OnInit {
 
   abreAnalisis(tipo: string, fechad: string, fechah: string, municipio: string, lugar: string) {
     switch (tipo) {
-      case '1':
+      case 'Pesos totales':
         this.router.navigate(['dash/analisis/pesos_mun/', fechad, fechah, municipio]);
         break;
-      case '2':
+      case 'Pesos por playa':
         this.router.navigate(['dash/analisis/pesos_pla/', fechad, fechah, municipio, lugar]);
         break;
-      case '3':
+      case 'Estadísticas totales':
         this.router.navigate(['dash/analisis/estadisticas_mun/', fechad, fechah, municipio]);
         break;
-      case '4':
+      case 'Estadísticas por playa':
         this.router.navigate(['dash/analisis/estadisticas_pla/', fechad, fechah, municipio, lugar]);
         break;
     }

@@ -14,33 +14,33 @@
         </div>
         <div>
           <label>Municipio</label>
-          <select name="municipio" #municipio>
-            <option>Benidorm</option>
-            <option>Finestrat</option>    
-          </select>
+          <sui-select name="municipio" [(ngModel)]="municipio" class="selection">
+            <sui-select-option value="Benidorm">Benidorm</sui-select-option>
+            <sui-select-option value="Finestrat">Finestrat</sui-select-option>    
+          </sui-select>
         </div>        
-        <button class="ui blue button" type="button" (click)="abreRes(fecha, municipio.value)">Abrir Informe Diario</button>
+        <button class="ui blue button" type="button" (click)="abreRes(fecha, municipio)">Abrir Informe Diario</button>
         <p>.......</p>
         <p>
             Informe mensual por dia, turno y playa
         </p>
         <div>
           <label>Playa</label>
-          <select name="lugar" #lugar>
-            <option value="Levante y Calas">Levante y Calas</option>
-            <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
-            <option value="Finestrat">Finestrat</option>     
-          </select>
+          <sui-select name="lugar" [(ngModel)]="lugar" class="selection">
+            <sui-select-option value="Levante y Calas">Levante y Calas</sui-select-option>
+            <sui-select-option value="Poniente y Mal Pas">Poniente y Mal Pas</sui-select-option>
+            <sui-select-option value="Finestrat">Finestrat</sui-select-option>     
+          </sui-select>
         </div>  
         <div>
           <label>Turno</label>
-          <select name="turno" #turno>
-            <option>Mañana</option>
-            <option>Tarde</option>
-            <option>Noche</option>    
-          </select>
+          <sui-select name="turno" [(ngModel)]="turno" class="selection">
+            <sui-select-option value="Mañana">Mañana</sui-select-option>
+            <sui-select-option value="Tarde">Tarde</sui-select-option>
+            <sui-select-option value="Noche">Noche</sui-select-option>    
+          </sui-select>
         </div>                
-        <button class="ui blue button" type="button" (click)="abreMes(fecha, turno.value, lugar.value, municipio.value)">Abrir Informe Mensual</button>
+        <button class="ui blue button" type="button" (click)="abreMes(fecha, turno, lugar, municipio)">Abrir Informe Mensual</button>
       </div>      
     </div>
   </div>

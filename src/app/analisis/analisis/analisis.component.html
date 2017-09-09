@@ -15,30 +15,30 @@
   </div>
   <div>
     <label>Datos de tipo </label>
-    <select #tipo>
-      <option value="1">Pesos totales</option>
-      <option value="2">Pesos por playa</option>    
-      <option value="3">Estadísticas totales</option>       
-      <option value="4">Estadísticas por playa</option>     
-    </select>
+    <sui-select name="tipo" [(ngModel)]="tipo" class="selection">
+      <sui-select-option value="Pesos totales">Pesos totales</sui-select-option>
+      <sui-select-option value="Pesos por playa">Pesos por playa</sui-select-option>    
+      <sui-select-option value="Estadísticas totales">Estadísticas totales</sui-select-option>       
+      <sui-select-option value="Estadísticas por playa">Estadísticas por playa</sui-select-option>     
+    </sui-select>
   </div>
   <div>
     <label>Municipio</label>
-    <select #municipio>
-      <option>Benidorm</option>
-      <option>Finestrat</option>    
-    </select>
+    <sui-select [(ngModel)]="municipio" class="selection">
+      <sui-select-option value="Benidorm">Benidorm</sui-select-option>
+      <sui-select-option value="Finestrat">Finestrat</sui-select-option>    
+    </sui-select>
   </div> 
   <div>
     <label>Playa</label>
-    <select #lugar>
-      <option value="Levante y Calas">Levante y Calas</option>
-      <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
-      <option value="Finestrat">Finestrat</option>     
-    </select>
+    <sui-select [(ngModel)]="lugar" class="selection">
+      <sui-select-option value="Levante y Calas">Levante y Calas</sui-select-option>
+      <sui-select-option value="Poniente y Mal Pas">Poniente y Mal Pas</sui-select-option>
+      <sui-select-option value="Finestrat">Finestrat</sui-select-option>     
+    </sui-select>
   </div>
   <br>
-  <button type="button" (click)="abreAnalisis(tipo.value, fechad.value, fechah.value, municipio.value, lugar.value)">MUESTRA DATOS</button> 
+  <button class="ui blue button" type="button" (click)="abreAnalisis(tipo, fechad.value, fechah.value, municipio, lugar)">MUESTRA DATOS</button> 
 </div>
-
+<br>
 <router-outlet></router-outlet>

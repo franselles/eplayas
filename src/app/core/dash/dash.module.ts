@@ -5,6 +5,8 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { DashComponent } from './dash.component';
 import { RouterModule, Routes } from '@angular/router';
 
+import { SuiDropdownModule } from 'ng2-semantic-ui';
+
 const routes: Routes = [
   {path: '', component: DashComponent, children: [
       {path: 'operarios', loadChildren: './../../operarios/operarios.module#OperariosModule'},
@@ -20,7 +22,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SuiDropdownModule
   ],
   declarations: [
     TopBarComponent,

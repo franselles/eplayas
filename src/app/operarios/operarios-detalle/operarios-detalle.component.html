@@ -1,9 +1,5 @@
-<p>
-  operarios-detalle works!
-</p>
-
-<form novalidate [formGroup]="operariosForm" (ngSubmit)="onSubmit(operariosForm)">
-  <div>
+<form novalidate [formGroup]="operariosForm" (ngSubmit)="onSubmit(operariosForm)" class="ui form">
+  <div class="field">
     <label>
       Nombre
     </label>
@@ -12,10 +8,14 @@
       placeholder="Introduce nombre"
       name="nombre"
       formControlName="nombre">
-    <div *ngIf="operariosForm.controls['nombre'].hasError('required') && operariosForm.controls['nombre'].touched">Campo nombre necesario.
-    </div>
+      <sui-message class="attached warning" [isDismissable]="false" *ngIf="operariosForm.controls['nombre'].hasError('required') && operariosForm.controls['nombre'].touched">
+        <div class="header">
+            Atención
+        </div>
+        <p>Campo nombre necesario...</p>
+      </sui-message>       
   </div>
-  <div>
+  <div class="field">
     <label>
       Direccion
     </label>
@@ -25,7 +25,7 @@
       name="direccion"
       formControlName="direccion">
   </div>
-  <div>
+  <div class="field">
     <label>
       Telefono
     </label>
@@ -35,7 +35,7 @@
       name="telefono"
       formControlName="telefono">
   </div>
-  <div>
+  <div class="field">
     <label>
       Puesto
     </label>
@@ -46,8 +46,8 @@
       formControlName="puesto">
   </div>
   <div>
-    <button type="submit" [disabled]="!operariosForm.valid">Aceptar</button>
-    <button type="button" (click)="onCancelar()">Cancelar</button>
-    <button type="button" (click)="onBorrar(operariosForm)">BORRAR</button>
+    <button type="submit" [disabled]="!operariosForm.valid" class="ui blue button">Aceptar</button>
+    <button type="button" (click)="onCancelar()" class="ui yellow button">Cancelar</button>
+    <button type="button" (click)="onBorrar(operariosForm)" class="ui red button">BORRAR</button>
   </div>
 </form>

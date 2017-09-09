@@ -11,6 +11,8 @@ import { ResumenDiaComponent } from './resumen-dia/resumen-dia.component';
 import { ResumenMesComponent } from './resumen-mes/resumen-mes.component';
 import { ResumenComponent } from './resumen/resumen.component';
 
+import { SuiSelectModule } from 'ng2-semantic-ui';
+
 const routes: Routes = [
   {path: '', component: ResumenComponent, canActivate: [LoggedInGuard], children: [
     {path: 'diario/:dia/:municipio', component: ResumenDiaComponent},
@@ -23,7 +25,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     HttpModule,
-    FormsModule
+    FormsModule,
+    SuiSelectModule
   ],
   declarations: [
     ResumenDiaComponent,

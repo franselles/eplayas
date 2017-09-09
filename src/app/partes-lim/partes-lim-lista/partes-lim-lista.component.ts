@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Parte } from './../../shared/models'
+import { Parte } from './../../shared/models';
 import { PartesService } from './../../shared/partes.services';
 import { GlobalsPartes } from './../../shared/globalspartes.services';
 

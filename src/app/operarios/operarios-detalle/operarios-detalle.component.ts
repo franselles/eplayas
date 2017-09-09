@@ -37,7 +37,7 @@ export class OperariosDetalleComponent implements OnInit {
             this.enEdicion = true;
             this.cargaFormulario(data);
           },
-          err => console.log(err))
+          err => console.log(err));
     } else {
       this.enEdicion = false;
     }
