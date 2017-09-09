@@ -2,9 +2,9 @@
 <h4>MUNICIPIO DE {{ municipio | uppercase }}</h4>
 
 <div *ngFor="let playa of datos; let i=index">
-  <div>
+  <h4>
     PLAYA {{ playa._id | uppercase}}
-  </div>
+  </h4>
   <div *ngFor="let turno of playa.datos; let i=index">
     <div>
       TURNO {{ turno.turno | uppercase}}
@@ -15,9 +15,10 @@
     <div *ngIf="turno.top > 0" > 
       {{ turno.top }} OPERARIOS
     </div>    
-    <h4>
-      INCIDENCIAS
-    </h4>
+    <br>
+    <div>
+      <strong>INCIDENCIAS</strong>
+    </div>
     <div *ngFor="let detalle of turno.observacion; let i=index">
       <div *ngIf="detalle.observacion_ayto.length > 0">
         <div>

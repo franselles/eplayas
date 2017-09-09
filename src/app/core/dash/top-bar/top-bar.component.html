@@ -10,15 +10,14 @@
       <a class="item" [routerLink]="['/dash/analisis']">Analisis</a>
     </div>
   </div>  
-  <a class="item" [routerLink]="['/dash/mantenimiento']">
-    Mantenimiento
-  </a>      
-  <a class="item" [routerLink]="['/dash/taller']">
-    Taller
-  </a> 
-  <a class="item" [routerLink]="['/dash/hamacas']">
-    Hamacas
-  </a>     
+  <div class="ui dropdown item" suiDropdown>
+    EnDesarrollo <i class="dropdown icon"></i>
+    <div class="menu" suiDropdownMenu>
+      <a class="item" [routerLink]="['/dash/mantenimiento']">Mantenimiento</a>
+      <a class="item" [routerLink]="['/dash/taller']">Taller</a>
+      <a class="item" [routerLink]="['/dash/hamacas']">Hamacas</a>
+    </div>
+  </div>       
   <div class="right menu">
     <div class="item">
         <div class="ui red button" (click)="logOut()">Salir</div>

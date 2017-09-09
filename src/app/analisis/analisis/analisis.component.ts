@@ -17,6 +17,9 @@ export class AnalisisComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.municipio = 'Benidorm';
+    this.lugar = 'Levante y Calas';
+    this.tipo = 'Pesos totales';
     this.visible = true;
     this.textoOculta = '[-] ocultar';
   }

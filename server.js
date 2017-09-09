@@ -372,6 +372,9 @@ app.get("/api/resumen/dia/:dia/:municipio", function(req, res) {
         }
       },
       {
+        $sort: {"_id.lugar": 1}
+      },      
+      {
         $group: {
           _id: "$_id.lugar",
           topp: {$sum: "$total_operarios"},
@@ -393,9 +396,6 @@ app.get("/api/resumen/dia/:dia/:municipio", function(req, res) {
             }
           }
         }
-      },
-      {
-        $sort: {"_id.lugar": 1}
       }
     ], function(err, docs) {
         if (err) {

@@ -20,6 +20,9 @@ export class ResumenComponent implements OnInit {
   constructor(private router: Router, private globalPartes: GlobalsPartes) { }
 
   ngOnInit() {
+    this.municipio = 'Benidorm';
+    this.lugar = 'Levante y Calas';
+    this.turno = 'Mañana';
     this.fecha =  this.globalPartes.fecha;
     this.visible = true;
     this.textoOculta = '[-] ocultar';
