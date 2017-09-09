@@ -2,15 +2,14 @@
   <a class="item"  [routerLink]="['/dash/operarios']" >
     Operarios
   </a>
-  <a class="item" [routerLink]="['/dash/limpieza']">
-    Limpieza
-  </a>
-  <a class="item" [routerLink]="['/dash/informeslimpieza']">
-    Informes
-  </a>
-  <a class="item" [routerLink]="['/dash/analisis']">
-    Analisis
-  </a>
+  <div class="ui dropdown item" suiDropdown>
+    Limpieza <i class="dropdown icon"></i>
+    <div class="menu" suiDropdownMenu>
+      <a class="item" [routerLink]="['/dash/limpieza']">Partes</a>
+      <a class="item" [routerLink]="['/dash/informeslimpieza']">Informes</a>
+      <a class="item" [routerLink]="['/dash/analisis']">Analisis</a>
+    </div>
+  </div>  
   <a class="item" [routerLink]="['/dash/mantenimiento']">
     Mantenimiento
   </a>      
@@ -21,14 +20,6 @@
     Hamacas
   </a>     
   <div class="right menu">
-    <div class="ui dropdown item" suiDropdown>
-      Opciones <i class="dropdown icon"></i>
-      <div class="menu" suiDropdownMenu>
-        <a class="item">A</a>
-        <a class="item">B</a>
-        <a class="item">C</a>
-      </div>
-    </div>
     <div class="item">
         <div class="ui red button" (click)="logOut()">Salir</div>
     </div>
