@@ -7,11 +7,23 @@
   </p>
   <div>
     <label>Fecha inicial</label>
-    <input type="date" #fechad>
+    <input #fechad="ngModel" [(ngModel)]="fechade" type="date" required/>
+    <sui-message class="attached warning" [isDismissable]="false" *ngIf="fechad.invalid && fechad.touched">
+      <div class="header">
+          Atención
+      </div>
+      <p>Fecha inicial necesaria...</p>
+    </sui-message>     
   </div>
   <div>
     <label>Fecha final</label>
-    <input type="date" #fechah>
+    <input #fechah="ngModel" [(ngModel)]="fechaha" type="date" required/> 
+    <sui-message class="attached warning" [isDismissable]="false" *ngIf="fechah.invalid && fechah.touched">
+      <div class="header">
+          Atención
+      </div>
+      <p>Fecha final necesaria...</p>
+    </sui-message>        
   </div>
   <div>
     <label>Datos de tipo </label>
@@ -38,7 +50,7 @@
     </sui-select>
   </div>
   <br>
-  <button class="ui blue button" type="button" (click)="abreAnalisis(tipo, fechad.value, fechah.value, municipio, lugar)">MUESTRA DATOS</button> 
+  <button [disabled]="!fechad.valid || !fechah.valid" class="ui blue button" type="button" (click)="abreAnalisis(tipo, fechad.value, fechah.value, municipio, lugar)">MUESTRA DATOS</button> 
 </div>
 <br>
 <router-outlet></router-outlet>

@@ -13,6 +13,8 @@ export class AnalisisComponent implements OnInit {
   public tipo: string;
   public municipio: string;
   public lugar: string;
+  public fechade: any;
+  public fechaha: any;
 
   constructor(private router: Router) { }
 

@@ -11,7 +11,7 @@ import { PesosPlaComponent } from './pesos-pla/pesos-pla.component';
 import { EstadisticasMunComponent } from './estadisticas-mun/estadisticas-mun.component';
 import { EstadisticasPlaComponent } from './estadisticas-pla/estadisticas-pla.component';
 
-import { SuiSelectModule } from 'ng2-semantic-ui';
+import { SuiSelectModule, SuiMessageModule } from 'ng2-semantic-ui';
 
 const routes: Routes = [
   {path: '', component: AnalisisComponent, children: [
@@ -28,6 +28,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HttpModule,
     SuiSelectModule,
+    SuiMessageModule,
     FormsModule
   ],
   declarations: [
