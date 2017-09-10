@@ -1,13 +1,15 @@
 <p>
   Selecciona fecha para ver los partes
 </p>
-
-<nav>
-  <a [routerLink]="['detalle']">Nuevo</a> 
-</nav>
-<br>
-<input [(ngModel)]="fecha" type="date" (change)="actualizaLista()">
-<br>
+<button class="ui button" (click)="nuevoParte()">
+  Nuevo
+</button>
+<div class="ui horizontal divider">
+  Selecciona fecha
+</div>
+<div>
+  <input [(ngModel)]="fecha" type="date" (change)="actualizaLista()">
+</div>
 <div>
   <div *ngFor="let parte of listaPartes">
     <div>

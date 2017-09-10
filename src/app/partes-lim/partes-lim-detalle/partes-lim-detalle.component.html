@@ -5,15 +5,15 @@
 <form novalidate [formGroup]="parteForm" (ngSubmit)="onSubmit(parteForm)" class="ui form">
   <div class="field">
     <label for="municipio">Municipio</label>
-    <sui-select
+    <select
       placeholder="Introduce municipio"
       name="municipio"
       formControlName="municipio"
-      class="ui fluid selection dropdown"
+      class="ui search dropdown"
       suiDropdown>
-      <sui-select-option value="Benidorm" selected="selected">Benidorm</sui-select-option>
-      <sui-select-option value="Finestrat">Finestrat</sui-select-option>    
-    </sui-select>
+      <option value="Benidorm" selected="selected">Benidorm</option>
+      <option value="Finestrat">Finestrat</option>    
+    </select>
     <sui-message class="attached warning" [isDismissable]="false" *ngIf="parteForm.controls['municipio'].hasError('required') && parteForm.controls['municipio'].touched">
       <div class="header">
           Atención
@@ -37,15 +37,15 @@
   </div>
   <div class="field">
     <label for="lugar">Playa</label>
-    <sui-select
+    <select
       placeholder="Introduce playa"
       name="lugar"
       formControlName="lugar"
-      class="ui fluid selection dropdown">
-      <sui-select-option value="Levante y Calas">Levante y Calas</sui-select-option>
-      <sui-select-option value="Poniente y Mal Pas">Poniente y Mal Pas</sui-select-option>
-      <sui-select-option value="Finestrat">Finestrat</sui-select-option>      
-    </sui-select>
+      class="ui search dropdown">
+      <option value="Levante y Calas">Levante y Calas</option>
+      <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
+      <option value="Finestrat">Finestrat</option>      
+    </select>
     <sui-message class="attached warning" [isDismissable]="false" *ngIf="parteForm.controls['lugar'].hasError('required') && parteForm.controls['lugar'].touched">
       <div class="header">
           Atención
@@ -55,15 +55,15 @@
   </div> 
   <div class="field">
     <label for="turno">Turno</label>
-    <sui-select
+    <select
       placeholder="Introduce turno"
       name="turno"
       formControlName="turno"
-      class="ui fluid selection dropdown">
-      <sui-select-option value="Mañana">Mañana</sui-select-option>
-      <sui-select-option value="Tarde">Tarde</sui-select-option>
-      <sui-select-option value="Noche">Noche</sui-select-option>
-    </sui-select>
+      class="ui search dropdown">
+      <option value="Mañana">Mañana</option>
+      <option value="Tarde">Tarde</option>
+      <option value="Noche">Noche</option>
+    </select>
     <sui-message class="attached warning" [isDismissable]="false" *ngIf="parteForm.controls['turno'].hasError('required') && parteForm.controls['turno'].touched">
       <div class="header">
           Atención
@@ -73,14 +73,14 @@
   </div>  
   <div class="field">
     <label for="tipo">Tipo de limpieza</label>
-    <sui-select
+    <select
       placeholder="Introduce tipo"
       name="tipo"
       formControlName="tipo"
-      class="ui fluid selection dropdown">
-      <sui-select-option value="Manual">Manual</sui-select-option>
-      <sui-select-option value="Tractor">Tractor</sui-select-option>
-    </sui-select>
+      class="ui search dropdown">
+      <option value="Manual">Manual</option>
+      <option value="Tractor">Tractor</option>
+    </select>
     <sui-message class="attached warning" [isDismissable]="false" *ngIf="parteForm.controls['tipo'].hasError('required') && parteForm.controls['tipo'].touched">
       <div class="header">
           Atención
@@ -90,23 +90,23 @@
   </div>   
   <div class="field">
     <label for="operario">Conductor</label>
-    <sui-select
+    <select
       placeholder="Introduce conductor"
       name="operario"
       formControlName="operario"
-      class="ui fluid selection dropdown">    
-      <sui-select-option *ngFor="let unOperario of listaOperarios; let i=index" [value]="unOperario.nombre">{{ unOperario.nombre }}</sui-select-option>
-    </sui-select>    
+      class="ui search dropdown">   
+      <option *ngFor="let unOperario of listaOperarios; let i=index" [value]="unOperario.nombre">{{ unOperario.nombre }}</option>
+    </select>    
   </div>   
   <div class="field">
     <label for="vehiculo">Vehiculo</label>
-    <sui-select
+    <select
       placeholder="Introduce vehiculo"
       name="vehiculo"
       formControlName="vehiculo"
-      class="ui fluid selection dropdown">
-      <sui-select-option *ngFor="let unVehiculo of listaVehiculos; let i=index" [value]="unVehiculo.matricula">{{ unVehiculo.matricula }} - {{ unVehiculo.nombre }}</sui-select-option>    
-    </sui-select>
+      class="ui search dropdown">
+      <option *ngFor="let unVehiculo of listaVehiculos; let i=index" [value]="unVehiculo.matricula">{{ unVehiculo.matricula }} - {{ unVehiculo.nombre }}</option>    
+    </select>
   </div>   
   <div class="field">
     <label for="numero_ops">Numero de operarios</label>
@@ -139,7 +139,9 @@
   <div formArrayName="estadisticas" class="field">
     <label>Incidencias para control estadistico</label>
     <div>
-      <select #estadisticaSeleccionada>
+      <select
+       #estadisticaSeleccionada
+       class="ui search dropdown">
         <option *ngFor="let unaEstadistica of listaEstadisticas; let i=index">{{ unaEstadistica.nombre }}</option>
       </select>
     </div>

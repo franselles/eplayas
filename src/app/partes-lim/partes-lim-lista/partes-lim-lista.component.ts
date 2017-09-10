@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Parte } from './../../shared/models';
@@ -14,11 +15,15 @@ export class PartesLimListaComponent implements OnInit {
   public listaPartes: Parte[] = [];
   public fecha: string;
 
-  constructor(private partesService: PartesService, private globalPartes: GlobalsPartes) { }
+  constructor(private partesService: PartesService, private globalPartes: GlobalsPartes, private router: Router) { }
 
   ngOnInit() {
     this.fecha = this.globalPartes.fecha;
     this.actualizaLista();
+  }
+
+  nuevoParte() {
+    this.router.navigate(['dash/limpieza/detalle']);
   }
 
   actualizaLista() {
