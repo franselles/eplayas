@@ -408,7 +408,7 @@ app.get("/api/resumen/dia/:dia/:municipio", function(req, res) {
 
 
 /* Abrimos resumen-mes-partes */
-app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, res) {
+app.get("/api/viejo/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).find({
     "year": req.params.year,
     "month": req.params.month,
@@ -425,7 +425,7 @@ app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, 
 });
 
 /* Abrimos resumen-mes-partes revisitesd */
-app.get("/api/resumen/mes/2/:year/:month/:turno/:lugar/:municipio", function(req, res) {
+app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, res) {
   db.collection(PARTES_COLLECTION).aggregate([
     {
       $match: {
