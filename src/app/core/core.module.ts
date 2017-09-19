@@ -5,8 +5,6 @@ import { AuthenticationService } from '../shared/authentication.services';
 import { CoreComponent } from './core.component';
 import { LoggedInGuard  } from './../shared/logged-in.guard';
 
-import { SuiModule } from 'ng2-semantic-ui';
-
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dash', loadChildren: './../core/dash/dash.module#DashModule', canActivate: [LoggedInGuard]},
@@ -16,8 +14,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, { enableTracing: false }),
-    SuiModule
+    RouterModule.forRoot(routes, { enableTracing: false })
   ],
   exports: [
     CoreComponent

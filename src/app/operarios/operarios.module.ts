@@ -9,8 +9,6 @@ import { LoggedInGuard } from '../shared/logged-in.guard';
 import { OperariosDetalleComponent } from './operarios-detalle/operarios-detalle.component';
 import { OperariosListaComponent } from './operarios-lista/operarios-lista.component';
 
-import { SuiMessageModule } from 'ng2-semantic-ui';
-
 const routes: Routes = [
   {path: '', component: OperariosListaComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle', component: OperariosDetalleComponent, canActivate: [LoggedInGuard]},
@@ -24,8 +22,7 @@ const routes: Routes = [
     FormsModule,
     HttpModule,
     JsonpModule,
-    RouterModule.forChild(routes),
-    SuiMessageModule
+    RouterModule.forChild(routes)
   ],
   providers: [
     OperariosService,

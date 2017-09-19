@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from './../shared/authentication.services';
 
-import { IMessage } from 'ng2-semantic-ui';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,10 +15,6 @@ export class LoginComponent implements OnInit {
   public errorPass: boolean;
 
   constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
-  }
-
-  public dismiss(message: IMessage) {
-    message.dismiss();
   }
 
   ngOnInit() {

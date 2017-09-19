@@ -1,26 +1,23 @@
-<div class="ui small menu">
-  <a class="item"  [routerLink]="['/dash/operarios']" >
-    Operarios
-  </a>
-  <div class="ui dropdown item" suiDropdown>
-    Limpieza <i class="dropdown icon"></i>
-    <div class="menu" suiDropdownMenu>
-      <a class="item" [routerLink]="['/dash/limpieza']">Partes</a>
-      <a class="item" [routerLink]="['/dash/informeslimpieza']">Informes</a>
-      <a class="item" [routerLink]="['/dash/analisis']">Analisis</a>
-    </div>
+<div>
+  <div>
+    <a [routerLink]="['/dash/operarios']">Operarios</a>
+  </div>
+  <div>
+    <div>
+      <a [routerLink]="['/dash/limpieza']">Partes</a>
+      <a [routerLink]="['/dash/informeslimpieza']">Informes</a>
+      <a [routerLink]="['/dash/analisis']">Analisis</a>
   </div>  
-  <div class="ui dropdown item" suiDropdown>
-    EnDesarrollo <i class="dropdown icon"></i>
-    <div class="menu" suiDropdownMenu>
-      <a class="item" [routerLink]="['/dash/mantenimiento']">Mantenimiento</a>
-      <a class="item" [routerLink]="['/dash/taller']">Taller</a>
-      <a class="item" [routerLink]="['/dash/hamacas']">Hamacas</a>
+  <div>
+    <div>
+      <a [routerLink]="['/dash/mantenimiento']">Mantenimiento</a>
+      <a [routerLink]="['/dash/taller']">Taller</a>
+      <a [routerLink]="['/dash/hamacas']">Hamacas</a>
     </div>
   </div>       
-  <div class="right menu">
-    <div class="item">
-        <div class="ui red button" (click)="logOut()">Salir</div>
+  <div>
+    <div>
+        <div (click)="logOut()">Salir</div>
     </div>
   </div>
 </div>

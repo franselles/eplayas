@@ -8,49 +8,49 @@
   <div>
     <label>Fecha inicial</label>
     <input #fechad="ngModel" [(ngModel)]="fechade" type="date" required/>
-    <sui-message class="attached warning" [isDismissable]="false" *ngIf="fechad.invalid && fechad.touched">
-      <div class="header">
+    <div *ngIf="fechad.invalid && fechad.touched">
+      <div>
           Atención
       </div>
       <p>Fecha inicial necesaria...</p>
-    </sui-message>     
+    </div>     
   </div>
   <div>
     <label>Fecha final</label>
     <input #fechah="ngModel" [(ngModel)]="fechaha" type="date" required/> 
-    <sui-message class="attached warning" [isDismissable]="false" *ngIf="fechah.invalid && fechah.touched">
-      <div class="header">
+    <div *ngIf="fechah.invalid && fechah.touched">
+      <div>
           Atención
       </div>
       <p>Fecha final necesaria...</p>
-    </sui-message>        
+    </div>        
   </div>
   <div>
     <label>Datos de tipo </label>
-    <sui-select name="tipo" [(ngModel)]="tipo" class="selection">
-      <sui-select-option value="Pesos totales">Pesos totales</sui-select-option>
-      <sui-select-option value="Pesos por playa">Pesos por playa</sui-select-option>    
-      <sui-select-option value="Estadísticas totales">Estadísticas totales</sui-select-option>       
-      <sui-select-option value="Estadísticas por playa">Estadísticas por playa</sui-select-option>     
-    </sui-select>
+    <select name="tipo" [(ngModel)]="tipo">
+      <option value="Pesos totales">Pesos totales</option>
+      <option value="Pesos por playa">Pesos por playa</option>    
+      <option value="Estadísticas totales">Estadísticas totales</option>       
+      <option value="Estadísticas por playa">Estadísticas por playa</option>     
+    </select>
   </div>
   <div>
     <label>Municipio</label>
-    <sui-select [(ngModel)]="municipio" class="selection">
-      <sui-select-option value="Benidorm">Benidorm</sui-select-option>
-      <sui-select-option value="Finestrat">Finestrat</sui-select-option>    
-    </sui-select>
+    <select [(ngModel)]="municipio">
+      <option value="Benidorm">Benidorm</option>
+      <option value="Finestrat">Finestrat</option>    
+    </select>
   </div> 
   <div>
     <label>Playa</label>
-    <sui-select [(ngModel)]="lugar" class="selection">
-      <sui-select-option value="Levante y Calas">Levante y Calas</sui-select-option>
-      <sui-select-option value="Poniente y Mal Pas">Poniente y Mal Pas</sui-select-option>
-      <sui-select-option value="Finestrat">Finestrat</sui-select-option>     
-    </sui-select>
+    <select [(ngModel)]="lugar">
+      <option value="Levante y Calas">Levante y Calas</option>
+      <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
+      <option value="Finestrat">Finestrat</option>     
+    </select>
   </div>
   <br>
-  <button [disabled]="!fechad.valid || !fechah.valid" class="ui blue button" type="button" (click)="abreAnalisis(tipo, fechad.value, fechah.value, municipio, lugar)">MUESTRA DATOS</button> 
+  <button [disabled]="!fechad.valid || !fechah.valid" type="button" (click)="abreAnalisis(tipo, fechade, fechaha, municipio, lugar)">MUESTRA DATOS</button> 
 </div>
 <br>
 <router-outlet></router-outlet>
