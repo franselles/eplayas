@@ -1,5 +1,5 @@
 <p>
-  Detalle del parte
+  DETALLE DEL PARTE HOY
 </p>
 
 <form novalidate [formGroup]="parteForm" (ngSubmit)="onSubmit(parteForm)">
@@ -9,7 +9,7 @@
     <label for="fecha">Fecha</label>
     <input
       type="date"
-      placeholder="Introduce fecha"
+      placeholder="FECHA"
       name="fecha"
       formControlName="fecha">
       <div *ngIf="parteForm.controls['fecha'].hasError('required') && parteForm.controls['fecha'].touched" class="card warning">
@@ -30,7 +30,7 @@
   <div class="vertical">
     <label for="municipio">Municipio</label>
     <select
-      placeholder="Introduce municipio"
+      placeholder="MUNICIPIO"
       name="municipio"
       formControlName="municipio"
       suiDropdown>
@@ -46,7 +46,7 @@
   <div class="vertical">
     <label for="lugar">Playa</label>
     <select
-      placeholder="Introduce playa"
+      placeholder="PLAYA"
       name="lugar"
       formControlName="lugar">
       <option value="Levante y Calas">Levante y Calas</option>
@@ -62,7 +62,7 @@
   <div class="vertical">
     <label for="turno">Turno</label>
     <select
-      placeholder="Introduce turno"
+      placeholder="TURNO"
       name="turno"
       formControlName="turno">
       <option value="Mañana">Mañana</option>
@@ -78,7 +78,7 @@
   <div class="vertical">
     <label for="tipo">Tipo de limpieza</label>
     <select
-      placeholder="Introduce tipo"
+      placeholder="TIPO"
       name="tipo"
       formControlName="tipo">
       <option value="Manual">Manual</option>
@@ -96,7 +96,7 @@
   <div class="vertical">
     <label for="operario">Conductor</label>
     <select
-      placeholder="Introduce conductor"
+      placeholder="CONDUCTOR"
       name="operario"
       formControlName="operario">   
       <option *ngFor="let unOperario of listaOperarios; let i=index" [value]="unOperario.nombre">{{ unOperario.nombre }}</option>
@@ -105,7 +105,7 @@
   <div class="vertical">
     <label for="vehiculo">Vehiculo</label>
     <select
-      placeholder="Introduce vehiculo"
+      placeholder="VEHICULO"
       name="vehiculo"
       formControlName="vehiculo">
       <option *ngFor="let unVehiculo of listaVehiculos; let i=index" [value]="unVehiculo.matricula">{{ unVehiculo.matricula }} - {{ unVehiculo.nombre }}</option>    
@@ -181,7 +181,7 @@
       </label>
       <input    
         type="number"
-        placeholder="Introduce peso RSU"
+        placeholder="peso RSU"
         name="rsu_manual"
         formControlName="rsu_manual">
     </div>
@@ -191,7 +191,7 @@
       </label>
       <input     
         type="number"
-        placeholder="Introduce peso RSU cribadora"
+        placeholder="peso RSU cribadora"
         name="rsu_criba"
         formControlName="rsu_criba">
     </div>
@@ -201,7 +201,7 @@
       </label>
       <input     
         type="number"
-        placeholder="Introduce peso SELECTIVO"
+        placeholder="peso SELECTIVO"
         name="selectivo"
         formControlName="selectivo">
     </div>
@@ -211,7 +211,7 @@
       </label>
       <input     
         type="number"
-        placeholder="Introduce peso ALGAS PESADAS"
+        placeholder="peso ALGAS PESADAS"
         name="algas_pesadas"
         formControlName="algas_pesadas">
     </div>
@@ -221,7 +221,7 @@
       </label>
       <input     
         type="number"
-        placeholder="Introduce peso ALGAS TEORICAS"
+        placeholder="peso ALGAS TEORICAS"
         name="algas_teoricas"
         formControlName="algas_teoricas">
       </div>
@@ -236,7 +236,7 @@
       </label>
       <input     
         type="time"
-        placeholder="Introduce hora SALIDA ALMACEN"
+        placeholder="hora SALIDA ALMACEN"
         name="salida_almacen"
         formControlName="salida_almacen">
     </div>
@@ -246,7 +246,7 @@
       </label>
       <input
         type="time"
-        placeholder="Introduce hora SALIDA PLAYA"
+        placeholder="hora SALIDA PLAYA"
         name="salida_playa"
         formControlName="salida_playa">
     </div>
@@ -256,7 +256,7 @@
       </label>
       <input     
         type="time"
-        placeholder="Introduce hora LLEGADA ALMACEN"
+        placeholder="hora LLEGADA ALMACEN"
         name="llegada_almacen"
         formControlName="llegada_almacen">
     </div>
