@@ -8,22 +8,20 @@
   <div>
     <label>Fecha inicial</label>
     <input #fechad="ngModel" [(ngModel)]="fechade" type="date" required/>
-    <div *ngIf="fechad.invalid && fechad.touched">
-      <div>
-          Atención
+    <div *ngIf="fechad.invalid && fechad.touched" class="card warning">
+      <div class="section">
+        <p>Fecha inicial necesaria</p>
       </div>
-      <p>Fecha inicial necesaria...</p>
-    </div>     
+    </div>        
   </div>
   <div>
     <label>Fecha final</label>
     <input #fechah="ngModel" [(ngModel)]="fechaha" type="date" required/> 
-    <div *ngIf="fechah.invalid && fechah.touched">
-      <div>
-          Atención
+    <div *ngIf="fechah.invalid && fechah.touched" class="card warning">
+      <div class="section">
+        <p>Fecha final necesaria</p>
       </div>
-      <p>Fecha final necesaria...</p>
-    </div>        
+    </div>          
   </div>
   <div>
     <label>Datos de tipo </label>

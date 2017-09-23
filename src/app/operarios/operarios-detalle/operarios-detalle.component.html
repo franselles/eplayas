@@ -7,13 +7,12 @@
       type="text"
       placeholder="Introduce nombre"
       name="nombre"
-      formControlName="nombre">
-      <div *ngIf="operariosForm.controls['nombre'].hasError('required') && operariosForm.controls['nombre'].touched">
-        <div>
-            Atención
+      formControlName="nombre">  
+      <div *ngIf="operariosForm.controls['nombre'].hasError('required') && operariosForm.controls['nombre'].touched" class="card warning">
+        <div class="section">
+          <p>Campo nombre necesario</p>
         </div>
-        <p>Campo nombre necesario...</p>
-      </div>       
+      </div>           
   </div>
   <div>
     <label>

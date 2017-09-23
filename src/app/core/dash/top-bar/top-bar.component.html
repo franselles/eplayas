@@ -1,23 +1,9 @@
-<div>
-  <div>
-    <a [routerLink]="['/dash/operarios']">Operarios</a>
-  </div>
-  <div>
-    <div>
-      <a [routerLink]="['/dash/limpieza']">Partes</a>
-      <a [routerLink]="['/dash/informeslimpieza']">Informes</a>
-      <a [routerLink]="['/dash/analisis']">Analisis</a>
-  </div>  
-  <div>
-    <div>
-      <a [routerLink]="['/dash/mantenimiento']">Mantenimiento</a>
-      <a [routerLink]="['/dash/taller']">Taller</a>
-      <a [routerLink]="['/dash/hamacas']">Hamacas</a>
-    </div>
-  </div>       
-  <div>
-    <div>
-        <div (click)="logOut()">Salir</div>
-    </div>
-  </div>
+<div class="input-group">
+    <a [routerLink]="['/dash/operarios']" class="button" routerLinkActive="primary">Operarios</a>
+    <a [routerLink]="['/dash/limpieza']" class="button" routerLinkActive="primary">Partes</a>
+    <a [routerLink]="['/dash/informeslimpieza']" class="button" routerLinkActive="primary">Informes</a>
+    <a [routerLink]="['/dash/analisis']" class="button" routerLinkActive="primary">Analisis</a>
+    <a [routerLink]="['/dash/mantenimiento']" class="button" routerLinkActive="primary">Mantenimiento</a>
+    <a [routerLink]="['/dash/taller']" class="button" routerLinkActive="primary">Taller</a>
+    <a (click)="logOut()" class="button">Salir</a>   
 </div>

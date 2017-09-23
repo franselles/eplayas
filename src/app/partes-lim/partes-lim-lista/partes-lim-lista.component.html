@@ -2,21 +2,32 @@
   Selecciona fecha para ver los partes
 </p>
 <button (click)="nuevoParte()">
-  Nuevo
+  Nuevo Parte Diario
 </button>
 <div>
-  Selecciona fecha
-</div>
-<div>
+  <label>Selecciona fecha</label>
   <input [(ngModel)]="fecha" type="date" (change)="actualizaLista()">
 </div>
-<div>
-  <div *ngFor="let parte of listaPartes">
-    <div>
-      Operario : {{ parte.operario }} - Turno: {{ parte.turno }} - Playa: {{ parte.lugar }} - 
-      <a [routerLink]="['/dash/limpieza/detalle', parte._id]">
-        Editar
-      </a>    
-    </div>
-  </div>
+<br>
+<div class="row cols-sm">
+  <table>
+    <thead>
+      <tr>
+        <th>Playa</th>
+        <th>Operario</th>
+        <th>Turno</th>
+        <th>Editar</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let parte of listaPartes">
+        <td data-label="Playa">{{ parte.lugar }}</td>
+        <td data-label="Operario">{{ parte.operario }}</td>
+        <td data-label="Turno">{{ parte.turno }}</td>
+        <td data-label="Editar"><a [routerLink]="['/dash/limpieza/detalle', parte._id]" class="button small tertiary">
+          Editar
+        </a></td>        
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -6,9 +6,9 @@ import { CoreComponent } from './core.component';
 import { LoggedInGuard  } from './../shared/logged-in.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'dash', loadChildren: './../core/dash/dash.module#DashModule', canActivate: [LoggedInGuard]},
-  {path: 'login', loadChildren: './../login/login.module#LoginModule'}
+  {path: 'login', loadChildren: './../login/login.module#LoginModule'},
+  {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];
 
 @NgModule({

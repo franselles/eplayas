@@ -7,6 +7,7 @@ import { PartesService } from './../../shared/partes.services';
 import { EstadisticasService } from './../../shared/estadisticas.services';
 import { OperariosService } from './../../shared/operarios.services';
 import { VehiculosService } from './../../shared/vehiculos.services';
+import { GlobalsPartes } from './../../shared/globalspartes.services';
 
 @Component({
   selector: 'app-partes-lim-detalle',
@@ -25,14 +26,15 @@ export class PartesLimDetalleComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
     private partesService: PartesService, private estadisticasService: EstadisticasService,
     private operariosService: OperariosService,
-    private vehiculosService: VehiculosService) { }
+    private vehiculosService: VehiculosService,
+    private globalPartes: GlobalsPartes) { }
 
   ngOnInit() {
 
     this.parteForm = this.fb.group({
       // Se crea el FormGroup del formulario
       municipio: ['', Validators.required],
-      fecha: ['', Validators.required],
+      fecha: [ this.globalPartes.fecha, Validators.required],
       lugar: ['', Validators.required],
       turno: ['', Validators.required],
       tipo: ['', Validators.required],
@@ -118,6 +120,64 @@ export class PartesLimDetalleComponent implements OnInit {
   }
 
   get estadisticas(): FormArray { return this.parteForm.get('estadisticas') as FormArray; }
+
+
+  /*
+  ACCESO RAPIDO
+  */
+
+  setAccesoRapido(o: number) {
+    switch (o) {
+      case 1:
+        this.parteForm.patchValue({
+          municipio: 'Benidorm',
+          lugar: 'Levante y Calas',
+          turno: 'Mañana',
+          tipo: 'Manual'
+        });
+      break;
+      case 2:
+        this.parteForm.patchValue({
+          municipio: 'Benidorm',
+          lugar: 'Poniente y Mal Pas',
+          turno: 'Mañana',
+          tipo: 'Manual'
+        });
+      break;
+      case 3:
+        this.parteForm.patchValue({
+          municipio: 'Benidorm',
+          lugar: 'Levante y Calas',
+          turno: 'Tarde',
+          tipo: 'Manual'
+        });
+      break;
+      case 4:
+        this.parteForm.patchValue({
+          municipio: 'Benidorm',
+          lugar: 'Poniente y Mal Pas',
+          turno: 'Tarde',
+          tipo: 'Manual'
+        });
+      break;
+      case 5:
+        this.parteForm.patchValue({
+          municipio: 'Benidorm',
+          lugar: 'Levante y Calas',
+          turno: 'Noche',
+          tipo: 'Manual'
+        });
+      break;
+      case 6:
+        this.parteForm.patchValue({
+          municipio: 'Benidorm',
+          lugar: 'Poniente y Mal Pas',
+          turno: 'Noche',
+          tipo: 'Manual'
+        });
+      break;
+    }
+  }
 
   /*
   TEMPORADAS

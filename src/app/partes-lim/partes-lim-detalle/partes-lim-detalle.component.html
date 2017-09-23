@@ -3,7 +3,31 @@
 </p>
 
 <form novalidate [formGroup]="parteForm" (ngSubmit)="onSubmit(parteForm)">
-  <div>
+  <fieldset>
+    <legend>Datos obligatorios</legend>
+  <div class="vertical">
+    <label for="fecha">Fecha</label>
+    <input
+      type="date"
+      placeholder="Introduce fecha"
+      name="fecha"
+      formControlName="fecha">
+      <div *ngIf="parteForm.controls['fecha'].hasError('required') && parteForm.controls['fecha'].touched" class="card warning">
+        <div class="section">
+          <p>Campo fecha necesario</p>
+        </div>
+      </div>            
+  </div>  
+  <div class="vertical">
+    <label>Acceso rápido</label>
+    <button type="button" (click)="setAccesoRapido(1)">ML</button>
+    <button type="button" (click)="setAccesoRapido(2)">MP</button>
+    <button type="button" (click)="setAccesoRapido(3)">TL</button>
+    <button type="button" (click)="setAccesoRapido(4)">TP</button>
+    <button type="button" (click)="setAccesoRapido(5)">NL</button>
+    <button type="button" (click)="setAccesoRapido(6)">NP</button>
+  </div>
+  <div class="vertical">
     <label for="municipio">Municipio</label>
     <select
       placeholder="Introduce municipio"
@@ -13,28 +37,13 @@
       <option value="Benidorm" selected="selected">Benidorm</option>
       <option value="Finestrat">Finestrat</option>    
     </select>
-    <div *ngIf="parteForm.controls['municipio'].hasError('required') && parteForm.controls['municipio'].touched">
-      <div>
-          Atención
+    <div *ngIf="parteForm.controls['municipio'].hasError('required') && parteForm.controls['municipio'].touched" class="card warning">
+      <div class="section">
+        <p>Campo municipio necesario</p>
       </div>
-      <p>Campo municipio necesario...</p>
-    </div> 
+    </div>    
   </div>   
-  <div>
-    <label for="fecha">Fecha</label>
-    <input
-      type="date"
-      placeholder="Introduce fecha"
-      name="fecha"
-      formControlName="fecha">
-      <div *ngIf="parteForm.controls['fecha'].hasError('required') && parteForm.controls['fecha'].touched">
-        <div>
-            Atención
-        </div>
-        <p>Campo fecha necesario...</p>
-      </div>       
-  </div>
-  <div>
+  <div class="vertical">
     <label for="lugar">Playa</label>
     <select
       placeholder="Introduce playa"
@@ -44,14 +53,13 @@
       <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
       <option value="Finestrat">Finestrat</option>      
     </select>
-    <div *ngIf="parteForm.controls['lugar'].hasError('required') && parteForm.controls['lugar'].touched">
-      <div>
-          Atención
+    <div *ngIf="parteForm.controls['lugar'].hasError('required') && parteForm.controls['lugar'].touched" class="card warning">
+      <div class="section">
+        <p>Campo playa necesario</p>
       </div>
-      <p>Campo playa necesario...</p>
-    </div>     
+    </div>       
   </div> 
-  <div>
+  <div class="vertical">
     <label for="turno">Turno</label>
     <select
       placeholder="Introduce turno"
@@ -60,15 +68,14 @@
       <option value="Mañana">Mañana</option>
       <option value="Tarde">Tarde</option>
       <option value="Noche">Noche</option>
-    </select>
-    <div *ngIf="parteForm.controls['turno'].hasError('required') && parteForm.controls['turno'].touched">
-      <div>
-          Atención
+    </select> 
+    <div *ngIf="parteForm.controls['turno'].hasError('required') && parteForm.controls['turno'].touched" class="card warning">
+      <div class="section">
+        <p>Campo turno necesario</p>
       </div>
-      <p>Campo turno necesario...</p>
-    </div>     
+    </div>        
   </div>  
-  <div>
+  <div class="vertical">
     <label for="tipo">Tipo de limpieza</label>
     <select
       placeholder="Introduce tipo"
@@ -77,14 +84,16 @@
       <option value="Manual">Manual</option>
       <option value="Tractor">Tractor</option>
     </select>
-    <div *ngIf="parteForm.controls['tipo'].hasError('required') && parteForm.controls['tipo'].touched">
-      <div>
-          Atención
+    <div *ngIf="parteForm.controls['tipo'].hasError('required') && parteForm.controls['tipo'].touched" class="card warning">
+      <div class="section">
+        <p>Campo tipo necesario</p>
       </div>
-      <p>Campo tipo necesario...</p>
-    </div>         
-  </div>   
-  <div>
+    </div>             
+  </div>  
+  </fieldset> 
+  <fieldset>
+      <legend>Otros datos</legend>  
+  <div class="vertical">
     <label for="operario">Conductor</label>
     <select
       placeholder="Introduce conductor"
@@ -93,7 +102,7 @@
       <option *ngFor="let unOperario of listaOperarios; let i=index" [value]="unOperario.nombre">{{ unOperario.nombre }}</option>
     </select>    
   </div>   
-  <div>
+  <div class="vertical">
     <label for="vehiculo">Vehiculo</label>
     <select
       placeholder="Introduce vehiculo"
@@ -102,7 +111,7 @@
       <option *ngFor="let unVehiculo of listaVehiculos; let i=index" [value]="unVehiculo.matricula">{{ unVehiculo.matricula }} - {{ unVehiculo.nombre }}</option>    
     </select>
   </div>   
-  <div>
+  <div class="vertical">
     <label for="numero_ops">Numero de operarios</label>
     <input
       type="number"
@@ -112,8 +121,13 @@
       <button type="button" (click)="setOperariosTemporada(1)">TEMPORADA BAJA</button>
       <button type="button" (click)="setOperariosTemporada(2)">TEMPORADA ALTA</button>
   </div>  
-  <div>
-    <label for="observacion_ayto">Ayuntamiento</label>
+  </fieldset>
+  <fieldset>
+    <legend>Observaciones</legend>
+  <div class="vertical">
+    <div>
+      <label for="observacion_ayto">Ayuntamiento</label>
+    </div>
     <textarea
       name="observacion_ayto"
       rows="10"
@@ -121,24 +135,29 @@
       formControlName="observacion_ayto">
     </textarea>
   </div> 
-  <div>
-    <label for="observacion_ra">RA</label>
+  <div class="vertical">
+    <div>
+      <label for="observacion_ra">RA</label>
+    </div>
     <textarea
       name="observacion_ra"
       rows="10"
       cols="50"
       formControlName="observacion_ra">
     </textarea>
-  </div>     
-  <div formArrayName="estadisticas">
-    <label>Incidencias para control estadistico</label>
+  </div>    
+  </fieldset>  
+  <fieldset>
+      <legend>Analisis, estadisiticas, pesos,..</legend>  
+  <div formArrayName="estadisticas" class="vertical">
     <div>
+      <label>Incidencias para control estadistico</label>
+    </div>
       <select
        #estadisticaSeleccionada>
         <option *ngFor="let unaEstadistica of listaEstadisticas; let i=index">{{ unaEstadistica.nombre }}</option>
       </select>
-    </div>
-    <button type="button" (click)="onMasEstadsitica(estadisticaSeleccionada.value)">Añade
+    <button type="button" (click)="onMasEstadsitica(estadisticaSeleccionada.value)" class="tertiary">Añade
       iniccidencia
     </button>
     <div *ngFor="let estadisticaControl of estadisticas.controls; let i=index">
@@ -148,13 +167,11 @@
             name="estadistica"
             formControlName="estadistica"
             readonly>
-        <div>
-          <button type="button" (click)="onQuitaEstadistica(i)">Quitar</button>
-        </div>
+          <button type="button" (click)="onQuitaEstadistica(i)" class="secondary">Quitar</button>
       </div>
     </div>
   </div>  
-  <div formGroupName="pesos">
+  <div formGroupName="pesos" class="vertical">
     <p>
       PESOS
     </p>
@@ -209,7 +226,7 @@
         formControlName="algas_teoricas">
       </div>
   </div>
-  <div formGroupName="horarios">
+  <div formGroupName="horarios" class="vertical">
     <p>
       HORARIOS
     </p>
@@ -244,16 +261,17 @@
         formControlName="llegada_almacen">
     </div>
   </div>
-  <div>
+  <div class="vertical">
     <label for="bolsas">
       Bolsas de basura utilizadas
     </label>
     <input
       type="number"
-      placeholder="Introduce bolsas de basura utilizadas"
+      placeholder="Bolsas de basura utilizadas"
       name="bolsas"
       formControlName="bolsas"> 
   </div>
+  </fieldset>
   <div>
     <button type="submit" [disabled]="!parteForm.valid">GUARDAR</button>
     <button type="button" (click)="onCancelar()">CANCELAR</button>

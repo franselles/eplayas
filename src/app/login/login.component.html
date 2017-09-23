@@ -5,7 +5,7 @@
 </div>
 
 <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(loginForm)">
-  <div>
+  <div class="input-group fluid">
     <label>
       Clave
     </label>
@@ -13,21 +13,21 @@
       type="password"
       placeholder="Introduce clave"
       name="password"
-      formControlName="password">   
-    <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">
-        <div>
-            Atención
-        </div>
-        <p>Campo clave necesario..</p>
-      </div>    
-    <div *ngIf="errorPass" class="ui negative message">Clave incorrecta.</div>
+      formControlName="password">      
+    <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="card warning">
+      <div class="section">
+        <p>Campo clave necesario</p>
+      </div>
+    </div>      
+    <div *ngIf="errorPass" class="card error">
+      <div class="section">
+        <p>Clave incorrecta</p>
+      </div>
+    </div>
   </div>
   <button type="submit">Aceptar</button>
 </form>
 <br>
 <div>
-  <div>
-      Nota informativa!
-  </div>
-  <p>Nueva version 1.1.x en desarrollo v. 2017-09-18</p>
+  <span class="toast large">Nueva version 1.1.x en desarrollo v. 2017-09-18</span>
 </div>
