@@ -2,13 +2,25 @@
   Listado de operarios
 </p>
 
-<a [routerLink]="['detalle']" class="button">Nuevo</a> 
+<a [routerLink]="['detalle']" class="button">Nuevo Operario</a> 
 
 <br>
-<div>
-  <div *ngFor="let operario of listaOperarios">
-    <div>
-      <a [routerLink]="['/dash/operarios/detalle', operario._id]">{{ operario.nombre }}</a>
-    </div>
-  </div>
+
+<div class="row cols-sm">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Operario</th>
+        <th>Editar</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let operario of listaOperarios; let i = index">
+        <td data-label="#">{{ i }}</td>
+        <td data-label="Operario">{{ operario.nombre }}</td>
+        <td data-label="Editar"> <a [routerLink]="['/dash/operarios/detalle', operario._id]" class="button small tertiary">Editar</a></td>        
+      </tr>
+    </tbody>
+  </table>
 </div>

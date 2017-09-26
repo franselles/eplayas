@@ -7,7 +7,9 @@
   </h4>
   <div *ngFor="let turno of playa.datos; let i=index">
     <div>
+      <div class="turno">
       TURNO {{ turno.turno | uppercase}}
+      </div>
     </div>
     <div *ngIf="turno.turno == noche">
       2 CRIBADORAS
@@ -17,7 +19,7 @@
     </div>    
     <br>
     <div>
-      <strong>INCIDENCIAS</strong>
+      <strong>INCIDENCIAS / TRABAJOS</strong>
     </div>
     <div *ngFor="let detalle of turno.observacion; let i=index">
       <div *ngIf="detalle.observacion_ayto.length > 0">
@@ -34,9 +36,9 @@
     TOTAL PESOS PLAYA {{ playa._id | uppercase}}
     </h5>
   </div>
-  <div>
-    RSU: {{ playa?.trmp }} KGs. - CRIBADORAS: {{ playa?.trcp }} KGs. - SELECTIVO: {{ playa?.tsp }} KGs. -
-    ALGAS: {{ playa?.tapp }} KGs. - ALGAS TEORRICAS: {{ playa?.tatp }} KGs.
+  <div class="total">
+    RSU: <strong>{{ playa?.trmp }} KGs. </strong> - CRIBADORAS: <strong>{{ playa?.trcp }} KGs. </strong> - SELECTIVO: <strong>{{ playa?.tsp }} KGs. </strong> -
+    ALGAS: <strong>{{ playa?.tapp }} KGs. </strong> - ALGAS TEORRICAS: <strong>{{ playa?.tatp }} KGs.</strong>
   </div>  
   <br>
 </div>
@@ -47,9 +49,9 @@
     TOTAL PESOS DEL DIA {{ fecha | date: 'dd/MM/yyyy' }}
     </h5>
   </div>
-  <div>
-    RSU: {{ totalBas?.total_rsu_manual }} KGs. - CRIBADORAS: {{ totalBas?.total_rsu_criba }} KGs. - SELECTIVO: {{ totalBas?.total_selectivo }} KGs. -
-    ALGAS: {{ totalBas?.total_algas_pesadas }} KGs. - ALGAS: {{ totalBas?.total_algas_teoricas }} KGs.
+  <div class="totaldia">
+    RSU: <strong>{{ totalBas?.total_rsu_manual }} KGs. </strong> - CRIBADORAS: <strong>{{ totalBas?.total_rsu_criba }} KGs. </strong> - SELECTIVO: <strong>{{ totalBas?.total_selectivo }} KGs. </strong> -
+    ALGAS: <strong>{{ totalBas?.total_algas_pesadas }} KGs. </strong> - ALGAS TEORICAS: <strong>{{ totalBas?.total_algas_teoricas }} KGs.</strong>
   </div>
 </div>
 <br>
