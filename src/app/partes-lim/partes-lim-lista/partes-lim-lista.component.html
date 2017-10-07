@@ -22,10 +22,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let parte of listaPartes; let i = index">
-        <td data-label="#">{{ i }}</td>        
+        <td data-label="#">{{ i + 1 }}</td>        
         <td data-label="Playa">{{ parte.lugar }}</td>
         <td data-label="Operario">{{ parte.operario }}</td>
         <td data-label="Turno">{{ parte.turno }}</td>
+        <td data-label="Tipo">{{ parte.tipo }}</td>
+        <td data-label="RSUM">{{ parte.pesos.rsu_manual }}</td>     
+        <td data-label="RSUC">{{ parte.pesos.rsu_criba }}</td> 
+        <td data-label="SEL">{{ parte.pesos.selectivo }}</td> 
+        <td data-label="ALGT">{{ parte.pesos.algas_teoricas }}</td>        
+        <td data-label="ALGP">{{ parte.pesos.algas_pesadas }}</td>                                           
         <td data-label="Editar"><a [routerLink]="['/dash/limpieza/detalle', parte._id]" class="button small tertiary">
           Editar
         </a></td>        

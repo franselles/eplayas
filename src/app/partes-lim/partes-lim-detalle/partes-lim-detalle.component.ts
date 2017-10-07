@@ -176,6 +176,16 @@ export class PartesLimDetalleComponent implements OnInit {
           tipo: 'Manual'
         });
       break;
+      case 11:
+      this.parteForm.patchValue({
+        observacion_ayto: 'Cribado de playa'
+      });
+    break;
+    case 12:
+      this.parteForm.patchValue({
+        observacion_ayto: 'Cribado de orilla'
+      });
+    break;
     }
   }
 
