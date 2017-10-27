@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let operario of listaOperarios; let i = index">
-        <td data-label="#">{{ i }}</td>
+        <td data-label="#">{{ i + 1 }}</td>
         <td data-label="Operario">{{ operario.nombre }}</td>
         <td data-label="Editar"> <a [routerLink]="['/dash/operarios/detalle', operario._id]" class="button small tertiary">Editar</a></td>        
       </tr>

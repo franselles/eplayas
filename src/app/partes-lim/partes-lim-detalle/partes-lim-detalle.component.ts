@@ -87,7 +87,7 @@ export class PartesLimDetalleComponent implements OnInit {
 
     for (const i in parte.estadisticas) {
       if ({}.hasOwnProperty.call(parte.estadisticas, i)) {
-        this.nuevaEstadistica(parte.estadisticas[i].estadistica);
+        this.nuevaEstadistica(parte.estadisticas[i].nombre);
       }
     }
 

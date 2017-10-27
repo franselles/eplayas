@@ -5,7 +5,7 @@ import { CoreComponent } from './core/core.component';
 
 @NgModule({
   declarations: [
-      ],
+    ],
   imports: [
     BrowserModule,
     CoreModule

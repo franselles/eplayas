@@ -1,0 +1,26 @@
+<p>
+  Listado de incidencias
+</p>
+
+<a [routerLink]="['/dash/incidencias/detalle']" class="button">Nueva incidencia</a> 
+
+<br>
+
+<div class="row cols-sm">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Incidencia</th>
+        <th>Editar</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of estadisticas; let i = index">
+        <td data-label="#">{{ i + 1 }}</td>
+        <td data-label="Incidencia">{{ item.nombre }}</td>
+        <td data-label="Editar"> <a [routerLink]="['/dash/incidencias/detalle', item._id]" class="button small tertiary">Editar</a></td>        
+      </tr>
+    </tbody>
+  </table>
+</div>

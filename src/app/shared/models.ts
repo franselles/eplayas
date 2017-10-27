@@ -22,7 +22,7 @@ export interface Vehiculo {
 
 export interface Estadistica {
     _id?: string;
-    estadistica: string;
+    nombre: string;
     gravedad: string;
 }
 

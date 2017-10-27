@@ -34,7 +34,7 @@ export class EstadisticasService {
       .catch(error => this.handleError(error));
   }
 
-  removeOperario(id: number | string, estadistica: Estadistica) {
+  removeEstadistica(id: number | string) {
     return this.http.delete(this.BASE_URL + id)
       .map(response => response.json())
       .catch(error => this.handleError(error));
