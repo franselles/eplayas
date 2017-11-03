@@ -1,8 +1,9 @@
+import { JsonpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BdService } from '../shared/bd.services';
 import { EstadisticasService } from '../shared/estadisticas.services';
@@ -36,7 +37,7 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     JsonpModule,
     RouterModule.forChild(routes)
   ],

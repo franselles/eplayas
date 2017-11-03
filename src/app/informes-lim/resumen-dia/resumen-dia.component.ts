@@ -37,7 +37,7 @@ export class ResumenDiaComponent implements OnInit {
   abreRes(fecha: string, municipio: string) {
 
     this.resumenService.getResPlaya(fecha, municipio)
-      .subscribe(data => {
+      .subscribe((data: any[]) => {
         this.datos = data;
       }, err => console.log(err));
 

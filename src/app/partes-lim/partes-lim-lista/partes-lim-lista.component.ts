@@ -29,7 +29,7 @@ export class PartesLimListaComponent implements OnInit {
   actualizaLista() {
     this.globalPartes.setFecha(this.fecha);
     this.partesService.getPartesDia(this.fecha).subscribe(
-      partes => this.listaPartes = partes,
+      (partes: Parte[]) => this.listaPartes = partes,
       err => console.log(err)
     );
 

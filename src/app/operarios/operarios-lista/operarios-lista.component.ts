@@ -16,7 +16,7 @@ export class OperariosListaComponent implements OnInit {
 
   ngOnInit() {
     this.operariosService.getOperarios().subscribe(
-      data => this.listaOperarios = data,
+      (data: Operario[]) => this.listaOperarios = data,
       err => console.log(err)
     );
   }

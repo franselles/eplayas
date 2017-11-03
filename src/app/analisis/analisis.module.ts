@@ -1,5 +1,5 @@
 import { BdService } from '../shared/bd.services';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AnalisisService } from '../shared/analisis.services';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -24,7 +24,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    HttpModule,
+    HttpClientModule,
     FormsModule
   ],
   declarations: [

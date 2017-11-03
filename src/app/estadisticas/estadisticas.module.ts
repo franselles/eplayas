@@ -1,6 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BdService } from '../shared/bd.services';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { LoggedInGuard } from '../shared/logged-in.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -20,8 +20,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule,
-    JsonpModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild(routes)

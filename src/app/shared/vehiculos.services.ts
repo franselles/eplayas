@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
 
 import { Vehiculo } from './../shared/models';
 import { BdService } from './../shared/bd.services';
@@ -12,44 +10,29 @@ export class VehiculosService {
 
   BASE_URL: string;
 
-  constructor(private http: Http, private bdService: BdService) {
+  constructor(private http: HttpClient, private bdService: BdService) {
     this.BASE_URL = this.bdService.dir_bd_ + 'vehiculos/';
   }
 
   getVehiculos() {
-    return this.http.get(this.BASE_URL)
-      .map(response => response.json())
-      .catch(error => this.handleError(error));
+    return this.http.get(this.BASE_URL);
   }
 
   /*
   getOperario(id: string | number) {
-    return this.http.get(this.BASE_URL + id)
-      .map(response => response.json())
-      .catch(error => this.handleError(error));
+    return this.http.get(this.BASE_URL + id);
   }
 
   addOperario(operario: Operario) {
-    return this.http.post(this.BASE_URL, operario)
-      .map(response => response.json())
-      .catch(error => this.handleError(error));
+    return this.http.post(this.BASE_URL, operario);
   }
 
   removeOperario(id: number | string) {
-    return this.http.delete(this.BASE_URL + id)
-      .map(response => response.json())
-      .catch(error => this.handleError(error));
+    return this.http.delete(this.BASE_URL + id);
   }
 
   updateOperario(id: string | number, operario: Operario) {
-    return this.http.put(this.BASE_URL + id, operario)
-      .map(response => response.json())
-      .catch(error => this.handleError(error));
+    return this.http.put(this.BASE_URL + id, operario);
   }
   */
-
-  private handleError(error: any) {
-    console.error(error);
-    return Observable.throw('Server error (' + error.status + '): ' + error.text())
-  }
 }

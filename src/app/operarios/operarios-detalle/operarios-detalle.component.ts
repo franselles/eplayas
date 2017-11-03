@@ -32,7 +32,7 @@ export class OperariosDetalleComponent implements OnInit {
 
     if (id) {
       this.operariosService.getOperario(id)
-        .subscribe(data => {
+        .subscribe((data: Operario) => {
             this.operario = data;
             this.enEdicion = true;
             this.cargaFormulario(data);

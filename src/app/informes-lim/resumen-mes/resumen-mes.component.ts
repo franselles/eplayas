@@ -44,7 +44,7 @@ export class ResumenMesComponent implements OnInit {
 
   abreMes(year: string, month: string, turno: string, lugar: string, municipio: string) {
     this.resumenService.getMesPlaya(year, month, turno, lugar, municipio)
-      .subscribe(data => {
+      .subscribe((data: any[]) => {
         this.resumen = data;
       }, err => console.log(err));
 

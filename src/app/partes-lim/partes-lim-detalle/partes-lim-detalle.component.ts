@@ -59,14 +59,14 @@ export class PartesLimDetalleComponent implements OnInit {
       bolsas: ['']
     });
 
-    this.estadisticasService.getEstadisticas().subscribe(data => this.listaEstadisticas = data, error => console.log(error));
-    this.operariosService.getOperarios().subscribe(data => this.listaOperarios = data, error => console.log(error));
-    this.vehiculosService.getVehiculos().subscribe(data => this.listaVehiculos = data, error => console.log(error));
+    this.estadisticasService.getEstadisticas().subscribe((data: any[]) => this.listaEstadisticas = data, error => console.log(error));
+    this.operariosService.getOperarios().subscribe((data: any[]) => this.listaOperarios = data, error => console.log(error));
+    this.vehiculosService.getVehiculos().subscribe((data: any[]) => this.listaVehiculos = data, error => console.log(error));
 
     const id = this.activatedRoute.snapshot.params['id'];
 
     if (id) {
-      this.partesService.getParte(id).subscribe(parte => {
+      this.partesService.getParte(id).subscribe((parte: Parte) => {
         this.parte = parte;
         this.cargaDatosFormulario(this.parte);
         this.enEdicion = true;
@@ -87,7 +87,7 @@ export class PartesLimDetalleComponent implements OnInit {
 
     for (const i in parte.estadisticas) {
       if ({}.hasOwnProperty.call(parte.estadisticas, i)) {
-        this.nuevaEstadistica(parte.estadisticas[i].nombre);
+        this.nuevaEstadistica(parte.estadisticas[i].estadistica);
       }
     }
 

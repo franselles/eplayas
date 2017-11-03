@@ -16,7 +16,7 @@ export class EstadisticasListaComponent implements OnInit {
 
   ngOnInit() {
     this.estadisticasService.getEstadisticas()
-      .subscribe(data => {
+      .subscribe((data: Estadistica[]) => {
         this.estadisticas = data;
       });
   }

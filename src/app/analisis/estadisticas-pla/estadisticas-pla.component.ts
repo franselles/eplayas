@@ -31,7 +31,7 @@ export class EstadisticasPlaComponent implements OnInit {
 
   abreEstadisticasPla(fechad: string, fechah: string, lugar: string, municipio: string) {
     this.analisisServices.getEstadisticasPlaya(fechad, fechah, lugar, municipio).
-      subscribe(data =>  {
+      subscribe((data: any[]) =>  {
         this.estadisticas = data;
       }, err => console.log(err));
   }

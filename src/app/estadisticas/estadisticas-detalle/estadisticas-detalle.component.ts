@@ -28,7 +28,7 @@ export class EstadisticasDetalleComponent implements OnInit {
 
     if (id) {
       this.estadisticasService.getEstadistica(id)
-        .subscribe(data => {
+        .subscribe((data: Estadistica) => {
           this.estadistica = data;
           this.enEdicion = true;
           this.cargaFormulario(this.estadistica);
@@ -41,7 +41,7 @@ export class EstadisticasDetalleComponent implements OnInit {
 
   cargaFormulario(data: Estadistica) {
     this.estadisticasForm.patchValue({
-      nombre: data.nombre,
+      nombre: data.estadistica,
       gravedad: data.gravedad
     });
   }

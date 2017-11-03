@@ -33,7 +33,7 @@ export class EstadisticasMunComponent implements OnInit {
 
   abreEstadisticasMun(fechad: string, fechah: string, municipio: string) {
     this.analisisServices.getEstadisticasMunicipio(fechad, fechah, municipio).
-      subscribe(data =>  {
+      subscribe((data: any[]) =>  {
         this.estadisticas = data;
       }, err => console.log(err));
   }
