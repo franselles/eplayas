@@ -11,25 +11,22 @@
           </h4>
           <div *ngFor="let turno of playa.datos; let i=index">
             <div>
-              <div>
-                <h6 class="card-subtitle mb-2 text-muted">TURNO {{ turno.turno | uppercase}}</h6>
-              </div>
+              <h6 class="card-subtitle mb-2 text-muted">TURNO {{ turno.turno | uppercase}}</h6>
             </div>
-            <div *ngIf="turno.turno == noche">
+            <div *ngIf="turno.turno == noche" class="texto_p">
               2 CRIBADORAS
             </div>
-            <div *ngIf="turno.top > 0">
+            <div *ngIf="turno.top > 0" class="texto_p">
               {{ turno.top }} OPERARIOS
             </div>
             <div *ngFor="let detalle of turno.observacion; let i=index">
               <div *ngIf="detalle.observacion_ayto.length > 0">
-                <div>
-                  <pre>
-                    {{ detalle.observacion_ayto | uppercase}}
-                  </pre>
-                </div>
+                <pre>
+                  {{ detalle.observacion_ayto | uppercase}}
+                </pre>
               </div>
             </div>
+            <br>
           </div>
         </div>
       </div>
@@ -94,13 +91,14 @@
         <h4 class="card-title">
           TOTAL PESOS DEL DIA
         </h4>
-      </div>
-      <div class="card-body">
-        RSU: <strong>{{ totalBas?.total_rsu_manual }} KGs. </strong> -
-        CRIBADORAS: <strong>{{ totalBas?.total_rsu_criba }} KGs. </strong> -
-        SELECTIVO: <strong>{{ totalBas?.total_selectivo }} KGs. </strong> -
-        ALGAS: <strong>{{ totalBas?.total_algas_pesadas }} KGs. </strong> -
-        ALGAS TEORICAS: <strong>{{ totalBas?.total_algas_teoricas }} KGs.</strong>
+        <p class="card-text">
+          RSU:
+          <strong>{{ totalBas?.total_rsu_manual }} KGs. </strong> - CRIBADORAS:
+          <strong>{{ totalBas?.total_rsu_criba }} KGs. </strong> - SELECTIVO:
+          <strong>{{ totalBas?.total_selectivo }} KGs. </strong> - ALGAS:
+          <strong>{{ totalBas?.total_algas_pesadas }} KGs. </strong> - ALGAS TEORICAS:
+          <strong>{{ totalBas?.total_algas_teoricas }} KGs.</strong>
+        </p>
       </div>
     </div>
   </div>
