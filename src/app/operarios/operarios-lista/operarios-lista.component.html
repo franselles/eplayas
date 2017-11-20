@@ -2,24 +2,24 @@
   Listado de operarios
 </p>
 
-<a [routerLink]="['detalle']" class="button">Nuevo Operario</a> 
+<a [routerLink]="['detalle']">Nuevo Operario</a> 
 
 <br>
 
-<div class="row cols-sm">
-  <table>
+<div>
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Operario</th>
-        <th>Editar</th>        
+        <th scope="col">#</th>
+        <th scope="col">Operario</th>
+        <th scope="col">Editar</th>        
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let operario of listaOperarios; let i = index">
-        <td data-label="#">{{ i + 1 }}</td>
-        <td data-label="Operario">{{ operario.nombre }}</td>
-        <td data-label="Editar"> <a [routerLink]="['/dash/operarios/detalle', operario._id]" class="button small tertiary">Editar</a></td>        
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ operario.nombre }}</td>
+        <td> <a [routerLink]="['/dash/operarios/detalle', operario._id]">Editar</a></td>        
       </tr>
     </tbody>
   </table>

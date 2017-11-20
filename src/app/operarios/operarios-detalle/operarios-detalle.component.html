@@ -1,52 +1,58 @@
 <form novalidate [formGroup]="operariosForm" (ngSubmit)="onSubmit(operariosForm)">
-  <div>
-    <label>
+  <div class="form-group">
+    <label for="nombre">
       Nombre
     </label>
     <input
       type="text"
       placeholder="Introduce nombre"
       name="nombre"
-      formControlName="nombre">  
-      <div *ngIf="operariosForm.controls['nombre'].hasError('required') && operariosForm.controls['nombre'].touched" class="card warning">
-        <div class="section">
-          <p>Campo nombre necesario</p>
-        </div>
+      id="nombre"
+      formControlName="nombre"
+      class="form-control">  
+      <div *ngIf="operariosForm.controls['nombre'].hasError('required') && operariosForm.controls['nombre'].touched" class="alert alert-warning" role="warning">
+        Campo nombre necesario
       </div>           
   </div>
-  <div>
-    <label>
+  <div class="form-group">
+    <label for="direccion">
       Direccion
     </label>
     <input
       type="text"
       placeholder="Introduce direccion"
       name="direccion"
+      id="direccion"
+      class="form-control"        
       formControlName="direccion">
   </div>
-  <div>
-    <label>
+  <div class="form-group">
+    <label for="telefono">
       Telefono
     </label>
     <input
       type="text"
       placeholder="Introduce telefono"
       name="telefono"
-      formControlName="telefono">
+      id="telefono"
+      formControlName="telefono"
+      class="form-control">
   </div>
-  <div>
-    <label>
+  <div class="form-group">
+    <label for="puesto">
       Puesto
     </label>
     <input
       type="text"
       placeholder="Introduce puesto"
       name="puesto"
-      formControlName="puesto">
+      formControlName="puesto"
+      id="puesto"
+      class="form-control">
   </div>
   <div>
-    <button type="submit" [disabled]="!operariosForm.valid">Aceptar</button>
-    <button type="button" (click)="onCancelar()">Cancelar</button>
-    <button type="button" (click)="onBorrar(operariosForm)">BORRAR</button>
+    <button type="submit" [disabled]="!operariosForm.valid" class="btn btn-success">Aceptar</button>
+    <button type="button" (click)="onCancelar()" class="btn btn-warning">Cancelar</button>
+    <button type="button" (click)="onBorrar(operariosForm)" class="btn btn-danger">BORRAR</button>
   </div>
 </form>

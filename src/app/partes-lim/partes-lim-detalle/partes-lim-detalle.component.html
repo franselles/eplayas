@@ -5,131 +5,136 @@
 <form novalidate [formGroup]="parteForm" (ngSubmit)="onSubmit(parteForm)">
   <fieldset>
     <legend>Datos obligatorios</legend>
-  <div class="vertical">
+  <div class="form-group">
     <label for="fecha">Fecha</label>
     <input
       type="date"
       placeholder="FECHA"
       name="fecha"
+      class="form-control"   
+      id="fecha"      
       formControlName="fecha">
-      <div *ngIf="parteForm.controls['fecha'].hasError('required') && parteForm.controls['fecha'].touched" class="card warning">
-        <div class="section">
-          <p>Campo fecha necesario</p>
-        </div>
+      <div *ngIf="parteForm.controls['fecha'].hasError('required') && parteForm.controls['fecha'].touched" class="alert alert-warning" role="warning">
+          Campo fecha necesario
       </div>            
   </div>  
-  <div class="vertical">
+  <div class="form-group">
     <label>Acceso rápido</label>
-    <button type="button" (click)="setAccesoRapido(1)">ML</button>
-    <button type="button" (click)="setAccesoRapido(2)">MP</button>
-    <button type="button" (click)="setAccesoRapido(3)">TL</button>
-    <button type="button" (click)="setAccesoRapido(4)">TP</button>
-    <button type="button" (click)="setAccesoRapido(5)">NL</button>
-    <button type="button" (click)="setAccesoRapido(6)">NP</button>
+    <button type="button" (click)="setAccesoRapido(1)" class="btn btn-primary">ML</button>
+    <button type="button" (click)="setAccesoRapido(2)" class="btn btn-primary">MP</button>
+    <button type="button" (click)="setAccesoRapido(3)" class="btn btn-primary">TL</button>
+    <button type="button" (click)="setAccesoRapido(4)" class="btn btn-primary">TP</button>
+    <button type="button" (click)="setAccesoRapido(5)" class="btn btn-primary">NL</button>
+    <button type="button" (click)="setAccesoRapido(6)" class="btn btn-primary">NP</button>
   </div>
-  <div class="vertical">
+  <div class="form-group">
     <label for="municipio">Municipio</label>
     <select
       placeholder="MUNICIPIO"
       name="municipio"
+      id="municipio"
       formControlName="municipio"
-      suiDropdown>
+      class="form-control">
       <option value="Benidorm" selected="selected">Benidorm</option>
       <option value="Finestrat">Finestrat</option>    
     </select>
-    <div *ngIf="parteForm.controls['municipio'].hasError('required') && parteForm.controls['municipio'].touched" class="card warning">
-      <div class="section">
-        <p>Campo municipio necesario</p>
-      </div>
+    <div *ngIf="parteForm.controls['municipio'].hasError('required') && parteForm.controls['municipio'].touched" class="alert alert-warning" role="warning">
+        Campo municipio necesario
     </div>    
   </div>   
-  <div class="vertical">
+  <div class="form-group">
     <label for="lugar">Playa</label>
     <select
       placeholder="PLAYA"
       name="lugar"
+      id="lugar"
+      class="form-control"      
       formControlName="lugar">
       <option value="Levante y Calas">Levante y Calas</option>
       <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
       <option value="Finestrat">Finestrat</option>      
     </select>
-    <div *ngIf="parteForm.controls['lugar'].hasError('required') && parteForm.controls['lugar'].touched" class="card warning">
-      <div class="section">
-        <p>Campo playa necesario</p>
-      </div>
+    <div *ngIf="parteForm.controls['lugar'].hasError('required') && parteForm.controls['lugar'].touched" class="alert alert-warning" role="warning">
+        Campo playa necesario
     </div>       
   </div> 
-  <div class="vertical">
+  <div class="form-group">
     <label for="turno">Turno</label>
     <select
       placeholder="TURNO"
       name="turno"
+      id="turno"
+      class="form-control"      
       formControlName="turno">
       <option value="Mañana">Mañana</option>
       <option value="Tarde">Tarde</option>
       <option value="Noche">Noche</option>
     </select> 
-    <div *ngIf="parteForm.controls['turno'].hasError('required') && parteForm.controls['turno'].touched" class="card warning">
-      <div class="section">
-        <p>Campo turno necesario</p>
-      </div>
+    <div *ngIf="parteForm.controls['turno'].hasError('required') && parteForm.controls['turno'].touched" class="alert alert-warning" role="warning">
+        Campo turno necesario
     </div>        
   </div>  
-  <div class="vertical">
+  <div class="form-group">
     <label for="tipo">Tipo de limpieza</label>
     <select
       placeholder="TIPO"
       name="tipo"
+      class="form-control" 
+      id="tipo"      
       formControlName="tipo">
       <option value="Manual">Manual</option>
       <option value="Tractor">Tractor</option>
     </select>
-    <div *ngIf="parteForm.controls['tipo'].hasError('required') && parteForm.controls['tipo'].touched" class="card warning">
-      <div class="section">
-        <p>Campo tipo necesario</p>
-      </div>
+    <div *ngIf="parteForm.controls['tipo'].hasError('required') && parteForm.controls['tipo'].touched" class="alert alert-warning" role="warning">
+        Campo tipo necesario
     </div>             
   </div>  
   </fieldset> 
   <fieldset>
       <legend>Otros datos</legend>  
-  <div class="vertical">
+  <div class="form-group">
     <label for="operario">Conductor</label>
     <select
       placeholder="CONDUCTOR"
       name="operario"
+      class="form-control" 
+      id="operario"      
       formControlName="operario">   
       <option *ngFor="let unOperario of listaOperarios; let i=index" [value]="unOperario.nombre">{{ unOperario.nombre }}</option>
     </select>    
   </div>   
-  <div class="vertical">
+  <div class="form-group">
     <label for="vehiculo">Vehiculo</label>
     <select
       placeholder="VEHICULO"
       name="vehiculo"
+      class="form-control" 
+      id="vehiculo"      
       formControlName="vehiculo">
       <option *ngFor="let unVehiculo of listaVehiculos; let i=index" [value]="unVehiculo.matricula">{{ unVehiculo.matricula }} - {{ unVehiculo.nombre }}</option>    
     </select>
   </div>   
-  <div class="vertical">
+  <div class="form-group">
     <label for="numero_ops">Numero de operarios</label>
     <input
       type="number"
       placeholder="Numero de operarios"
       name="numero_ops"
+      class="form-control" 
+      id="numero_ops"      
       formControlName="numero_ops">
-      <button type="button" (click)="setOperariosTemporada(1)">TEMPORADA BAJA</button>
-      <button type="button" (click)="setOperariosTemporada(2)">TEMPORADA ALTA</button>
+      <button type="button" (click)="setOperariosTemporada(1)" class="btn btn-primary">TEMPORADA BAJA</button>
+      <button type="button" (click)="setOperariosTemporada(2)" class="btn btn-primary">TEMPORADA ALTA</button>
   </div>  
   </fieldset>
   <fieldset>
     <legend>Observaciones</legend>
-    <div class="vertical">
+    <div class="form-group">
       <label>Acceso rápido</label>
-      <button type="button" (click)="setAccesoRapido(11)">CP</button>
-      <button type="button" (click)="setAccesoRapido(12)">CO</button>
+      <button type="button" (click)="setAccesoRapido(11)" class="btn btn-primary">CP</button>
+      <button type="button" (click)="setAccesoRapido(12)" class="btn btn-primary">CO</button>
     </div>    
-  <div class="vertical">
+  <div class="form-group">
     <div>
       <label for="observacion_ayto">Ayuntamiento</label>
     </div>
@@ -137,10 +142,12 @@
       name="observacion_ayto"
       rows="10"
       cols="50"
+      class="form-control" 
+      id="observacion_ayto"      
       formControlName="observacion_ayto">
     </textarea>
   </div> 
-  <div class="vertical">
+  <div class="form-group">
     <div>
       <label for="observacion_ra">RA</label>
     </div>
@@ -148,35 +155,40 @@
       name="observacion_ra"
       rows="10"
       cols="50"
+      class="form-control" 
+      id="observacion_ra"      
       formControlName="observacion_ra">
     </textarea>
   </div>    
   </fieldset>  
   <fieldset>
       <legend>Analisis, estadisiticas, pesos,..</legend>  
-  <div formArrayName="estadisticas" class="vertical">
+  <div formArrayName="estadisticas" class="form-group">
     <div>
-      <label>Incidencias para control estadistico</label>
+      <label for="incidencia">Incidencias para control estadistico</label>
     </div>
       <select
-       #estadisticaSeleccionada>
+       #estadisticaSeleccionada
+       class="form-control" 
+       id="incidencia">
         <option *ngFor="let unaEstadistica of listaEstadisticas; let i=index">{{ unaEstadistica.nombre }}</option>
       </select>
-    <button type="button" (click)="onMasEstadsitica(estadisticaSeleccionada.value)" class="tertiary">Añade
+    <button type="button" (click)="onMasEstadsitica(estadisticaSeleccionada.value)" class="btn btn-success">Añade
       iniccidencia
     </button>
-    <div *ngFor="let estadisticaControl of estadisticas.controls; let i=index">
+    <div *ngFor="let estadisticaControl of estadisticas.controls; let i=index" class="form-inline">
       <div [formGroupName]="i">
           <input      
             type="text"
             name="estadistica"
+            class="form-control"             
             formControlName="estadistica"
             readonly>
-          <button type="button" (click)="onQuitaEstadistica(i)" class="secondary">Quitar</button>
+          <button type="button" (click)="onQuitaEstadistica(i)" class="btn btn-danger">Quitar</button>
       </div>
     </div>
   </div>  
-  <div formGroupName="pesos" class="vertical">
+  <div formGroupName="pesos" class="form-group">
     <p>
       PESOS
     </p>
@@ -188,6 +200,8 @@
         type="number"
         placeholder="peso RSU"
         name="rsu_manual"
+        class="form-control"  
+        id="rsu_manual"        
         formControlName="rsu_manual">
     </div>
     <div>
@@ -198,6 +212,8 @@
         type="number"
         placeholder="peso RSU cribadora"
         name="rsu_criba"
+        class="form-control" 
+        id="rsu_criba"        
         formControlName="rsu_criba">
     </div>
     <div>
@@ -208,6 +224,8 @@
         type="number"
         placeholder="peso SELECTIVO"
         name="selectivo"
+        class="form-control" 
+        id="selectivo"        
         formControlName="selectivo">
     </div>
     <div>
@@ -218,6 +236,8 @@
         type="number"
         placeholder="peso ALGAS PESADAS"
         name="algas_pesadas"
+        class="form-control" 
+        id="algas_pesadas"        
         formControlName="algas_pesadas">
     </div>
     <div>
@@ -228,10 +248,12 @@
         type="number"
         placeholder="peso ALGAS TEORICAS"
         name="algas_teoricas"
+        class="form-control" 
+        id="algas_teoricas"        
         formControlName="algas_teoricas">
       </div>
   </div>
-  <div formGroupName="horarios" class="vertical">
+  <div formGroupName="horarios" class="form-group">
     <p>
       HORARIOS
     </p>
@@ -243,6 +265,8 @@
         type="time"
         placeholder="hora SALIDA ALMACEN"
         name="salida_almacen"
+        class="form-control" 
+        id="salida_almacen"        
         formControlName="salida_almacen">
     </div>
     <div>
@@ -253,6 +277,8 @@
         type="time"
         placeholder="hora SALIDA PLAYA"
         name="salida_playa"
+        class="form-control" 
+        id="salida_playa"        
         formControlName="salida_playa">
     </div>
     <div>
@@ -263,10 +289,12 @@
         type="time"
         placeholder="hora LLEGADA ALMACEN"
         name="llegada_almacen"
+        class="form-control" 
+        id="llegada_almacen"        
         formControlName="llegada_almacen">
     </div>
   </div>
-  <div class="vertical">
+  <div class="form-group">
     <label for="bolsas">
       Bolsas de basura utilizadas
     </label>
@@ -274,12 +302,14 @@
       type="number"
       placeholder="Bolsas de basura utilizadas"
       name="bolsas"
+      class="form-control" 
+      id="bolsas"      
       formControlName="bolsas"> 
   </div>
   </fieldset>
   <div>
-    <button type="submit" [disabled]="!parteForm.valid">GUARDAR</button>
-    <button type="button" (click)="onCancelar()">CANCELAR</button>
-    <button type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion">BORRAR</button>
+    <button type="submit" [disabled]="!parteForm.valid" class="btn btn-success">GUARDAR</button>
+    <button type="button" (click)="onCancelar()" class="btn btn-warning">CANCELAR</button>
+    <button type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion" class="btn btn-danger">BORRAR</button>
   </div>    
 </form>

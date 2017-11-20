@@ -1,8 +1,42 @@
-<p>
-  TOTAL PESOS PLAYA {{ lugar }} EN {{ municipio }}
-</p>
-RSU MANUAL: {{ pesos?.total_rsu_manual }} <br>
-RSU CRIBADORA: {{ pesos?.total_rsu_criba }} <br>
-SELECTIVO: {{ pesos?.total_selectivo }} <br>
-ALGAS TEORICAS: {{ pesos?.total_algas_teoricas }} <br>
-ALGAS PESADAS: {{ pesos?.total_algas_pesadas }} <br>
+<h5>
+  TOTAL PESOS PLAYA {{ lugar | uppercase }} EN {{ municipio | uppercase }}
+</h5>
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">RECOGIDA</th>
+            <th scope="col">PESO KG.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>RSU MANUAL</td>
+            <td>{{ pesos?.total_rsu_manual }}</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>RSU CRIBADORA</td>
+            <td>{{ pesos?.total_rsu_criba }}</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>SELECTIVO</td>
+            <td>{{ pesos?.total_selectivo }}</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>ALGAS TEORICAS</td>
+            <td>{{ pesos?.total_algas_teoricas }}</td>
+          </tr>     
+          <tr>
+            <th scope="row">3</th>
+            <td>ALGAS PESADAS</td>
+            <td>{{ pesos?.total_algas_pesadas }}</td>
+          </tr>         
+        </tbody>
+      </table>
+    </div>

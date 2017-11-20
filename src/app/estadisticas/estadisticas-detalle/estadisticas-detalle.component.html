@@ -1,32 +1,34 @@
 <form novalidate [formGroup]="estadisticasForm" (ngSubmit)="onSubmit(estadisticasForm)">
-  <div>
-    <label>
+  <div class="form-group">
+    <label for="nombre">
       Nombre
     </label>
     <input
       type="text"
       placeholder="Introduce nombre"
       name="nombre"
+      id="nombre"
+      class="form-control"      
       formControlName="nombre">  
-      <div *ngIf="estadisticasForm.controls['nombre'].hasError('required') && estadisticasForm.controls['nombre'].touched" class="card warning">
-        <div class="section">
-          <p>Campo nombre necesario</p>
-        </div>
+      <div *ngIf="estadisticasForm.controls['nombre'].hasError('required') && estadisticasForm.controls['nombre'].touched" class="card warning" class="alert alert-warning" role="warning">
+          Campo nombre necesario
       </div>           
   </div>
-  <div>
-    <label>
+  <div class="form-group">
+    <label for="gravedad">
       Gravedad
     </label>
     <input
       type="text"
       placeholder="Introduce gravedad"
       name="gravedad"
+      class="form-control"   
+      id="gravedad"      
       formControlName="gravedad">
   </div>
   <div>
-    <button type="submit" [disabled]="!estadisticasForm.valid">Aceptar</button>
-    <button type="button" (click)="onCancelar()">Cancelar</button>
-    <button type="button" (click)="onBorrar(estadisticasForm)">BORRAR</button>
+    <button type="submit" [disabled]="!estadisticasForm.valid" class="btn btn-success">Aceptar</button>
+    <button type="button" (click)="onCancelar()" class="btn btn-warning">Cancelar</button>
+    <button type="button" (click)="onBorrar(estadisticasForm)" class="btn btn-danger">BORRAR</button>
   </div>
 </form>

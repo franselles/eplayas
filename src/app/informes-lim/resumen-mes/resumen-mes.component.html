@@ -1,11 +1,24 @@
 <h4>PARTES MENSUAL LIMPIEZA DE {{ lugar | uppercase }}. {{ municipio | uppercase }}. MES {{ month }} AÑO {{ year }}</h4>
+
 <div>
-  <div *ngFor="let item of resumen; let i=index">
-      <div><strong>{{ item._id }}</strong></div>
-      <div *ngFor="let observa of item.observaciones; let i=index">
-       <div>{{ observa.observacion_ayto | uppercase }}</div>
-      </div>
-  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Dia</th>
+        <th scope="col">Incidencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of resumen; let i=index">
+        <th scope="row">{{ item._id | date: 'dd/MM/yyyy' }}</th>
+        <td>
+          <div *ngFor="let observa of item.observaciones; let i=index">
+              {{ observa.observacion_ayto | uppercase }} 
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <br>
 <div>RA. BENIDORM. SL</div>

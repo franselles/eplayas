@@ -2,59 +2,114 @@
 <h4>MUNICIPIO DE {{ municipio | uppercase }}</h4>
 
 <div *ngFor="let playa of datos; let i=index">
-  <h4>
-    PLAYA {{ playa._id | uppercase}}
-  </h4>
-  <div *ngFor="let turno of playa.datos; let i=index">
-    <div>
-      <div class="turno">
-      TURNO {{ turno.turno | uppercase}}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">
+            PLAYA {{ playa._id | uppercase}}
+          </h4>
+          <div *ngFor="let turno of playa.datos; let i=index">
+            <div>
+              <div>
+                <h6 class="card-subtitle mb-2 text-muted">TURNO {{ turno.turno | uppercase}}</h6>
+              </div>
+            </div>
+            <div *ngIf="turno.turno == noche">
+              2 CRIBADORAS
+            </div>
+            <div *ngIf="turno.top > 0">
+              {{ turno.top }} OPERARIOS
+            </div>
+            <br>
+            <div>
+              <strong>INCIDENCIAS / TRABAJOS</strong>
+            </div>
+            <div *ngFor="let detalle of turno.observacion; let i=index">
+              <div *ngIf="detalle.observacion_ayto.length > 0">
+                <div>
+                  <pre>
+                    {{ detalle.observacion_ayto | uppercase}}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div *ngIf="turno.turno == noche">
-      2 CRIBADORAS
-    </div>
-    <div *ngIf="turno.top > 0" > 
-      {{ turno.top }} OPERARIOS
-    </div>    
-    <br>
-    <div>
-      <strong>INCIDENCIAS / TRABAJOS</strong>
-    </div>
-    <div *ngFor="let detalle of turno.observacion; let i=index">
-      <div *ngIf="detalle.observacion_ayto.length > 0">
-        <div>
-          <pre>
-            {{ detalle.observacion_ayto | uppercase}}
-          </pre>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <h4 class="card-title">
+              TOTAL PESOS PLAYA {{ playa._id | uppercase}}
+            </h4>
+          </div>
+          <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">RECOGIDA</th>
+                  <th scope="col">PESO KG.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>RSU</td>
+                  <td>{{ playa?.trmp }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>CRIBADORAS</td>
+                  <td>{{ playa?.trcp }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>SELECTIVO</td>
+                  <td>{{ playa?.tsp }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>ALGAS</td>
+                  <td>{{ playa?.tapp }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>ALGAS TEORICAS</td>
+                  <td>{{ playa?.tatp }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div>
-    <h5>
-    TOTAL PESOS PLAYA {{ playa._id | uppercase}}
-    </h5>
-  </div>
-  <div class="total">
-    RSU: <strong>{{ playa?.trmp }} KGs. </strong> - CRIBADORAS: <strong>{{ playa?.trcp }} KGs. </strong> - SELECTIVO: <strong>{{ playa?.tsp }} KGs. </strong> -
-    ALGAS: <strong>{{ playa?.tapp }} KGs. </strong> - ALGAS TEORRICAS: <strong>{{ playa?.tatp }} KGs.</strong>
-  </div>  
   <br>
 </div>
 <br>
-<div>
-  <div>
-    <h5>
-    TOTAL PESOS DEL DIA {{ fecha | date: 'dd/MM/yyyy' }}
-    </h5>
-  </div>
-  <div class="totaldia">
-    RSU: <strong>{{ totalBas?.total_rsu_manual }} KGs. </strong> - CRIBADORAS: <strong>{{ totalBas?.total_rsu_criba }} KGs. </strong> - SELECTIVO: <strong>{{ totalBas?.total_selectivo }} KGs. </strong> -
-    ALGAS: <strong>{{ totalBas?.total_algas_pesadas }} KGs. </strong> - ALGAS TEORICAS: <strong>{{ totalBas?.total_algas_teoricas }} KGs.</strong>
+<div class="row">
+  <div class="col-md">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">
+          TOTAL PESOS DEL DIA
+        </h4>
+      </div>
+      <div class="card-body">
+        RSU: <strong>{{ totalBas?.total_rsu_manual }} KGs. </strong> -
+        CRIBADORAS: <strong>{{ totalBas?.total_rsu_criba }} KGs. </strong> -
+        SELECTIVO: <strong>{{ totalBas?.total_selectivo }} KGs. </strong> -
+        ALGAS: <strong>{{ totalBas?.total_algas_pesadas }} KGs. </strong> -
+        ALGAS TEORICAS: <strong>{{ totalBas?.total_algas_teoricas }} KGs.</strong>
+      </div>
+    </div>
   </div>
 </div>
 <br>
 <p>
-RA. BENIDORM. SL
+  RA. BENIDORM. SL
 </p>

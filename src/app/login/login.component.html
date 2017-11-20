@@ -1,33 +1,27 @@
-<div>
-  <div>
-    ACCESO A LA APLICACION GESTION LIMPIEZA DE PLAYAS. RA BENIDORM. 2017
-  </div>
-</div>
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">RA BENIDORM. 2017</h4>
+  <p>ACCESO A LA APLICACION GESTION LIMPIEZA DE PLAYAS</p>
+  <hr>
+  <p class="mb-0">Nueva version 1.1.x en desarrollo v. 2017-11-20</p>
+</div>  
 
 <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(loginForm)">
-  <div class="input-group fluid">
-    <label>
+  <div class="form-group">
+    <label for="password">
       Clave
     </label>
     <input
       type="password"
       placeholder="Introduce clave"
+      class="form-control"
       name="password"
       formControlName="password">      
-    <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="card warning">
-      <div class="section">
-        <p>Campo clave necesario</p>
-      </div>
+    <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="alert alert-warning" role="warning">
+      Campo clave necesario
     </div>      
-    <div *ngIf="errorPass" class="card error">
-      <div class="section">
-        <p>Clave incorrecta</p>
-      </div>
+    <div *ngIf="errorPass" class="alert alert-danger" role="alert">
+      Clave incorrecta
     </div>
   </div>
-  <button type="submit">Aceptar</button>
+  <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>
-<br>
-<div>
-  <span class="toast large">Nueva version 1.1.x en desarrollo v. 2017-11-03</span>
-</div>

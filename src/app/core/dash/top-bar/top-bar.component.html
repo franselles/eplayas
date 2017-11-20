@@ -1,10 +1,39 @@
-<div class="input-group">
-    <a [routerLink]="['/dash/operarios']" class="button" routerLinkActive="primary">Operarios</a>
-    <a [routerLink]="['/dash/incidencias']" class="button" routerLinkActive="primary">Incidencias</a>    
-    <a [routerLink]="['/dash/limpieza']" class="button" routerLinkActive="primary">Partes</a>
-    <a [routerLink]="['/dash/informeslimpieza']" class="button" routerLinkActive="primary">Informes</a>
-    <a [routerLink]="['/dash/analisis']" class="button" routerLinkActive="primary">Analisis</a>
-    <a [routerLink]="['/dash/mantenimiento']" class="button" routerLinkActive="primary">Mantenimiento</a>
-    <a [routerLink]="['/dash/taller']" class="button" routerLinkActive="primary">Taller</a>
-    <a (click)="logOut()" class="button">Salir</a>   
-</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" [routerLink]="['/']">EPLAYAS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dash/operarios']" routerLinkActive="active">Operarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dash/incidencias']" routerLinkActive="active">Incidencias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dash/limpieza']" routerLinkActive="active">Partes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dash/informeslimpieza']" routerLinkActive="active">Informes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dash/analisis']" routerLinkActive="active">Analisis</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Otros
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" [routerLink]="['/dash/mantenimiento']">Mantenimiento</a>
+                    <a class="dropdown-item" [routerLink]="['/dash/taller']">Taller</a>
+                    <a class="dropdown-item" [routerLink]="['/dash/hamacas']">Hamacas</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-danger" (click)="logOut()">Salir</button>
+            </li>
+        </ul>
+    </div>
+</nav>
