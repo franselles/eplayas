@@ -21,10 +21,6 @@
             <div *ngIf="turno.top > 0">
               {{ turno.top }} OPERARIOS
             </div>
-            <br>
-            <div>
-              <strong>INCIDENCIAS / TRABAJOS</strong>
-            </div>
             <div *ngFor="let detalle of turno.observacion; let i=index">
               <div *ngIf="detalle.observacion_ayto.length > 0">
                 <div>
