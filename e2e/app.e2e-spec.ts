@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('eplayas App', () => {
+describe('peaceful App', () => {
   let page: AppPage;
 
   beforeEach(() => {
