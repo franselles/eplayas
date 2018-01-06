@@ -18,7 +18,7 @@
     <tbody>
       <tr *ngFor="let item of estadisticas; let i = index">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ item.nombre }}</td>
+        <td>{{ item.estadistica }}</td>
         <td> <a [routerLink]="['/dash/incidencias/detalle', item._id]">Editar</a></td>        
       </tr>
     </tbody>

@@ -20,7 +20,7 @@ export class EstadisticasDetalleComponent implements OnInit {
 
   ngOnInit() {
     this.estadisticasForm = this.fb.group({
-      nombre: ['', Validators.required],
+      estadistica: ['', Validators.required],
       gravedad: []
     });
 
@@ -41,7 +41,7 @@ export class EstadisticasDetalleComponent implements OnInit {
 
   cargaFormulario(data: Estadistica) {
     this.estadisticasForm.patchValue({
-      nombre: data.estadistica,
+      estadistica: data.estadistica,
       gravedad: data.gravedad
     });
   }

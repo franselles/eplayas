@@ -4,6 +4,10 @@ export interface Operario {
     direccion: string;
     telefono: string;
     puesto: string;
+    conductor: boolean;
+    activo: boolean;
+    ultima_alta: string;
+    ultima_baja: string;
 }
 
 export interface Vehiculo {
@@ -64,4 +68,37 @@ export interface Parte {
     pesos: Peso;
     horarios: Horario;
     bolsas: number;
+}
+
+export interface Hamaca {
+    _id?: string;
+    fecha: Date;
+    sector: number;
+    hamacas: number;
+    sombrillas: number;
+    h_rotas: number;
+    h_retiradas: number;
+    h_repuestas: number;
+    s_rotas: number;
+    s_retiradas: number;
+    s_repuestas: number;
+}
+
+export interface Asistencia {
+    _id?: string;
+    id_op: string;
+    nombre: string;
+    fecha: string;
+    puesto: string;
+    trabajado: number;
+    descanso: number;
+    festivo: number;
+    vacaciones: number;
+    disfrutadas: number;
+    baja: number;
+    justificado: number;
+    injustificado: number;
+    fecha_inicio: string;
+    fecha_fin: string;
+    observacion: string;
 }

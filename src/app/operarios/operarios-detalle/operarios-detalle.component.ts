@@ -25,7 +25,11 @@ export class OperariosDetalleComponent implements OnInit {
       nombre: ['', Validators.required],
       direccion: [''],
       telefono: [''],
-      puesto: ['']
+      puesto: [''],
+      conductor: [''],
+      activo: [''],
+      ultima_alta: [''],
+      ultima_baja: ['']
     });
 
     const id = this.activatedRoute.snapshot.params['id'];
@@ -48,7 +52,11 @@ export class OperariosDetalleComponent implements OnInit {
       nombre: data.nombre,
       direccion: data.direccion,
       telefono: data.telefono,
-      puesto: data.puesto
+      puesto: data.puesto,
+      conductor: data.conductor,
+      activo: data.activo,
+      ultima_alta: data.ultima_alta,
+      ultima_baja: data.ultima_baja
     });
   }
 

@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: '', component: DashComponent, children: [
       {path: 'operarios', loadChildren: './../../operarios/operarios.module#OperariosModule'},
+      {path: 'asistencia', loadChildren: './../../asistencia/asistencia.module#AsistenciaModule'},
       {path: 'incidencias', loadChildren: './../../estadisticas/estadisticas.module#EstadisticasModule'},
       {path: 'limpieza', loadChildren: './../../partes-lim/partes-lim.module#PartesLimModule'},
       {path: 'informeslimpieza', loadChildren: './../../informes-lim/informes-lim.module#InformesLimModule'},

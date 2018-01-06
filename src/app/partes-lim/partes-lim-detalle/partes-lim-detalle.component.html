@@ -171,7 +171,7 @@
        #estadisticaSeleccionada
        class="form-control" 
        id="incidencia">
-        <option *ngFor="let unaEstadistica of listaEstadisticas; let i=index">{{ unaEstadistica.nombre }}</option>
+        <option *ngFor="let unaEstadistica of listaEstadisticas; let i=index">{{ unaEstadistica.estadistica }}</option>
       </select>
     <button type="button" (click)="onMasEstadsitica(estadisticaSeleccionada.value)" class="btn btn-success">Añade
       iniccidencia

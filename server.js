@@ -260,7 +260,7 @@ app.post("/api/estadisticas", function(req, res) {
   var newEstadistica = req.body;
   newEstadistica.createfecha = new Date();
 
-  if (!req.body.nombre) {
+  if (!req.body.estadistica) {
     handleError(res, "Invalid nombre input", "Must provide a nombre.", 400);
   }
 
