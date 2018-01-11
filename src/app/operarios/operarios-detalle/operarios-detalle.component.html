@@ -95,7 +95,20 @@
       formControlName="ultima_baja"
       id="ultima_baja"
       class="form-control">
-  </div>    
+  </div>  
+  <div class="form-group">
+    <div>
+      <label for="observacion">Observación del operario</label>
+    </div>
+    <textarea
+      name="observacion"
+      rows="10"
+      cols="50"
+      class="form-control" 
+      id="observacion"      
+      formControlName="observacion">
+    </textarea>
+</div>     
   <div>
     <button type="submit" [disabled]="!operariosForm.valid" class="btn btn-success">Aceptar</button>
     <button type="button" (click)="onCancelar()" class="btn btn-warning">Cancelar</button>

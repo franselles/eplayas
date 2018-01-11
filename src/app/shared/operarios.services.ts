@@ -18,6 +18,10 @@ export class OperariosService {
     return this.http.get(this.BASE_URL);
   }
 
+  getOperariosActCond() {
+    return this.http.get(this.BASE_URL + 'activos/conductores');
+  }
+
   getOperario(id: string | number) {
     return this.http.get(this.BASE_URL + id);
   }

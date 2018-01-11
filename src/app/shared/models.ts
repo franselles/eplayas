@@ -8,6 +8,7 @@ export interface Operario {
     activo: boolean;
     ultima_alta: string;
     ultima_baja: string;
+    observacion: string;
 }
 
 export interface Vehiculo {

@@ -60,7 +60,7 @@ export class PartesLimDetalleComponent implements OnInit {
     });
 
     this.estadisticasService.getEstadisticas().subscribe((data: any[]) => this.listaEstadisticas = data, error => console.log(error));
-    this.operariosService.getOperarios().subscribe((data: any[]) => this.listaOperarios = data, error => console.log(error));
+    this.operariosService.getOperariosActCond().subscribe((data: any[]) => this.listaOperarios = data, error => console.log(error));
     this.vehiculosService.getVehiculos().subscribe((data: any[]) => this.listaVehiculos = data, error => console.log(error));
 
     const id = this.activatedRoute.snapshot.params['id'];

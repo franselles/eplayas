@@ -29,7 +29,8 @@ export class OperariosDetalleComponent implements OnInit {
       conductor: [''],
       activo: [''],
       ultima_alta: [''],
-      ultima_baja: ['']
+      ultima_baja: [''],
+      observacion: ['']
     });
 
     const id = this.activatedRoute.snapshot.params['id'];
@@ -56,7 +57,8 @@ export class OperariosDetalleComponent implements OnInit {
       conductor: data.conductor,
       activo: data.activo,
       ultima_alta: data.ultima_alta,
-      ultima_baja: data.ultima_baja
+      ultima_baja: data.ultima_baja,
+      observacion: data.observacion
     });
   }
 

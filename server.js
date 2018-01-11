@@ -7,6 +7,7 @@ var PARTES_COLLECTION = "partes";
 var OPERARIOS_COLLECTION = "operarios";
 var ESTADISTICAS_COLLECTION = "estadisticas";
 var VEHICULOS_COLLECTION = "vehiculos";
+var ASISTENCIA_COLLECTION = "asistencia";
 
 
 var app = express();
@@ -61,6 +62,103 @@ function handleError(res, reason, message, code) {
   response.send('Eplayas!!!');
  });
 
+
+
+// ASISTENCIA API ROUTES BELOW
+
+/*  "/api/asistencia"
+ *    GET: finds all asistencias
+ *    POST: creates a new asistencia
+ */
+
+app.get("/api/asistencia", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get asistencia.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/asistencia", function(req, res) {
+  var newAsistencia = req.body;
+  newAsistencia.createfecha = new Date();
+
+  if (!req.body.nombre) {
+    handleError(res, "Invalid nombre input", "Must provide a nombre.", 400);
+  }
+
+  var splitFecha = req.body.fecha.split("-");
+
+  newAsistencia.year = splitFecha[0];
+  newAsistencia.month = splitFecha[1];
+
+  db.collection(ASISTENCIA_COLLECTION).insertOne(newAsistencia, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new asistencia.");
+    } else {
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+});
+
+
+/*  "/api/asistencia/:id"
+ *    GET: find asistencia by id
+ *    PUT: upfecha asistencia by id
+ *    DELETE: deletes asistencia by id
+ */
+
+app.get("/api/asistencia/:fecha/:id_op", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).find({"fecha": req.params.fecha, "id_op": req.params.id_op}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get asistencia.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/api/asistencia/a/a/a/a/:id", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to get asistencia");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+app.put("/api/asistencia/:id", function(req, res) {
+  var upfechaDoc = req.body;
+  delete upfechaDoc._id;
+
+  db.collection(ASISTENCIA_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to upfecha asistencia");
+    } else {
+      upfechaDoc._id = req.params.id;
+      res.status(200).json(upfechaDoc);
+    }
+  });
+});
+
+app.delete("/api/asistencia/:id", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete asistencia");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
+
+
+
+
+
+
 // OPERARIOS API ROUTES BELOW
 
 /*  "/api/operarios"
@@ -100,6 +198,26 @@ app.post("/api/operarios", function(req, res) {
  *    PUT: upfecha operario by id
  *    DELETE: deletes operario by id
  */
+
+app.get("/api/operarios/estado/activo", function(req, res) {
+  db.collection(OPERARIOS_COLLECTION).find({"activo": true}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get operarios.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/api/operarios/activos/conductores", function(req, res) {
+  db.collection(OPERARIOS_COLLECTION).find({"activo": true, "conductor": true}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get operarios.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
 
 app.get("/api/operarios/:id", function(req, res) {
   db.collection(OPERARIOS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
