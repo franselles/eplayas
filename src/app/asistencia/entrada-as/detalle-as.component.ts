@@ -15,7 +15,7 @@ export class DetalleAsComponent implements OnInit {
   public asistencia: Asistencia;
 
   public enEdicion: boolean;
-  private id: string;
+  public id: string;
 
   constructor(private router: Router, private fb: FormBuilder, private route: ActivatedRoute,
     private asistenciaSercice: AsistenciaService) { }
@@ -122,14 +122,13 @@ export class DetalleAsComponent implements OnInit {
 
   onSubmit(datos: any) {
     if (this.enEdicion === true) {
+      datos.value.id_op = this.id;
       this.asistenciaSercice.updateAsistencia(this.asistencia._id, datos.value).subscribe(() => {
         console.log('Actualizado');
         this.router.navigate(['/dash/asistencia/entrada']);
       }, error => console.error('Error updating : ' + error));
     } else {
-      console.log(this.id);
       datos.value.id_op = this.id;
-      console.log(datos);
       this.asistenciaSercice.addAsistencia(datos.value).subscribe(() => {
         console.log('Salvado');
         this.router.navigate(['/dash/asistencia/entrada']);

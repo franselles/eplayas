@@ -10,7 +10,7 @@
             name="nombre"
             class="form-control"   
             id="nombre"      
-            formControlName="nombre">
+            formControlName="nombre"> {{ id }}
         <div *ngIf="asForm.controls['nombre'].hasError('required') && asForm.controls['nombre'].touched" class="alert alert-warning" role="warning">
             Campo nombre necesario
         </div>            
