@@ -14,7 +14,7 @@ export class DetalleAsComponent implements OnInit {
   public asForm: FormGroup;
   public asistencia: Asistencia;
 
-  private enEdicion: boolean;
+  public enEdicion: boolean;
   private id: string;
 
   constructor(private router: Router, private fb: FormBuilder, private route: ActivatedRoute,
