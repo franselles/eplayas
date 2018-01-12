@@ -1,4 +1,3 @@
-<a class="nav-link" [routerLink]="['/dash/asistencia/entrada/1/1']" routerLinkActive="active">Detalle</a>
 <div class="form-group col-md-3">
   <label for="fecha">Selecciona fecha</label>
   <input id="fecha" [(ngModel)]="fecha" type="date" (change)="actualizaLista()" class="form-control">
@@ -23,7 +22,7 @@
         </tbody>
       </table>
     </div>
-    <button class="btn btn-info" (click)="actualizaLista()">Recarga registrados</button>
+    <h5>Operarios registrados</h5>
     <div>
       <table class="table table-striped">
         <thead>
@@ -35,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of asistencias; let i = index">
+          <tr *ngFor="let item of asistenciaService.asistencias; let i = index">
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ item.nombre }}</td>
             <td>            

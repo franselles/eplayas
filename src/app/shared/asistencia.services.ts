@@ -12,6 +12,8 @@ export class AsistenciaService {
     BASE_URL_A: string;
     BASE_URL_O: string;
 
+    public asistencias: Asistencia[] = [];
+
     constructor(private http: HttpClient, private bdService: BdService) {
       this.BASE_URL_A = this.bdService.dir_bd_ + 'asistencia/';
       this.BASE_URL_O = this.bdService.dir_bd_ + 'operarios/';
@@ -43,5 +45,14 @@ export class AsistenciaService {
 
     updateAsistencia(id: number | string, asistencia: Asistencia) {
       return this.http.put(this.BASE_URL_A + id, asistencia);
+    }
+
+    listaAsistenciasDia(fecha: string) {
+      this.getAsistenciasDia(fecha).subscribe(
+        (data: Asistencia[]) => {
+          this.asistencias = data;
+        },
+        err => console.log(err)
+      );
     }
 }

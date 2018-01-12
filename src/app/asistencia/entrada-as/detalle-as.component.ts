@@ -125,12 +125,14 @@ export class DetalleAsComponent implements OnInit {
       datos.value.id_op = this.id;
       this.asistenciaSercice.updateAsistencia(this.asistencia._id, datos.value).subscribe(() => {
         console.log('Actualizado');
+        this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
         this.router.navigate(['/dash/asistencia/entrada']);
       }, error => console.error('Error updating : ' + error));
     } else {
       datos.value.id_op = this.id;
       this.asistenciaSercice.addAsistencia(datos.value).subscribe(() => {
         console.log('Salvado');
+        this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
         this.router.navigate(['/dash/asistencia/entrada']);
       }, error => console.error('Error creating : ' + error));
     }
@@ -151,6 +153,7 @@ export class DetalleAsComponent implements OnInit {
   onBorrar(datos: any) {
     this.asistenciaSercice.removeAsistencia(this.asistencia._id, datos.value).subscribe(() => {
       console.log('Borrado');
+      this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
       this.router.navigate(['/dash/asistencia/entrada']);
     }, error => console.error('Error removing : ' + error));
   }

@@ -11,10 +11,9 @@ import { GlobalsPartes } from './../../shared/globalspartes.services';
 export class EntradaAsComponent implements OnInit {
 
   public operarios: Operario[] = [];
-  public asistencias: Asistencia[] = [];
   public fecha: string;
 
-  constructor(private asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes) {
+  constructor(public asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes) {
 
   }
 
@@ -22,12 +21,7 @@ export class EntradaAsComponent implements OnInit {
 
     this.fecha = this.globalPartes.fecha;
 
-    this.asistenciaService.getAsistenciasDia(this.fecha).subscribe(
-      (data: Asistencia[]) => {
-        this.asistencias = data;
-      },
-      err => console.log(err)
-    );
+    this.asistenciaService.listaAsistenciasDia(this.fecha);
 
     this.asistenciaService.getOperarios().subscribe(
       (data: Operario[]) => {
@@ -38,12 +32,7 @@ export class EntradaAsComponent implements OnInit {
   }
 
   actualizaLista() {
-    this.asistenciaService.getAsistenciasDia(this.fecha).subscribe(
-      (data: Asistencia[]) => {
-        this.asistencias = data;
-      },
-      err => console.log(err)
-    );
+    this.asistenciaService.listaAsistenciasDia(this.fecha);
   }
 
 }
