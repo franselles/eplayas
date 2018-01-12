@@ -9,9 +9,16 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/dash/operarios']" routerLinkActive="active">Operarios</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/dash/asistencia']" routerLinkActive="active">Asistencia</a>
-            </li>            
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Asistencia
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" [routerLink]="['/dash/asistencia/entrada']">Entrada</a>
+                    <a class="dropdown-item" [routerLink]="['/dash/asistencia/entrada']">Seguimiento</a>
+                    <a class="dropdown-item" [routerLink]="['/dash/asistencia/entrada']">Resumen</a>
+                </div>
+            </li>                    
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['/dash/incidencias']" routerLinkActive="active">Incidencias</a>
             </li>

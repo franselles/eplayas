@@ -21,6 +21,10 @@ export class AsistenciaService {
       return this.http.get<Asistencia>(this.BASE_URL_A + fecha + '/' + id_op);
     }
 
+    getAsistenciasDia(fecha: string) {
+      return this.http.get(this.BASE_URL_A + 'lista/dia/' + fecha);
+    }
+
     getOperarios() {
       return this.http.get(this.BASE_URL_O);
     }

@@ -120,12 +120,12 @@ app.get("/api/asistencia/:fecha/:id_op", function(req, res) {
   });
 });
 
-app.get("/api/asistencia/a/a/a/a/:id", function(req, res) {
-  db.collection(ASISTENCIA_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+app.get("/api/asistencia/lista/dia/:fecha", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).find({"fecha": req.params.fecha}).sort({ "nombre": 1}).toArray(function(err, docs) {
     if (err) {
-      handleError(res, err.message, "Failed to get asistencia");
+      handleError(res, err.message, "Failed to get asistencias.");
     } else {
-      res.status(200).json(doc);
+      res.status(200).json(docs);
     }
   });
 });
@@ -167,7 +167,7 @@ app.delete("/api/asistencia/:id", function(req, res) {
  */
 
 app.get("/api/operarios", function(req, res) {
-  db.collection(OPERARIOS_COLLECTION).find({}).toArray(function(err, docs) {
+  db.collection(OPERARIOS_COLLECTION).find({}).sort({ "nombre": 1}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get operarios.");
     } else {

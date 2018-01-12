@@ -1,28 +1,57 @@
 <a class="nav-link" [routerLink]="['/dash/asistencia/entrada/1/1']" routerLinkActive="active">Detalle</a>
 <div class="form-group col-md-3">
   <label for="fecha">Selecciona fecha</label>
-  <input id="fecha" [(ngModel)]="fecha" type="date" class="form-control">
+  <input id="fecha" [(ngModel)]="fecha" type="date" (change)="actualizaLista()" class="form-control">
 </div>
 <div class="row">
   <div class="col">
-<div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Operario</th>
-        <th scope="col">Editar</th>        
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of operarios; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>{{ item.nombre }}</td>
-        <td> <a [routerLink]="['/dash/asistencia/entrada', fecha, item._id]">Editar</a></td>        
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Operario</th>
+            <th scope="col">Editar</th>        
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of operarios; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ item.nombre }}</td>
+            <td> <a [routerLink]="['/dash/asistencia/entrada', fecha, item._id]">Editar</a></td>        
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-info" (click)="actualizaLista()">Recarga registrados</button>
+    <div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Operario</th>
+            <th scope="col">Situacion</th>
+            <th scope="col">Editar</th>        
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of asistencias; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ item.nombre }}</td>
+            <td>            
+              <div *ngIf="item.trabajado > 0">Dia trabajado: {{ item.trabajado }}</div>
+              <div *ngIf="item.descanso > 0">Dia descanso: {{ item.descanso }}</div>
+              <div *ngIf="item.festivo > 0">Dia festivo: {{ item.festivo }}</div>
+              <div *ngIf="item.vacaciones > 0">Dias vacaciones pendientes: {{ item.vacaciones }}</div>
+              <div *ngIf="item.disfrutadas > 0">Dias vacaciones disfrutadas: {{ item.disfrutadas }}</div>
+              <div *ngIf="item.justificado > 0">Dia justificado: {{ item.justificado }}</div>                                                                      
+              <div *ngIf="item.injustificado > 0">Dia no justificado: {{ item.injustificado }}</div>                    
+            </td>
+            <td> <a [routerLink]="['/dash/asistencia/entrada', fecha, item.id_op]">Editar</a></td>        
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </div>
 <div class="col">
 <router-outlet></router-outlet>
