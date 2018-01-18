@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="form-group col-md-3">
+    <label for="fechai">Desde fecha</label>
+    <input id="fechai" type="date" name="fechai" placeholder="dia inicial" [(ngModel)]="fechai" class="form-control">         
+  </div>
+  <div class="form-group col-md-3">
+    <label for="fechaf">Hasta fecha</label>
+    <input id="fechaf" type="date" name="fechaf" placeholder="dia final" [(ngModel)]="fechaf" class="form-control">         
+  </div>
+  <div class="form-group col-md-5">
+    <label for="idop">Operario</label>
+    <select
+      placeholder="OPERARIO"
+      name="idop"
+      class="form-control" 
+      id="idop"
+      [(ngModel)]="idop">   
+      <option *ngFor="let item of listaOperarios; let i=index" [value]="item._id">{{ item.nombre }}</option>
+    </select>    
+  </div> 
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <app-detalle-seg [idop]="idop" [fechai]="fechai" [fechaf]="fechaf"></app-detalle-seg>    
+  </div>
+  <div class="col-md-3">
+    <app-acumulado-seg [idop]="idop" [fechai]="fechai" [fechaf]="fechaf"></app-acumulado-seg>    
+  </div>
+</div>
+
+

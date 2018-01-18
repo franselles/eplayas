@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Operario, Asistencia } from './../shared/models';
+import { Operario, Asistencia, TotalAsistencia } from './../shared/models';
 
 import { BdService } from './../shared/bd.services';
 
@@ -21,6 +21,14 @@ export class AsistenciaService {
 
     getAsistencia(fecha: string, id_op: string) {
       return this.http.get<Asistencia>(this.BASE_URL_A + fecha + '/' + id_op);
+    }
+
+    getAsistenciaSegimiento(fechai: string, fechaf: string, id_op: string) {
+      return this.http.get<Asistencia[]>(this.BASE_URL_A + 'seguimiento/' + fechai + '/' + fechaf + '/' + id_op);
+    }
+
+    getAsistenciaSegAcumulado(fechai: string, fechaf: string, id_op: string) {
+      return this.http.get<TotalAsistencia>(this.BASE_URL_A + 'acumulado/' + fechai + '/' + fechaf + '/' + id_op);
     }
 
     getAsistenciasDia(fecha: string) {

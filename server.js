@@ -155,7 +155,81 @@ app.delete("/api/asistencia/:id", function(req, res) {
 });
 
 
+app.get("/api/asistencia/seguimiento/:fechad/:fechah/:id_op", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gte: req.params.fechad, $lte: req.params.fechah},
+          id_op: req.params.id_op
+         }
+      },
+      {
+        $sort: {"fecha": 1}
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
 
+app.get("/api/asistencia/lista/operario/:fecha_i/:fecha_f", function(req, res) {
+  db.collection(OPERARIOS_COLLECTION).aggregate(
+    [
+      {
+      $lookup:
+        {
+            from: "asistencia",
+            localField: "_id",
+            foreignField : "id_op",
+            as: "parte"
+        },
+      $match: {
+        parte: {
+          fecha : {$gte: req.params.fecha_i, $lte: req.params.fecha_f}
+        }
+      }}
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate /asistencia/lista/operario/:fecha_i/:fecha_f.");
+        } else {
+          res.status(200).json(docs);
+        }
+      });
+});
+
+app.get("/api/asistencia/acumulado/:fecha_i/:fecha_f/:id_op", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gte: req.params.fecha_i, $lte: req.params.fecha_f},
+          id_op: req.params.id_op
+         }
+      },
+      {
+        $group: {
+          _id: "$id_op",
+          total_trabajado: {$sum: "$trabajado"},
+          total_descanso: {$sum: "$descanso"},
+          total_festivo: {$sum: "$festivo"},
+          total_vacaciones: {$sum: "$vacaciones"},
+          total_disfrutadas: {$sum: "$disfrutadas"},
+          total_baja: {$sum: "$baja"},
+          total_justificado: {$sum: "$justificado"},
+          total_injustificado: {$sum: "$injustificado"},                  
+      }}
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
 
 
 

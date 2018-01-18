@@ -103,3 +103,14 @@ export interface Asistencia {
     fecha_fin: string;
     observacion: string;
 }
+
+export interface TotalAsistencia {
+    total_trabajado: number;
+    total_descanso: number;
+    total_festivo: number;
+    total_vacaciones: number;
+    total_disfrutadas: number;
+    total_baja: number;
+    total_justificado: number;
+    total_injustificado: number;
+}
