@@ -21,7 +21,8 @@
               <a class="btn btn-secondary btn-sm" [routerLink]="['/dash/asistencia/entrada', fecha, item._id]">Editar</a>
               <button type="button" class="btn btn-primary btn-sm" (click)="insertaRapido(item._id, item.nombre, 1)">TRA</button>
               <button type="button" class="btn btn-success btn-sm" (click)="insertaRapido(item._id, item.nombre, 2)">DES</button>
-              <button type="button" class="btn btn-warning btn-sm" (click)="insertaRapido(item._id, item.nombre, 3)">FES</button>              
+              <button type="button" class="btn btn-warning btn-sm" (click)="insertaRapido(item._id, item.nombre, 3)">FES</button>    
+              <button type="button" class="btn btn-dark btn-sm" *ngIf="yaExiste(item._id)">XXX</button>          
             </td>        
           </tr>
         </tbody>

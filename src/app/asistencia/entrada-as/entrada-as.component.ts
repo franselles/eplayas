@@ -37,6 +37,12 @@ export class EntradaAsComponent implements OnInit {
     this.asistenciaService.listaAsistenciasDia(this.fecha);
   }
 
+  yaExiste(id_op: string) {
+    if (this.asistenciaService.asistencias.find(x => x.id_op === id_op)) {
+      return true;
+    }
+  }
+
   insertaRapido(id_op: string, nombre: string, tipo: number) {
 
     if (this.asistenciaService.asistencias.find(x => x.id_op === id_op)) {
