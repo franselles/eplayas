@@ -17,7 +17,12 @@
           <tr *ngFor="let item of operarios; let i = index">
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ item.nombre }}</td>
-            <td> <a [routerLink]="['/dash/asistencia/entrada', fecha, item._id]">Editar</a></td>        
+            <td>
+              <a class="btn btn-secondary btn-sm" [routerLink]="['/dash/asistencia/entrada', fecha, item._id]">Editar</a>
+              <button type="button" class="btn btn-primary btn-sm" (click)="insertaRapido(item._id, item.nombre, 1)">TRA</button>
+              <button type="button" class="btn btn-success btn-sm" (click)="insertaRapido(item._id, item.nombre, 2)">DES</button>
+              <button type="button" class="btn btn-warning btn-sm" (click)="insertaRapido(item._id, item.nombre, 3)">FES</button>              
+            </td>        
           </tr>
         </tbody>
       </table>

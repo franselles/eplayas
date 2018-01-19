@@ -15,6 +15,8 @@ export class SeguimientoAsComponent implements OnInit {
   public fechaf: string;
   public idop: string;
   public listaOperarios: Operario[] = [];
+  public visible = true;
+  public textoOculta = '[-] ocultar';
 
   constructor(private asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes) {
 
@@ -32,6 +34,17 @@ export class SeguimientoAsComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  oculta(event) {
+    event.preventDefault();
+    if (this.visible) {
+      this.visible = false;
+      this.textoOculta = '[+] mostrar';
+    } else {
+      this.visible = true;
+      this.textoOculta = '[-] ocultar';
+    }
   }
 
 }

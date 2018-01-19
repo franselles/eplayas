@@ -19,9 +19,13 @@
     </select>    
   </div> 
 </div>
-
 <div class="row">
-  <div class="col-md-8">
+  <div class="form-group col-md-3">
+    <a href="" (click)="oculta($event)">{{ textoOculta }}</a>
+  </div>   
+</div>  
+<div class="row">
+  <div class="col-md-8" *ngIf="visible">
     <app-detalle-seg [idop]="idop" [fechai]="fechai" [fechaf]="fechaf"></app-detalle-seg>    
   </div>
   <div class="col-md-3">
