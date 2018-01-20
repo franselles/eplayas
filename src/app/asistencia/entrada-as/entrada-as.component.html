@@ -50,7 +50,8 @@
               <div *ngIf="item.vacaciones > 0">Dias vacaciones pendientes: {{ item.vacaciones }}</div>
               <div *ngIf="item.disfrutadas > 0">Dias vacaciones disfrutadas: {{ item.disfrutadas }}</div>
               <div *ngIf="item.justificado > 0">Dia justificado: {{ item.justificado }}</div>                                                                      
-              <div *ngIf="item.injustificado > 0">Dia no justificado: {{ item.injustificado }}</div>                    
+              <div *ngIf="item.injustificado > 0">Dia no justificado: {{ item.injustificado }}</div>      
+              <div *ngIf="item.fecha_inico != ''">Desde {{ item.fecha_inicio}}<br>Hasta {{ item.fecha_fin }}</div>                              
             </td>
             <td> <a [routerLink]="['/dash/asistencia/entrada', fecha, item.id_op]">Editar</a></td>        
           </tr>
