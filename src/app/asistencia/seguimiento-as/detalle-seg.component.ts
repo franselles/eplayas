@@ -2,7 +2,6 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { AsistenciaService } from '../../shared/asistencia.services';
 import { Asistencia } from '../../shared/models';
 
-
 @Component({
   selector: 'app-detalle-seg',
   templateUrl: './detalle-seg.component.html',
