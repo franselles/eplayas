@@ -16,16 +16,6 @@ import { PartesLimDetalleComponent } from './partes-lim-detalle/partes-lim-detal
 import { PartesLimListaComponent } from './partes-lim-lista/partes-lim-lista.component';
 import { PartesLimComponent } from './partes-lim/partes-lim.component';
 
-/*
-const routes: Routes = [
-  {path: '', component: PartesLimComponent, canActivate: [LoggedInGuard], children: [
-    {path: 'detalle', component: PartesLimDetalleComponent},
-    {path: 'detalle/:id', component: PartesLimDetalleComponent},
-    {path: 'lista', component: PartesLimListaComponent}
-  ]}
-]
-*/
-
 const routes: Routes = [
   {path: '', component: PartesLimListaComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle', component: PartesLimDetalleComponent, canActivate: [LoggedInGuard]},

@@ -73,7 +73,7 @@ export interface Parte {
 
 export interface Hamaca {
     _id?: string;
-    fecha: Date;
+    fecha: string;
     sector: number;
     hamacas: number;
     sombrillas: number;
@@ -83,6 +83,7 @@ export interface Hamaca {
     s_rotas: number;
     s_retiradas: number;
     s_repuestas: number;
+    observacion: string;
 }
 
 export interface Asistencia {
@@ -105,6 +106,7 @@ export interface Asistencia {
 }
 
 export interface TotalAsistencia {
+    _id?: string;
     total_trabajado: number;
     total_descanso: number;
     total_festivo: number;

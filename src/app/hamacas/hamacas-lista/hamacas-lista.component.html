@@ -1,0 +1,30 @@
+<p>
+  Inventario por sectores
+</p>
+
+<a [routerLink]="['detalle']">Nuevo movimienro en sector</a> 
+
+<br>
+
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Sector</th>
+        <th scope="col">Fecha</th>   
+        <th scope="col">Hamacas</th>  
+        <th scope="col">Sombrillas</th>    
+        <th scope="col">Editar</th>                              
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listaHamacas; let i = index">
+        <th scope="row">{{ item._id }}</th>
+        <td>{{ item.lastFecha | date: 'dd/MM/yyyy' }}</td> 
+        <td>{{ item.lastHamacas }}</td>               
+        <td>{{ item.lastSombrillas }}</td>        
+        <td> <a [routerLink]="['/dash/hamacas/detalle', item.lastId]">Editar</a></td>        
+      </tr>
+    </tbody>
+  </table>
+</div>

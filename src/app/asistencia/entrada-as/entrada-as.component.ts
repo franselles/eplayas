@@ -14,6 +14,8 @@ export class EntradaAsComponent implements OnInit {
   public operarios: Operario[] = [];
   public fecha: string;
   private asistencia: Asistencia;
+  public asDeldia: Asistencia;
+  public asUltimo: any;
 
   constructor(public asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes, private router: Router) {
 
@@ -24,6 +26,7 @@ export class EntradaAsComponent implements OnInit {
     this.fecha = this.globalPartes.fecha;
 
     this.asistenciaService.listaAsistenciasDia(this.fecha);
+    this.asistenciaService.listaAsistenciasUltimas();
 
     this.asistenciaService.getOperarios().subscribe(
       (data: Operario[]) => {
@@ -35,11 +38,21 @@ export class EntradaAsComponent implements OnInit {
 
   actualizaLista() {
     this.asistenciaService.listaAsistenciasDia(this.fecha);
+    this.asistenciaService.listaAsistenciasUltimas();
   }
 
   yaExiste(id_op: string) {
-    if (this.asistenciaService.asistencias.find(x => x.id_op === id_op)) {
-      return true;
+    this.asDeldia = this.asistenciaService.asistencias.find(x => x.id_op === id_op);
+
+    if (this.asDeldia) {
+      return this.asDeldia;
+    }
+  }
+
+  elUltimo(id_op: string) {
+    this.asUltimo = this.asistenciaService.asUltimos.find(x => x._id === id_op);
+    if (this.asUltimo) {
+      return this.asUltimo;
     }
   }
 

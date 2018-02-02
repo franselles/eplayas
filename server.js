@@ -8,7 +8,7 @@ var OPERARIOS_COLLECTION = "operarios";
 var ESTADISTICAS_COLLECTION = "estadisticas";
 var VEHICULOS_COLLECTION = "vehiculos";
 var ASISTENCIA_COLLECTION = "asistencia";
-
+var HAMACAS_COLLECTION = "hamacas";
 
 var app = express();
 app.use(bodyParser.json());
@@ -79,6 +79,37 @@ app.get("/api/asistencia", function(req, res) {
       res.status(200).json(docs);
     }
   });
+});
+
+app.get("/api/asistencia/ultimos", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).aggregate(
+    [
+      {
+        $sort: {"fecha": 1}
+      },
+      {
+        $group: {
+          _id: "$id_op",
+          lastFecha: { $last: "$fecha" },
+          lastTrabajado: { $last: "$trabajado" },
+          lastDescanso: { $last: "$descanso" },
+          lastFestivo: { $last: "$festivo" },
+          lastVacaciones: { $last: "$vacaciones" },
+          lastDisfrutadas: { $last: "$disfrutadas" },
+          lastBaja: { $last: "$baja" },
+          lastJustificado: { $last: "$justificado" },
+          lastInjustificado: { $last: "$injustificado" },
+          lastFecha_inicio: { $last: "$fecha_inicio" },
+          lastFecha_fin: { $last: "$fecha_fin" },
+          lastId: { $last: "$_id"}                    
+      }}
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
 });
 
 app.post("/api/asistencia", function(req, res) {
@@ -430,6 +461,135 @@ app.delete("/api/partes/:id", function(req, res) {
     }
   });
 });
+
+
+
+// HAMACAS API ROUTES BELOW
+
+/*  "/api/hamacas"
+ *    GET: finds all hamacas
+ *    POST: creates a new hamacas
+ */
+
+app.get("/api/hamacas", function(req, res) {
+  db.collection(HAMACAS_COLLECTION).find({}).sort({ "fecha": 1, "sector": 1}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get hamacas.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/hamacas", function(req, res) {
+  var newHamaca = req.body;
+  newHamaca.createfecha = new Date();
+
+/*   if (!req.body.nombre) {
+    handleError(res, "Invalid nombre input", "Must provide a nombre.", 400);
+  } */
+
+  db.collection(HAMACAS_COLLECTION).insertOne(newHamaca, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new hamacas.");
+    } else {
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+});
+
+/*  "/api/hamacas/:id"
+ *    GET: find hamacas by id
+ *    PUT: upfecha hamacas by id
+ *    DELETE: deletes hamacas by id
+ */
+
+app.get("/api/hamacas/edita/:id", function(req, res) {
+  db.collection(HAMACAS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to get hamacas");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+
+app.get("/api/hamacas/lista/ultimos", function(req, res) {
+  db.collection(HAMACAS_COLLECTION).aggregate(
+    [
+      {
+        $sort: {"fecha": 1}
+      },
+      {
+        $group: {
+          _id: "$sector",
+          lastFecha: { $last: "$fecha" },
+          lastHamacas: { $last: "$hamacas" }, 
+          lastSombrillas: { $last: "$sombrillas" },
+          lastId: { $last: "$_id"}           
+      }},
+      {
+        $sort: {"_id": 1}
+      }    
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/hamacas/activos/conductores", function(req, res) {
+  db.collection(HAMACAS_COLLECTION).find({"activo": true, "conductor": true}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get hamacas.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/api/hamacas/:id", function(req, res) {
+  db.collection(ESTADISTICAS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to get hamacas");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+app.put("/api/hamacas/:id", function(req, res) {
+  var upfechaDoc = req.body;
+  delete upfechaDoc._id;
+
+  db.collection(HAMACAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to upfecha hamacas");
+    } else {
+      upfechaDoc._id = req.params.id;
+      res.status(200).json(upfechaDoc);
+    }
+  });
+});
+
+app.delete("/api/hamacas/:id", function(req, res) {
+  db.collection(HAMACAS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete hamacas");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
+
+
+
+
+
+
 
 // ESTADISTICAS API ROUTES BELOW
 

@@ -13,6 +13,7 @@ export class AsistenciaService {
     BASE_URL_O: string;
 
     public asistencias: Asistencia[] = [];
+    public asUltimos: Asistencia[] = [];
 
     constructor(private http: HttpClient, private bdService: BdService) {
       this.BASE_URL_A = this.bdService.dir_bd_ + 'asistencia/';
@@ -39,6 +40,10 @@ export class AsistenciaService {
       return this.http.get(this.BASE_URL_O);
     }
 
+    getAsistenciaUltimos() {
+      return this.http.get(this.BASE_URL_A + 'ultimos');
+    }
+
     getOperario(id: string | number) {
       return this.http.get(this.BASE_URL_O + id);
     }
@@ -59,6 +64,15 @@ export class AsistenciaService {
       this.getAsistenciasDia(fecha).subscribe(
         (data: Asistencia[]) => {
           this.asistencias = data;
+        },
+        err => console.log(err)
+      );
+    }
+
+    listaAsistenciasUltimas() {
+      this.getAsistenciaUltimos().subscribe(
+        (data: Asistencia[]) => {
+          this.asUltimos = data;
         },
         err => console.log(err)
       );
