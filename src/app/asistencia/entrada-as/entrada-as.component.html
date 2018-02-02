@@ -21,15 +21,16 @@
             <td>
               <div *ngIf="elUltimo(item._id)" class="alert alert-warning" role="alert">
                 <div>Fecha: {{ asUltimo?.lastFecha | date: 'dd/MM/yyyy' }}</div>                
-                <div *ngIf="asUltimo?.lastTrabajado > 0">Dia trabajado: {{ asUltimo?.lastTrabajado }}</div>
-                <div *ngIf="asUltimo?.lastDescanso > 0">Dia descanso: {{ asUltimo?.lastDescanso }}</div>
-                <div *ngIf="asUltimo?.lastFestivo > 0">Dia festivo: {{ asUltimo?.lastFestivo }}</div>
-                <div *ngIf="asUltimo?.lastVacaciones > 0">Dias vacaciones pendientes: {{ asUltimo?.lastVacaciones }}</div>
-                <div *ngIf="asUltimo?.lastDisfrutadas > 0">Dias vacaciones disfrutadas: {{ asUltimo?.lastDisfrutadas }}</div>
-                <div *ngIf="asUltimo?.lastBaja > 0">Dias de baja: {{ asUltimo?.lastBaja }}</div>                
-                <div *ngIf="asUltimo?.lastJustificado > 0">Dia justificado: {{ asUltimo?.lastJustificado }}</div>                                                                      
-                <div *ngIf="asUltimo?.lastInjustificado > 0">Dia no justificado: {{ asUltimo?.lastInjustificado }}</div>      
+                <div *ngIf="asUltimo?.lastTrabajado > 0">Trabajado: {{ asUltimo?.lastTrabajado }}</div>
+                <div *ngIf="asUltimo?.lastDescanso > 0">Descanso: {{ asUltimo?.lastDescanso }}</div>
+                <div *ngIf="asUltimo?.lastFestivo > 0">Festivo: {{ asUltimo?.lastFestivo }}</div>
+                <div *ngIf="asUltimo?.lastVacaciones > 0">Vacaciones pend.: {{ asUltimo?.lastVacaciones }}</div>
+                <div *ngIf="asUltimo?.lastDisfrutadas > 0">Vacaciones disf.: {{ asUltimo?.lastDisfrutadas }}</div>
+                <div *ngIf="asUltimo?.lastBaja > 0">Baja: {{ asUltimo?.lastBaja }}</div>                
+                <div *ngIf="asUltimo?.lastJustificado > 0">Justificado: {{ asUltimo?.lastJustificado }}</div>                                                                      
+                <div *ngIf="asUltimo?.lastInjustificado > 0">No justificado: {{ asUltimo?.lastInjustificado }}</div>      
                 <div *ngIf="(asUltimo?.lastFecha_inicio != '') && (asUltimo?.lastFecha_inicio != null)">Desde {{ asUltimo?.lastFecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ asUltimo?.lastFecha_fin | date:'dd/MM/yyyy' }}</div> 
+                <a class="btn btn-secondary btn-sm" [routerLink]="['/dash/asistencia/entrada', asUltimo?.lastFecha, asUltimo?._id]">Editar</a>
             </div>               
             </td>
             <td>
@@ -38,14 +39,14 @@
               <button type="button" class="btn btn-success btn-sm" (click)="insertaRapido(item._id, item.nombre, 2)">DES</button>
               <button type="button" class="btn btn-warning btn-sm" (click)="insertaRapido(item._id, item.nombre, 3)">FES</button>    
               <div *ngIf="yaExiste(item._id)" class="alert alert-primary" role="alert">
-                  <div *ngIf="asDeldia?.trabajado > 0">Dia trabajado: {{ asDeldia?.trabajado }}</div>
-                  <div *ngIf="asDeldia?.descanso > 0">Dia descanso: {{ asDeldia?.descanso }}</div>
-                  <div *ngIf="asDeldia?.festivo > 0">Dia festivo: {{ asDeldia?.festivo }}</div>
-                  <div *ngIf="asDeldia?.vacaciones > 0">Dias vacaciones pendientes: {{ asDeldia?.vacaciones }}</div>
-                  <div *ngIf="asDeldia?.disfrutadas > 0">Dias vacaciones disfrutadas: {{ asDeldia?.disfrutadas }}</div>
-                  <div *ngIf="asDeldia?.baja > 0">Dias de baja: {{ asDeldia?.baja }}</div>                  
-                  <div *ngIf="asDeldia?.justificado > 0">Dia justificado: {{ asDeldia?.justificado }}</div>                                                                      
-                  <div *ngIf="asDeldia?.injustificado > 0">Dia no justificado: {{ asDeldia?.injustificado }}</div>      
+                  <div *ngIf="asDeldia?.trabajado > 0">Trabajado: {{ asDeldia?.trabajado }}</div>
+                  <div *ngIf="asDeldia?.descanso > 0">Descanso: {{ asDeldia?.descanso }}</div>
+                  <div *ngIf="asDeldia?.festivo > 0">Festivo: {{ asDeldia?.festivo }}</div>
+                  <div *ngIf="asDeldia?.vacaciones > 0">Vacaciones pend.: {{ asDeldia?.vacaciones }}</div>
+                  <div *ngIf="asDeldia?.disfrutadas > 0">Vacaciones disf.: {{ asDeldia?.disfrutadas }}</div>
+                  <div *ngIf="asDeldia?.baja > 0">Baja: {{ asDeldia?.baja }}</div>                  
+                  <div *ngIf="asDeldia?.justificado > 0">Justificado: {{ asDeldia?.justificado }}</div>                                                                      
+                  <div *ngIf="asDeldia?.injustificado > 0">No justificado: {{ asDeldia?.injustificado }}</div>      
                   <div *ngIf="(asDeldia?.fecha_inicio != '') && (asDeldia?.fecha_inicio != null)">Desde {{ asDeldia?.fecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ asDeldia?.fecha_fin | date:'dd/MM/yyyy' }}</div> 
               </div>          
             </td>        
