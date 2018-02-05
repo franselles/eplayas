@@ -1,12 +1,12 @@
 {
   "name": "eplayas",
-  "version": "1.1.103",
+  "version": "1.1.104",
   "license": "MIT",
   "main": "server.js",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

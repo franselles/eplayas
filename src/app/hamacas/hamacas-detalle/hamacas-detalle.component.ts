@@ -47,6 +47,10 @@ export class HamacasDetalleComponent implements OnInit {
     } else {
       this.enEdicion = false;
     }
+
+/*     this.hamacasForm.valueChanges.subscribe(value => {
+      console.log(value);
+    }); */
   }
 
   cargaFormulario(data: Hamaca) {
@@ -103,6 +107,126 @@ export class HamacasDetalleComponent implements OnInit {
       console.log('Borrado');
       this.router.navigate(['/dash/hamacas']);
     }, error => console.error('Error removing : ' + error));
+  }
+
+  masHret(value: any) {
+    const t = Number(value.h_retiradas);
+    const h = Number(value.hamacas);
+    this.hamacasForm.patchValue({
+      hamacas: h - 1,
+      h_retiradas: t + 1
+    });
+  }
+
+  menosHret(value: any) {
+    const t = Number(value.h_retiradas);
+    const h = Number(value.hamacas);
+    if (t > 0) {
+      this.hamacasForm.patchValue({
+        hamacas: h + 1,
+        h_retiradas: t - 1
+      });
+    }
+  }
+
+  masSret(value: any) {
+    const t = Number(value.s_retiradas);
+    const h = Number(value.sombrillas);
+    this.hamacasForm.patchValue({
+      sombrillas: h - 1,
+      s_retiradas: t + 1
+    });
+  }
+
+  menosSret(value: any) {
+    const t = Number(value.s_retiradas);
+    const h = Number(value.sombrillas);
+    if (t > 0) {
+      this.hamacasForm.patchValue({
+        sombrillas: h + 1,
+        s_retiradas: t - 1
+      });
+    }
+  }
+
+  masHrot(value: any) {
+    const t = Number(value.h_rotas);
+    const h = Number(value.hamacas);
+    this.hamacasForm.patchValue({
+      hamacas: h - 1,
+      h_rotas: t + 1
+    });
+  }
+
+  menosHrot(value: any) {
+    const t = Number(value.h_rotas);
+    const h = Number(value.hamacas);
+    if (t > 0) {
+      this.hamacasForm.patchValue({
+        hamacas: h + 1,
+        h_rotas: t - 1
+      });
+    }
+  }
+
+  masSrot(value: any) {
+    const t = Number(value.s_rotas);
+    const h = Number(value.sombrillas);
+    this.hamacasForm.patchValue({
+      sombrillas: h - 1,
+      s_rotas: t + 1
+    });
+  }
+
+  menosSrot(value: any) {
+    const t = Number(value.s_rotas);
+    const h = Number(value.sombrillas);
+    if (t > 0) {
+      this.hamacasForm.patchValue({
+        sombrillas: h + 1,
+        s_rotas: t - 1
+      });
+    }
+  }
+
+  masHrep(value: any) {
+    const t = Number(value.h_repuestas);
+    const h = Number(value.hamacas);
+    this.hamacasForm.patchValue({
+      hamacas: h + 1,
+      h_repuestas: t + 1
+    });
+  }
+
+  menosHrep(value: any) {
+    const t = Number(value.h_repuestas);
+    const h = Number(value.hamacas);
+    if (t > 0) {
+      this.hamacasForm.patchValue({
+        hamacas: h - 1,
+        h_repuestas: t - 1
+      });
+    }
+  }
+
+  masSrep(value: any) {
+    const t = Number(value.s_repuestas);
+    const h = Number(value.sombrillas);
+    this.hamacasForm.patchValue({
+      sombrillas: h + 1,
+      s_repuestas: t + 1
+    });
+  }
+
+  menosSrep(value: any) {
+    const t = Number(value.s_repuestas);
+    const h = Number(value.sombrillas);
+    if (t > 0) {
+      this.hamacasForm.patchValue({
+        sombrillas: h - 1,
+        s_repuestas: t - 1
+      });
+    }
   }
 
 }
