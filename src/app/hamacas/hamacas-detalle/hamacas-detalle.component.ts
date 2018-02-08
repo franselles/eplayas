@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hamaca } from '../../shared/models';
 import { HamacasService } from '../../shared/hamacas.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-hamacas-detalle',
@@ -16,7 +17,7 @@ export class HamacasDetalleComponent implements OnInit {
   public enEdicion: boolean;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
-    private hamacasService: HamacasService) { }
+    private hamacasService: HamacasService, private location: Location) { }
 
   ngOnInit() {
     this.hamacasForm = this.fb.group({
@@ -38,7 +39,6 @@ export class HamacasDetalleComponent implements OnInit {
     if (id) {
       this.hamacasService.getHamaca(id)
         .subscribe((data: Hamaca) => {
-            console.log(data);
             this.hamaca = data;
             this.enEdicion = true;
             this.cargaFormulario(data);
@@ -77,13 +77,15 @@ export class HamacasDetalleComponent implements OnInit {
       this.hamacasService.updateHamaca(this.hamaca._id, data.value)
         .subscribe(() => {
           console.log('Actializado');
-          this.router.navigate(['/dash/hamacas']);
+          // this.router.navigate(['/dash/hamacas']);
+          this.location.back();
         }, err => console.log('Error updating : ' + err));
     } else {
       this.hamacasService.addHamaca(data.value)
         .subscribe(() => {
           console.log('Creado');
-          this.router.navigate(['/dash/hamacas']);
+          // this.router.navigate(['/dash/hamacas']);
+          this.location.back();
         }, err => console.log('Error creating : ' + err));
     }
   }
@@ -94,7 +96,8 @@ export class HamacasDetalleComponent implements OnInit {
    */
 
   onCancelar() {
-    this.router.navigate(['/dash/hamacas']);
+    // this.router.navigate(['/dash/hamacas']);
+    this.location.back();
   }
 
   /*
@@ -105,7 +108,8 @@ export class HamacasDetalleComponent implements OnInit {
   onBorrar(datos: any) {
     this.hamacasService.removeHamaca(this.hamaca._id).subscribe(() => {
       console.log('Borrado');
-      this.router.navigate(['/dash/hamacas']);
+      // this.router.navigate(['/dash/hamacas']);
+      this.location.back();
     }, error => console.error('Error removing : ' + error));
   }
 

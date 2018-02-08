@@ -17,6 +17,10 @@ export class HamacasService {
     return this.http.get(this.BASE_URL + 'lista/ultimos');
   }
 
+  getHamacasHistorico(fecha1: string, fecha2: string, sector: number) {
+    return this.http.get(this.BASE_URL + 'lista/historico/' + fecha1 + '/' + fecha2 + '/' + sector);
+  }
+
   getHamaca(id: string | number) {
     return this.http.get(this.BASE_URL + 'edita/' + id);
   }

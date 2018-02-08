@@ -541,8 +541,11 @@ app.get("/api/hamacas/lista/ultimos", function(req, res) {
     });
 });
 
-app.get("/api/hamacas/activos/conductores", function(req, res) {
-  db.collection(HAMACAS_COLLECTION).find({"activo": true, "conductor": true}).toArray(function(err, docs) {
+app.get("/api/hamacas/lista/historico/:fecha1/:fecha2/:sector", function(req, res) {
+  db.collection(HAMACAS_COLLECTION).find({
+    "fecha": {$gte: req.params.fecha1, $lte: req.params.fecha2},
+    "sector": parseInt(req.params.sector)
+  }).sort({"fecha": 1}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get hamacas.");
     } else {

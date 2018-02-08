@@ -32,12 +32,20 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hamacas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" [routerLink]="['/dash/hamacas']">Hamacas</a>
+                    <a class="dropdown-item" [routerLink]="['/dash/hamacas/historico']">Historico</a>                    
+                </div>
+            </li>            
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Otros
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" [routerLink]="['/dash/mantenimiento']">Mantenimiento</a>
                     <a class="dropdown-item" [routerLink]="['/dash/taller']">Taller</a>
-                    <a class="dropdown-item" [routerLink]="['/dash/hamacas']">Hamacas</a>
                 </div>
             </li>
             <li class="nav-item">
