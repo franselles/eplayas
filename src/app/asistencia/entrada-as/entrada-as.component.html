@@ -1,9 +1,18 @@
-<div class="form-group col-md-3">
-  <label for="fecha">Selecciona fecha</label>
-  <input id="fecha" [(ngModel)]="fecha" type="date" (change)="actualizaLista()" class="form-control">
+<div class="row">
+  <div class="form-group col-md-6">
+    <label for="fecha">Selecciona fecha</label>
+    <div class="form-inline">
+      <input id="fecha" [(ngModel)]="fecha" type="date" (change)="actualizaLista()" class="form-control">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        Estado de hoy
+      </button>
+    </div>
+  </div>
+
 </div>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md">
     <div>
       <table class="table table-striped">
         <thead>
@@ -11,7 +20,7 @@
             <th scope="col">#</th>
             <th scope="col">Operario</th>
             <th scope="col">Anterior</th>
-            <th scope="col">Editar</th>        
+            <th scope="col">Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -20,73 +29,90 @@
             <td>{{ item.nombre }}</td>
             <td>
               <div *ngIf="elUltimo(item._id)" class="alert alert-warning" role="alert">
-                <div>Fecha: {{ asUltimo?.lastFecha | date: 'dd/MM/yyyy' }}</div>                
+                <div>Fecha: {{ asUltimo?.lastFecha | date: 'dd/MM/yyyy' }}</div>
                 <div *ngIf="asUltimo?.lastTrabajado > 0">Trabajado: {{ asUltimo?.lastTrabajado }}</div>
                 <div *ngIf="asUltimo?.lastDescanso > 0">Descanso: {{ asUltimo?.lastDescanso }}</div>
                 <div *ngIf="asUltimo?.lastFestivo > 0">Festivo: {{ asUltimo?.lastFestivo }}</div>
                 <div *ngIf="asUltimo?.lastVacaciones > 0">Vacaciones pend.: {{ asUltimo?.lastVacaciones }}</div>
                 <div *ngIf="asUltimo?.lastDisfrutadas > 0">Vacaciones disf.: {{ asUltimo?.lastDisfrutadas }}</div>
-                <div *ngIf="asUltimo?.lastBaja > 0">Baja: {{ asUltimo?.lastBaja }}</div>                
-                <div *ngIf="asUltimo?.lastJustificado > 0">Justificado: {{ asUltimo?.lastJustificado }}</div>                                                                      
-                <div *ngIf="asUltimo?.lastInjustificado > 0">No justificado: {{ asUltimo?.lastInjustificado }}</div>      
-                <div *ngIf="(asUltimo?.lastFecha_inicio != '') && (asUltimo?.lastFecha_inicio != null)">Desde {{ asUltimo?.lastFecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ asUltimo?.lastFecha_fin | date:'dd/MM/yyyy' }}</div> 
-                <a class="btn btn-secondary btn-sm" [routerLink]="['/dash/asistencia/entrada', asUltimo?.lastFecha, asUltimo?._id]">Editar</a>
-            </div>               
+                <div *ngIf="asUltimo?.lastBaja > 0">Baja: {{ asUltimo?.lastBaja }}</div>
+                <div *ngIf="asUltimo?.lastJustificado > 0">Justificado: {{ asUltimo?.lastJustificado }}</div>
+                <div *ngIf="asUltimo?.lastInjustificado > 0">No justificado: {{ asUltimo?.lastInjustificado }}</div>
+                <div *ngIf="(asUltimo?.lastFecha_inicio != '') && (asUltimo?.lastFecha_inicio != null)">Desde {{ asUltimo?.lastFecha_inicio | date:'dd/MM/yyyy' }}
+                  <br>Hasta {{ asUltimo?.lastFecha_fin | date:'dd/MM/yyyy' }}</div>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="ventanaClick(i, 'e')">Editar</button>
+                <app-in-detalle-as [ffecha]="asUltimo?.lastFecha" [idd]="asUltimo?._id" (upventana)="ventanaClick($event, 'e')" *ngIf="ventana == i && tipoVentana === 'e'"></app-in-detalle-as>
+              </div>
             </td>
             <td>
-              <a class="btn btn-secondary btn-sm" [routerLink]="['/dash/asistencia/entrada', fecha, item._id]">Editar</a>
               <button type="button" class="btn btn-primary btn-sm" (click)="insertaRapido(item._id, item.nombre, 1)">TRA</button>
               <button type="button" class="btn btn-success btn-sm" (click)="insertaRapido(item._id, item.nombre, 2)">DES</button>
-              <button type="button" class="btn btn-warning btn-sm" (click)="insertaRapido(item._id, item.nombre, 3)">FES</button>    
+              <button type="button" class="btn btn-warning btn-sm" (click)="insertaRapido(item._id, item.nombre, 3)">FES</button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="ventanaClick(i, 'n')">Otro</button>
               <div *ngIf="yaExiste(item._id)" class="alert alert-primary" role="alert">
-                  <div *ngIf="asDeldia?.trabajado > 0">Trabajado: {{ asDeldia?.trabajado }}</div>
-                  <div *ngIf="asDeldia?.descanso > 0">Descanso: {{ asDeldia?.descanso }}</div>
-                  <div *ngIf="asDeldia?.festivo > 0">Festivo: {{ asDeldia?.festivo }}</div>
-                  <div *ngIf="asDeldia?.vacaciones > 0">Vacaciones pend.: {{ asDeldia?.vacaciones }}</div>
-                  <div *ngIf="asDeldia?.disfrutadas > 0">Vacaciones disf.: {{ asDeldia?.disfrutadas }}</div>
-                  <div *ngIf="asDeldia?.baja > 0">Baja: {{ asDeldia?.baja }}</div>                  
-                  <div *ngIf="asDeldia?.justificado > 0">Justificado: {{ asDeldia?.justificado }}</div>                                                                      
-                  <div *ngIf="asDeldia?.injustificado > 0">No justificado: {{ asDeldia?.injustificado }}</div>      
-                  <div *ngIf="(asDeldia?.fecha_inicio != '') && (asDeldia?.fecha_inicio != null)">Desde {{ asDeldia?.fecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ asDeldia?.fecha_fin | date:'dd/MM/yyyy' }}</div> 
-              </div>          
-            </td>        
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <h5>Operarios registrados</h5>
-    <div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Operario</th>
-            <th scope="col">Situacion</th>
-            <th scope="col">Editar</th>        
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of asistenciaService.asistencias; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ item.nombre }}</td>
-            <td>            
-              <div *ngIf="item.trabajado > 0">Dia trabajado: {{ item.trabajado }}</div>
-              <div *ngIf="item.descanso > 0">Dia descanso: {{ item.descanso }}</div>
-              <div *ngIf="item.festivo > 0">Dia festivo: {{ item.festivo }}</div>
-              <div *ngIf="item.vacaciones > 0">Dias vacaciones pendientes: {{ item.vacaciones }}</div>
-              <div *ngIf="item.disfrutadas > 0">Dias vacaciones disfrutadas: {{ item.disfrutadas }}</div>
-              <div *ngIf="item.justificado > 0">Dia justificado: {{ item.justificado }}</div>                                                                      
-              <div *ngIf="item.injustificado > 0">Dia no justificado: {{ item.injustificado }}</div>      
-              <div *ngIf="(item.fecha_inicio != '') && (item.fecha_inicio != null)">Desde {{ item.fecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ item.fecha_fin | date:'dd/MM/yyyy' }}</div>                              
+                <div *ngIf="asDeldia?.trabajado > 0">Trabajado: {{ asDeldia?.trabajado }}</div>
+                <div *ngIf="asDeldia?.descanso > 0">Descanso: {{ asDeldia?.descanso }}</div>
+                <div *ngIf="asDeldia?.festivo > 0">Festivo: {{ asDeldia?.festivo }}</div>
+                <div *ngIf="asDeldia?.vacaciones > 0">Vacaciones pend.: {{ asDeldia?.vacaciones }}</div>
+                <div *ngIf="asDeldia?.disfrutadas > 0">Vacaciones disf.: {{ asDeldia?.disfrutadas }}</div>
+                <div *ngIf="asDeldia?.baja > 0">Baja: {{ asDeldia?.baja }}</div>
+                <div *ngIf="asDeldia?.justificado > 0">Justificado: {{ asDeldia?.justificado }}</div>
+                <div *ngIf="asDeldia?.injustificado > 0">No justificado: {{ asDeldia?.injustificado }}</div>
+                <div *ngIf="(asDeldia?.fecha_inicio != '') && (asDeldia?.fecha_inicio != null)">Desde {{ asDeldia?.fecha_inicio | date:'dd/MM/yyyy' }}
+                  <br>Hasta {{ asDeldia?.fecha_fin | date:'dd/MM/yyyy' }}</div>
+              </div>
+              <app-in-detalle-as [ffecha]="fecha" [idd]="item._id" (upventana)="ventanaClick($event, 'n')" *ngIf="ventana == i && tipoVentana === 'n'"></app-in-detalle-as>
             </td>
-            <td> <a [routerLink]="['/dash/asistencia/entrada', fecha, item.id_op]">Editar</a></td>        
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
 </div>
-<div class="col">
-<router-outlet></router-outlet>
-</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Operarios registrados</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Operario</th>
+                <th scope="col">Situacion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of asistenciaService.asistencias; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.nombre }}</td>
+                <td>
+                  <div *ngIf="item.trabajado > 0">Dia trabajado: {{ item.trabajado }}</div>
+                  <div *ngIf="item.descanso > 0">Dia descanso: {{ item.descanso }}</div>
+                  <div *ngIf="item.festivo > 0">Dia festivo: {{ item.festivo }}</div>
+                  <div *ngIf="item.vacaciones > 0">Dias vacaciones pendientes: {{ item.vacaciones }}</div>
+                  <div *ngIf="item.disfrutadas > 0">Dias vacaciones disfrutadas: {{ item.disfrutadas }}</div>
+                  <div *ngIf="item.justificado > 0">Dia justificado: {{ item.justificado }}</div>
+                  <div *ngIf="item.injustificado > 0">Dia no justificado: {{ item.injustificado }}</div>
+                  <div *ngIf="(item.fecha_inicio != '') && (item.fecha_inicio != null)">Desde {{ item.fecha_inicio | date:'dd/MM/yyyy' }}
+                    <br>Hasta {{ item.fecha_fin | date:'dd/MM/yyyy' }}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 

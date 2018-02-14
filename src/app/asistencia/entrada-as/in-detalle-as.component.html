@@ -1,0 +1,160 @@
+<form novalidate [formGroup]="asForm" (ngSubmit)="onSubmit(asForm)">
+  <fieldset>
+  <legend>Datos del dia</legend>
+  <hr>
+  <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input
+          type="text"
+          placeholder="NOMBRE"
+          name="nombre"
+          class="form-control"   
+          id="nombre"      
+          formControlName="nombre">
+      <div *ngIf="asForm.controls['nombre'].hasError('required') && asForm.controls['nombre'].touched" class="alert alert-warning" role="warning">
+          Campo nombre necesario
+      </div>            
+  </div>      
+  <div class="form-group">
+    <label for="fecha">Fecha</label>
+    <input
+      type="date"
+      placeholder="FECHA"
+      name="fecha"
+      class="form-control"   
+      id="fecha"      
+      formControlName="fecha">
+      <div *ngIf="asForm.controls['fecha'].hasError('required') && asForm.controls['fecha'].touched" class="alert alert-warning" role="warning">
+          Campo fecha necesario
+      </div>            
+  </div>  
+  <div class="form-group">
+      <label for="puesto">Puesto</label>
+      <input
+          type="text"
+          placeholder="PUESTO"
+          name="puesto"
+          class="form-control"   
+          id="puesto"      
+          formControlName="puesto">         
+  </div>    
+  <div class="form-group">
+      <label for="trabajado">Dia/s trabajado/s</label>
+      <input
+          type="number"
+          placeholder="TRABAJADOS"
+          name="trabajado"
+          class="form-control"   
+          id="trabajado"      
+          formControlName="trabajado">         
+  </div>            
+  <div class="form-group">
+      <label for="descanso">Dia/s descanso/s</label>
+      <input
+          type="number"
+          placeholder="DESCANSADOS"
+          name="descanso"
+          class="form-control"   
+          id="descanso"      
+          formControlName="descanso">         
+  </div>   
+  <div class="form-group">
+      <label for="festivo">Dia/s festivo/s</label>
+      <input
+          type="number"
+          placeholder="FESTIVOS"
+          name="festivo"
+          class="form-control"   
+          id="festivo"      
+          formControlName="festivo">         
+  </div> 
+  <div class="form-group">
+      <label for="vacaciones">Dia/s restantes de vacaciones</label>
+      <input
+          type="number"
+          placeholder="PENDIENTES"
+          name="vacaciones"
+          class="form-control"   
+          id="vacaciones"      
+          formControlName="vacaciones">         
+  </div>         
+  <div class="form-group">
+      <label for="disfrutadas">Dia/s disfrutadas de vacaciones</label>
+      <input
+          type="number"
+          placeholder="DISFRUTADAS"
+          name="disfrutadas"
+          class="form-control"   
+          id="disfrutadas"      
+          formControlName="disfrutadas">         
+  </div>       
+  <div class="form-group">
+      <label for="baja">Dia/s de baja/enfermedad</label>
+      <input
+          type="number"
+          placeholder="ENFERMEDAD"
+          name="baja"
+          class="form-control"   
+          id="baja"      
+          formControlName="baja">         
+  </div>  
+  <div class="form-group">
+      <label for="justificado">Dia/s de falta justificada</label>
+      <input
+          type="number"
+          placeholder="JUSTIFICADO"
+          name="justificado"
+          class="form-control"   
+          id="justificado"      
+          formControlName="justificado">         
+  </div>     
+  <div class="form-group">
+      <label for="injustificado">Dia/s de falta no justificada</label>
+      <input
+          type="number"
+          placeholder="NO JUSTIFICADO"
+          name="injustificado"
+          class="form-control"   
+          id="injustificado"      
+          formControlName="injustificado">         
+  </div>   
+  <div class="form-group">
+      <label for="fecha_inicio">Fecha de inicio de la situación</label>
+      <input
+        type="date"
+        placeholder="FECHA INICIO"
+        name="fecha_inicio"
+        class="form-control"   
+        id="fecha_inicio"      
+        formControlName="fecha_inicio">          
+  </div>  
+  <div class="form-group">
+      <label for="fecha_fin">Fecha de finalización de la situación</label>
+      <input
+        type="date"
+        placeholder="FECHA FIN"
+        name="fecha_fin"
+        class="form-control"   
+        id="fecha_fin"      
+        formControlName="fecha_fin">          
+  </div>     
+  <div class="form-group">
+      <div>
+        <label for="observacion">Observación de la asistencia</label>
+      </div>
+      <textarea
+        name="observacion"
+        rows="10"
+        cols="50"
+        class="form-control" 
+        id="observacion"      
+        formControlName="observacion">
+      </textarea>
+  </div>              
+  </fieldset>
+  <div>
+      <button type="submit" [disabled]="!asForm.valid" class="btn btn-success">GUARDAR</button>
+      <button type="button" (click)="onCancelar()" class="btn btn-warning">CANCELAR</button>
+      <button type="button" (click)="onBorrar(asForm)" [disabled]="!enEdicion" class="btn btn-danger">BORRAR</button>
+  </div>     
+</form>

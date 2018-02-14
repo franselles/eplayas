@@ -16,6 +16,8 @@ export class EntradaAsComponent implements OnInit {
   private asistencia: Asistencia;
   public asDeldia: Asistencia;
   public asUltimo: any;
+  public ventana = -1;
+  public tipoVentana = 'n';
 
   constructor(public asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes, private router: Router) {
 
@@ -106,6 +108,11 @@ export class EntradaAsComponent implements OnInit {
       this.asistenciaService.listaAsistenciasDia(this.fecha);
       // this.router.navigate(['/dash/asistencia/entrada']);
     }, error => console.error('Error creating : ' + error));
+  }
+
+  ventanaClick(i: number, t: string) {
+    this.tipoVentana = t;
+    this.ventana = i;
   }
 
 }
