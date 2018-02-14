@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { EntradaAsComponent } from './entrada-as/entrada-as.component';
-// import { DetalleAsComponent } from './entrada-as/detalle-as.component';
+import { DetalleAsComponent } from './entrada-as/detalle-as.component';
 import { LoggedInGuard } from '../shared/logged-in.guard';
 import { AsistenciaService } from '../shared/asistencia.services';
 import { BdService } from '../shared/bd.services';
@@ -39,7 +39,7 @@ const routes: Routes = [
   declarations: [
     ControlAsComponent,
     EntradaAsComponent,
-    // DetalleAsComponent,
+    DetalleAsComponent,
     SeguimientoAsComponent,
     DetalleSegComponent,
     AcumuladoSegComponent,
