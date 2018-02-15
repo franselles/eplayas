@@ -101,6 +101,7 @@ app.get("/api/asistencia/ultimos", function(req, res) {
           lastInjustificado: { $last: "$injustificado" },
           lastFecha_inicio: { $last: "$fecha_inicio" },
           lastFecha_fin: { $last: "$fecha_fin" },
+          lastObservacion: { $last: "$observacion"},
           lastId: { $last: "$_id"}                    
       }}
     ], function(err, docs) {

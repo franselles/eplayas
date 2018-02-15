@@ -39,7 +39,9 @@
                 <div *ngIf="asUltimo?.lastJustificado > 0">Justificado: {{ asUltimo?.lastJustificado }}</div>
                 <div *ngIf="asUltimo?.lastInjustificado > 0">No justificado: {{ asUltimo?.lastInjustificado }}</div>
                 <div *ngIf="(asUltimo?.lastFecha_inicio != '') && (asUltimo?.lastFecha_inicio != null)">Desde {{ asUltimo?.lastFecha_inicio | date:'dd/MM/yyyy' }}
-                  <br>Hasta {{ asUltimo?.lastFecha_fin | date:'dd/MM/yyyy' }}</div>
+                  <br>Hasta {{ asUltimo?.lastFecha_fin | date:'dd/MM/yyyy' }}
+                </div>
+                <div *ngIf="asUltimo?.lastObservacion">{{ asUltimo?.lastObservacion}}</div>                
                 <button type="button" class="btn btn-secondary btn-sm" (click)="ventanaClick(i, 'e')">Editar</button>
                 <app-in-detalle-as [ffecha]="asUltimo?.lastFecha" [idd]="asUltimo?._id" (upventana)="ventanaClick($event, 'e')" *ngIf="ventana == i && tipoVentana === 'e'"></app-in-detalle-as>
               </div>
@@ -59,7 +61,9 @@
                 <div *ngIf="asDeldia?.justificado > 0">Justificado: {{ asDeldia?.justificado }}</div>
                 <div *ngIf="asDeldia?.injustificado > 0">No justificado: {{ asDeldia?.injustificado }}</div>
                 <div *ngIf="(asDeldia?.fecha_inicio != '') && (asDeldia?.fecha_inicio != null)">Desde {{ asDeldia?.fecha_inicio | date:'dd/MM/yyyy' }}
-                  <br>Hasta {{ asDeldia?.fecha_fin | date:'dd/MM/yyyy' }}</div>
+                  <br>Hasta {{ asDeldia?.fecha_fin | date:'dd/MM/yyyy' }}
+                </div>
+                <div *ngIf="asDeldia?.observacion">{{ asDeldia?.observacion}}</div>
               </div>
               <app-in-detalle-as [ffecha]="fecha" [idd]="item._id" (upventana)="ventanaClick($event, 'n')" *ngIf="ventana == i && tipoVentana === 'n'"></app-in-detalle-as>
             </td>
@@ -102,7 +106,9 @@
                   <div *ngIf="item.justificado > 0">Dia justificado: {{ item.justificado }}</div>
                   <div *ngIf="item.injustificado > 0">Dia no justificado: {{ item.injustificado }}</div>
                   <div *ngIf="(item.fecha_inicio != '') && (item.fecha_inicio != null)">Desde {{ item.fecha_inicio | date:'dd/MM/yyyy' }}
-                    <br>Hasta {{ item.fecha_fin | date:'dd/MM/yyyy' }}</div>
+                    <br>Hasta {{ item.fecha_fin | date:'dd/MM/yyyy' }}
+                  </div>
+                  <div *ngIf="item.observacion">{{ item?.observacion}}</div>
                 </td>
               </tr>
             </tbody>
