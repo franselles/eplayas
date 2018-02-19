@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hamaca } from '../../shared/models';
+import { Hamaca, Acumulados } from '../../shared/models';
 import { HamacasService } from '../../shared/hamacas.service';
 import { GlobalsPartes } from '../../shared/globalspartes.services';
 
@@ -15,7 +15,7 @@ export class HamacasHistoricoComponent implements OnInit {
   public sector: number;
 
   public listaHamacas: Hamaca[] = [];
-  public acumuladoHamacas: Hamaca;
+  public acumuladoHamacas: Acumulados;
 
   constructor(private hamacasService: HamacasService, private global: GlobalsPartes) { }
 
@@ -43,7 +43,7 @@ export class HamacasHistoricoComponent implements OnInit {
 
       this.hamacasService.getHamacasHistoricoRotas(this.fecha1, this.fecha2, this.sector)
       .subscribe(
-        (data: Hamaca) => {
+        (data: Acumulados) => {
           this.acumuladoHamacas = data[0];
         },
         err => console.log(err)
