@@ -86,6 +86,16 @@ export interface Hamaca {
     observacion: string;
 }
 
+export interface Acumulados {
+    _id?: number;
+    total_h_rotas: number;
+    total_h_retiradas: number;
+    total_h_repuestas: number;
+    total_s_rotas: number;
+    total_s_retiradas: number;
+    total_s_repuestas: number;
+}
+
 export interface Asistencia {
     _id?: string;
     id_op: string;

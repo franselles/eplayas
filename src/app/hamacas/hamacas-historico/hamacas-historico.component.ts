@@ -15,13 +15,18 @@ export class HamacasHistoricoComponent implements OnInit {
   public sector: number;
 
   public listaHamacas: Hamaca[] = [];
+  public acumuladoHamacas: Hamaca;
 
   constructor(private hamacasService: HamacasService, private global: GlobalsPartes) { }
 
   ngOnInit() {
     this.sector = 1;
-    this.fecha1 = this.global.fecha;
+    const splitFecha = this.global.fecha.split('-');
+
+    this.fecha1 = splitFecha[0] + '-' + splitFecha[1] + '-01';
     this.fecha2 = this.global.fecha;
+
+    this.actualizaLista();
   }
 
   actualizaLista() {
@@ -32,6 +37,14 @@ export class HamacasHistoricoComponent implements OnInit {
       .subscribe(
         (data: Hamaca[]) => {
           this.listaHamacas = data;
+        },
+        err => console.log(err)
+      );
+
+      this.hamacasService.getHamacasHistoricoRotas(this.fecha1, this.fecha2, this.sector)
+      .subscribe(
+        (data: Hamaca) => {
+          this.acumuladoHamacas = data[0];
         },
         err => console.log(err)
       );

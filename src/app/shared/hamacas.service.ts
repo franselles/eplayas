@@ -21,6 +21,10 @@ export class HamacasService {
     return this.http.get(this.BASE_URL + 'lista/historico/' + fecha1 + '/' + fecha2 + '/' + sector);
   }
 
+  getHamacasHistoricoRotas(fecha1: string, fecha2: string, sector: number) {
+    return this.http.get(this.BASE_URL + 'rotas/total/fecha/' + fecha1 + '/' + fecha2 + '/' + sector);
+  }
+
   getHamaca(id: string | number) {
     return this.http.get(this.BASE_URL + 'edita/' + id);
   }

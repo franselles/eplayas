@@ -24,7 +24,9 @@ export class SeguimientoAsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.fechai = this.globalPartes.fecha;
+    const splitFecha = this.globalPartes.fecha.split('-');
+
+    this.fechai = splitFecha[0] + '-' + splitFecha[1] + '-01';
 
     this.fechaf = this.globalPartes.fecha;
 
