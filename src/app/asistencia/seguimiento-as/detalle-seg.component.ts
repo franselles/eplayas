@@ -13,6 +13,9 @@ export class DetalleSegComponent implements OnInit, OnChanges {
   @Input() fechai: string;
   @Input() fechaf: string;
 
+  public ventana = -1;
+  public tipoVentana = 'n';
+
   public asistencia: Asistencia[] = [];
 
   constructor(private asistenciaService: AsistenciaService) { }
@@ -42,6 +45,13 @@ export class DetalleSegComponent implements OnInit, OnChanges {
       },
       err => console.log(err)
     );
+  }
+
+  ventanaClick(i: number, t: string) {
+    this.tipoVentana = t;
+    this.ventana = i;
+
+    this.actualizaData();
   }
 
 }
