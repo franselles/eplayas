@@ -61,6 +61,7 @@ export class HamacasDetalleComponent implements OnInit {
       sombrillas: data.sombrillas,
       h_rotas: data.h_rotas,
       h_retiradas: data.h_retiradas,
+      h_repuestas: data.h_repuestas,
       s_rotas: data.s_rotas,
       s_retiradas: data.s_retiradas,
       s_repuestas: data.s_repuestas,
