@@ -121,7 +121,7 @@ onSubmit(datos: any) {
     this.asistenciaSercice.updateAsistencia(this.asistencia._id, datos.value).subscribe(() => {
       console.log('Actualizado');
       this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-      this.asistenciaSercice.listaAsistenciasUltimas();
+      this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
       this.upventana.emit(-1);
     }, error => console.error('Error updating : ' + error));
   } else {
@@ -129,7 +129,7 @@ onSubmit(datos: any) {
     this.asistenciaSercice.addAsistencia(datos.value).subscribe(() => {
       console.log('Salvado');
       this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-      this.asistenciaSercice.listaAsistenciasUltimas();
+      this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
       this.upventana.emit(-1);
     }, error => console.error('Error creating : ' + error));
   }
@@ -151,7 +151,7 @@ onBorrar(datos: any) {
   this.asistenciaSercice.removeAsistencia(this.asistencia._id, datos.value).subscribe(() => {
     console.log('Borrado');
     this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-    this.asistenciaSercice.listaAsistenciasUltimas();
+    this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
     this.upventana.emit(-1);
   }, error => console.error('Error removing : ' + error));
 }

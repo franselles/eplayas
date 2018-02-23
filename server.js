@@ -81,9 +81,12 @@ app.get("/api/asistencia", function(req, res) {
   });
 });
 
-app.get("/api/asistencia/ultimos", function(req, res) {
+app.get("/api/asistencia/ultimos/:fecha", function(req, res) {
   db.collection(ASISTENCIA_COLLECTION).aggregate(
     [
+      {
+        $match: {fecha : {$lt: req.params.fecha}}
+      },
       {
         $sort: {"fecha": 1}
       },

@@ -126,7 +126,7 @@ export class DetalleAsComponent implements OnInit {
       this.asistenciaSercice.updateAsistencia(this.asistencia._id, datos.value).subscribe(() => {
         console.log('Actualizado');
         this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-        this.asistenciaSercice.listaAsistenciasUltimas();
+        this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
         this.router.navigate(['/dash/asistencia/entrada']);
       }, error => console.error('Error updating : ' + error));
     } else {
@@ -134,7 +134,7 @@ export class DetalleAsComponent implements OnInit {
       this.asistenciaSercice.addAsistencia(datos.value).subscribe(() => {
         console.log('Salvado');
         this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-        this.asistenciaSercice.listaAsistenciasUltimas();
+        this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
         this.router.navigate(['/dash/asistencia/entrada']);
       }, error => console.error('Error creating : ' + error));
     }
@@ -156,7 +156,7 @@ export class DetalleAsComponent implements OnInit {
     this.asistenciaSercice.removeAsistencia(this.asistencia._id, datos.value).subscribe(() => {
       console.log('Borrado');
       this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-      this.asistenciaSercice.listaAsistenciasUltimas();
+      this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
       this.router.navigate(['/dash/asistencia/entrada']);
     }, error => console.error('Error removing : ' + error));
   }

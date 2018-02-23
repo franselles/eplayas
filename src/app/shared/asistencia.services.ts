@@ -40,8 +40,8 @@ export class AsistenciaService {
       return this.http.get(this.BASE_URL_O);
     }
 
-    getAsistenciaUltimos() {
-      return this.http.get(this.BASE_URL_A + 'ultimos');
+    getAsistenciaUltimos(fecha: string) {
+      return this.http.get(this.BASE_URL_A + 'ultimos/' + fecha);
     }
 
     getOperario(id: string | number) {
@@ -69,8 +69,8 @@ export class AsistenciaService {
       );
     }
 
-    listaAsistenciasUltimas() {
-      this.getAsistenciaUltimos().subscribe(
+    listaAsistenciasUltimas(fecha: string) {
+      this.getAsistenciaUltimos(fecha).subscribe(
         (data: Asistencia[]) => {
           this.asUltimos = data;
         },

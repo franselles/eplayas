@@ -28,7 +28,7 @@ export class EntradaAsComponent implements OnInit {
     this.fecha = this.globalPartes.fecha;
 
     this.asistenciaService.listaAsistenciasDia(this.fecha);
-    this.asistenciaService.listaAsistenciasUltimas();
+    this.asistenciaService.listaAsistenciasUltimas(this.fecha);
 
     this.asistenciaService.getOperarios().subscribe(
       (data: Operario[]) => {
@@ -40,7 +40,7 @@ export class EntradaAsComponent implements OnInit {
 
   actualizaLista() {
     this.asistenciaService.listaAsistenciasDia(this.fecha);
-    this.asistenciaService.listaAsistenciasUltimas();
+    this.asistenciaService.listaAsistenciasUltimas(this.fecha);
   }
 
   yaExiste(id_op: string) {
