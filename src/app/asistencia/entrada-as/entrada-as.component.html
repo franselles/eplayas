@@ -50,6 +50,8 @@
               <button type="button" class="btn btn-primary btn-sm" (click)="insertaRapido(item._id, item.nombre, 1)">TRA</button>
               <button type="button" class="btn btn-success btn-sm" (click)="insertaRapido(item._id, item.nombre, 2)">DES</button>
               <button type="button" class="btn btn-warning btn-sm" (click)="insertaRapido(item._id, item.nombre, 3)">FES</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="insertaRapido(item._id, item.nombre, 4)">BAJ</button>      
+              <button type="button" class="btn btn-light btn-sm" (click)="insertaRapido(item._id, item.nombre, 5)">VAC</button>                         
               <button type="button" class="btn btn-secondary btn-sm" (click)="ventanaClick(i, 'n')">Otro</button>
               <div *ngIf="yaExiste(item._id)" class="alert alert-primary" role="alert">
                 <div *ngIf="asDeldia?.trabajado > 0" style="background-color: #24e9f7;">Trabajado: {{ asDeldia?.trabajado }}</div>

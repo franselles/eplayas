@@ -126,3 +126,20 @@ export interface TotalAsistencia {
     total_justificado: number;
     total_injustificado: number;
 }
+
+export interface Mantenimiento {
+    _id?: string;
+    municipio: string;
+    fecha: string;
+    lugar: string;
+    turno: string;
+    tipo: string;
+    operario: string;
+    vehiculo: string;
+    numero_ops: number;
+    observacion_ayto: string;
+    observacion_ra: string;
+    material: string;
+    coste: number;
+    horarios: Horario;
+}

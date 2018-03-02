@@ -9,6 +9,7 @@ var ESTADISTICAS_COLLECTION = "estadisticas";
 var VEHICULOS_COLLECTION = "vehiculos";
 var ASISTENCIA_COLLECTION = "asistencia";
 var HAMACAS_COLLECTION = "hamacas";
+var MANTENIMIENTO_COLLECTION = "mantenimiento";
 
 var app = express();
 app.use(bodyParser.json());
@@ -662,6 +663,112 @@ app.get("/api/hamacas/rotas/total/fecha/:fecha1/:fecha2/:sector", function(req, 
     });
 });
 
+
+
+
+// MANTENIMIENTO API ROUTES BELOW
+
+/*  "/api/mantenimiento"
+ *    GET: finds all mantenimiento
+ *    GET: finds all mantenimiento in month and year
+ *    POST: creates a new mantenimiento
+ */
+
+app.get("/api/mantenimiento", function(req, res) {
+  db.collection(MANTENIMIENTO_COLLECTION).find({}).sort({ "fecha": -1 }).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get mantenimiento.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/api/mantenimiento/limit/:mes/:ano", function(req, res) {
+  db.collection(MANTENIMIENTO_COLLECTION).find({"month": req.params.mes, "year": req.params.ano}).sort({ "fecha": -1 }).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get mantenimiento.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/api/mantenimiento/fecha/:fecha", function(req, res) {
+  db.collection(MANTENIMIENTO_COLLECTION).find({"fecha": req.params.fecha}).sort({ "fecha": -1 }).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get mantenimiento.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/mantenimiento", function(req, res) {
+  var newMantenimiento = req.body;
+  newMantenimiento.createfecha = new Date();
+
+  if (!req.body.fecha) {
+    handleError(res, "Invalid fecha input", "Must provide a fecha.", 400);
+  }
+  var splitFecha = req.body.fecha.split("-");
+
+  newMantenimiento.year = splitFecha[0];
+  newMantenimiento.month = splitFecha[1];
+
+  db.collection(MANTENIMIENTO_COLLECTION).insertOne(newMantenimiento, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new mantenimiento.");
+    } else {
+      res.status(201).json(doc.ops[0]);
+    }
+  });
+});
+
+/*  "/api/mantenimiento/:id"
+ *    GET: find mantenimiento by id
+ *    PUT: upfecha mantenimiento by id
+ *    DELETE: deletes mantenimiento by id
+ */
+
+app.get("/api/mantenimiento/:id", function(req, res) {
+  db.collection(MANTENIMIENTO_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to get mantenimiento");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
+app.put("/api/mantenimiento/:id", function(req, res) {
+  var upfechaDoc = req.body;
+  delete upfechaDoc._id;
+
+  var splitFecha = req.body.fecha.split("-");
+
+  upfechaDoc.year = splitFecha[0];
+  upfechaDoc.month = splitFecha[1];
+
+  db.collection(MANTENIMIENTO_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to upfecha mantenimiento");
+    } else {
+      upfechaDoc._id = req.params.id;
+      res.status(200).json(upfechaDoc);
+    }
+  });
+});
+
+app.delete("/api/mantenimiento/:id", function(req, res) {
+  db.collection(MANTENIMIENTO_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete mantenimiento");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
 
 
 

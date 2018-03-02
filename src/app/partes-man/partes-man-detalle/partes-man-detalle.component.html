@@ -1,0 +1,203 @@
+<p>
+  DETALLE DEL PARTE HOY DE MANTENIMIENTO
+</p>
+
+<form novalidate [formGroup]="manteForm" (ngSubmit)="onSubmit(manteForm)">
+  <fieldset>
+    <legend>Datos obligatorios</legend>
+  <div class="form-group">
+    <label for="fecha">Fecha</label>
+    <input
+      type="date"
+      placeholder="FECHA"
+      name="fecha"
+      class="form-control"   
+      id="fecha"      
+      formControlName="fecha">
+      <div *ngIf="manteForm.controls['fecha'].hasError('required') && manteForm.controls['fecha'].touched" class="alert alert-warning" role="warning">
+          Campo fecha necesario
+      </div>            
+  </div>  
+  <div class="form-group">
+    <label for="municipio">Municipio</label>
+    <select
+      placeholder="MUNICIPIO"
+      name="municipio"
+      id="municipio"
+      formControlName="municipio"
+      class="form-control">
+      <option value="Benidorm" selected="selected">Benidorm</option>
+      <option value="Finestrat">Finestrat</option>    
+    </select>
+    <div *ngIf="manteForm.controls['municipio'].hasError('required') && manteForm.controls['municipio'].touched" class="alert alert-warning" role="warning">
+        Campo municipio necesario
+    </div>    
+  </div>   
+  <div class="form-group">
+    <label for="lugar">Playa</label>
+    <select
+      placeholder="PLAYA"
+      name="lugar"
+      id="lugar"
+      class="form-control"      
+      formControlName="lugar">
+      <option value="Levante y Calas">Levante y Calas</option>
+      <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
+      <option value="Finestrat">Finestrat</option>      
+    </select>
+    <div *ngIf="manteForm.controls['lugar'].hasError('required') && manteForm.controls['lugar'].touched" class="alert alert-warning" role="warning">
+        Campo playa necesario
+    </div>       
+  </div> 
+  <div class="form-group">
+    <label for="turno">Turno</label>
+    <select
+      placeholder="TURNO"
+      name="turno"
+      id="turno"
+      class="form-control"      
+      formControlName="turno">
+      <option value="Mañana">Mañana</option>
+    </select> 
+    <div *ngIf="manteForm.controls['turno'].hasError('required') && manteForm.controls['turno'].touched" class="alert alert-warning" role="warning">
+        Campo turno necesario
+    </div>        
+  </div>  
+  </fieldset> 
+  <fieldset>
+      <legend>Otros datos</legend>  
+  <div class="form-group">
+    <label for="operario">Conductor</label>
+    <select
+      placeholder="CONDUCTOR"
+      name="operario"
+      class="form-control" 
+      id="operario"      
+      formControlName="operario">   
+      <option *ngFor="let unOperario of listaOperarios; let i=index" [value]="unOperario.nombre">{{ unOperario.nombre }}</option>
+    </select>    
+  </div>   
+  <div class="form-group">
+    <label for="vehiculo">Vehiculo</label>
+    <select
+      placeholder="VEHICULO"
+      name="vehiculo"
+      class="form-control" 
+      id="vehiculo"      
+      formControlName="vehiculo">
+      <option *ngFor="let unVehiculo of listaVehiculos; let i=index" [value]="unVehiculo.matricula">{{ unVehiculo.matricula }} - {{ unVehiculo.nombre }}</option>    
+    </select>
+  </div>   
+  <div class="form-group">
+    <label for="numero_ops">Numero de operarios</label>
+    <input
+      type="number"
+      placeholder="Numero de operarios"
+      name="numero_ops"
+      class="form-control" 
+      id="numero_ops"      
+      formControlName="numero_ops">
+  </div>  
+  </fieldset>
+  <fieldset>
+    <legend>Observaciones</legend>  
+  <div class="form-group">
+    <div>
+      <label for="observacion_ayto">Ayuntamiento</label>
+    </div>
+    <textarea
+      name="observacion_ayto"
+      rows="10"
+      cols="50"
+      class="form-control" 
+      id="observacion_ayto"      
+      formControlName="observacion_ayto">
+    </textarea>
+  </div> 
+  <div class="form-group">
+    <div>
+      <label for="observacion_ra">RA</label>
+    </div>
+    <textarea
+      name="observacion_ra"
+      rows="10"
+      cols="50"
+      class="form-control" 
+      id="observacion_ra"      
+      formControlName="observacion_ra">
+    </textarea>
+  </div>    
+  </fieldset>  
+  <fieldset>
+    <legend>Reparación</legend>  
+  <div class="form-group">
+    <div>
+      <label for="material">Material usado</label>
+    </div>
+    <textarea
+      name="material"
+      rows="10"
+      cols="50"
+      class="form-control" 
+      id="material"      
+      formControlName="material">
+    </textarea>
+    <div class="form-group">
+      <label for="coste">Coste</label>
+      <input
+        type="number"
+        placeholder="Coste reparacion"
+        name="coste"
+        class="form-control" 
+        id="coste"      
+        formControlName="coste">
+    </div>     
+  </div>    
+  </fieldset>   
+  <fieldset>
+      <legend>Horarios</legend>  
+  <div formGroupName="horarios" class="form-group">
+    <div>
+      <label for="salida_almacen">
+        Salida de almacen
+      </label>
+      <input     
+        type="time"
+        placeholder="hora SALIDA ALMACEN"
+        name="salida_almacen"
+        class="form-control" 
+        id="salida_almacen"        
+        formControlName="salida_almacen">
+    </div>
+    <div>
+      <label for="salida_playa">
+        Salida de la playa
+      </label>
+      <input
+        type="time"
+        placeholder="hora SALIDA PLAYA"
+        name="salida_playa"
+        class="form-control" 
+        id="salida_playa"        
+        formControlName="salida_playa">
+    </div>
+    <div>
+      <label for="llegada_almacen">
+        Llegada al almacen
+      </label>
+      <input     
+        type="time"
+        placeholder="hora LLEGADA ALMACEN"
+        name="llegada_almacen"
+        class="form-control" 
+        id="llegada_almacen"        
+        formControlName="llegada_almacen">
+    </div>
+  </div>
+  </fieldset>
+  <div>
+    <button type="submit" [disabled]="!manteForm.valid" class="btn btn-success">GUARDAR</button>
+    <button type="button" (click)="onCancelar()" class="btn btn-warning">CANCELAR</button>
+    <button type="button" (click)="onBorrar(manteForm)" [disabled]="!enEdicion" class="btn btn-danger">BORRAR</button>
+  </div>    
+</form>
