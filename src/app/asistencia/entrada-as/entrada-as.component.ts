@@ -71,6 +71,7 @@ export class EntradaAsComponent implements OnInit {
     let v = 0;
     let f1 = '';
     let f2 = '';
+    let desc = '';
 
     if (tipo === 1) {
       t = 1;
@@ -79,6 +80,7 @@ export class EntradaAsComponent implements OnInit {
       v = 0;
       f1 = '';
       f2 = '';
+      desc = '';
     }
 
     if (tipo === 2) {
@@ -88,6 +90,7 @@ export class EntradaAsComponent implements OnInit {
       v = 0;
       f1 = '';
       f2 = '';
+      desc = '';
     }
 
     if (tipo === 3) {
@@ -97,6 +100,7 @@ export class EntradaAsComponent implements OnInit {
       v = 0;
       f1 = '';
       f2 = '';
+      desc = '';
     }
 
     if (tipo === 4) {
@@ -106,6 +110,7 @@ export class EntradaAsComponent implements OnInit {
       v = 0;
       f1 = this.fecha;
       f2 = this.fecha;
+      desc = 'ENFERMEDAD';
     }
 
     if (tipo === 5) {
@@ -115,12 +120,13 @@ export class EntradaAsComponent implements OnInit {
       v = 1;
       f1 = this.fecha;
       f2 = this.fecha;
+      desc = 'VACACIONES';
     }
 
     const asis: Asistencia = {
       id_op: id_op,
       puesto: '',
-      observacion: '',
+      observacion: desc,
       fecha_fin: f1,
       fecha_inicio: f2,
       fecha: this.fecha,
