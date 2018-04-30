@@ -14,6 +14,7 @@ export class AsistenciaService {
 
     public asistencias: Asistencia[] = [];
     public asUltimos: Asistencia[] = [];
+    public prueba: any[];
 
     constructor(private http: HttpClient, private bdService: BdService) {
       this.BASE_URL_A = this.bdService.dir_bd_ + 'asistencia/';
@@ -76,5 +77,9 @@ export class AsistenciaService {
         },
         err => console.log(err)
       );
+    }
+
+    aAsistencia() {
+      const a = this.prueba.find(data => data.descanso.some(item => item.casa === 'hola'));
     }
 }

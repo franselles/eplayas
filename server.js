@@ -36,7 +36,7 @@ var db;
 // 'mongodb://localhost/eplayas'
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', function (err, database) {
+mongodb.MongoClient.connect('mongodb://localhost/eplayas', function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -267,6 +267,84 @@ app.get("/api/asistencia/acumulado/:fecha_i/:fecha_f/:id_op", function(req, res)
     });
 });
 
+app.get("/api/asistencia/rejilla/operarios/:fecha_i/:fecha_f", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gte: req.params.fecha_i, $lte: req.params.fecha_f},
+         }
+      },
+      {
+        $group: {
+          _id: {
+            id_op: "$id_op",
+            nombre: "$nombre",
+          }
+                
+      }},
+      {
+        $sort: {"_id.nombre": 1}
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/asistencia/rejilla/detalle/:fecha_i/:fecha_f", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).find({
+    "fecha" : {$gte: req.params.fecha_i, $lte: req.params.fecha_f}
+  }).sort({ "nombre": 1, "fecha": 1}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get asistencias.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.get("/api/asistencia/rejilla/lista/:fecha_i/:fecha_f", function(req, res) {
+  db.collection(ASISTENCIA_COLLECTION).aggregate(
+    [
+      {
+        $match : { 
+          fecha : {$gte: req.params.fecha_i, $lte: req.params.fecha_f},
+         }
+      },
+      {
+        $sort: {"nombre": 1, "fecha": 1}
+      },      
+      {
+        $group:
+          {
+            _id: { id_op: "$id_op", nombre: "$nombre" },
+            diario: { $push:  {
+               dia: { $split: ["$fecha", "-"] },
+               trabajado: "$trabajado",
+               descanso: "$descanso",
+               festivo: "$festivo",
+               vacaciones: "$vacaciones",
+               disfrutadas: "$disfrutadas",
+               baja: "$baja",
+               justificado: "$justificado",
+               injustificado: "$injustificado",
+               fecha_i: "$fecha_inicio",
+               fecha_f: "$fecha_fin",               
+              }}
+          }
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
 
 
 // OPERARIOS API ROUTES BELOW

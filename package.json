@@ -1,6 +1,6 @@
 {
   "name": "eplayas",
-  "version": "1.1.113",
+  "version": "1.1.114",
   "license": "MIT",
   "main": "server.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^5.2.0",
-    "@angular/cli": "^1.7.2",
+    "@angular/cli": "^1.7.4",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
@@ -34,7 +34,7 @@
     "zone.js": "^0.8.20"
   },
   "devDependencies": {
-    "@angular/cli": "^1.7.2",
+    "@angular/cli": "^1.7.4",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",
@@ -55,7 +55,7 @@
     "typescript": "~2.5.3"
   },
   "engines": {
-    "node": "8.9.4",
-    "npm": "5.6.0"
+    "node": "8.11.1",
+    "npm": "6.0.0"
   }
 }
