@@ -36,7 +36,7 @@ var db;
 // 'mongodb://localhost/eplayas'
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect('mongodb://localhost/eplayas', function (err, database) {
+mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
