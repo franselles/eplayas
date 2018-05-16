@@ -19,7 +19,12 @@ const routes: Routes = [
   exports: [
     CoreComponent
   ],
-  declarations: [CoreComponent],
-  providers: [ LoggedInGuard, AuthenticationService ]
+  declarations: [
+    CoreComponent
+  ],
+  providers: [
+    LoggedInGuard,
+    AuthenticationService
+  ]
 })
 export class CoreModule { }
