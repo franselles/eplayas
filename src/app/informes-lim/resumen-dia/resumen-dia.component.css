@@ -6,6 +6,9 @@ pre {
     background: transparent;   
     padding: 0px;
     margin: 0px;    
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
     }
 
 .texto_p {
