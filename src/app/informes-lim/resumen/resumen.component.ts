@@ -14,8 +14,6 @@ export class ResumenComponent implements OnInit {
   public lugar: string;
   public municipio: string;
   public turno: string;
-  public visible: boolean;
-  public textoOculta: string;
 
   constructor(private router: Router, private globalPartes: GlobalsPartes) { }
 
@@ -24,19 +22,6 @@ export class ResumenComponent implements OnInit {
     this.lugar = 'Levante y Calas';
     this.turno = 'Mañana';
     this.fecha =  this.globalPartes.fecha;
-    this.visible = true;
-    this.textoOculta = '[-] ocultar';
-  }
-
-  oculta(event) {
-    event.preventDefault();
-    if (this.visible) {
-      this.visible = false;
-      this.textoOculta = '[+] mostrar';
-    } else {
-      this.visible = true;
-      this.textoOculta = '[-] ocultar';
-    }
   }
 
   abreRes(fecha: string, municipio: string) {

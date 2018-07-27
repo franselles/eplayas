@@ -8,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalisisComponent implements OnInit {
 
-  public visible: boolean;
-  public textoOculta: string;
   public tipo: string;
   public municipio: string;
   public lugar: string;
@@ -22,8 +20,6 @@ export class AnalisisComponent implements OnInit {
     this.municipio = 'Benidorm';
     this.lugar = 'Levante y Calas';
     this.tipo = 'Pesos totales';
-    this.visible = true;
-    this.textoOculta = '[-] ocultar';
   }
 
   abreAnalisis(tipo: string, fechad: string, fechah: string, municipio: string, lugar: string) {
@@ -43,14 +39,4 @@ export class AnalisisComponent implements OnInit {
     }
   }
 
-  oculta(event) {
-    event.preventDefault();
-    if (this.visible) {
-      this.visible = false;
-      this.textoOculta = '[+] mostrar';
-    } else {
-      this.visible = true;
-      this.textoOculta = '[-] ocultar';
-    }
-  }
 }
