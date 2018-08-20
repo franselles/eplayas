@@ -33,7 +33,7 @@ var db;
 
 // 'mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious'
 // process.env.MONGODB_URI
-// 'mongodb://localhost/eplayas'
+// 'mongodb://localhost/userserious'
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', function (err, database) {
@@ -199,6 +199,31 @@ app.get("/api/asistencia/seguimiento/:fechad/:fechah/:id_op", function(req, res)
           fecha : {$gte: req.params.fechad, $lte: req.params.fechah},
           id_op: req.params.id_op
          }
+      },
+      {
+        $sort: {"fecha": 1}
+      }
+    ], function(err, docs) {
+        if (err) {
+          handleError(res, err.message, "Failed to get aggregate del dia.");
+        } else {
+          res.status(200).json(docs);
+        }
+    });
+});
+
+app.get("/api/asistencia/seguimiento/acumulado/:fechad/:fechah/:id_op/:concepto", function(req, res) {
+  var concepto = req.params.concepto;
+  var qeryStr = {
+    fecha : {$gte: req.params.fechad, $lte: req.params.fechah},
+    id_op: req.params.id_op,
+    [concepto]: { $gt: 0 }
+  }
+
+  db.collection(ASISTENCIA_COLLECTION).aggregate(
+    [
+      {
+        $match : qeryStr
       },
       {
         $sort: {"fecha": 1}

@@ -18,9 +18,12 @@
       <option *ngFor="let item of listaOperarios; let i=index" [value]="item._id">{{ item.nombre }}</option>
     </select>    
   </div> 
-</div> 
+</div>
 <div class="row">
+  <div class="col-md-3">
+    <app-acumulado-seg [idop]="idop" [fechai]="fechai" [fechaf]="fechaf" (concepto)="cargaConcepto($event)"></app-acumulado-seg>    
+  </div>
   <div class="col">
-    <app-detalle-seg [idop]="idop" [fechai]="fechai" [fechaf]="fechaf"></app-detalle-seg>    
+    <app-detalle-acu [idop]="idop" [fechai]="fechai" [fechaf]="fechaf" [concepto]="concepto"></app-detalle-acu>
   </div>
 </div>

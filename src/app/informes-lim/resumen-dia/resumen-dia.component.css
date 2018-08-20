@@ -1,16 +1,23 @@
 pre {
     overflow: auto;
-    border-left: none;
+    /* border-left: none; */
     text-align: left;
-    white-space: pre-line;  
+    white-space: normal;  
     background: transparent;   
     padding: 0px;
-    margin: 0px;    
+    margin: 0px; 
     border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
+    /* box-shadow: none !important; */
+    /* outline: none !important; */
     }
 
 .texto_p {
     font-size: 80%;
 }
+
+.like-pre {
+    text-align: left; 
+    display: block;
+    unicode-bidi: embed;
+    white-space: pre-line;
+  }

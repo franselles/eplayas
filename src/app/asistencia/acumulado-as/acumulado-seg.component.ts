@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { AsistenciaService } from '../../shared/asistencia.services';
 import { TotalAsistencia } from '../../shared/models';
 
@@ -12,6 +12,8 @@ export class AcumuladoSegComponent implements OnInit, OnChanges {
   @Input() idop: string;
   @Input() fechai: string;
   @Input() fechaf: string;
+
+  @Output() concepto = new EventEmitter();
 
   public totales: TotalAsistencia;
 
@@ -32,6 +34,14 @@ export class AcumuladoSegComponent implements OnInit, OnChanges {
     if (changes['fechaf']) {
       this.actualizaData();
     }
+
+    if (changes['concepto']) {
+      this.actualizaData();
+    }
+  }
+
+  cargaConcepto(concepto: string) {
+    this.concepto.emit(concepto);
   }
 
   actualizaData() {

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Operario } from '../../shared/models';
 import { AsistenciaService } from '../../shared/asistencia.services';
 import { GlobalsPartes } from '../../shared/globalspartes.services';
+import { Operario } from '../../shared/models';
 
 @Component({
-  selector: 'app-seguimiento-as',
-  templateUrl: './seguimiento-as.component.html',
-  styleUrls: ['./seguimiento-as.component.css']
+  selector: 'app-acumulado-as',
+  templateUrl: './acumulado-as.component.html',
+  styleUrls: ['./acumulado-as.component.css']
 })
-export class SeguimientoAsComponent implements OnInit {
-
+export class AcumuladoAsComponent implements OnInit {
 
   public fechai: string;
   public fechaf: string;
   public idop: string;
+  public concepto: string;
   public listaOperarios: Operario[] = [];
 
   constructor(private asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes) {
@@ -34,6 +34,10 @@ export class SeguimientoAsComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  cargaConcepto(event) {
+    this.concepto = event;
   }
 
 }

@@ -29,6 +29,10 @@ export class AsistenciaService {
       return this.http.get<Asistencia[]>(this.BASE_URL_A + 'seguimiento/' + fechai + '/' + fechaf + '/' + id_op);
     }
 
+    getAsistenciaSegimientoAcumulado(fechai: string, fechaf: string, id_op: string, concepto: string) {
+      return this.http.get<Asistencia[]>(this.BASE_URL_A + 'seguimiento/acumulado/' + fechai + '/' + fechaf + '/' + id_op + '/' + concepto);
+    }
+
     getAsistenciaSegAcumulado(fechai: string, fechaf: string, id_op: string) {
       return this.http.get<TotalAsistencia>(this.BASE_URL_A + 'acumulado/' + fechai + '/' + fechaf + '/' + id_op);
     }
