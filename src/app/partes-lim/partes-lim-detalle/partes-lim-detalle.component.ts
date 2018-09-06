@@ -178,12 +178,24 @@ export class PartesLimDetalleComponent implements OnInit {
       break;
       case 11:
       this.parteForm.patchValue({
-        observacion_ayto: 'Cribado de playa'
+        observacion_ayto: 'Cribado y nivelación de la arena de playa'
       });
     break;
     case 12:
       this.parteForm.patchValue({
-        observacion_ayto: 'Cribado de orilla'
+        observacion_ayto: 'Cribado de la orilla de playa'
+      });
+    break;
+    case 13:
+      const texto1 = this.parteForm.get('observacion_ayto').value;
+      this.parteForm.patchValue({
+        observacion_ayto: texto1 + '\n' + 'MANTENIMIENTO:\n'
+      });
+    break;
+    case 14:
+      const texto2 = this.parteForm.get('observacion_ayto').value;
+      this.parteForm.patchValue({
+        observacion_ayto: texto2 + '\n' + 'Limpieza de lavapies, escaleras y casetas.'
       });
     break;
     }
