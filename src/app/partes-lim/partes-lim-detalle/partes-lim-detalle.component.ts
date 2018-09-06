@@ -195,7 +195,7 @@ export class PartesLimDetalleComponent implements OnInit {
     case 14:
       const texto2 = this.parteForm.get('observacion_ayto').value;
       this.parteForm.patchValue({
-        observacion_ayto: texto2 + '\n' + 'Limpieza de lavapies, escaleras y casetas.'
+        observacion_ayto: texto2 + '\n' + 'Limpieza de lavapiés, escaleras y casetas.'
       });
     break;
     }
