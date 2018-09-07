@@ -10,6 +10,7 @@ var VEHICULOS_COLLECTION = "vehiculos";
 var ASISTENCIA_COLLECTION = "asistencia";
 var HAMACAS_COLLECTION = "hamacas";
 var MANTENIMIENTO_COLLECTION = "mantenimiento";
+var CONSTANTES_COLLECTION = "constantes";
 
 var app = express();
 app.use(bodyParser.json());
@@ -63,6 +64,23 @@ function handleError(res, reason, message, code) {
   response.send('Eplayas!!!');
  });
 
+
+// CONSTANTES API ROUTES BELOW
+
+/*  "/api/constantes"
+ *    GET: finds all constantes
+ *    POST: creates a new constantes
+ */
+
+app.get("/api/constantes/:seccion", function(req, res) {
+  db.collection(CONSTANTES_COLLECTION).find({"seccion": req.params.seccion}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get constantes.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
 
 
 // ASISTENCIA API ROUTES BELOW

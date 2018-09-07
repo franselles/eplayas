@@ -28,4 +28,8 @@ export class ResumenService {
   getMesPlaya(year: string, month: string, turno: string, lugar: string, municipio: string) {
   return this.http.get(this.BASE_URL + 'mes/' + year + '/' + month + '/' + turno + '/' +  lugar + '/' + municipio);
   }
+
+  getConstantes(seccion: string) {
+    return this.http.get(this.bdService.dir_bd_ + 'constantes/' + seccion);
+  }
 }

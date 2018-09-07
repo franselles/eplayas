@@ -20,6 +20,7 @@ export class ResumenDiaComponent implements OnInit {
 
   public datos: any[];
   public noche = 'Noche';
+  public textos = {};
 
   constructor(private resumenService: ResumenService, private route: ActivatedRoute) { }
 
@@ -29,9 +30,19 @@ export class ResumenDiaComponent implements OnInit {
       this.fecha = params['dia'];
       this.municipio = params['municipio'];
 
+      this.getConstantes('inf_limpieza_dia');
+
       this.abreRes(this.fecha, this.municipio);
     });
 
+  }
+
+  getConstantes(seccion: string) {
+    this.resumenService.getConstantes(seccion).subscribe(
+      data => {
+        this.textos = data[0];
+      }, err => console.log(err)
+    );
   }
 
   abreRes(fecha: string, municipio: string) {
