@@ -22,6 +22,7 @@ export class PartesLimDetalleComponent implements OnInit {
   public listaOperarios = [];
   public listaVehiculos = [];
   public enEdicion: boolean;
+  public enviado: boolean;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
     private partesService: PartesService, private estadisticasService: EstadisticasService,
@@ -58,6 +59,8 @@ export class PartesLimDetalleComponent implements OnInit {
       }),
       bolsas: ['']
     });
+
+    this.enviado = false;
 
     this.estadisticasService.getEstadisticas().subscribe((data: any[]) => this.listaEstadisticas = data, error => console.log(error));
     this.operariosService.getOperariosActCond().subscribe((data: any[]) => this.listaOperarios = data, error => console.log(error));
@@ -250,6 +253,9 @@ export class PartesLimDetalleComponent implements OnInit {
    */
 
   onSubmit(datos: any) {
+
+    this.enviado = true;
+
     if (this.enEdicion === true) {
       this.partesService.updateParte(this.parte._id, datos.value).subscribe(() => {
         console.log('Actualizado');
@@ -276,6 +282,8 @@ export class PartesLimDetalleComponent implements OnInit {
    */
 
   onBorrar(datos: any) {
+    this.enviado = true;
+
     this.partesService.removeParte(this.parte._id, datos.value).subscribe(() => {
       console.log('Borrado');
       this.router.navigate(['/dash/limpieza']);

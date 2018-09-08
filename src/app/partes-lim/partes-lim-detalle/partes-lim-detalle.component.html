@@ -310,8 +310,8 @@
   </div>
   </fieldset>
   <div>
-    <button type="submit" [disabled]="!parteForm.valid" class="btn btn-success">GUARDAR</button>
+    <button type="submit" [disabled]="!parteForm.valid || enviado" class="btn btn-success">GUARDAR</button>
     <button type="button" (click)="onCancelar()" class="btn btn-warning">CANCELAR</button>
-    <button type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion" class="btn btn-danger">BORRAR</button>
+    <button type="button" (click)="onBorrar(parteForm)" [disabled]="!enEdicion || enviado" class="btn btn-danger">BORRAR</button>
   </div>    
 </form>
