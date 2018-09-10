@@ -18,6 +18,13 @@ export class ResumenComponent implements OnInit {
   constructor(private router: Router, private globalPartes: GlobalsPartes) { }
 
   ngOnInit() {
+
+    document.addEventListener('mousewheel', function(event) {
+      if (document.activeElement.classList.contains('noscroll')) {
+          (document.activeElement as HTMLElement).blur();
+      }
+    });
+
     this.municipio = 'Benidorm';
     this.lugar = 'Levante y Calas';
     this.turno = 'Mañana';

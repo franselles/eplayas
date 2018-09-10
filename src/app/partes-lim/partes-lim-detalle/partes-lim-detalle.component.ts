@@ -32,6 +32,12 @@ export class PartesLimDetalleComponent implements OnInit {
 
   ngOnInit() {
 
+    document.addEventListener('mousewheel', function(event) {
+      if (document.activeElement.classList.contains('noscroll')) {
+          (document.activeElement as HTMLElement).blur();
+      }
+    });
+
     this.parteForm = this.fb.group({
       // Se crea el FormGroup del formulario
       municipio: ['', Validators.required],

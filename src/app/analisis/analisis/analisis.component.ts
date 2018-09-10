@@ -17,6 +17,12 @@ export class AnalisisComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    document.addEventListener('mousewheel', function(event) {
+      if (document.activeElement.classList.contains('noscroll')) {
+          (document.activeElement as HTMLElement).blur();
+      }
+    });
+
     this.municipio = 'Benidorm';
     this.lugar = 'Levante y Calas';
     this.tipo = 'Pesos totales';
