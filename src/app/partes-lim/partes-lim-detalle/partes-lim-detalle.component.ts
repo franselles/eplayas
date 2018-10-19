@@ -9,11 +9,13 @@ import { OperariosService } from './../../shared/operarios.services';
 import { VehiculosService } from './../../shared/vehiculos.services';
 import { GlobalsPartes } from './../../shared/globalspartes.services';
 
+
 @Component({
   selector: 'app-partes-lim-detalle',
   templateUrl: './partes-lim-detalle.component.html',
   styleUrls: ['./partes-lim-detalle.component.css']
 })
+
 export class PartesLimDetalleComponent implements OnInit {
 
   public parteForm: FormGroup;
@@ -32,7 +34,7 @@ export class PartesLimDetalleComponent implements OnInit {
 
   ngOnInit() {
 
-    document.addEventListener('mousewheel', function(event) {
+     document.addEventListener('mousewheel', function(event) {
       if (document.activeElement.classList.contains('noscroll')) {
           (document.activeElement as HTMLElement).blur();
       }
