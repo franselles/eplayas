@@ -42,7 +42,7 @@ export class AsistenciaService {
     }
 
     getOperarios() {
-      return this.http.get(this.BASE_URL_O);
+      return this.http.get(this.BASE_URL_O + 'estado/activo');
     }
 
     getAsistenciaUltimos(fecha: string) {

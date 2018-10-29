@@ -431,7 +431,7 @@ app.post("/api/operarios", function(req, res) {
  */
 
 app.get("/api/operarios/estado/activo", function(req, res) {
-  db.collection(OPERARIOS_COLLECTION).find({"activo": true}).toArray(function(err, docs) {
+  db.collection(OPERARIOS_COLLECTION).find({"activo": true}).sort({ "nombre": 1 }).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get operarios.");
     } else {
