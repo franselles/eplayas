@@ -1,51 +1,70 @@
 <div class="noprint">
-  <p>
-    Analisis estadisticos de pesos, incidencias, etc
-  </p>
-  <div class="form-group col-md-3">
-    <label for="fechad">Fecha inicial</label>
-    <input #fechad="ngModel" [(ngModel)]="fechade" type="date" required class="form-control noscroll" id="fechad">
-    <div *ngIf="fechad.invalid && fechad.touched" class="card warning">
-      <div class="section">
-        <p>Fecha inicial necesaria</p>
-      </div>
-    </div>        
-  </div>
-  <div class="form-group col-md-3">
-    <label for="fechaha">Fecha final</label>
-    <input #fechah="ngModel" [(ngModel)]="fechaha" type="date" required class="form-control noscroll" id="fechaha"> 
-    <div *ngIf="fechah.invalid && fechah.touched" class="card warning">
-      <div class="section">
-        <p>Fecha final necesaria</p>
-      </div>
-    </div>          
-  </div>
-  <div class="form-group">
-    <label for="tipo">Datos de tipo </label>
-    <select name="tipo" [(ngModel)]="tipo" class="form-control" id="tipo">
-      <option value="Pesos totales">Pesos totales</option>
-      <option value="Pesos por playa">Pesos por playa</option>    
-      <option value="Estadísticas totales">Estadísticas totales</option>       
-      <option value="Estadísticas por playa">Estadísticas por playa</option>     
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="municipio">Municipio</label>
-    <select [(ngModel)]="municipio" class="form-control" id="municipio">
-      <option value="Benidorm">Benidorm</option>
-      <option value="Finestrat">Finestrat</option>    
-    </select>
-  </div> 
-  <div class="form-group">
-    <label for="lugar">Playa</label>
-    <select [(ngModel)]="lugar" class="form-control" id="lugar">
-      <option value="Levante y Calas">Levante y Calas</option>
-      <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
-      <option value="Finestrat">Finestrat</option>     
-    </select>
-  </div>
-  <br>
-  <button [disabled]="!fechad.valid || !fechah.valid" type="button" (click)="abreAnalisis(tipo, fechade, fechaha, municipio, lugar)" class="btn btn-primary">Muestra Datos</button> 
+    <p>Analisis estadisticos de pesos, incidencias, etc</p>
+    <div class="form-group col-md-3">
+        <label for="fechad">Fecha inicial</label>
+        <input
+            onwheel="this.blur()"
+            #fechad="ngModel"
+            [(ngModel)]="fechade"
+            type="date"
+            required
+            class="form-control"
+            id="fechad"
+        />
+        <div *ngIf="fechad.invalid && fechad.touched" class="card warning">
+            <div class="section"><p>Fecha inicial necesaria</p></div>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <label for="fechaha">Fecha final</label>
+        <input
+            onwheel="this.blur()"
+            #fechah="ngModel"
+            [(ngModel)]="fechaha"
+            type="date"
+            required
+            class="form-control"
+            id="fechaha"
+        />
+        <div *ngIf="fechah.invalid && fechah.touched" class="card warning">
+            <div class="section"><p>Fecha final necesaria</p></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tipo">Datos de tipo </label>
+        <select name="tipo" [(ngModel)]="tipo" class="form-control" id="tipo">
+            <option value="Pesos totales">Pesos totales</option>
+            <option value="Pesos por playa">Pesos por playa</option>
+            <option value="Estadísticas totales">Estadísticas totales</option>
+            <option value="Estadísticas por playa"
+                >Estadísticas por playa</option
+            >
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="municipio">Municipio</label>
+        <select [(ngModel)]="municipio" class="form-control" id="municipio">
+            <option value="Benidorm">Benidorm</option>
+            <option value="Finestrat">Finestrat</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="lugar">Playa</label>
+        <select [(ngModel)]="lugar" class="form-control" id="lugar">
+            <option value="Levante y Calas">Levante y Calas</option>
+            <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
+            <option value="Finestrat">Finestrat</option>
+        </select>
+    </div>
+    <br />
+    <button
+        [disabled]="!fechad.valid || !fechah.valid"
+        type="button"
+        (click)="abreAnalisis(tipo, fechade, fechaha, municipio, lugar)"
+        class="btn btn-primary"
+    >
+        Muestra Datos
+    </button>
 </div>
-<br>
+<br />
 <router-outlet></router-outlet>

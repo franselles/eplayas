@@ -1608,3 +1608,55 @@ app.get("/api/calculo/estadisticas/c", function(req, res) {
         }
     });
 });
+
+
+
+
+
+/*  "/api/sistema"
+* borrar datos de las entidades
+* limpieza
+* asistencia
+* patines
+* hamacas
+* inspectoras
+*/
+
+app.delete("/api/sistema/delete/:entidad/:fechad/:fechah", function(req, res) {
+
+  var ENTIDAD;
+
+  switch (req.params.entidad) {
+    case 'limpieza':
+      ENTIDAD = 'partes';
+      break;
+
+    case 'asistencia':
+      ENTIDAD = 'asistencia';
+      break; 
+
+    case 'patines':
+      ENTIDAD = 'pat_alquileres';
+      break;     
+
+    case 'hamacas':
+      ENTIDAD = 'hamacas';
+      break;     
+
+    case 'inspectoras':
+      ENTIDAD = 'ham_inspeccions';
+      break;  
+
+    default:
+      ENTIDAD = '';
+
+  }
+
+  db.collection(ENTIDAD).deleteMany({fecha: {$gte: req.params.fechad, $lte: req.params.fechah}}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to detele entidades.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});

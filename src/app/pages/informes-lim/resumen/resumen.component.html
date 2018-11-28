@@ -1,45 +1,78 @@
 <div class="noprint">
-    <br>
+    <br />
     <div>
-      <div>
-        <p>
-          Informe diario por dia y municipio
-        </p>
-        <div class="form-group col-md-3">
-          <label for="fecha">Fecha</label>
-          <input id="fecha" type="date" name="fecha" placeholder="dia resumen" [(ngModel)]="fecha" class="form-control noscroll">         
+        <div>
+            <p>Informe diario por dia y municipio</p>
+            <div class="form-group col-md-3">
+                <label for="fecha">Fecha</label>
+                <input
+                    onwheel="this.blur()"
+                    id="fecha"
+                    type="date"
+                    name="fecha"
+                    placeholder="dia resumen"
+                    [(ngModel)]="fecha"
+                    class="form-control"
+                />
+            </div>
+            <div class="form-group">
+                <label for="municipio">Municipio</label>
+                <select
+                    name="municipio"
+                    [(ngModel)]="municipio"
+                    class="form-control"
+                    id="municipio"
+                >
+                    <option value="Benidorm">Benidorm</option>
+                    <option value="Finestrat">Finestrat</option>
+                </select>
+            </div>
+            <button
+                type="button"
+                (click)="abreRes(fecha, municipio)"
+                class="btn btn-primary"
+            >
+                Abrir Informe Diario
+            </button>
+            <p>Informe mensual por dia, turno y playa</p>
+            <div class="form-group">
+                <label for="lugar">Playa</label>
+                <select
+                    name="lugar"
+                    [(ngModel)]="lugar"
+                    class="form-control"
+                    id="lugar"
+                >
+                    <option value="Levante y Calas">Levante y Calas</option>
+                    <option value="Poniente y Mal Pas"
+                        >Poniente y Mal Pas</option
+                    >
+                    <option value="Finestrat">Finestrat</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="turno">Turno</label>
+                <select
+                    name="turno"
+                    [(ngModel)]="turno"
+                    class="form-control"
+                    id="turno"
+                >
+                    <option value="Mañana">Mañana</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noche">Noche</option>
+                </select>
+            </div>
+            <button
+                type="button"
+                (click)="abreMes(fecha, turno, lugar, municipio)"
+                class="btn btn-primary"
+            >
+                Abrir Informe Mensual
+            </button>
         </div>
-        <div class="form-group">
-          <label for="municipio">Municipio</label>
-          <select name="municipio" [(ngModel)]="municipio" class="form-control" id="municipio">
-            <option value="Benidorm">Benidorm</option>
-            <option value="Finestrat">Finestrat</option>    
-          </select>
-        </div>        
-        <button type="button" (click)="abreRes(fecha, municipio)" class="btn btn-primary">Abrir Informe Diario</button>
-        <p>
-            Informe mensual por dia, turno y playa
-        </p>
-        <div class="form-group">
-          <label for="lugar">Playa</label>
-          <select name="lugar" [(ngModel)]="lugar" class="form-control" id="lugar">
-            <option value="Levante y Calas">Levante y Calas</option>
-            <option value="Poniente y Mal Pas">Poniente y Mal Pas</option>
-            <option value="Finestrat">Finestrat</option>     
-          </select>
-        </div>  
-        <div class="form-group">
-          <label for="turno">Turno</label>
-          <select name="turno" [(ngModel)]="turno" class="form-control" id="turno">
-            <option value="Mañana">Mañana</option>
-            <option value="Tarde">Tarde</option>
-            <option value="Noche">Noche</option>    
-          </select>
-        </div>                
-        <button type="button" (click)="abreMes(fecha, turno, lugar, municipio)" class="btn btn-primary">Abrir Informe Mensual</button>
-      </div>      
     </div>
-  </div>
-  <br>
-  <br>
-  <router-outlet></router-outlet>
+</div>
+<br />
+<br />
+<router-outlet></router-outlet>
