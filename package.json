@@ -1,12 +1,12 @@
 {
   "name": "eplayas",
-  "version": "1.1.133",
+  "version": "1.1.134",
   "license": "MIT",
   "main": "server.js",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build --prod",
+    "build": "webpack",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -55,7 +55,7 @@
     "tslint": "~5.9.1"
   },
   "engines": {
-    "node": "10.14.0",
-    "npm": "6.4.1"
+    "node": "10.15.1",
+    "npm": "6.7.0"
   }
 }
