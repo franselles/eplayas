@@ -2,18 +2,27 @@
     <h4 class="alert-heading">RA BENIDORM. 2017</h4>
     <p>ACCESO A LA APLICACION GESTION LIMPIEZA DE PLAYAS</p>
     <hr />
-    <p class="mb-0">Nueva version 1.1.x en desarrollo v. 2019-02-11B</p>
+    <p class="mb-0">Nueva version 1.1.x en desarrollo v. 2019-05-20A</p>
 </div>
 
 <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(loginForm)">
     <div class="form-group">
         <label for="password"> Clave </label>
-        <input type="password" placeholder="Introduce clave" class="form-control" name="password"
-            formControlName="password" />
-        <div *ngIf="
+        <input
+            type="password"
+            placeholder="Introduce clave"
+            class="form-control"
+            name="password"
+            formControlName="password"
+        />
+        <div
+            *ngIf="
                 loginForm.controls['password'].hasError('required') &&
                 loginForm.controls['password'].touched
-            " class="alert alert-warning" role="warning">
+            "
+            class="alert alert-warning"
+            role="warning"
+        >
             Campo clave necesario
         </div>
         <div *ngIf="errorPass" class="alert alert-danger" role="alert">
