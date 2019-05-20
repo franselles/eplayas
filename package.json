@@ -1,6 +1,6 @@
 {
     "name": "eplayas",
-    "version": "1.1.137",
+    "version": "1.1.138",
     "license": "MIT",
     "main": "server.js",
     "scripts": {
@@ -30,7 +30,7 @@
         "express": "^4.17.0",
         "mongodb": "^2.2.34",
         "rxjs": "^6.5.2",
-        "typescript": "^3.4.5",
+        "typescript": "~3.2.4",
         "zone.js": "^0.8.29"
     },
     "devDependencies": {
