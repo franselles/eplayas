@@ -1,4 +1,3 @@
-import { JsonpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,32 +16,43 @@ import { PartesLimListaComponent } from './partes-lim-lista/partes-lim-lista.com
 import { PartesLimComponent } from './partes-lim/partes-lim.component';
 
 const routes: Routes = [
-  {path: '', component: PartesLimListaComponent, canActivate: [LoggedInGuard]},
-  {path: 'detalle', component: PartesLimDetalleComponent, canActivate: [LoggedInGuard]},
-  {path: 'detalle/:id', component: PartesLimDetalleComponent, canActivate: [LoggedInGuard]}
+    {
+        path: '',
+        component: PartesLimListaComponent,
+        canActivate: [LoggedInGuard]
+    },
+    {
+        path: 'detalle',
+        component: PartesLimDetalleComponent,
+        canActivate: [LoggedInGuard]
+    },
+    {
+        path: 'detalle/:id',
+        component: PartesLimDetalleComponent,
+        canActivate: [LoggedInGuard]
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    JsonpModule,
-    RouterModule.forChild(routes)
-  ],
-  providers: [
-    BdService,
-    VehiculosService,
-    EstadisticasService,
-    OperariosService,
-    PartesService,
-    GlobalsPartes
-  ],
-  declarations: [
-    PartesLimComponent,
-    PartesLimDetalleComponent,
-    PartesLimListaComponent
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule.forChild(routes)
+    ],
+    providers: [
+        BdService,
+        VehiculosService,
+        EstadisticasService,
+        OperariosService,
+        PartesService,
+        GlobalsPartes
+    ],
+    declarations: [
+        PartesLimComponent,
+        PartesLimDetalleComponent,
+        PartesLimListaComponent
+    ]
 })
-export class PartesLimModule { }
+export class PartesLimModule {}
