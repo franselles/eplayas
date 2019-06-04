@@ -7,15 +7,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path: '', component: DashComponent, children: [
-      {path: 'operarios', loadChildren: './../../pages/operarios/operarios.module#OperariosModule'},
-      {path: 'asistencia', loadChildren: './../../pages/asistencia/asistencia.module#AsistenciaModule'},
-      {path: 'incidencias', loadChildren: './../../pages/estadisticas/estadisticas.module#EstadisticasModule'},
-      {path: 'limpieza', loadChildren: './../../pages/partes-lim/partes-lim.module#PartesLimModule'},
-      {path: 'informeslimpieza', loadChildren: './../../pages/informes-lim/informes-lim.module#InformesLimModule'},
-      {path: 'analisis', loadChildren: './../../pages/analisis/analisis.module#AnalisisModule'},
-      {path: 'mantenimiento', loadChildren: './../../pages/partes-man/partes-man.module#PartesManModule'},
-      {path: 'taller', loadChildren: './../../pages/taller/taller.module#TallerModule'},
-      {path: 'hamacas', loadChildren: './../../pages/hamacas/hamacas.module#HamacasModule'}
+      {path: 'operarios', loadChildren: () => import('./../../pages/operarios/operarios.module').then(m => m.OperariosModule)},
+      {path: 'asistencia', loadChildren: () => import('./../../pages/asistencia/asistencia.module').then(m => m.AsistenciaModule)},
+      {path: 'incidencias', loadChildren: () => import('./../../pages/estadisticas/estadisticas.module').then(m => m.EstadisticasModule)},
+      {path: 'limpieza', loadChildren: () => import('./../../pages/partes-lim/partes-lim.module').then(m => m.PartesLimModule)},
+      {path: 'informeslimpieza', loadChildren: () => import('./../../pages/informes-lim/informes-lim.module').then(m => m.InformesLimModule)},
+      {path: 'analisis', loadChildren: () => import('./../../pages/analisis/analisis.module').then(m => m.AnalisisModule)},
+      {path: 'mantenimiento', loadChildren: () => import('./../../pages/partes-man/partes-man.module').then(m => m.PartesManModule)},
+      {path: 'taller', loadChildren: () => import('./../../pages/taller/taller.module').then(m => m.TallerModule)},
+      {path: 'hamacas', loadChildren: () => import('./../../pages/hamacas/hamacas.module').then(m => m.HamacasModule)}
     ]}
 ];
 

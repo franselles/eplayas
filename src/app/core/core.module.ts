@@ -8,10 +8,10 @@ import { LoggedInGuard } from './../shared/logged-in.guard';
 const routes: Routes = [
     {
         path: 'dash',
-        loadChildren: './../core/dash/dash.module#DashModule',
+        loadChildren: () => import('./../core/dash/dash.module').then(m => m.DashModule),
         canActivate: [LoggedInGuard]
     },
-    { path: 'login', loadChildren: './../login/login.module#LoginModule' },
+    { path: 'login', loadChildren: () => import('./../login/login.module').then(m => m.LoginModule) },
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
