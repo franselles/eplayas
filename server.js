@@ -37,14 +37,14 @@ var db;
 // 'mongodb://localhost/userserious'
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', { useNewUrlParser: true, useUnifiedTopology: true }, function (err, database) {
+mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
   }
 
   // Save database object from the callback for reuse.
-  db = database.db('userserious');
+  db = database;
   console.log("Database connection ready");
 
   // Initialize the app.
@@ -188,7 +188,7 @@ app.put("/api/asistencia/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(ASISTENCIA_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
+  db.collection(ASISTENCIA_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha asistencia");
     } else {
@@ -464,7 +464,7 @@ app.put("/api/operarios/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(OPERARIOS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set:upfechaDoc}, function(err, doc) {
+  db.collection(OPERARIOS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha operario");
     } else {
@@ -568,7 +568,7 @@ app.put("/api/partes/:id", function(req, res) {
   upfechaDoc.year = splitFecha[0];
   upfechaDoc.month = splitFecha[1];
 
-  db.collection(PARTES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
+  db.collection(PARTES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha parte");
     } else {
@@ -699,7 +699,7 @@ app.put("/api/hamacas/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(HAMACAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
+  db.collection(HAMACAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha hamacas");
     } else {
@@ -871,7 +871,7 @@ app.put("/api/mantenimiento/:id", function(req, res) {
   upfechaDoc.year = splitFecha[0];
   upfechaDoc.month = splitFecha[1];
 
-  db.collection(MANTENIMIENTO_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
+  db.collection(MANTENIMIENTO_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha mantenimiento");
     } else {
@@ -950,7 +950,7 @@ app.put("/api/estadisticas/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(ESTADISTICAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
+  db.collection(ESTADISTICAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha estadistica");
     } else {
