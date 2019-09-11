@@ -37,7 +37,7 @@ var db;
 // 'mongodb://localhost/userserious'
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/', { useNewUrlParser: true, useUnifiedTopology: true }, function (err, database) {
+mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', { useNewUrlParser: true, useUnifiedTopology: true }, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
