@@ -37,14 +37,14 @@ var db;
 // 'mongodb://localhost/userserious'
 
 // Connect to the database before starting the application server.
-mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', function (err, database) {
+mongodb.MongoClient.connect('mongodb://f54n:Uzituxez1800@ds145295.mlab.com:45295/userserious', { useNewUrlParser: true, useUnifiedTopology: true }, function (err, database) {
   if (err) {
     console.log(err);
     process.exit(1);
   }
 
   // Save database object from the callback for reuse.
-  db = database;
+  db = database.db('userserious');
   console.log("Database connection ready");
 
   // Initialize the app.
@@ -126,12 +126,14 @@ app.get("/api/asistencia/ultimos/:fecha", function(req, res) {
           lastObservacion: { $last: "$observacion"},
           lastId: { $last: "$_id"}                    
       }}
-    ], function(err, docs) {
-        if (err) {
-          handleError(res, err.message, "Failed to get aggregate del dia.");
-        } else {
-          res.status(200).json(docs);
-        }
+    ], function(err, cursor) {
+        cursor.toArray(function(err, docs) {
+          if (err) {
+            handleError(res, err.message, "Failed to get aggregate del dia.");
+          } else {
+            res.status(200).json(docs);
+          }
+        });
     });
 });
 
@@ -188,7 +190,7 @@ app.put("/api/asistencia/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(ASISTENCIA_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+  db.collection(ASISTENCIA_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha asistencia");
     } else {
@@ -221,12 +223,14 @@ app.get("/api/asistencia/seguimiento/:fechad/:fechah/:id_op", function(req, res)
       {
         $sort: {"fecha": 1}
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -246,12 +250,14 @@ app.get("/api/asistencia/seguimiento/acumulado/:fechad/:fechah/:id_op/:concepto"
       {
         $sort: {"fecha": 1}
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -271,12 +277,14 @@ app.get("/api/asistencia/lista/operario/:fecha_i/:fecha_f", function(req, res) {
           fecha : {$gte: req.params.fecha_i, $lte: req.params.fecha_f}
         }
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate /asistencia/lista/operario/:fecha_i/:fecha_f.");
         } else {
           res.status(200).json(docs);
         }
+      });
       });
 });
 
@@ -301,12 +309,14 @@ app.get("/api/asistencia/acumulado/:fecha_i/:fecha_f/:id_op", function(req, res)
           total_justificado: {$sum: "$justificado"},
           total_injustificado: {$sum: "$injustificado"},                  
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -329,12 +339,14 @@ app.get("/api/asistencia/rejilla/operarios/:fecha_i/:fecha_f", function(req, res
       {
         $sort: {"_id.nombre": 1}
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -380,12 +392,14 @@ app.get("/api/asistencia/rejilla/lista/:fecha_i/:fecha_f", function(req, res) {
               }}
           }
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -464,7 +478,7 @@ app.put("/api/operarios/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(OPERARIOS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+  db.collection(OPERARIOS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set:upfechaDoc}, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha operario");
     } else {
@@ -568,7 +582,7 @@ app.put("/api/partes/:id", function(req, res) {
   upfechaDoc.year = splitFecha[0];
   upfechaDoc.month = splitFecha[1];
 
-  db.collection(PARTES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+  db.collection(PARTES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha parte");
     } else {
@@ -663,12 +677,14 @@ app.get("/api/hamacas/lista/ultimos", function(req, res) {
       {
         $sort: {"_id": 1}
       }    
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -699,7 +715,7 @@ app.put("/api/hamacas/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(HAMACAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+  db.collection(HAMACAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha hamacas");
     } else {
@@ -742,12 +758,14 @@ app.get("/api/hamacas/rotas/total/mes/:month/:year", function(req, res) {
           total_s_retiradas: {$sum: "$s_retiradas"}, 
           total_s_repuestas: {$sum: "$s_repuestas"},             
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -775,12 +793,14 @@ app.get("/api/hamacas/rotas/total/fecha/:fecha1/:fecha2/:sector", function(req, 
           total_s_retiradas: {$sum: "$s_retiradas"}, 
           total_s_repuestas: {$sum: "$s_repuestas"},             
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -871,7 +891,7 @@ app.put("/api/mantenimiento/:id", function(req, res) {
   upfechaDoc.year = splitFecha[0];
   upfechaDoc.month = splitFecha[1];
 
-  db.collection(MANTENIMIENTO_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+  db.collection(MANTENIMIENTO_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha mantenimiento");
     } else {
@@ -950,7 +970,7 @@ app.put("/api/estadisticas/:id", function(req, res) {
   var upfechaDoc = req.body;
   delete upfechaDoc._id;
 
-  db.collection(ESTADISTICAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, upfechaDoc, function(err, doc) {
+  db.collection(ESTADISTICAS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, {$set: upfechaDoc}, function(err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to upfecha estadistica");
     } else {
@@ -995,12 +1015,14 @@ app.get("/api/resumen/diario/:dia/:turno/:municipio", function(req, res) {
             turno: "$turno",
             lugar: "$lugar"}
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate /diario/:dia/:turno/:municipio.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1054,12 +1076,14 @@ app.get("/api/resumen/dia/:dia/:municipio", function(req, res) {
           }
         }
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1103,12 +1127,14 @@ app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function(req, 
     {
       $sort: {_id: 1}
     }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate /diario/:dia/:turno/:municipio.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1165,12 +1191,14 @@ app.get("/api/resumen/mes/agrupado/total/:year/:month/:municipio", function(req,
       {
         $sort: {"_id.lugar": 1}
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1193,12 +1221,14 @@ app.get("/api/resumen/dia/basura/total/:dia/:municipio", function(req, res) {
           total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
           total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1222,12 +1252,14 @@ app.get("/api/resumen/mes/basura/total/:mes/:ano/:municipio", function(req, res)
           total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
           total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1273,12 +1305,14 @@ app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function(req, res) {
           total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
           total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1306,12 +1340,14 @@ app.get("/api/analisis/pesos/anual/:fechad/:fechah/:municipio", function(req, re
             _id: 1
         }
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1334,12 +1370,14 @@ app.get("/api/analisis/pesos/playas/:fechad/:fechah/:lugar/:municipio", function
           total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
           total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1362,12 +1400,14 @@ app.get("/api/analisis/pesos/playas/anual/:fechad/:fechah/:lugar/:municipio", fu
           total_algas_teoricas: {$sum: "$pesos.algas_teoricas"},
           total_algas_pesadas: {$sum: "$pesos.algas_pesadas"}          
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del dia.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1394,12 +1434,14 @@ app.get("/api/analisis/estadisticas/:fechad/:fechah/:municipio", function(req, r
             _id: 1
         }
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del estadisticas fechas.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1426,12 +1468,14 @@ app.get("/api/analisis/estadisticas/anual/:fechad/:fechah/:municipio", function(
             _id: 1
         }
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del estadisticas fechas.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1459,12 +1503,14 @@ app.get("/api/analisis/estadisticas/playas/:fechad/:fechah/:lugar/:municipio", f
             _id: 1
         }
       }
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del estadisticas fechas.");
         } else {
           res.status(200).json(docs);
         }
+      });
     });
 });
 
@@ -1517,8 +1563,6 @@ app.get("/api/calculo/estadisticas", function(req, res) {
     if (err) {
       handleError(res, err.message, "Failed to get estadisticas.");
     } else {
-      console.log(docs);
-      console.log(docs.length);
       // res.status(200).json(docs);
 
       for (var key in docs) {
@@ -1527,7 +1571,6 @@ app.get("/api/calculo/estadisticas", function(req, res) {
 
         if (docs.hasOwnProperty(key)) {
           var element = docs[key];
-          console.log(element.nombre);
           t.push({"nombre": element.nombre, "otro": element.nombre + 'R'});
 
           e = element.nombre;
@@ -1550,13 +1593,14 @@ app.get("/api/calculo/estadisticas", function(req, res) {
                   _id: "element._id",
                   value: {$sum: 1},
               }}
-            ], function(err, docs) {
+            ], function(err, cursor) {
+              cursor.toArray(function(err, docs) {
                 if (err) {
                   handleError(res, err.message, "Failed to get aggregate del contar estadisticas.");
                 } else {
-                  console.log(docs);
-                  //res.status(200).json(docs);
+                  res.status(200).json(docs);
                 }
+              });
             });
 
         }
@@ -1599,13 +1643,14 @@ app.get("/api/calculo/estadisticas/c", function(req, res) {
           _id: "element._id",
           value: {$sum: 1},
       }}
-    ], function(err, docs) {
+    ], function(err, cursor) {
+      cursor.toArray(function(err, docs) {
         if (err) {
           handleError(res, err.message, "Failed to get aggregate del contar estadisticas.");
         } else {
-          console.log(docs);
           res.status(200).json(docs);
         }
+      });
     });
 });
 
