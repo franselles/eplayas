@@ -1,6 +1,6 @@
 {
     "name": "eplayas",
-    "version": "1.1.146",
+    "version": "1.1.149",
     "license": "MIT",
     "main": "server.js",
     "scripts": {
@@ -14,31 +14,31 @@
     "heroku-run-build-script": true,
     "private": true,
     "dependencies": {
-        "@angular/animations": "^9.0.0-next.6",
-        "@angular/common": "^9.0.0-next.6",
-        "@angular/compiler": "^9.0.0-next.6",
-        "@angular/compiler-cli": "^9.0.0-next.6",
-        "@angular/core": "^9.0.0-next.6",
-        "@angular/forms": "^9.0.0-next.6",
-        "@angular/platform-browser": "^9.0.0-next.6",
-        "@angular/platform-browser-dynamic": "^9.0.0-next.6",
-        "@angular/router": "^9.0.0-next.6",
+        "@angular/animations": "^9.0.0",
+        "@angular/common": "^9.0.0",
+        "@angular/compiler": "^9.0.0",
+        "@angular/compiler-cli": "^9.0.0",
+        "@angular/core": "^9.0.0",
+        "@angular/forms": "^9.0.0",
+        "@angular/platform-browser": "^9.0.0",
+        "@angular/platform-browser-dynamic": "^9.0.0",
+        "@angular/router": "^9.0.0",
         "body-parser": "^1.19.0",
-        "core-js": "^2.5.3",
         "express": "^4.17.0",
-        "mongodb": "^3.3.2",
-        "rxjs": "^6.5.3",
-        "typescript": "3.5.3",
+        "mongodb": "^3.5.2",
+        "rxjs": "^6.5.4",
+        "tslib": "^1.10.0",
+        "typescript": "^3.7.5",
         "zone.js": "~0.10.2"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "~0.803.4",
-        "@angular/language-service": "^9.0.0-next.6",
-        "@angular/cli": "^8.3.12",
+        "@angular-devkit/build-angular": "~0.900.1",
+        "@angular/cli": "^9.0.1",
+        "@angular/language-service": "^9.0.0",
         "@types/jasmine": "~2.8.3",
         "@types/jasminewd2": "^2.0.6",
-        "@types/node": "~8.9.4",
-        "codelyzer": "^5.0.1",
+        "@types/node": "^12.11.1",
+        "codelyzer": "^5.2.1",
         "jasmine-core": "~2.99.1",
         "jasmine-spec-reporter": "~4.2.1",
         "karma": "^2.0.5",
@@ -47,12 +47,12 @@
         "karma-coverage-istanbul-reporter": "^1.2.1",
         "karma-jasmine": "~1.1.0",
         "karma-jasmine-html-reporter": "^0.2.2",
-        "protractor": "^5.4.2",
+        "protractor": "^5.4.3",
         "ts-node": "~5.0.1",
-        "tslint": "^5.16.0"
+        "tslint": "^6.0.0"
     },
     "engines": {
-        "node": "12.10.0",
-        "npm": "6.11.3"
+        "node": "12.14.1",
+        "npm": "6.13.4"
     }
 }
