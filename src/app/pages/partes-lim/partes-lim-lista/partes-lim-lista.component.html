@@ -1,0 +1,45 @@
+<p>
+  Selecciona fecha para ver los partes de limpieza
+</p>
+<a [routerLink]="['detalle']">Nuevo parte</a> 
+<div class="form-group col-md-3">
+  <label for="fecha">Selecciona fecha</label>
+  <input id="fecha" [(ngModel)]="fecha" type="date" (change)="actualizaLista()" class="form-control">
+</div>
+<br>
+<div>
+  <table class="table table-striped table-responsive-md">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">PLAYA</th>
+        <th scope="col">OPERARIO</th>
+        <th scope="col">TURNO</th>
+        <th scope="col">TIPO</th>           
+        <th scope="col">RSUM</th>   
+        <th scope="col">RSUC</th>  
+        <th scope="col">SELEC</th>         
+        <th scope="col">ALGT</th>  
+        <th scope="col">ALGP</th>          
+        <th scope="col">EDITAR</th>                               
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let parte of listaPartes; let i = index">
+        <th scope="row">{{ i + 1 }}</th>        
+        <td>{{ parte.lugar }}</td>
+        <td>{{ parte.operario }}</td>
+        <td>{{ parte.turno }}</td>
+        <td>{{ parte.tipo }}</td>
+        <td>{{ parte.pesos.rsu_manual }}</td>     
+        <td>{{ parte.pesos.rsu_criba }}</td> 
+        <td>{{ parte.pesos.selectivo }}</td> 
+        <td>{{ parte.pesos.algas_teoricas }}</td>        
+        <td>{{ parte.pesos.algas_pesadas }}</td>                                           
+        <td><a [routerLink]="['/dash/limpieza/detalle', parte._id]">
+          Editar
+        </a></td>        
+      </tr>
+    </tbody>
+  </table>
+</div>

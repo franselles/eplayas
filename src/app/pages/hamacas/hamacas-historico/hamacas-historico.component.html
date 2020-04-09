@@ -1,0 +1,108 @@
+<p>
+  Historico de sectores
+</p>
+
+
+<div class="row">
+    <div class="form-group col-md-3">
+      <label for="fecha1">Selecciona fecha desde</label>
+      <input id="fecha1" [(ngModel)]="fecha1" type="date" (change)="actualizaLista()" class="form-control">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="fecha2">Selecciona fecha hasta</label>
+      <input id="fecha2" [(ngModel)]="fecha2" type="date" (change)="actualizaLista()" class="form-control">
+    </div>    
+  <div class="form-group col-md-3">
+    <label for="tipo">Sector </label>
+    <select name="sector" [(ngModel)]="sector" class="form-control" id="sector" (change)="actualizaLista()">
+      <option value="1">Sector 1</option>
+      <option value="2">Sector 2</option>
+      <option value="3">Sector 3</option>
+      <option value="4">Sector 4</option>
+      <option value="5">Sector 5</option>
+      <option value="6">Sector 6</option>
+      <option value="7">Sector 7</option>
+      <option value="8">Sector 8</option>
+      <option value="9">Sector 9</option>
+      <option value="10">Sector 10</option>
+      <option value="11">Sector 11</option>
+      <option value="12">Sector 12</option>
+      <option value="13">Sector 13</option>      
+      <option value="14">Sector 14</option>
+      <option value="15">Sector 15</option>
+      <option value="16">Sector 16</option>
+      <option value="17">Sector 17</option>
+      <option value="18">Sector 18</option>
+      <option value="19">Sector 19</option>
+      <option value="20">Sector 20</option>
+      <option value="21">Sector 21</option>
+      <option value="22">Sector 22</option>            
+    </select>
+  </div>  
+</div>
+
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Sector</th>
+        <th scope="col">Fecha</th>   
+        <th scope="col">Hamacas</th>  
+        <th scope="col">Sombrillas</th>    
+        <th scope="col">Editar</th>                              
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listaHamacas; let i = index">
+        <th scope="row">{{ item.sector }}</th>
+        <td>{{ item.fecha | date: 'dd/MM/yyyy' }}</td> 
+        <td>
+          <div>
+           Hamacas: {{ item.hamacas }} 
+          </div>
+          <div>
+            Rotas: {{ item.h_rotas }} 
+          </div>
+        </td>               
+        <td>
+          <div>
+            Sombrillas: {{ item.sombrillas }} 
+          </div>
+          <div>
+            Rotas: {{ item.s_rotas }} 
+          </div>
+        </td>      
+        <td> <a [routerLink]="['/dash/hamacas/detalle', item._id]">Editar</a></td>        
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <h4>Hamacas y sombrillas rotas</h4>
+</div>
+<div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Sector</th>
+          <th scope="col">Hamacas</th>  
+          <th scope="col">Sombrillas</th>                           
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">{{ acumuladoHamacas?._id }}</th>
+          <td>
+            <div>
+              Hamacas: {{ acumuladoHamacas?.total_h_rotas }} 
+            </div>
+            </td>
+            <td>
+            <div>
+              Sombrillas: {{ acumuladoHamacas?.total_s_rotas }} 
+            </div>
+          </td>                  
+        </tr>
+      </tbody>
+    </table>
+  </div>

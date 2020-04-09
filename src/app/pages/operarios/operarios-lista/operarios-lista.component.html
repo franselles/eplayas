@@ -1,0 +1,26 @@
+<p>
+  Listado de operarios
+</p>
+
+<a [routerLink]="['detalle']">Nuevo Operario</a> 
+
+<br>
+
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Operario</th>
+        <th scope="col">Editar</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let operario of listaOperarios; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ operario.nombre }}</td>
+        <td> <a [routerLink]="['/dash/operarios/detalle', operario._id]">Editar</a></td>        
+      </tr>
+    </tbody>
+  </table>
+</div>

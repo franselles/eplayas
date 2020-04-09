@@ -1,0 +1,34 @@
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Fecha</th>        
+        <th scope="col">Detalle</th>    
+        <th scope="col">Observacion</th>              
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of asistencia; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ item.fecha }}
+          <button type="button" class="btn btn-primary btn-sm" (click)="ventanaClick(i, 'e')">Editar</button>
+        </td>        
+        <td>
+          <div *ngIf="item.trabajado > 0" style="background-color: #24e9f7;">Dia trabajado: {{ item.trabajado }}</div>
+          <div *ngIf="item.descanso > 0" style="background-color: #21f77a;">Dia descanso: {{ item.descanso }}</div>
+          <div *ngIf="item.festivo > 0" style="background-color: #f860f8; color: white;">Dia festivo: {{ item.festivo }}</div>
+          <div *ngIf="item.vacaciones > 0" style="background-color: #f7ee70;">Dias vacaciones pendientes: {{ item.vacaciones }}</div>
+          <div *ngIf="item.disfrutadas > 0" style="background-color: #f7bc3c;">Dias vacaciones disfrutadas: {{ item.disfrutadas }}</div>
+          <div *ngIf="item.baja > 0" style="background-color: #f73c3c; color: white;">Baja: {{ item.baja }}</div>
+          <div *ngIf="item.justificado > 0">Dia justificado: {{ item.justificado }}</div>                                                                      
+          <div *ngIf="item.injustificado > 0" style="background-color: #7c7c7c; color: white;">Dia no justificado: {{ item.injustificado }}</div> 
+          <div *ngIf="(item.fecha_inicio != '') && (item.fecha_inicio != null)">Desde {{ item.fecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ item.fecha_fin | date:'dd/MM/yyyy' }}</div>
+          <app-in-detalle-as [ffecha]="item.fecha" [idd]="item.id_op" (upventana)="ventanaClick($event, 'e')" *ngIf="ventana == i && tipoVentana === 'e'"></app-in-detalle-as>
+        </td>  
+        <td><pre>{{ item.observacion }}</pre></td>                 
+      </tr>
+    </tbody>
+  </table>
+</div>

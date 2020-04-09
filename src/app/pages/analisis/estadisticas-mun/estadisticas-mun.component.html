@@ -1,0 +1,22 @@
+<h5>
+ESTADISTICAS TOTALES PLAYAS {{ municipio | uppercase }}
+</h5>
+
+<div class="row">
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">#</th>            
+        <th scope="col">INCIDENCIA</th>
+        <th scope="col">VECES</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let estadistica of estadisticas; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ estadistica._id }}</td>
+        <td>{{ estadistica.count }}</td>
+        </tr>
+    </tbody>
+</table>
+</div>

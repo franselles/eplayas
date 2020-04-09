@@ -1,0 +1,34 @@
+<form novalidate [formGroup]="estadisticasForm" (ngSubmit)="onSubmit(estadisticasForm)">
+  <div class="form-group">
+    <label for="nombre">
+      Nombre
+    </label>
+    <input
+      type="text"
+      placeholder="Introduce nombre"
+      name="estadistica"
+      id="estadistica"
+      class="form-control"      
+      formControlName="estadistica">  
+      <div *ngIf="estadisticasForm.controls['estadistica'].hasError('required') && estadisticasForm.controls['estadistica'].touched" class="card warning" class="alert alert-warning" role="warning">
+          Campo nombre necesario
+      </div>           
+  </div>
+  <div class="form-group">
+    <label for="gravedad">
+      Gravedad
+    </label>
+    <input
+      type="text"
+      placeholder="Introduce gravedad"
+      name="gravedad"
+      class="form-control"   
+      id="gravedad"      
+      formControlName="gravedad">
+  </div>
+  <div>
+    <button type="submit" [disabled]="!estadisticasForm.valid" class="btn btn-success">Aceptar</button>
+    <button type="button" (click)="onCancelar()" class="btn btn-warning">Cancelar</button>
+    <button type="button" (click)="onBorrar(estadisticasForm)" class="btn btn-danger">BORRAR</button>
+  </div>
+</form>

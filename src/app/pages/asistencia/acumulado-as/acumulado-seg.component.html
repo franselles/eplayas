@@ -1,0 +1,62 @@
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Situacion</th>
+        <th scope="col">Dias</th>   
+        <th scope="col">Detalle</th>                
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Trabajado</td>
+        <td>{{ totales?.total_trabajado }}</td>     
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('trabajado')">Listar</button></td>   
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Descanso</td>
+        <td>{{ totales?.total_descanso }}</td>  
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('descanso')">Listar</button></td>                
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Festivos</td>
+        <td>{{ totales?.total_festivo }}</td> 
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('festivo')">Listar</button></td>                 
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Vacaciones</td>
+        <td>{{ totales?.total_vacaciones }}</td>  
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('vacaciones')">Listar</button></td>                
+      </tr>       
+      <tr>
+        <th scope="row">5</th>
+        <td>Vac/Fest. Disfrutadas</td>
+        <td>{{ totales?.total_disfrutadas }}</td> 
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('disfrutadas')">Listar</button></td>                 
+      </tr>
+      <tr>
+        <th scope="row">6</th>
+        <td>Baja / Enfermedad</td>
+        <td>{{ totales?.total_baja }}</td>   
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('baja')">Listar</button></td>               
+      </tr>
+      <tr>
+        <th scope="row">7</th>
+        <td>Justificadas</td>
+        <td>{{ totales?.total_justificado }}</td>   
+        <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('justificado')">Listar</button></td>               
+      </tr>                
+      <tr>
+          <th scope="row">7</th>
+          <td>No justificadas</td>
+          <td>{{ totales?.total_injustificado }}</td>  
+          <td><button type="button" class="btn btn-primary btn-sm" (click)="cargaConcepto('injustificado')">Listar</button></td>                  
+        </tr>         
+    </tbody>
+  </table>
+</div>
