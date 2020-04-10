@@ -37,9 +37,6 @@ app.all("/api/*", function (req, res, next) {
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
-// process.env.MONGODB_URI
-// 'mongodb://localhost/userserious'
-
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(
     process.env.MONGODB_URI || process.env.DB_HOST,
@@ -51,7 +48,7 @@ mongodb.MongoClient.connect(
         }
 
         // Save database object from the callback for reuse.
-        db = database.db("userserious");
+        db = database.db(process.env.DB_NAME);
         console.log("Database connection ready");
 
         // Initialize the app.
