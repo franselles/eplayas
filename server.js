@@ -1344,22 +1344,24 @@ app.get(
 );
 
 /* Abrimos resumen-mes-partes revisitesd */
-app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function (
-    req,
-    res
-) {
+// app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function (
+app.get("/api/resumen/mes/:year/:month/:lugar/:municipio", function (req, res) {
     db.collection(PARTES_COLLECTION).aggregate(
         [
             {
                 $match: {
                     year: req.params.year,
                     month: req.params.month,
-                    turno: req.params.turno,
+                    // turno: req.params.turno,
                     lugar: req.params.lugar,
                     municipio: req.params.municipio,
                     observacion_ayto: { $ne: "" },
                 },
             },
+            {
+                $sort: { turno: 1 },
+            },
+
             {
                 $group: {
                     _id: "$fecha",
