@@ -202,16 +202,16 @@ export class PartesLimDetalleComponent implements OnInit {
             case 11:
                 this.parteForm.patchValue({
                     observacion_ayto:
-                        "Cribado y nivelación de la arena de playa",
+                        "Cribado y nivelación de la arena de playa.",
                 });
                 break;
             case 12:
                 this.parteForm.patchValue({
-                    observacion_ayto: "Cribado de la orilla de playa",
+                    observacion_ayto: "Cribado de la orilla de playa.",
                 });
                 break;
             case 13:
-                const texto1 = this.parteForm.get("observacion_ayto").value;
+                const texto1 = this.parteForm.get("observacion_ayto.").value;
                 this.parteForm.patchValue({
                     observacion_ayto: texto1 + "\n" + "MANTENIMIENTO:\n",
                 });
@@ -222,7 +222,7 @@ export class PartesLimDetalleComponent implements OnInit {
                     observacion_ayto:
                         texto2 +
                         "\n" +
-                        "Limpieza de lavapiés, escaleras y casetas.",
+                        "Limpieza y desinfección de lavapiés, escaleras y casetas.",
                 });
                 break;
             case 15:
@@ -230,11 +230,10 @@ export class PartesLimDetalleComponent implements OnInit {
                 this.parteForm.patchValue({
                     observacion_ayto:
                         texto3 +
-                        "\n" +
                         `Desinfección y limpieza de pasarelas, lavapies, papeleras, casetas.
-Mucha basura pequeña. Colillas, papeles y plásticos.
-Limpieza a pie de toda la playa.
-Se rastilla y cambian papeleras.`,
+Mucha basura pequeña. Hojas secas, colillas, papeles, plásticos, y similar.
+Limpieza a pie de toda la playa, rios, y salidas de agua.
+Se rastilla filo, pasarelas, palmeras y cambian papeleras.`,
                 });
                 break;
         }

@@ -52,39 +52,45 @@
                                 </div>
                                 <div
                                     *ngIf="asUltimo?.lastTrabajado > 0"
-                                    style="background-color: #24e9f7;"
+                                    style="background-color: #24e9f7"
                                 >
                                     Trabajado: {{ asUltimo?.lastTrabajado }}
                                 </div>
                                 <div
                                     *ngIf="asUltimo?.lastDescanso > 0"
-                                    style="background-color: #21f77a;"
+                                    style="background-color: #21f77a"
                                 >
                                     Descanso: {{ asUltimo?.lastDescanso }}
                                 </div>
                                 <div
                                     *ngIf="asUltimo?.lastFestivo > 0"
-                                    style="background-color: #f860f8; color: white;"
+                                    style="
+                                        background-color: #f860f8;
+                                        color: white;
+                                    "
                                 >
                                     Festivo: {{ asUltimo?.lastFestivo }}
                                 </div>
                                 <div
                                     *ngIf="asUltimo?.lastVacaciones > 0"
-                                    style="background-color: #f7eb44;"
+                                    style="background-color: #f7eb44"
                                 >
                                     Vacaciones pend.:
                                     {{ asUltimo?.lastVacaciones }}
                                 </div>
                                 <div
                                     *ngIf="asUltimo?.lastDisfrutadas > 0"
-                                    style="background-color: #f7bc3c;"
+                                    style="background-color: #f7bc3c"
                                 >
                                     Vacaciones disf.:
                                     {{ asUltimo?.lastDisfrutadas }}
                                 </div>
                                 <div
                                     *ngIf="asUltimo?.lastBaja > 0"
-                                    style="background-color: #f73c3c; color: white;"
+                                    style="
+                                        background-color: #f73c3c;
+                                        color: white;
+                                    "
                                 >
                                     Baja: {{ asUltimo?.lastBaja }}
                                 </div>
@@ -93,7 +99,10 @@
                                 </div>
                                 <div
                                     *ngIf="asUltimo?.lastInjustificado > 0"
-                                    style="background-color: #7c7c7c; color: white;"
+                                    style="
+                                        background-color: #7c7c7c;
+                                        color: white;
+                                    "
                                 >
                                     No justificado:
                                     {{ asUltimo?.lastInjustificado }}
@@ -190,6 +199,15 @@
                             </button>
                             <button
                                 type="button"
+                                class="btn btn-light btn-sm"
+                                (click)="
+                                    insertaRapido(item._id, item.nombre, 7)
+                                "
+                            >
+                                VAA
+                            </button>
+                            <button
+                                type="button"
                                 class="btn btn-secondary btn-sm"
                                 (click)="ventanaClick(i, 'n')"
                             >
@@ -202,38 +220,44 @@
                             >
                                 <div
                                     *ngIf="asDeldia?.trabajado > 0"
-                                    style="background-color: #24e9f7;"
+                                    style="background-color: #24e9f7"
                                 >
                                     Trabajado: {{ asDeldia?.trabajado }}
                                 </div>
                                 <div
                                     *ngIf="asDeldia?.descanso > 0"
-                                    style="background-color: #21f77a;"
+                                    style="background-color: #21f77a"
                                 >
                                     Descanso: {{ asDeldia?.descanso }}
                                 </div>
                                 <div
                                     *ngIf="asDeldia?.festivo > 0"
-                                    style="background-color: #f860f8; color: white;"
+                                    style="
+                                        background-color: #f860f8;
+                                        color: white;
+                                    "
                                 >
                                     Festivo: {{ asDeldia?.festivo }}
                                 </div>
                                 <div
                                     *ngIf="asDeldia?.vacaciones > 0"
-                                    style="background-color: #f7ee70;"
+                                    style="background-color: #f7ee70"
                                 >
                                     Vacaciones pend.: {{ asDeldia?.vacaciones }}
                                 </div>
                                 <div
                                     *ngIf="asDeldia?.disfrutadas > 0"
-                                    style="background-color: #f7bc3c;"
+                                    style="background-color: #f7bc3c"
                                 >
                                     Vacaciones disf.:
                                     {{ asDeldia?.disfrutadas }}
                                 </div>
                                 <div
                                     *ngIf="asDeldia?.baja > 0"
-                                    style="background-color: #f73c3c; color: white;"
+                                    style="
+                                        background-color: #f73c3c;
+                                        color: white;
+                                    "
                                 >
                                     Baja: {{ asDeldia?.baja }}
                                 </div>
@@ -242,7 +266,10 @@
                                 </div>
                                 <div
                                     *ngIf="asDeldia?.injustificado > 0"
-                                    style="background-color: #7c7c7c; color: white;"
+                                    style="
+                                        background-color: #7c7c7c;
+                                        color: white;
+                                    "
                                 >
                                     No justificado:
                                     {{ asDeldia?.injustificado }}
@@ -326,39 +353,45 @@
                                 <td>
                                     <div
                                         *ngIf="item.trabajado > 0"
-                                        style="background-color: #24e9f7;"
+                                        style="background-color: #24e9f7"
                                     >
                                         Dia trabajado: {{ item.trabajado }}
                                     </div>
                                     <div
                                         *ngIf="item.descanso > 0"
-                                        style="background-color: #21f77a;"
+                                        style="background-color: #21f77a"
                                     >
                                         Dia descanso: {{ item.descanso }}
                                     </div>
                                     <div
                                         *ngIf="item.festivo > 0"
-                                        style="background-color: #f860f8; color: white;"
+                                        style="
+                                            background-color: #f860f8;
+                                            color: white;
+                                        "
                                     >
                                         Dia festivo: {{ item.festivo }}
                                     </div>
                                     <div
                                         *ngIf="item.vacaciones > 0"
-                                        style="background-color: #f7ee70;"
+                                        style="background-color: #f7ee70"
                                     >
                                         Dias vacaciones pendientes:
                                         {{ item.vacaciones }}
                                     </div>
                                     <div
                                         *ngIf="item.disfrutadas > 0"
-                                        style="background-color: #f7bc3c;"
+                                        style="background-color: #f7bc3c"
                                     >
                                         Dias vacaciones disfrutadas:
                                         {{ item.disfrutadas }}
                                     </div>
                                     <div
                                         *ngIf="item.baja > 0"
-                                        style="background-color: #f73c3c; color: white;"
+                                        style="
+                                            background-color: #f73c3c;
+                                            color: white;
+                                        "
                                     >
                                         Baja: {{ item.baja }}
                                     </div>
@@ -367,7 +400,10 @@
                                     </div>
                                     <div
                                         *ngIf="item.injustificado > 0"
-                                        style="background-color: #7c7c7c; color: white;"
+                                        style="
+                                            background-color: #7c7c7c;
+                                            color: white;
+                                        "
                                     >
                                         Dia no justificado:
                                         {{ item.injustificado }}

@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { AsistenciaService } from '../../../shared/asistencia.services';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Operario, Asistencia } from '../../../shared/models';
-import { GlobalsPartes } from './../../../shared/globalspartes.services';
+import { Component, OnInit } from "@angular/core";
+import { AsistenciaService } from "../../../shared/asistencia.services";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Operario, Asistencia } from "../../../shared/models";
+import { GlobalsPartes } from "./../../../shared/globalspartes.services";
 
 @Component({
-    selector: 'app-entrada-as',
-    templateUrl: './entrada-as.component.html',
-    styleUrls: ['./entrada-as.component.css']
+    selector: "app-entrada-as",
+    templateUrl: "./entrada-as.component.html",
+    styleUrls: ["./entrada-as.component.css"],
 })
 export class EntradaAsComponent implements OnInit {
     public operarios: Operario[] = [];
@@ -16,7 +16,7 @@ export class EntradaAsComponent implements OnInit {
     public asDeldia: Asistencia;
     public asUltimo: any;
     public ventana = -1;
-    public tipoVentana = 'n';
+    public tipoVentana = "n";
 
     constructor(
         public asistenciaService: AsistenciaService,
@@ -34,7 +34,7 @@ export class EntradaAsComponent implements OnInit {
             (data: Operario[]) => {
                 this.operarios = data;
             },
-            err => console.log(err)
+            (err) => console.log(err)
         );
     }
 
@@ -45,7 +45,7 @@ export class EntradaAsComponent implements OnInit {
 
     yaExiste(id_op: string) {
         this.asDeldia = this.asistenciaService.asistencias.find(
-            x => x.id_op === id_op
+            (x) => x.id_op === id_op
         );
 
         if (this.asDeldia) {
@@ -55,7 +55,7 @@ export class EntradaAsComponent implements OnInit {
 
     elUltimo(id_op: string) {
         this.asUltimo = this.asistenciaService.asUltimos.find(
-            x => x._id === id_op
+            (x) => x._id === id_op
         );
         if (this.asUltimo) {
             return this.asUltimo;
@@ -63,7 +63,7 @@ export class EntradaAsComponent implements OnInit {
     }
 
     insertaRapido(id_op: string, nombre: string, tipo: number) {
-        if (this.asistenciaService.asistencias.find(x => x.id_op === id_op)) {
+        if (this.asistenciaService.asistencias.find((x) => x.id_op === id_op)) {
             return;
         }
 
@@ -73,9 +73,9 @@ export class EntradaAsComponent implements OnInit {
         let b = 0;
         let v = 0;
         let j = 0;
-        let f1 = '';
-        let f2 = '';
-        let desc = '';
+        let f1 = "";
+        let f2 = "";
+        let desc = "";
 
         if (tipo === 1) {
             t = 1;
@@ -83,9 +83,9 @@ export class EntradaAsComponent implements OnInit {
             b = 0;
             v = 0;
             j = 0;
-            f1 = '';
-            f2 = '';
-            desc = '';
+            f1 = "";
+            f2 = "";
+            desc = "";
         }
 
         if (tipo === 2) {
@@ -94,9 +94,9 @@ export class EntradaAsComponent implements OnInit {
             b = 0;
             v = 0;
             j = 0;
-            f1 = '';
-            f2 = '';
-            desc = '';
+            f1 = "";
+            f2 = "";
+            desc = "";
         }
 
         if (tipo === 3) {
@@ -105,9 +105,9 @@ export class EntradaAsComponent implements OnInit {
             b = 0;
             v = 0;
             j = 0;
-            f1 = '';
-            f2 = '';
-            desc = '';
+            f1 = "";
+            f2 = "";
+            desc = "";
         }
 
         if (tipo === 4) {
@@ -118,7 +118,7 @@ export class EntradaAsComponent implements OnInit {
             j = 0;
             f1 = this.fecha;
             f2 = this.fecha;
-            desc = 'ENFERMEDAD';
+            desc = "ENFERMEDAD";
         }
 
         if (tipo === 5) {
@@ -126,10 +126,10 @@ export class EntradaAsComponent implements OnInit {
             f = 0;
             b = 0;
             v = 1;
-            j = 1;
+            j = 0;
             f1 = this.fecha;
             f2 = this.fecha;
-            desc = 'VACACIONES';
+            desc = "VACACIONES";
         }
 
         if (tipo === 6) {
@@ -140,12 +140,23 @@ export class EntradaAsComponent implements OnInit {
             j = 1;
             f1 = this.fecha;
             f2 = this.fecha;
-            desc = 'CONFINAMIENTO';
+            desc = "CONFINAMIENTO";
+        }
+
+        if (tipo === 7) {
+            t = 0;
+            f = 0;
+            b = 0;
+            v = 0;
+            j = 1;
+            f1 = this.fecha;
+            f2 = this.fecha;
+            desc = "VACACIONES DEL AÑO PASADO";
         }
 
         const asis: Asistencia = {
             id_op: id_op,
-            puesto: '',
+            puesto: "",
             observacion: desc,
             fecha_fin: f1,
             fecha_inicio: f2,
@@ -158,16 +169,16 @@ export class EntradaAsComponent implements OnInit {
             festivo: f,
             injustificado: 0,
             justificado: j,
-            nombre: nombre
+            nombre: nombre,
         };
 
         this.asistenciaService.addAsistencia(asis).subscribe(
             () => {
-                console.log('Salvado');
+                console.log("Salvado");
                 this.asistenciaService.listaAsistenciasDia(this.fecha);
                 // this.router.navigate(['/dash/asistencia/entrada']);
             },
-            error => console.error('Error creating : ' + error)
+            (error) => console.error("Error creating : " + error)
         );
     }
 
