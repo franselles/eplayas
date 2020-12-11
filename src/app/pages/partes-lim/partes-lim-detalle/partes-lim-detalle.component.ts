@@ -211,7 +211,7 @@ export class PartesLimDetalleComponent implements OnInit {
                 });
                 break;
             case 13:
-                const texto1 = this.parteForm.get("observacion_ayto.").value;
+                const texto1 = this.parteForm.get("observacion_ayto").value;
                 this.parteForm.patchValue({
                     observacion_ayto: texto1 + "\n" + "MANTENIMIENTO:\n",
                 });
