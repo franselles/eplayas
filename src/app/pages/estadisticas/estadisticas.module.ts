@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'lista', component: EstadisticasListaComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle', component: EstadisticasDetalleComponent, canActivate: [LoggedInGuard]},
   {path: 'detalle/:id', component: EstadisticasDetalleComponent, canActivate: [LoggedInGuard]},
-  {path: '**', redirectTo: 'lista', pathMatch: 'full', canActivate: [LoggedInGuard]}
+  { path: '**', redirectTo: 'lista', pathMatch: 'full' }
 ];
 
 @NgModule({
