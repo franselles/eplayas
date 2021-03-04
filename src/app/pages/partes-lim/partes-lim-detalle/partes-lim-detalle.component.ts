@@ -231,8 +231,8 @@ export class PartesLimDetalleComponent implements OnInit {
                     observacion_ayto:
                         texto3 +
                         `Desinfección y limpieza de pasarelas, lavapies, papeleras, casetas.
-Mucha basura pequeña. Hojas secas, colillas, papeles, plásticos, y similar.
-Limpieza a pie de toda la playa, rios, y salidas de agua.
+Limpieza a pie de toda la playa, rios, y salidas de agua.                        
+Basura pequeña. Hojas secas, colillas, papeles, plásticos, y similar.
 Se rastilla filo, pasarelas, palmeras y cambian papeleras.`,
                 });
                 break;
