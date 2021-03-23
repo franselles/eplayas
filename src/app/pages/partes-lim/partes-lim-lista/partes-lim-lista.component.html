@@ -1,6 +1,6 @@
 <p>Selecciona fecha para ver los partes de limpieza</p>
 <a [routerLink]="['detalle']">Nuevo parte</a>
-<div class="row">
+<div class="row align-items-end">
     <div class="col-md-3">
         <label for="fecha">Selecciona fecha</label>
         <input
@@ -19,6 +19,11 @@
             type="date"
             class="form-control"
         />
+    </div>
+    <div class="col-md-3">
+        <button type="button" (click)="clonarPartes()" class="btn btn-primary">
+            DUPLICAR
+        </button>
     </div>
 </div>
 
@@ -41,7 +46,7 @@
                 <th scope="col">ALGT</th>
                 <th scope="col">ALGP</th>
                 <th scope="col">EDITAR</th>
-                <th scope="col">CLONAR</th>
+                <th scope="col">DUPLICAR</th>
             </tr>
         </thead>
         <tbody>
@@ -70,7 +75,7 @@
                         (click)="clonarParte(parte)"
                         class="btn btn-warning"
                     >
-                        CLONAR
+                        DUPLICA
                     </button>
                 </td>
             </tr>

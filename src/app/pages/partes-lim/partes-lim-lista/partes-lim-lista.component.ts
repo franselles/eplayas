@@ -46,9 +46,26 @@ export class PartesLimListaComponent implements OnInit {
         clonParte.fecha = this.clonFecha;
         this.partesService.addParte(clonParte).subscribe(
             () => {
-                console.log("Salvado");
                 this.clonado = true;
-                console.log(clonParte);
+                setTimeout(() => {
+                    this.clonado = false;
+                }, 3000);
+            },
+            (error) => console.error("Error creating : " + error)
+        );
+    }
+
+    clonarPartes() {
+        let clonListaPartes = [...this.listaPartes];
+
+        clonListaPartes.forEach((item) => {
+            item.fecha = this.clonFecha;
+            delete item._id;
+        });
+
+        this.partesService.addPartes(clonListaPartes).subscribe(
+            () => {
+                this.clonado = true;
                 setTimeout(() => {
                     this.clonado = false;
                 }, 3000);

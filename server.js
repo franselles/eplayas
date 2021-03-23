@@ -747,6 +747,25 @@ app.delete("/api/partes/:id", function (req, res) {
     );
 });
 
+app.post("/api/partes/duplica", function (req, res) {
+    var partes = req.body;
+
+    partes.forEach((item) => {
+        item.createfecha = new Date();
+        let splitFecha = item.fecha.split("-");
+        item.year = splitFecha[0];
+        item.month = splitFecha[1];
+    });
+
+    db.collection(PARTES_COLLECTION).insertMany(partes, function (err, doc) {
+        if (err) {
+            handleError(res, err.message, "Failed to create new partes.");
+        } else {
+            res.status(201).json(doc.ops[0]);
+        }
+    });
+});
+
 // HAMACAS API ROUTES BELOW
 
 /*  "/api/hamacas"
