@@ -1,0 +1,51 @@
+<div>
+    <div class="form-group col-md-3 noprint">
+        <label for="fecha">Fecha</label>
+        <input
+            id="fecha"
+            type="date"
+            name="fecha"
+            placeholder="dia resumen"
+            [(ngModel)]="fecha"
+            class="form-control"
+            (ngModelChange)="setDates()"
+        />
+    </div>
+</div>
+
+<div class="page">
+    <div class="subpage">
+        <div *ngFor="let operario of operarios; let i = index">
+            <p class="font-weight-bold">
+                REGISTRO DIARIO DE JORNADA TRABAJADORES A TIEMPO COMPLETO
+            </p>
+            <div class="row">
+                <div class="col-sm font-weight-bold">
+                    {{ operario.nombre | uppercase }}
+                </div>
+                <div class="col-sm font-weight-bold">{{ fechaLabel }}</div>
+                <div class="col-sm font-weight-bold">R.A. BENIDORM, S.L.</div>
+            </div>
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <th>DIA</th>
+                        <th>HORA ENTRADA</th>
+                        <th>FIRMA</th>
+                        <th>HORA SALIDA</th>
+                        <th>FIRMA</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dia of fechas; let i = index">
+                            <td>{{ dia }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
