@@ -1,7 +1,7 @@
 .page {
     width: 210mm;
     min-height: 297mm;
-    padding: 0mm;
+    padding: 10mm;
     margin: 10mm auto;
 }
 .subpage {
@@ -11,7 +11,7 @@
 
 @page {
     size: A4;
-    margin: 0;
+    margin: 10mm;
 }
 
 @media print {
