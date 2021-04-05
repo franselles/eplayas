@@ -56,7 +56,7 @@ export class OperariosDetalleComponent implements OnInit {
     cargaFormulario(data: Operario) {
         this.operariosForm.patchValue({
             nombre: data.nombre,
-            nif: data.nombre,
+            nif: data.nif,
             direccion: data.direccion,
             telefono: data.telefono,
             puesto: data.puesto,
