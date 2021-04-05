@@ -39,4 +39,8 @@ export class OperariosService {
     getOperariosActivos() {
         return this.http.get(this.BASE_URL + "estado/activo");
     }
+
+    getOperariosHorario() {
+        return this.http.get(this.BASE_URL + "estado/horario");
+    }
 }

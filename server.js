@@ -567,6 +567,19 @@ app.get("/api/operarios/estado/activo", function (req, res) {
         });
 });
 
+app.get("/api/operarios/estado/horario", function (req, res) {
+    db.collection(OPERARIOS_COLLECTION)
+        .find({ horario: true })
+        .sort({ nombre: 1 })
+        .toArray(function (err, docs) {
+            if (err) {
+                handleError(res, err.message, "Failed to get operarios.");
+            } else {
+                res.status(200).json(docs);
+            }
+        });
+});
+
 app.get("/api/operarios/activos/conductores", function (req, res) {
     db.collection(OPERARIOS_COLLECTION)
         .find({ activo: true, conductor: true })

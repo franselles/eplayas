@@ -35,3 +35,9 @@
         page-break-after: always;
     }
 }
+
+tr {
+    line-height: 16px;
+    min-height: 16px;
+    height: 16px;
+}

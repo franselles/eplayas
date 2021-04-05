@@ -34,7 +34,7 @@ export class OperariosHorarioComponent implements OnInit {
     constructor(public operariosService: OperariosService) {}
 
     ngOnInit(): void {
-        this.operariosService.getOperariosActivos().subscribe(
+        this.operariosService.getOperariosHorario().subscribe(
             (data: Operario[]) => {
                 this.operarios = data;
             },

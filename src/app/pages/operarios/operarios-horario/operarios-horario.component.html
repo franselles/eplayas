@@ -13,9 +13,9 @@
     </div>
 </div>
 
-<div class="page">
-    <div class="subpage">
-        <div *ngFor="let operario of operarios; let i = index">
+<div class="book">
+    <div class="page" *ngFor="let operario of operarios; let i = index">
+        <div class="subpage">
             <p class="font-weight-bold">
                 REGISTRO DIARIO DE JORNADA TRABAJADORES A TIEMPO COMPLETO
             </p>
@@ -26,14 +26,15 @@
                 <div class="col-sm font-weight-bold">{{ fechaLabel }}</div>
                 <div class="col-sm font-weight-bold">R.A. BENIDORM, S.L.</div>
             </div>
+
             <div>
                 <table class="table table-bordered">
                     <thead>
-                        <th>DIA</th>
+                        <th style="width: 20%">DIA</th>
                         <th>HORA ENTRADA</th>
-                        <th>FIRMA</th>
+                        <th style="width: 30%">FIRMA</th>
                         <th>HORA SALIDA</th>
-                        <th>FIRMA</th>
+                        <th style="width: 30%">FIRMA</th>
                     </thead>
                     <tbody>
                         <tr *ngFor="let dia of fechas; let i = index">

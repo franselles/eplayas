@@ -1,10 +1,12 @@
 export interface Operario {
     _id?: string;
     nombre: string;
+    nif: string;
     direccion: string;
     telefono: string;
     puesto: string;
     conductor: boolean;
+    horario: boolean;
     activo: boolean;
     ultima_alta: string;
     ultima_baja: string;
