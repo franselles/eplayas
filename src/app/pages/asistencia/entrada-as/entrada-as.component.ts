@@ -151,7 +151,7 @@ export class EntradaAsComponent implements OnInit {
             j = 1;
             f1 = this.fecha;
             f2 = this.fecha;
-            desc = "VACACIONES DEL AÑO PASADO";
+            desc = `VACACIONES DEL AÑO PASADO ${Number(f1.slice(0, 4)) - 1}`;
         }
 
         const asis: Asistencia = {
