@@ -43,7 +43,7 @@ export class OperariosHorarioComponent implements OnInit {
     }
 
     lastDay(m: number, y: number): number {
-        return new Date(y, m + 1, 0).getDate();
+        return new Date(y, m, 0).getDate();
     }
 
     setDates() {
@@ -55,6 +55,7 @@ export class OperariosHorarioComponent implements OnInit {
         this.fechaLabel = this.meses[Number(mes) - 1] + "-" + ano;
 
         const last = this.lastDay(Number(mes), Number(ano));
+
         for (let d = Number(dia); d <= last; d++) {
             let fecha = d.toLocaleString() + "-" + mes + "-" + ano;
             this.fechas.push(fecha);
