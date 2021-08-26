@@ -2,22 +2,26 @@ pre {
     overflow: auto;
     /* border-left: none; */
     text-align: left;
-    white-space: normal;  
-    background: transparent;   
+    white-space: normal;
+    background: transparent;
     padding: 0px;
-    margin: 0px; 
+    margin: 0px;
     border: none !important;
     /* box-shadow: none !important; */
     /* outline: none !important; */
-    }
+}
 
 .texto_p {
     font-size: 80%;
 }
 
 .like-pre {
-    text-align: left; 
+    text-align: left;
     display: block;
     unicode-bidi: embed;
     white-space: pre-line;
-  }
+}
+
+.row {
+    padding-bottom: 16px;
+}
