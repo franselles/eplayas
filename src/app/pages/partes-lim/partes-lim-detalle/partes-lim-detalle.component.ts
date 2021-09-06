@@ -76,7 +76,13 @@ export class PartesLimDetalleComponent implements OnInit {
             (error) => console.log(error)
         );
         this.operariosService.getOperariosActCond().subscribe(
-            (data: any[]) => (this.listaOperarios = data),
+            (data: any[]) => {
+                this.listaOperarios = data;
+                this.listaOperarios.forEach((x) => {
+                    // x.nombre = x.nombre.toUpperCase();
+                    x.nombre = this.capitalize(x.nombre);
+                });
+            },
             (error) => console.log(error)
         );
         this.vehiculosService.getVehiculos().subscribe(
@@ -90,6 +96,8 @@ export class PartesLimDetalleComponent implements OnInit {
             this.partesService.getParte(id).subscribe(
                 (parte: Parte) => {
                     this.parte = parte;
+                    // this.parte.operario = parte.operario.toUpperCase();
+                    this.parte.operario = this.capitalize(parte.operario);
                     this.cargaDatosFormulario(this.parte);
                     this.enEdicion = true;
                 },
@@ -98,6 +106,16 @@ export class PartesLimDetalleComponent implements OnInit {
         } else {
             this.enEdicion = false;
         }
+    }
+
+    capitalize(sentence: string): string {
+        const words = sentence.toLowerCase().split(" ");
+
+        return words
+            .map((word) => {
+                return word[0].toUpperCase() + word.substring(1);
+            })
+            .join(" ");
     }
 
     cargaDatosFormulario(parte: Parte) {
