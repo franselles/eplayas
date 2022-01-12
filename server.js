@@ -107,48 +107,40 @@ app.get("/api/asistencia", function (req, res) {
         });
 });
 
-app.get("/api/asistencia/ultimos/:fecha", function (req, res) {
-    db.collection(ASISTENCIA_COLLECTION).aggregate(
-        [
-            {
-                $match: { fecha: { $lt: req.params.fecha } },
+app.get("/api/asistencia/ultimos/:fecha", async function (req, res) {
+    const aggCursor = db.collection(ASISTENCIA_COLLECTION).aggregate([
+        {
+            $match: { fecha: { $lt: req.params.fecha } },
+        },
+        {
+            $sort: { fecha: 1 },
+        },
+        {
+            $group: {
+                _id: "$id_op",
+                lastFecha: { $last: "$fecha" },
+                lastTrabajado: { $last: "$trabajado" },
+                lastDescanso: { $last: "$descanso" },
+                lastFestivo: { $last: "$festivo" },
+                lastVacaciones: { $last: "$vacaciones" },
+                lastDisfrutadas: { $last: "$disfrutadas" },
+                lastBaja: { $last: "$baja" },
+                lastJustificado: { $last: "$justificado" },
+                lastInjustificado: { $last: "$injustificado" },
+                lastFecha_inicio: { $last: "$fecha_inicio" },
+                lastFecha_fin: { $last: "$fecha_fin" },
+                lastObservacion: { $last: "$observacion" },
+                lastId: { $last: "$_id" },
             },
-            {
-                $sort: { fecha: 1 },
-            },
-            {
-                $group: {
-                    _id: "$id_op",
-                    lastFecha: { $last: "$fecha" },
-                    lastTrabajado: { $last: "$trabajado" },
-                    lastDescanso: { $last: "$descanso" },
-                    lastFestivo: { $last: "$festivo" },
-                    lastVacaciones: { $last: "$vacaciones" },
-                    lastDisfrutadas: { $last: "$disfrutadas" },
-                    lastBaja: { $last: "$baja" },
-                    lastJustificado: { $last: "$justificado" },
-                    lastInjustificado: { $last: "$injustificado" },
-                    lastFecha_inicio: { $last: "$fecha_inicio" },
-                    lastFecha_fin: { $last: "$fecha_fin" },
-                    lastObservacion: { $last: "$observacion" },
-                    lastId: { $last: "$_id" },
-                },
-            },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del dia."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
-        }
-    );
+        },
+    ]);
+
+    try {
+        const data = await aggCursor.toArray();
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error.message, "Failed to get aggregate del dia.");
+    }
 });
 
 app.post("/api/asistencia", function (req, res) {
@@ -244,42 +236,34 @@ app.delete("/api/asistencia/:id", function (req, res) {
 
 app.get(
     "/api/asistencia/seguimiento/:fechad/:fechah/:id_op",
-    function (req, res) {
-        db.collection(ASISTENCIA_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fechad,
-                            $lte: req.params.fechah,
-                        },
-                        id_op: req.params.id_op,
+    async function (req, res) {
+        const aggCursor = db.collection(ASISTENCIA_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fechad,
+                        $lte: req.params.fechah,
                     },
+                    id_op: req.params.id_op,
                 },
-                {
-                    $sort: { fecha: 1 },
-                },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+            {
+                $sort: { fecha: 1 },
+            },
+        ]);
+
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/asistencia/seguimiento/acumulado/:fechad/:fechah/:id_op/:concepto",
-    function (req, res) {
+    async function (req, res) {
         var concepto = req.params.concepto;
         var qeryStr = {
             fecha: { $gte: req.params.fechad, $lte: req.params.fechah },
@@ -287,155 +271,119 @@ app.get(
             [concepto]: { $gt: 0 },
         };
 
-        db.collection(ASISTENCIA_COLLECTION).aggregate(
-            [
-                {
-                    $match: qeryStr,
-                },
-                {
-                    $sort: { fecha: 1 },
-                },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+        aggCursor = db.collection(ASISTENCIA_COLLECTION).aggregate([
+            {
+                $match: qeryStr,
+            },
+            {
+                $sort: { fecha: 1 },
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/asistencia/lista/operario/:fecha_i/:fecha_f",
-    function (req, res) {
-        db.collection(OPERARIOS_COLLECTION).aggregate(
-            [
-                {
-                    $lookup: {
-                        from: "asistencia",
-                        localField: "_id",
-                        foreignField: "id_op",
-                        as: "parte",
-                    },
-                    $match: {
-                        parte: {
-                            fecha: {
-                                $gte: req.params.fecha_i,
-                                $lte: req.params.fecha_f,
-                            },
+    async function (req, res) {
+        const aggCursor = db.collection(OPERARIOS_COLLECTION).aggregate([
+            {
+                $lookup: {
+                    from: "asistencia",
+                    localField: "_id",
+                    foreignField: "id_op",
+                    as: "parte",
+                },
+                $match: {
+                    parte: {
+                        fecha: {
+                            $gte: req.params.fecha_i,
+                            $lte: req.params.fecha_f,
                         },
                     },
                 },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate /asistencia/lista/operario/:fecha_i/:fecha_f."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/asistencia/acumulado/:fecha_i/:fecha_f/:id_op",
-    function (req, res) {
-        db.collection(ASISTENCIA_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fecha_i,
-                            $lte: req.params.fecha_f,
-                        },
-                        id_op: req.params.id_op,
+    async function (req, res) {
+        const aggCursor = db.collection(ASISTENCIA_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fecha_i,
+                        $lte: req.params.fecha_f,
                     },
+                    id_op: req.params.id_op,
                 },
-                {
-                    $group: {
-                        _id: "$id_op",
-                        total_trabajado: { $sum: "$trabajado" },
-                        total_descanso: { $sum: "$descanso" },
-                        total_festivo: { $sum: "$festivo" },
-                        total_vacaciones: { $sum: "$vacaciones" },
-                        total_disfrutadas: { $sum: "$disfrutadas" },
-                        total_baja: { $sum: "$baja" },
-                        total_justificado: { $sum: "$justificado" },
-                        total_injustificado: { $sum: "$injustificado" },
-                    },
+            },
+            {
+                $group: {
+                    _id: "$id_op",
+                    total_trabajado: { $sum: "$trabajado" },
+                    total_descanso: { $sum: "$descanso" },
+                    total_festivo: { $sum: "$festivo" },
+                    total_vacaciones: { $sum: "$vacaciones" },
+                    total_disfrutadas: { $sum: "$disfrutadas" },
+                    total_baja: { $sum: "$baja" },
+                    total_justificado: { $sum: "$justificado" },
+                    total_injustificado: { $sum: "$injustificado" },
                 },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/asistencia/rejilla/operarios/:fecha_i/:fecha_f",
-    function (req, res) {
-        db.collection(ASISTENCIA_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fecha_i,
-                            $lte: req.params.fecha_f,
-                        },
+    async function (req, res) {
+        const aggCursor = db.collection(ASISTENCIA_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fecha_i,
+                        $lte: req.params.fecha_f,
                     },
                 },
-                {
-                    $group: {
-                        _id: {
-                            id_op: "$id_op",
-                            nombre: "$nombre",
-                        },
+            },
+            {
+                $group: {
+                    _id: {
+                        id_op: "$id_op",
+                        nombre: "$nombre",
                     },
                 },
-                {
-                    $sort: { "_id.nombre": 1 },
-                },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+            {
+                $sort: { "_id.nombre": 1 },
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
@@ -457,9 +405,10 @@ app.get(
     }
 );
 
-app.get("/api/asistencia/rejilla/lista/:fecha_i/:fecha_f", function (req, res) {
-    db.collection(ASISTENCIA_COLLECTION).aggregate(
-        [
+app.get(
+    "/api/asistencia/rejilla/lista/:fecha_i/:fecha_f",
+    async function (req, res) {
+        const aggCursor = db.collection(ASISTENCIA_COLLECTION).aggregate([
             {
                 $match: {
                     fecha: {
@@ -491,22 +440,15 @@ app.get("/api/asistencia/rejilla/lista/:fecha_i/:fecha_f", function (req, res) {
                     },
                 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del dia."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
         }
-    );
-});
+    }
+);
 
 // OPERARIOS API ROUTES BELOW
 
@@ -840,39 +782,30 @@ app.get("/api/hamacas/edita/:id", function (req, res) {
     );
 });
 
-app.get("/api/hamacas/lista/ultimos", function (req, res) {
-    db.collection(HAMACAS_COLLECTION).aggregate(
-        [
-            {
-                $sort: { fecha: 1 },
+app.get("/api/hamacas/lista/ultimos", async function (req, res) {
+    const aggCursor = db.collection(HAMACAS_COLLECTION).aggregate([
+        {
+            $sort: { fecha: 1 },
+        },
+        {
+            $group: {
+                _id: "$sector",
+                lastFecha: { $last: "$fecha" },
+                lastHamacas: { $last: "$hamacas" },
+                lastSombrillas: { $last: "$sombrillas" },
+                lastId: { $last: "$_id" },
             },
-            {
-                $group: {
-                    _id: "$sector",
-                    lastFecha: { $last: "$fecha" },
-                    lastHamacas: { $last: "$hamacas" },
-                    lastSombrillas: { $last: "$sombrillas" },
-                    lastId: { $last: "$_id" },
-                },
-            },
-            {
-                $sort: { _id: 1 },
-            },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del dia."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
-        }
-    );
+        },
+        {
+            $sort: { _id: 1 },
+        },
+    ]);
+    try {
+        const data = await aggCursor.toArray();
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error.message, "Failed to get aggregate del dia.");
+    }
 });
 
 app.get(
@@ -939,13 +872,49 @@ app.delete("/api/hamacas/:id", function (req, res) {
 });
 
 /* Abrimos totales hasta mes en el año */
-app.get("/api/hamacas/rotas/total/mes/:month/:year", function (req, res) {
-    db.collection(HAMACAS_COLLECTION).aggregate(
-        [
+app.get("/api/hamacas/rotas/total/mes/:month/:year", async function (req, res) {
+    const aggCursor = db.collection(HAMACAS_COLLECTION).aggregate([
+        {
+            $match: {
+                month: { $lte: req.params.month },
+                year: req.params.year,
+            },
+        },
+        {
+            $sort: { sector: -1, fecha: 1 },
+        },
+        {
+            $group: {
+                _id: "$sector",
+                total_h_rotas: { $sum: "$h_rotas" },
+                total_h_retiradas: { $sum: "$h_retiradas" },
+                total_h_repuestas: { $sum: "$h_repuestas" },
+                total_s_rotas: { $sum: "$s_rotas" },
+                total_s_retiradas: { $sum: "$s_retiradas" },
+                total_s_repuestas: { $sum: "$s_repuestas" },
+            },
+        },
+    ]);
+    try {
+        const data = await aggCursor.toArray();
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error.message, "Failed to get aggregate del dia.");
+    }
+});
+
+/* Abrimos totales en el año */
+app.get(
+    "/api/hamacas/rotas/total/fecha/:fecha1/:fecha2/:sector",
+    async function (req, res) {
+        const aggCursor = db.collection(HAMACAS_COLLECTION).aggregate([
             {
                 $match: {
-                    month: { $lte: req.params.month },
-                    year: req.params.year,
+                    fecha: {
+                        $gte: req.params.fecha1,
+                        $lte: req.params.fecha2,
+                    },
+                    sector: parseInt(req.params.sector),
                 },
             },
             {
@@ -962,67 +931,13 @@ app.get("/api/hamacas/rotas/total/mes/:month/:year", function (req, res) {
                     total_s_repuestas: { $sum: "$s_repuestas" },
                 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del dia."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
         }
-    );
-});
-
-/* Abrimos totales en el año */
-app.get(
-    "/api/hamacas/rotas/total/fecha/:fecha1/:fecha2/:sector",
-    function (req, res) {
-        db.collection(HAMACAS_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fecha1,
-                            $lte: req.params.fecha2,
-                        },
-                        sector: parseInt(req.params.sector),
-                    },
-                },
-                {
-                    $sort: { sector: -1, fecha: 1 },
-                },
-                {
-                    $group: {
-                        _id: "$sector",
-                        total_h_rotas: { $sum: "$h_rotas" },
-                        total_h_retiradas: { $sum: "$h_retiradas" },
-                        total_h_repuestas: { $sum: "$h_repuestas" },
-                        total_s_rotas: { $sum: "$s_rotas" },
-                        total_s_retiradas: { $sum: "$s_retiradas" },
-                        total_s_repuestas: { $sum: "$s_repuestas" },
-                    },
-                },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
     }
 );
 
@@ -1261,9 +1176,10 @@ app.delete("/api/estadisticas/:id", function (req, res) {
  */
 
 /* Abrimos resumen-dia */
-app.get("/api/resumen/diario/:dia/:turno/:municipio", function (req, res) {
-    db.collection(PARTES_COLLECTION).aggregate(
-        [
+app.get(
+    "/api/resumen/diario/:dia/:turno/:municipio",
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
             {
                 $match: {
                     fecha: req.params.dia,
@@ -1280,88 +1196,72 @@ app.get("/api/resumen/diario/:dia/:turno/:municipio", function (req, res) {
                     },
                 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate /diario/:dia/:turno/:municipio."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
         }
-    );
-});
+    }
+);
 
 /* Abrimos resumen-dia-partes */
-app.get("/api/resumen/dia/:dia/:municipio", function (req, res) {
-    db.collection(PARTES_COLLECTION).aggregate(
-        [
-            {
-                $match: {
-                    fecha: req.params.dia,
-                    municipio: req.params.municipio,
+app.get("/api/resumen/dia/:dia/:municipio", async function (req, res) {
+    const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+        {
+            $match: {
+                fecha: req.params.dia,
+                municipio: req.params.municipio,
+            },
+        },
+        {
+            $group: {
+                _id: { lugar: "$lugar", turno: "$turno" },
+                observacion: {
+                    $push: { observacion_ayto: "$observacion_ayto" },
                 },
+                total_operarios: { $sum: "$numero_ops" },
+                total_rsu_manual: { $sum: "$pesos.rsu_manual" },
+                total_rsu_criba: { $sum: "$pesos.rsu_criba" },
+                total_selectivo: { $sum: "$pesos.selectivo" },
+                total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
+                total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
             },
-            {
-                $group: {
-                    _id: { lugar: "$lugar", turno: "$turno" },
-                    observacion: {
-                        $push: { observacion_ayto: "$observacion_ayto" },
-                    },
-                    total_operarios: { $sum: "$numero_ops" },
-                    total_rsu_manual: { $sum: "$pesos.rsu_manual" },
-                    total_rsu_criba: { $sum: "$pesos.rsu_criba" },
-                    total_selectivo: { $sum: "$pesos.selectivo" },
-                    total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
-                    total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
-                },
-            },
-            {
-                $sort: { "_id.lugar": 1 },
-            },
-            {
-                $group: {
-                    _id: "$_id.lugar",
-                    topp: { $sum: "$total_operarios" },
-                    trmp: { $sum: "$total_rsu_manual" },
-                    trcp: { $sum: "$total_rsu_criba" },
-                    tsp: { $sum: "$total_selectivo" },
-                    tatp: { $sum: "$total_algas_teoricas" },
-                    tapp: { $sum: "$total_algas_pesadas" },
-                    datos: {
-                        $push: {
-                            turno: "$_id.turno",
-                            observacion: "$observacion",
-                            top: "$total_operarios",
-                            trm: "$total_rsu_manual",
-                            trc: "$total_rsu_criba",
-                            ts: "$total_selectivo",
-                            tat: "$total_algas_teoricas",
-                            tap: "$total_algas_pesadas",
-                        },
+        },
+        {
+            $sort: { "_id.lugar": 1 },
+        },
+        {
+            $group: {
+                _id: "$_id.lugar",
+                topp: { $sum: "$total_operarios" },
+                trmp: { $sum: "$total_rsu_manual" },
+                trcp: { $sum: "$total_rsu_criba" },
+                tsp: { $sum: "$total_selectivo" },
+                tatp: { $sum: "$total_algas_teoricas" },
+                tapp: { $sum: "$total_algas_pesadas" },
+                datos: {
+                    $push: {
+                        turno: "$_id.turno",
+                        observacion: "$observacion",
+                        top: "$total_operarios",
+                        trm: "$total_rsu_manual",
+                        trc: "$total_rsu_criba",
+                        ts: "$total_selectivo",
+                        tat: "$total_algas_teoricas",
+                        tap: "$total_algas_pesadas",
                     },
                 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del dia."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
-        }
-    );
+        },
+    ]);
+    try {
+        const data = await aggCursor.toArray();
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error.message, "Failed to get aggregate del dia.");
+    }
 });
 
 /* Abrimos resumen-mes-partes */
@@ -1393,9 +1293,10 @@ app.get(
 
 /* Abrimos resumen-mes-partes revisitesd */
 // app.get("/api/resumen/mes/:year/:month/:turno/:lugar/:municipio", function (
-app.get("/api/resumen/mes/:year/:month/:lugar/:municipio", function (req, res) {
-    db.collection(PARTES_COLLECTION).aggregate(
-        [
+app.get(
+    "/api/resumen/mes/:year/:month/:lugar/:municipio",
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
             {
                 $match: {
                     year: req.params.year,
@@ -1421,104 +1322,89 @@ app.get("/api/resumen/mes/:year/:month/:lugar/:municipio", function (req, res) {
             {
                 $sort: { _id: 1 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate /diario/:dia/:turno/:municipio."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
         }
-    );
-});
+    }
+);
 
 /* Abrimos resumen-diario-totales-pesos */
 app.get(
     "/api/resumen/mes/agrupado/total/:year/:month/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        year: req.params.year,
-                        month: req.params.month,
-                        municipio: req.params.municipio,
-                    },
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    year: req.params.year,
+                    month: req.params.month,
+                    municipio: req.params.municipio,
                 },
-                {
-                    $group: {
-                        _id: {
-                            fecha: "$fecha",
-                            lugar: "$lugar",
-                            turno: "$turno",
-                        },
-                        total_operarios: { $sum: "$numero_ops" },
-                        total_rsu_manual: { $sum: "$pesos.rsu_manual" },
-                        total_rsu_criba: { $sum: "$pesos.rsu_criba" },
-                        total_selectivo: { $sum: "$pesos.selectivo" },
-                        total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
-                        total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
+            },
+            {
+                $group: {
+                    _id: {
+                        fecha: "$fecha",
+                        lugar: "$lugar",
+                        turno: "$turno",
                     },
+                    total_operarios: { $sum: "$numero_ops" },
+                    total_rsu_manual: { $sum: "$pesos.rsu_manual" },
+                    total_rsu_criba: { $sum: "$pesos.rsu_criba" },
+                    total_selectivo: { $sum: "$pesos.selectivo" },
+                    total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
+                    total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
                 },
-                {
-                    sort: {
-                        fecha: "-1",
-                    },
+            },
+            {
+                sort: {
+                    fecha: "-1",
                 },
-                {
-                    $group: {
-                        _id: { fecha: "$_id.fecha", lugar: "$_id.lugar" },
-                        topp: { $sum: "$total_operarios" },
-                        trmp: { $sum: "$total_rsu_manual" },
-                        trcp: { $sum: "$total_rsu_criba" },
-                        tsp: { $sum: "$total_selectivo" },
-                        tatp: { $sum: "$total_algas_teoricas" },
-                        tapp: { $sum: "$total_algas_pesadas" },
-                        datos: {
-                            $push: {
-                                turno: "$_id.turno",
-                                observacion: "$observacion",
-                                top: "$total_operarios",
-                                trm: "$total_rsu_manual",
-                                trc: "$total_rsu_criba",
-                                ts: "$total_selectivo",
-                                tat: "$total_algas_teoricas",
-                                tap: "$total_algas_pesadas",
-                            },
+            },
+            {
+                $group: {
+                    _id: { fecha: "$_id.fecha", lugar: "$_id.lugar" },
+                    topp: { $sum: "$total_operarios" },
+                    trmp: { $sum: "$total_rsu_manual" },
+                    trcp: { $sum: "$total_rsu_criba" },
+                    tsp: { $sum: "$total_selectivo" },
+                    tatp: { $sum: "$total_algas_teoricas" },
+                    tapp: { $sum: "$total_algas_pesadas" },
+                    datos: {
+                        $push: {
+                            turno: "$_id.turno",
+                            observacion: "$observacion",
+                            top: "$total_operarios",
+                            trm: "$total_rsu_manual",
+                            trc: "$total_rsu_criba",
+                            ts: "$total_selectivo",
+                            tat: "$total_algas_teoricas",
+                            tap: "$total_algas_pesadas",
                         },
                     },
                 },
-                {
-                    $sort: { "_id.lugar": 1 },
-                },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+            {
+                $sort: { "_id.lugar": 1 },
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 /* Abrimos resumen-mes-totales-pesos */
-app.get("/api/resumen/dia/basura/total/:dia/:municipio", function (req, res) {
-    db.collection(PARTES_COLLECTION).aggregate(
-        [
+app.get(
+    "/api/resumen/dia/basura/total/:dia/:municipio",
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
             {
                 $match: {
                     fecha: req.params.dia,
@@ -1535,61 +1421,45 @@ app.get("/api/resumen/dia/basura/total/:dia/:municipio", function (req, res) {
                     total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
                 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del dia."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
         }
-    );
-});
+    }
+);
 
 /* Ver si tiene utilidad */
 app.get(
     "/api/resumen/mes/basura/total/:mes/:ano/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: req.params.dia,
-                        turno: req.params.turno,
-                        municipio: req.params.municipio,
-                    },
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: req.params.dia,
+                    turno: req.params.turno,
+                    municipio: req.params.municipio,
                 },
-                {
-                    $group: {
-                        _id: "$fecha",
-                        total_rsu_manual: { $sum: "$pesos.rsu_manual" },
-                        total_rsu_criba: { $sum: "$pesos.rsu_criba" },
-                        total_selectivo: { $sum: "$pesos.selectivo" },
-                        total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
-                        total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
-                    },
+            },
+            {
+                $group: {
+                    _id: "$fecha",
+                    total_rsu_manual: { $sum: "$pesos.rsu_manual" },
+                    total_rsu_criba: { $sum: "$pesos.rsu_criba" },
+                    total_selectivo: { $sum: "$pesos.selectivo" },
+                    total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
+                    total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
                 },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
@@ -1619,9 +1489,10 @@ app.get("/api/resumen/mes/:mes/:ano/:turno/:playa", function (req, res) {
  *    GET: finds all resumen del periodo
  */
 
-app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function (req, res) {
-    db.collection(PARTES_COLLECTION).aggregate(
-        [
+app.get(
+    "/api/analisis/pesos/:fechad/:fechah/:municipio",
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
             {
                 $match: {
                     fecha: { $gte: req.params.fechad, $lte: req.params.fechah },
@@ -1638,296 +1509,235 @@ app.get("/api/analisis/pesos/:fechad/:fechah/:municipio", function (req, res) {
                     total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
                 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del dia."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
         }
-    );
-});
+    }
+);
 
 app.get(
     "/api/analisis/pesos/anual/:fechad/:fechah/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fechad,
-                            $lte: req.params.fechah,
-                        },
-                        municipio: req.params.municipio,
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fechad,
+                        $lte: req.params.fechah,
                     },
+                    municipio: req.params.municipio,
                 },
-                {
-                    $group: {
-                        _id: { year: "$year", month: "$month" },
-                        total_rsu_manual: { $sum: "$pesos.rsu_manual" },
-                        total_rsu_criba: { $sum: "$pesos.rsu_criba" },
-                        total_selectivo: { $sum: "$pesos.selectivo" },
-                        total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
-                        total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
-                    },
+            },
+            {
+                $group: {
+                    _id: { year: "$year", month: "$month" },
+                    total_rsu_manual: { $sum: "$pesos.rsu_manual" },
+                    total_rsu_criba: { $sum: "$pesos.rsu_criba" },
+                    total_selectivo: { $sum: "$pesos.selectivo" },
+                    total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
+                    total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
                 },
-                {
-                    $sort: {
-                        _id: 1,
-                    },
+            },
+            {
+                $sort: {
+                    _id: 1,
                 },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/analisis/pesos/playas/:fechad/:fechah/:lugar/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fechad,
-                            $lte: req.params.fechah,
-                        },
-                        lugar: req.params.lugar,
-                        municipio: req.params.municipio,
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fechad,
+                        $lte: req.params.fechah,
                     },
+                    lugar: req.params.lugar,
+                    municipio: req.params.municipio,
                 },
-                {
-                    $group: {
-                        _id: "$lugar",
-                        total_rsu_manual: { $sum: "$pesos.rsu_manual" },
-                        total_rsu_criba: { $sum: "$pesos.rsu_criba" },
-                        total_selectivo: { $sum: "$pesos.selectivo" },
-                        total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
-                        total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
-                    },
+            },
+            {
+                $group: {
+                    _id: "$lugar",
+                    total_rsu_manual: { $sum: "$pesos.rsu_manual" },
+                    total_rsu_criba: { $sum: "$pesos.rsu_criba" },
+                    total_selectivo: { $sum: "$pesos.selectivo" },
+                    total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
+                    total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
                 },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/analisis/pesos/playas/anual/:fechad/:fechah/:lugar/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fechad,
-                            $lte: req.params.fechah,
-                        },
-                        lugar: req.params.lugar,
-                        municipio: req.params.municipio,
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fechad,
+                        $lte: req.params.fechah,
                     },
+                    lugar: req.params.lugar,
+                    municipio: req.params.municipio,
                 },
-                {
-                    $group: {
-                        _id: { year: "$year", month: "$month" },
-                        total_rsu_manual: { $sum: "$pesos.rsu_manual" },
-                        total_rsu_criba: { $sum: "$pesos.rsu_criba" },
-                        total_selectivo: { $sum: "$pesos.selectivo" },
-                        total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
-                        total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
-                    },
+            },
+            {
+                $group: {
+                    _id: { year: "$year", month: "$month" },
+                    total_rsu_manual: { $sum: "$pesos.rsu_manual" },
+                    total_rsu_criba: { $sum: "$pesos.rsu_criba" },
+                    total_selectivo: { $sum: "$pesos.selectivo" },
+                    total_algas_teoricas: { $sum: "$pesos.algas_teoricas" },
+                    total_algas_pesadas: { $sum: "$pesos.algas_pesadas" },
                 },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del dia."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/analisis/estadisticas/:fechad/:fechah/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fechad,
-                            $lte: req.params.fechah,
-                        },
-                        municipio: req.params.municipio,
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fechad,
+                        $lte: req.params.fechah,
                     },
+                    municipio: req.params.municipio,
                 },
-                {
-                    $unwind: "$estadisticas",
+            },
+            {
+                $unwind: "$estadisticas",
+            },
+            {
+                $group: {
+                    _id: "$estadisticas.estadistica",
+                    count: { $sum: 1 },
                 },
-                {
-                    $group: {
-                        _id: "$estadisticas.estadistica",
-                        count: { $sum: 1 },
-                    },
+            },
+            {
+                $sort: {
+                    _id: 1,
                 },
-                {
-                    $sort: {
-                        _id: 1,
-                    },
-                },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del estadisticas fechas."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/analisis/estadisticas/anual/:fechad/:fechah/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fechad,
-                            $lte: req.params.fechah,
-                        },
-                        municipio: req.params.municipio,
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fechad,
+                        $lte: req.params.fechah,
                     },
+                    municipio: req.params.municipio,
                 },
-                {
-                    $unwind: "$estadisticas",
-                },
-                {
-                    $group: {
-                        _id: {
-                            estadistica: "$estadisticas.estadistica",
-                            year: "$year",
-                            month: "$month",
-                        },
-                        count: { $sum: 1 },
+            },
+            {
+                $unwind: "$estadisticas",
+            },
+            {
+                $group: {
+                    _id: {
+                        estadistica: "$estadisticas.estadistica",
+                        year: "$year",
+                        month: "$month",
                     },
+                    count: { $sum: 1 },
                 },
-                {
-                    $sort: {
-                        _id: 1,
-                    },
+            },
+            {
+                $sort: {
+                    _id: 1,
                 },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del estadisticas fechas."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
 app.get(
     "/api/analisis/estadisticas/playas/:fechad/:fechah/:lugar/:municipio",
-    function (req, res) {
-        db.collection(PARTES_COLLECTION).aggregate(
-            [
-                {
-                    $match: {
-                        fecha: {
-                            $gte: req.params.fechad,
-                            $lte: req.params.fechah,
-                        },
-                        lugar: req.params.lugar,
-                        municipio: req.params.municipio,
+    async function (req, res) {
+        const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+            {
+                $match: {
+                    fecha: {
+                        $gte: req.params.fechad,
+                        $lte: req.params.fechah,
                     },
+                    lugar: req.params.lugar,
+                    municipio: req.params.municipio,
                 },
-                {
-                    $unwind: "$estadisticas",
+            },
+            {
+                $unwind: "$estadisticas",
+            },
+            {
+                $group: {
+                    _id: "$estadisticas.estadistica",
+                    count: { $sum: 1 },
                 },
-                {
-                    $group: {
-                        _id: "$estadisticas.estadistica",
-                        count: { $sum: 1 },
-                    },
+            },
+            {
+                $sort: {
+                    _id: 1,
                 },
-                {
-                    $sort: {
-                        _id: 1,
-                    },
-                },
-            ],
-            function (err, cursor) {
-                cursor.toArray(function (err, docs) {
-                    if (err) {
-                        handleError(
-                            res,
-                            err.message,
-                            "Failed to get aggregate del estadisticas fechas."
-                        );
-                    } else {
-                        res.status(200).json(docs);
-                    }
-                });
-            }
-        );
+            },
+        ]);
+        try {
+            const data = await aggCursor.toArray();
+            res.status(200).json(data);
+        } catch (error) {
+            handleError(res, error.message, "Failed to get aggregate del dia.");
+        }
     }
 );
 
@@ -1978,7 +1788,7 @@ app.get("/api/calculo/estadisticas", function (req, res) {
 
     db.collection(ESTADISTICAS_COLLECTION)
         .find({})
-        .toArray(function (err, docs) {
+        .toArray(async function (err, docs) {
             if (err) {
                 handleError(res, err.message, "Failed to get estadisticas.");
             } else {
@@ -1997,8 +1807,9 @@ app.get("/api/calculo/estadisticas", function (req, res) {
 
                         e = element.nombre;
 
-                        db.collection(PARTES_COLLECTION).aggregate(
-                            [
+                        const aggCursor = db
+                            .collection(PARTES_COLLECTION)
+                            .aggregate([
                                 {
                                     $match: {
                                         month: "07",
@@ -2016,26 +1827,21 @@ app.get("/api/calculo/estadisticas", function (req, res) {
                                         value: { $sum: 1 },
                                     },
                                 },
-                            ],
-                            function (err, cursor) {
-                                cursor.toArray(function (err, docs) {
-                                    if (err) {
-                                        handleError(
-                                            res,
-                                            err.message,
-                                            "Failed to get aggregate del contar estadisticas."
-                                        );
-                                    } else {
-                                        res.status(200).json(docs);
-                                    }
-                                });
-                            }
-                        );
+                            ]);
                     }
                 }
-
+                try {
+                    const data = await aggCursor.toArray();
+                    res.status(200).json(data);
+                } catch (error) {
+                    handleError(
+                        res,
+                        error.message,
+                        "Failed to get aggregate del dia."
+                    );
+                }
                 //console.log(t);
-                res.status(200).json(docs);
+                // res.status(200).json(docs);
             }
         });
 
@@ -2050,41 +1856,32 @@ app.get("/api/calculo/estadisticas", function (req, res) {
     */
 });
 
-app.get("/api/calculo/estadisticas/c", function (req, res) {
-    db.collection(PARTES_COLLECTION).aggregate(
-        [
-            {
-                $match: {
-                    month: "07",
-                    year: "2017",
-                    lugar: "Poniente y Mal Pas",
-                    tipo: "Manual",
-                    estadisticas: {
-                        estadistica: "botellon",
-                    },
+app.get("/api/calculo/estadisticas/c", async function (req, res) {
+    const aaCursor = db.collection(PARTES_COLLECTION).aggregate([
+        {
+            $match: {
+                month: "07",
+                year: "2017",
+                lugar: "Poniente y Mal Pas",
+                tipo: "Manual",
+                estadisticas: {
+                    estadistica: "botellon",
                 },
             },
-            {
-                $group: {
-                    _id: "element._id",
-                    value: { $sum: 1 },
-                },
+        },
+        {
+            $group: {
+                _id: "element._id",
+                value: { $sum: 1 },
             },
-        ],
-        function (err, cursor) {
-            cursor.toArray(function (err, docs) {
-                if (err) {
-                    handleError(
-                        res,
-                        err.message,
-                        "Failed to get aggregate del contar estadisticas."
-                    );
-                } else {
-                    res.status(200).json(docs);
-                }
-            });
-        }
-    );
+        },
+    ]);
+    try {
+        const data = await aggCursor.toArray();
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error.message, "Failed to get aggregate del dia.");
+    }
 });
 
 /*  "/api/sistema"
