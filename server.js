@@ -702,7 +702,7 @@ app.delete("/api/partes/:id", function (req, res) {
     );
 });
 
-app.post("/api/partes/duplica", function (req, res) {
+app.post("/api/partes/duplica", async function (req, res) {
     var partes = req.body;
 
     partes.forEach((item) => {
@@ -712,13 +712,12 @@ app.post("/api/partes/duplica", function (req, res) {
         item.month = splitFecha[1];
     });
 
-    db.collection(PARTES_COLLECTION).insertMany(partes, function (err, doc) {
-        if (err) {
-            handleError(res, err.message, "Failed to create new partes.");
-        } else {
-            res.status(201).json(doc.ops[0]);
-        }
-    });
+    try {
+        await db.collection(PARTES_COLLECTION).insertMany(partes);
+    } catch (error) {
+        handleError(res, error.message, "Failed to create new partes.");
+    }
+    res.status(200).json({ ok: "ok" });
 });
 
 // HAMACAS API ROUTES BELOW
