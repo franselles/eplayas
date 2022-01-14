@@ -143,7 +143,7 @@ app.get("/api/asistencia/ultimos/:fecha", async function (req, res) {
     }
 });
 
-app.post("/api/asistencia", function (req, res) {
+app.post("/api/asistencia", async function (req, res) {
     var newAsistencia = req.body;
     newAsistencia.createfecha = new Date();
 
@@ -156,20 +156,14 @@ app.post("/api/asistencia", function (req, res) {
     newAsistencia.year = splitFecha[0];
     newAsistencia.month = splitFecha[1];
 
-    db.collection(ASISTENCIA_COLLECTION).insertOne(
-        newAsistencia,
-        function (err, doc) {
-            if (err) {
-                handleError(
-                    res,
-                    err.message,
-                    "Failed to create new asistencia."
-                );
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
-        }
-    );
+    try {
+        const doc = await db
+            .collection(ASISTENCIA_COLLECTION)
+            .insertOne(newAsistencia);
+        res.status(201).json(doc.insertedId);
+    } catch (error) {
+        handleError(res, error.message, "Failed to create new asistencia.");
+    }
 });
 
 /*  "/api/asistencia/:id"
@@ -470,7 +464,7 @@ app.get("/api/operarios", function (req, res) {
         });
 });
 
-app.post("/api/operarios", function (req, res) {
+app.post("/api/operarios", async function (req, res) {
     var newOperario = req.body;
     newOperario.createfecha = new Date();
 
@@ -478,16 +472,14 @@ app.post("/api/operarios", function (req, res) {
         handleError(res, "Invalid nombre input", "Must provide a nombre.", 400);
     }
 
-    db.collection(OPERARIOS_COLLECTION).insertOne(
-        newOperario,
-        function (err, doc) {
-            if (err) {
-                handleError(res, err.message, "Failed to create new operario.");
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
-        }
-    );
+    try {
+        const doc = await db
+            .collection(OPERARIOS_COLLECTION)
+            .insertOne(newOperario);
+        res.status(201).json(doc.insertedId);
+    } catch (error) {
+        handleError(res, error.message, "Failed to create new asistencia.");
+    }
 });
 
 /*  "/api/operarios/:id"
@@ -626,7 +618,7 @@ app.get("/api/partes/fecha/:fecha", function (req, res) {
         });
 });
 
-app.post("/api/partes", function (req, res) {
+app.post("/api/partes", async function (req, res) {
     var newParte = req.body;
     newParte.createfecha = new Date();
 
@@ -638,13 +630,12 @@ app.post("/api/partes", function (req, res) {
     newParte.year = splitFecha[0];
     newParte.month = splitFecha[1];
 
-    db.collection(PARTES_COLLECTION).insertOne(newParte, function (err, doc) {
-        if (err) {
-            handleError(res, err.message, "Failed to create new partes.");
-        } else {
-            res.status(201).json(doc.ops[0]);
-        }
-    });
+    try {
+        const doc = await db.collection(PARTES_COLLECTION).insertOne(newParte);
+        res.status(201).json(doc.insertedId);
+    } catch (error) {
+        handleError(res, error.message, "Failed to create new asistencia.");
+    }
 });
 
 /*  "/api/partes/:id"
@@ -740,7 +731,7 @@ app.get("/api/hamacas", function (req, res) {
         });
 });
 
-app.post("/api/hamacas", function (req, res) {
+app.post("/api/hamacas", async function (req, res) {
     var newHamaca = req.body;
     newHamaca.createfecha = new Date();
 
@@ -753,13 +744,14 @@ app.post("/api/hamacas", function (req, res) {
     newHamaca.year = splitFecha[0];
     newHamaca.month = splitFecha[1];
 
-    db.collection(HAMACAS_COLLECTION).insertOne(newHamaca, function (err, doc) {
-        if (err) {
-            handleError(res, err.message, "Failed to create new hamacas.");
-        } else {
-            res.status(201).json(doc.ops[0]);
-        }
-    });
+    try {
+        const doc = await db
+            .collection(HAMACAS_COLLECTION)
+            .insertOne(newHamaca);
+        res.status(201).json(doc.insertedId);
+    } catch (error) {
+        handleError(res, error.message, "Failed to create new asistencia.");
+    }
 });
 
 /*  "/api/hamacas/:id"
@@ -987,7 +979,7 @@ app.get("/api/mantenimiento/fecha/:fecha", function (req, res) {
         });
 });
 
-app.post("/api/mantenimiento", function (req, res) {
+app.post("/api/mantenimiento", async function (req, res) {
     var newMantenimiento = req.body;
     newMantenimiento.createfecha = new Date();
 
@@ -999,20 +991,14 @@ app.post("/api/mantenimiento", function (req, res) {
     newMantenimiento.year = splitFecha[0];
     newMantenimiento.month = splitFecha[1];
 
-    db.collection(MANTENIMIENTO_COLLECTION).insertOne(
-        newMantenimiento,
-        function (err, doc) {
-            if (err) {
-                handleError(
-                    res,
-                    err.message,
-                    "Failed to create new mantenimiento."
-                );
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
-        }
-    );
+    try {
+        const doc = await db
+            .collection(MANTENIMIENTO_COLLECTION)
+            .insertOne(newMantenimiento);
+        res.status(201).json(doc.insertedId);
+    } catch (error) {
+        handleError(res, error.message, "Failed to create new asistencia.");
+    }
 });
 
 /*  "/api/mantenimiento/:id"
@@ -1094,7 +1080,7 @@ app.get("/api/estadisticas", function (req, res) {
         });
 });
 
-app.post("/api/estadisticas", function (req, res) {
+app.post("/api/estadisticas", async function (req, res) {
     var newEstadistica = req.body;
     newEstadistica.createfecha = new Date();
 
@@ -1102,20 +1088,14 @@ app.post("/api/estadisticas", function (req, res) {
         handleError(res, "Invalid nombre input", "Must provide a nombre.", 400);
     }
 
-    db.collection(ESTADISTICAS_COLLECTION).insertOne(
-        newEstadistica,
-        function (err, doc) {
-            if (err) {
-                handleError(
-                    res,
-                    err.message,
-                    "Failed to create new estadistica."
-                );
-            } else {
-                res.status(201).json(doc.ops[0]);
-            }
-        }
-    );
+    try {
+        const doc = await db
+            .collection(ESTADISTICAS_COLLECTION)
+            .insertOne(newEstadistica);
+        res.status(201).json(doc.insertedId);
+    } catch (error) {
+        handleError(res, error.message, "Failed to create new asistencia.");
+    }
 });
 
 /*  "/api/estadisticas/:id"
