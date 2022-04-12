@@ -608,7 +608,7 @@ app.get("/api/partes/limit/:mes/:ano", function (req, res) {
 app.get("/api/partes/fecha/:fecha", function (req, res) {
     db.collection(PARTES_COLLECTION)
         .find({ fecha: req.params.fecha })
-        .sort({ fecha: -1, "horarios.salida_almacen": -1 })
+        .sort({ fecha: -1, tipo: 1, lugar: 1, turno: 1 })
         .toArray(function (err, docs) {
             if (err) {
                 handleError(res, err.message, "Failed to get partes.");
