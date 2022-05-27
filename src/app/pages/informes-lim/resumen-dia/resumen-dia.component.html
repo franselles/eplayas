@@ -1,5 +1,7 @@
-<h4>PARTES DIARIO LIMPIEZA DE PLAYAS. DIA {{ fecha | date: "dd/MM/yyyy" }}</h4>
-<h4>MUNICIPIO DE {{ municipio | uppercase }}</h4>
+<h5>
+    PARTES DIARIO LIMPIEZA DE PLAYAS. DIA
+    {{ fecha | date: "dd/MM/yyyy" }} -- MUNICIPIO DE {{ municipio | uppercase }}
+</h5>
 
 <div *ngFor="let playa of datos; let i = index">
     <div class="row">
@@ -13,14 +15,18 @@
                         <div>
                             <h6 class="card-subtitle mb-2 text-muted">
                                 TURNO {{ turno.turno | uppercase }}
+                                <span
+                                    *ngIf="turno.turno == noche"
+                                    class="texto_p"
+                                >
+                                    2 CRIBADORAS
+                                </span>
+                                <span *ngIf="turno.top > 0" class="texto_p">
+                                    {{ turno.top }} OPERARIOS
+                                </span>
                             </h6>
                         </div>
-                        <div *ngIf="turno.turno == noche" class="texto_p">
-                            2 CRIBADORAS
-                        </div>
-                        <div *ngIf="turno.top > 0" class="texto_p">
-                            {{ turno.top }} OPERARIOS
-                        </div>
+
                         <div
                             *ngFor="
                                 let detalle of turno.observacion;
@@ -37,9 +43,7 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
             <div class="card">
                 <div class="card-body">
                     <div>
@@ -48,7 +52,7 @@
                         </h4>
                     </div>
                     <div>
-                        <table class="table table-striped">
+                        <table class="table table-sm table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -98,19 +102,26 @@
                 <p class="card-text">
                     <span class="like-pre">
                         {{ textos["texto_1"] }}
+                        {{ textos["texto_2"] }}
                     </span>
                 </p>
             </div>
         </div>
-    </div>
 
-    <div class="col">
         <div class="card">
             <div class="card-body">
+                <h4 class="card-title">TOTAL PESOS DEL DIA</h4>
                 <p class="card-text">
-                    <span class="like-pre">
-                        {{ textos["texto_2"] }}
-                    </span>
+                    RSU:
+                    <strong>{{ totalBas?.total_rsu_manual }} KGs. </strong>
+                    - CRIBADORAS:
+                    <strong>{{ totalBas?.total_rsu_criba }} KGs. </strong> -
+                    SELECTIVO:
+                    <strong>{{ totalBas?.total_selectivo }} KGs. </strong> -
+                    ALGAS:
+                    <strong>{{ totalBas?.total_algas_pesadas }} KGs. </strong>
+                    - ALGAS TEORICAS:
+                    <strong>{{ totalBas?.total_algas_teoricas }} KGs.</strong>
                 </p>
             </div>
         </div>
@@ -119,24 +130,6 @@
 
 <div class="row">
     <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">TOTAL PESOS DEL DIA</h4>
-                <p class="card-text">
-                    RSU:
-                    <strong>{{ totalBas?.total_rsu_manual }} KGs. </strong> -
-                    CRIBADORAS:
-                    <strong>{{ totalBas?.total_rsu_criba }} KGs. </strong> -
-                    SELECTIVO:
-                    <strong>{{ totalBas?.total_selectivo }} KGs. </strong> -
-                    ALGAS:
-                    <strong>{{ totalBas?.total_algas_pesadas }} KGs. </strong> -
-                    ALGAS TEORICAS:
-                    <strong>{{ totalBas?.total_algas_teoricas }} KGs.</strong>
-                </p>
-            </div>
-        </div>
+        <p>RA. BENIDORM. SL</p>
     </div>
 </div>
-<br />
-<p>RA. BENIDORM. SL</p>
