@@ -18,6 +18,7 @@
 *.sublime-workspace
 
 # IDE - VSCode
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -47,3 +48,6 @@ Thumbs.db
 .config
 
 .angular
+
+#npm
+package-lock.json
