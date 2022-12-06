@@ -1,7 +1,7 @@
 import { Estadistica } from '../../../shared/models';
 import { EstadisticasService } from '../../../shared/estadisticas.services';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,12 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstadisticasDetalleComponent implements OnInit {
 
-  public estadisticasForm: FormGroup;
+  public estadisticasForm: UntypedFormGroup;
   public estadistica: Estadistica;
   public enEdicion = false;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    private estadisticasService: EstadisticasService, private fb: FormBuilder) { }
+    private estadisticasService: EstadisticasService, private fb: UntypedFormBuilder) { }
 
   ngOnInit() {
     this.estadisticasForm = this.fb.group({

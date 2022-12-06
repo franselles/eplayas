@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Mantenimiento } from './../../../shared/models';
@@ -15,13 +15,13 @@ import { GlobalsPartes } from './../../../shared/globalspartes.services';
 })
 export class PartesManDetalleComponent implements OnInit {
 
-  public manteForm: FormGroup;
+  public manteForm: UntypedFormGroup;
   public mante: Mantenimiento;
   public listaOperarios = [];
   public listaVehiculos = [];
   public enEdicion: boolean;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: UntypedFormBuilder,
     private mantenimientoService: MantenimientoService,
     private operariosService: OperariosService,
     private vehiculosService: VehiculosService,

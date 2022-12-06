@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { Parte } from "./../../../shared/models";
@@ -15,7 +15,7 @@ import { GlobalsPartes } from "./../../../shared/globalspartes.services";
     styleUrls: ["./partes-lim-detalle.component.css"],
 })
 export class PartesLimDetalleComponent implements OnInit {
-    public parteForm: FormGroup;
+    public parteForm: UntypedFormGroup;
     public parte: Parte;
     public listaEstadisticas = [];
     public listaOperarios = [];
@@ -26,7 +26,7 @@ export class PartesLimDetalleComponent implements OnInit {
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private partesService: PartesService,
         private estadisticasService: EstadisticasService,
         private operariosService: OperariosService,
@@ -159,8 +159,8 @@ export class PartesLimDetalleComponent implements OnInit {
         });
     }
 
-    get estadisticas(): FormArray {
-        return this.parteForm.get("estadisticas") as FormArray;
+    get estadisticas(): UntypedFormArray {
+        return this.parteForm.get("estadisticas") as UntypedFormArray;
     }
 
     /*
@@ -281,7 +281,7 @@ Se rastilla filo, pasarelas, palmeras y cambian papeleras.`,
    */
 
     nuevaEstadistica(nuevaEst: string) {
-        const campoEst = this.parteForm.controls["estadisticas"] as FormArray;
+        const campoEst = this.parteForm.controls["estadisticas"] as UntypedFormArray;
         campoEst.push(this.campoEst(nuevaEst));
     }
 
@@ -292,7 +292,7 @@ Se rastilla filo, pasarelas, palmeras y cambian papeleras.`,
     }
 
     onQuitaEstadistica(i: number) {
-        const campoEst = this.parteForm.controls["estadisticas"] as FormArray;
+        const campoEst = this.parteForm.controls["estadisticas"] as UntypedFormArray;
         campoEst.removeAt(i);
     }
 

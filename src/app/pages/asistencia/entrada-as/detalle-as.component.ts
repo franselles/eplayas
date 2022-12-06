@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia, Operario } from '../../../shared/models';
@@ -11,13 +11,13 @@ import { Asistencia, Operario } from '../../../shared/models';
 })
 export class DetalleAsComponent implements OnInit {
 
-  public asForm: FormGroup;
+  public asForm: UntypedFormGroup;
   public asistencia: Asistencia;
 
   public enEdicion: boolean;
   public id: string;
 
-  constructor(private router: Router, private fb: FormBuilder, private route: ActivatedRoute,
+  constructor(private router: Router, private fb: UntypedFormBuilder, private route: ActivatedRoute,
     private asistenciaSercice: AsistenciaService) { }
 
   ngOnInit() {

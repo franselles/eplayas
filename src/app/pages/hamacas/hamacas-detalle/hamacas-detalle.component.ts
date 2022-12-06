@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hamaca } from '../../../shared/models';
 import { HamacasService } from '../../../shared/hamacas.service';
@@ -12,11 +12,11 @@ import { Location } from '@angular/common';
 })
 export class HamacasDetalleComponent implements OnInit {
 
-  public hamacasForm: FormGroup;
+  public hamacasForm: UntypedFormGroup;
   public hamaca: Hamaca;
   public enEdicion: boolean;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: UntypedFormBuilder,
     private hamacasService: HamacasService, private location: Location) { }
 
   ngOnInit() {

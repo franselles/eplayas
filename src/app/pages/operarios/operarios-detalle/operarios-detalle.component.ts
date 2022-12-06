@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { Operario } from "./../../../shared/models";
@@ -11,14 +11,14 @@ import { OperariosService } from "./../../../shared/operarios.services";
     styleUrls: ["./operarios-detalle.component.css"],
 })
 export class OperariosDetalleComponent implements OnInit {
-    public operariosForm: FormGroup;
+    public operariosForm: UntypedFormGroup;
     public operario: Operario;
     public enEdicion: boolean;
 
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private operariosService: OperariosService
     ) {}
 

@@ -1,53 +1,53 @@
 {
-    "name": "eplayas",
-    "version": "1.1.183",
-    "license": "MIT",
-    "main": "server.js",
-    "scripts": {
-        "ng": "ng",
-        "serve": "ng serve",
-        "start": "node server.js",
-        "build": "ng build --configuration production",
-        "test": "ng test",
-        "lint": "ng lint",
-        "e2e": "ng e2e"
-    },
-    "heroku-run-build-script": true,
-    "private": true,
-    "dependencies": {
-        "@angular/animations": "^13.3.10",
-        "@angular/common": "^13.3.10",
-        "@angular/compiler": "^13.3.10",
-        "@angular/compiler-cli": "^13.3.10",
-        "@angular/core": "^13.3.10",
-        "@angular/forms": "^13.3.10",
-        "@angular/platform-browser": "^13.3.10",
-        "@angular/platform-browser-dynamic": "^13.3.10",
-        "@angular/router": "^13.3.10",
-        "body-parser": "^1.20.0",
-        "core-js": "^3.22.7",
-        "dotenv": "^10.0.0",
-        "express": "^4.18.1",
-        "mongodb": "^4.6.0",
-        "rxjs": "~6.6.0",
-        "tslib": "^2.4.0",
-        "typescript": "~4.5.4",
-        "zone.js": "~0.11.5"
-    },
-    "devDependencies": {
-        "@angular-devkit/build-angular": "~13.3.4",
-        "@angular/cli": "~13.3.4",
-        "@types/jasmine": "~3.8.0",
-        "@types/node": "^16.4.13",
-        "jasmine-core": "~3.8.0",
-        "karma": "~6.3.0",
-        "karma-chrome-launcher": "~3.1.0",
-        "karma-coverage": "~2.0.3",
-        "karma-jasmine": "~4.0.0",
-        "karma-jasmine-html-reporter": "~1.7.0"
-    },
-    "engines": {
-        "node": "16.15.0",
-        "npm": "8.9.0"
-    }
+  "name": "eplayas",
+  "version": "1.1.183",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "ng": "ng",
+    "serve": "ng serve",
+    "start": "node server.js",
+    "build": "ng build --configuration production",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "heroku-run-build-script": true,
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^14.2.12",
+    "@angular/common": "^14.2.12",
+    "@angular/compiler": "^14.2.12",
+    "@angular/compiler-cli": "^14.2.12",
+    "@angular/core": "^14.2.12",
+    "@angular/forms": "^14.2.12",
+    "@angular/platform-browser": "^14.2.12",
+    "@angular/platform-browser-dynamic": "^14.2.12",
+    "@angular/router": "^14.2.12",
+    "body-parser": "^1.20.0",
+    "core-js": "^3.22.7",
+    "dotenv": "^10.0.0",
+    "express": "^4.18.1",
+    "mongodb": "^4.6.0",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.4.0",
+    "typescript": "~4.8.4",
+    "zone.js": "~0.11.5"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^14.2.10",
+    "@angular/cli": "^14.2.10",
+    "@types/jasmine": "~3.8.0",
+    "@types/node": "^16.4.13",
+    "jasmine-core": "~3.8.0",
+    "karma": "~6.3.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.0.3",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "~1.7.0"
+  },
+  "engines": {
+    "node": "16.15.0",
+    "npm": "8.9.0"
+  }
 }

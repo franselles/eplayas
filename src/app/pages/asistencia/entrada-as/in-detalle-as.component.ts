@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia, Operario } from '../../../shared/models';
 
@@ -14,13 +14,13 @@ export class InDetalleAsComponent implements OnInit {
   @Input() idd: string;
   @Output() upventana: EventEmitter<number> = new EventEmitter<number>();
 
-  public asForm: FormGroup;
+  public asForm: UntypedFormGroup;
   public asistencia: Asistencia;
 
   public enEdicion: boolean;
   public id: string;
 
-  constructor(private fb: FormBuilder, private asistenciaSercice: AsistenciaService) { }
+  constructor(private fb: UntypedFormBuilder, private asistenciaSercice: AsistenciaService) { }
 
   ngOnInit() {
     this.id = this.idd;

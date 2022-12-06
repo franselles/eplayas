@@ -129,7 +129,6 @@
             }
         }
     },
-    "defaultProject": "peaceful",
     "schematics": {
         "@schematics/angular:component": {
             "prefix": "app",

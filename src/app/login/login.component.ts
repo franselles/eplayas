@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './../shared/authentication.services';
@@ -11,10 +11,10 @@ import { AuthenticationService } from './../shared/authentication.services';
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
   public errorPass: boolean;
 
-  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private fb: UntypedFormBuilder, private authenticationService: AuthenticationService, private router: Router) {
   }
 
   ngOnInit() {
