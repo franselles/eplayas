@@ -49,6 +49,7 @@ export class PartesLimListaComponent implements OnInit {
                 this.clonado = true;
                 setTimeout(() => {
                     this.clonado = false;
+                    this.actualizaLista();
                 }, 3000);
             },
             (error) => console.error("Error creating : " + error)
