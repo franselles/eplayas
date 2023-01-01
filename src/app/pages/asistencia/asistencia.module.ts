@@ -1,10 +1,11 @@
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlAsComponent } from "./control-as/control-as.component";
 import { Routes } from "@angular/router";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { registerLocaleData } from "@angular/common";
 
 import { EntradaAsComponent } from "./entrada-as/entrada-as.component";
 import { DetalleAsComponent } from "./entrada-as/detalle-as.component";
@@ -18,6 +19,9 @@ import { AcumuladoSegComponent } from "./acumulado-as/acumulado-seg.component";
 import { InDetalleAsComponent } from "./entrada-as/in-detalle-as.component";
 import { AcumuladoAsComponent } from "./acumulado-as/acumulado-as.component";
 import { DetalleAcuComponent } from "./acumulado-as/detalle-acu.component";
+
+import localeEs from "@angular/common/locales/es";
+registerLocaleData(localeEs, "es");
 
 const routes: Routes = [
     {
@@ -66,6 +70,11 @@ const routes: Routes = [
         AcumuladoAsComponent,
         DetalleAcuComponent,
     ],
-    providers: [BdService, AsistenciaService, GlobalsPartes],
+    providers: [
+        BdService,
+        AsistenciaService,
+        GlobalsPartes,
+        { provide: LOCALE_ID, useValue: "es" },
+    ],
 })
 export class AsistenciaModule {}
