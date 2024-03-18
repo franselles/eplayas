@@ -711,6 +711,77 @@ app.post("/api/partes/duplica", async function (req, res) {
     res.status(200).json({ ok: "ok" });
 });
 
+// app.get("/api/partes/desinfecta/:fecha_i/:fecha_f", async function (req, res) {
+//     const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+//         {
+//             text: {
+//                 $search: {
+//                     path: "observacion_ayto",
+//                     query: ["*"],
+//                 },
+//             },
+//         },
+//         {
+//             $project: {
+//                 _id: 0,
+//                 observacion_ayto: 1,
+//                 fecha: 1,
+//             },
+//         },
+//     ]);
+//     try {
+//         const data = await aggCursor.toArray();
+//         res.status(200).json(data);
+//     } catch (error) {
+//         handleError(res, error.message, "Failed to get aggregate del dia.");
+//     }
+// });
+
+// app.get("/api/partes/desinfecta/:fecha_i/:fecha_f", async function (req, res) {
+//     const aggCursor = db.collection(PARTES_COLLECTION).aggregate([
+//         {
+//             $match: {
+//                 fecha: {
+//                     $gte: req.params.fecha_i,
+//                     $lte: req.params.fecha_f,
+//                 },
+//                 turno: "Noche",
+//             },
+//         },
+//         {
+//             $sort: { fecha: 1 },
+//         },
+//         {
+//             $text: {
+//                 $search: "*desinfec*",
+//             },
+//         },
+//     ]);
+//     try {
+//         const data = await aggCursor.toArray();
+//         res.status(200).json(data);
+//     } catch (error) {
+//         handleError(res, error.message, "Failed to get aggregate del dia.");
+//     }
+// });
+
+app.get("/api/partes/desinfecta/:fecha_i/:fecha_f", async function (req, res) {
+    const aggCursor = db
+        .collection(PARTES_COLLECTION)
+        .find({
+            fecha: { $lte: "2022-12-31", $gte: "2022-01-01" },
+            turno: "Noche",
+            observacion_ayto: /.*limpi.*/i,
+        })
+        .sort({ fecha: 1 });
+    try {
+        const data = await aggCursor.toArray();
+        res.status(200).json(data);
+    } catch (error) {
+        handleError(res, error.message, "Failed to get aggregate del dia.");
+    }
+});
+
 // HAMACAS API ROUTES BELOW
 
 /*  "/api/hamacas"
