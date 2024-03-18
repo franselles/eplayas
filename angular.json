@@ -61,18 +61,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "peaceful:build"
+                      "buildTarget": "peaceful:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "peaceful:build:production"
+                          "buildTarget": "peaceful:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "peaceful:build"
+                      "buildTarget": "peaceful:build"
                     }
                 },
                 "test": {
