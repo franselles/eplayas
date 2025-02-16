@@ -16,8 +16,12 @@ var app = express();
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist/";
+var distDir = __dirname + "/dist/browser/";
 app.use(express.static(distDir));
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/browser/index.html'));
+  });
 
 require("dotenv").config();
 
