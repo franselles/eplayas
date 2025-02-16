@@ -9,6 +9,7 @@ import { GlobalsPartes } from "./../../../shared/globalspartes.services";
     selector: "app-partes-lim-lista",
     templateUrl: "./partes-lim-lista.component.html",
     styleUrls: ["./partes-lim-lista.component.css"],
+    standalone: false
 })
 export class PartesLimListaComponent implements OnInit {
     public listaPartes: Parte[] = [];

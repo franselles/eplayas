@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { Estadistica } from './../../../shared/models';
 
 @Component({
-  selector: 'app-estadisticas-lista',
-  templateUrl: './estadisticas-lista.component.html',
-  styleUrls: ['./estadisticas-lista.component.css']
+    selector: 'app-estadisticas-lista',
+    templateUrl: './estadisticas-lista.component.html',
+    styleUrls: ['./estadisticas-lista.component.css'],
+    standalone: false
 })
 export class EstadisticasListaComponent implements OnInit {
 

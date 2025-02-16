@@ -4,9 +4,10 @@ import { HamacasService } from '../../../shared/hamacas.service';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
 
 @Component({
-  selector: 'app-hamacas-historico',
-  templateUrl: './hamacas-historico.component.html',
-  styleUrls: ['./hamacas-historico.component.css']
+    selector: 'app-hamacas-historico',
+    templateUrl: './hamacas-historico.component.html',
+    styleUrls: ['./hamacas-historico.component.css'],
+    standalone: false
 })
 export class HamacasHistoricoComponent implements OnInit {
 

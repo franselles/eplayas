@@ -6,6 +6,7 @@ import { Operario } from "../../../shared/models";
     selector: "app-operarios-horario",
     templateUrl: "./operarios-horario.component.html",
     styleUrls: ["./operarios-horario.component.css"],
+    standalone: false
 })
 export class OperariosHorarioComponent implements OnInit {
     fecha: string;

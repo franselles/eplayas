@@ -4,9 +4,10 @@ import { GlobalsPartes } from '../../../shared/globalspartes.services';
 import { Operario } from '../../../shared/models';
 
 @Component({
-  selector: 'app-acumulado-as',
-  templateUrl: './acumulado-as.component.html',
-  styleUrls: ['./acumulado-as.component.css']
+    selector: 'app-acumulado-as',
+    templateUrl: './acumulado-as.component.html',
+    styleUrls: ['./acumulado-as.component.css'],
+    standalone: false
 })
 export class AcumuladoAsComponent implements OnInit {
 

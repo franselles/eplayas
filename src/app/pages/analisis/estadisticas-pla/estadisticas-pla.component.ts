@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-estadisticas-pla',
-  templateUrl: './estadisticas-pla.component.html',
-  styleUrls: ['./estadisticas-pla.component.css']
+    selector: 'app-estadisticas-pla',
+    templateUrl: './estadisticas-pla.component.html',
+    styleUrls: ['./estadisticas-pla.component.css'],
+    standalone: false
 })
 export class EstadisticasPlaComponent implements OnInit {
 

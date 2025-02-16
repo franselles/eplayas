@@ -5,9 +5,10 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-estadisticas-detalle',
-  templateUrl: './estadisticas-detalle.component.html',
-  styleUrls: ['./estadisticas-detalle.component.css']
+    selector: 'app-estadisticas-detalle',
+    templateUrl: './estadisticas-detalle.component.html',
+    styleUrls: ['./estadisticas-detalle.component.css'],
+    standalone: false
 })
 export class EstadisticasDetalleComponent implements OnInit {
 

@@ -3,9 +3,10 @@ import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia } from '../../../shared/models';
 
 @Component({
-  selector: 'app-detalle-acu',
-  templateUrl: './detalle-acu.component.html',
-  styleUrls: ['./detalle-acu.component.css']
+    selector: 'app-detalle-acu',
+    templateUrl: './detalle-acu.component.html',
+    styleUrls: ['./detalle-acu.component.css'],
+    standalone: false
 })
 export class DetalleAcuComponent implements OnInit, OnChanges {
 

@@ -7,7 +7,7 @@ import { HamacasListaComponent } from './hamacas-lista/hamacas-lista.component';
 import { LoggedInGuard } from '../../shared/logged-in.guard';
 import { HamacasService } from '../../shared/hamacas.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BdService } from '../../shared/bd.services';
 import { HamacasHistoricoComponent } from './hamacas-historico/hamacas-historico.component';
 import { GlobalsPartes } from '../../shared/globalspartes.services';
@@ -19,24 +19,18 @@ const routes: Routes = [
   {path: 'historico', component: HamacasHistoricoComponent, canActivate: [LoggedInGuard]}
 ];
 
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  declarations: [
-    HamacasComponent,
-    HamacasDetalleComponent,
-    HamacasListaComponent,
-    HamacasHistoricoComponent
-  ],
-  providers: [
-    HamacasService,
-    BdService,
-    GlobalsPartes
-  ]
-})
+@NgModule({ declarations: [
+        HamacasComponent,
+        HamacasDetalleComponent,
+        HamacasListaComponent,
+        HamacasHistoricoComponent
+    ], imports: [CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule,
+        ReactiveFormsModule], providers: [
+        HamacasService,
+        BdService,
+        GlobalsPartes,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class HamacasModule { }

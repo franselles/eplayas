@@ -13,6 +13,7 @@ import { GlobalsPartes } from "./../../../shared/globalspartes.services";
     selector: "app-partes-lim-detalle",
     templateUrl: "./partes-lim-detalle.component.html",
     styleUrls: ["./partes-lim-detalle.component.css"],
+    standalone: false
 })
 export class PartesLimDetalleComponent implements OnInit {
     public parteForm: UntypedFormGroup;

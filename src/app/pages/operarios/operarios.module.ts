@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { LoggedInGuard } from "../../shared/logged-in.guard";
 import { OperariosDetalleComponent } from "./operarios-detalle/operarios-detalle.component";
 import { OperariosListaComponent } from "./operarios-lista/operarios-lista.component";
@@ -33,19 +33,12 @@ const routes: Routes = [
     },
 ];
 
-@NgModule({
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        FormsModule,
-        HttpClientModule,
-        RouterModule.forChild(routes),
-    ],
-    providers: [OperariosService, BdService],
-    declarations: [
+@NgModule({ declarations: [
         OperariosDetalleComponent,
         OperariosListaComponent,
         OperariosHorarioComponent,
-    ],
-})
+    ], imports: [CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule.forChild(routes)], providers: [OperariosService, BdService, provideHttpClient(withInterceptorsFromDi())] })
 export class OperariosModule {}

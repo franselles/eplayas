@@ -5,9 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { Total } from './../../../shared/models';
 
 @Component({
-  selector: 'app-pesos-mun',
-  templateUrl: './pesos-mun.component.html',
-  styleUrls: ['./pesos-mun.component.css']
+    selector: 'app-pesos-mun',
+    templateUrl: './pesos-mun.component.html',
+    styleUrls: ['./pesos-mun.component.css'],
+    standalone: false
 })
 export class PesosMunComponent implements OnInit {
 

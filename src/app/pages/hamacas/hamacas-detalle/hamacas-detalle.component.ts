@@ -6,9 +6,10 @@ import { HamacasService } from '../../../shared/hamacas.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-hamacas-detalle',
-  templateUrl: './hamacas-detalle.component.html',
-  styleUrls: ['./hamacas-detalle.component.css']
+    selector: 'app-hamacas-detalle',
+    templateUrl: './hamacas-detalle.component.html',
+    styleUrls: ['./hamacas-detalle.component.css'],
+    standalone: false
 })
 export class HamacasDetalleComponent implements OnInit {
 

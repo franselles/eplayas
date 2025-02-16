@@ -3,9 +3,10 @@ import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia } from '../../../shared/models';
 
 @Component({
-  selector: 'app-detalle-seg',
-  templateUrl: './detalle-seg.component.html',
-  styleUrls: ['./detalle-seg.component.css']
+    selector: 'app-detalle-seg',
+    templateUrl: './detalle-seg.component.html',
+    styleUrls: ['./detalle-seg.component.css'],
+    standalone: false
 })
 export class DetalleSegComponent implements OnInit, OnChanges {
 

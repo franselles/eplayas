@@ -1,6 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BdService } from '../../shared/bd.services';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LoggedInGuard } from '../../shared/logged-in.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -17,21 +17,15 @@ const routes: Routes = [
   { path: '**', redirectTo: 'lista', pathMatch: 'full' }
 ];
 
-@NgModule({
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [
-    EstadisticasListaComponent,
-    EstadisticasDetalleComponent
-  ],
-  providers: [
-    EstadisticasService,
-    BdService
-  ]
-})
+@NgModule({ declarations: [
+        EstadisticasListaComponent,
+        EstadisticasDetalleComponent
+    ], imports: [CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule.forChild(routes)], providers: [
+        EstadisticasService,
+        BdService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class EstadisticasModule { }

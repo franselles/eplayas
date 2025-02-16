@@ -8,6 +8,7 @@ import { ResumenService } from "./../../../shared/resumen.services";
     selector: "app-resumen-dia",
     templateUrl: "./resumen-dia.component.html",
     styleUrls: ["./resumen-dia.component.css"],
+    standalone: false
 })
 export class ResumenDiaComponent implements OnInit {
     public fecha: string;

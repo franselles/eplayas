@@ -6,9 +6,10 @@ import { GlobalsPartes } from './../../../shared/globalspartes.services';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-partes-man-lista',
-  templateUrl: './partes-man-lista.component.html',
-  styleUrls: ['./partes-man-lista.component.css']
+    selector: 'app-partes-man-lista',
+    templateUrl: './partes-man-lista.component.html',
+    styleUrls: ['./partes-man-lista.component.css'],
+    standalone: false
 })
 export class PartesManListaComponent implements OnInit {
 

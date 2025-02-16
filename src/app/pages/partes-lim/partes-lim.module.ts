@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { BdService } from '../../shared/bd.services';
 import { EstadisticasService } from '../../shared/estadisticas.services';
@@ -33,26 +33,20 @@ const routes: Routes = [
     }
 ];
 
-@NgModule({
-    imports: [
-        CommonModule,
+@NgModule({ declarations: [
+        PartesLimComponent,
+        PartesLimDetalleComponent,
+        PartesLimListaComponent
+    ], imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule,
-        RouterModule.forChild(routes)
-    ],
-    providers: [
+        RouterModule.forChild(routes)], providers: [
         BdService,
         VehiculosService,
         EstadisticasService,
         OperariosService,
         PartesService,
-        GlobalsPartes
-    ],
-    declarations: [
-        PartesLimComponent,
-        PartesLimDetalleComponent,
-        PartesLimListaComponent
-    ]
-})
+        GlobalsPartes,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class PartesLimModule {}

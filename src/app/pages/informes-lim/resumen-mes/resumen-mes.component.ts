@@ -8,6 +8,7 @@ import { ResumenService } from "./../../../shared/resumen.services";
     selector: "app-resumen-mes",
     templateUrl: "./resumen-mes.component.html",
     styleUrls: ["./resumen-mes.component.css"],
+    standalone: false
 })
 export class ResumenMesComponent implements OnInit {
     public resumen: any[];

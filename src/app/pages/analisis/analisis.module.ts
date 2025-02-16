@@ -1,5 +1,5 @@
 import { BdService } from '../../shared/bd.services';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AnalisisService } from '../../shared/analisis.services';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -20,23 +20,17 @@ const routes: Routes = [
   ]}
 ];
 
-@NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    HttpClientModule,
-    FormsModule
-  ],
-  declarations: [
-    AnalisisComponent,
-    PesosMunComponent,
-    PesosPlaComponent,
-    EstadisticasMunComponent,
-    EstadisticasPlaComponent
-  ],
-  providers: [
-    AnalisisService,
-    BdService
-  ]
-})
+@NgModule({ declarations: [
+        AnalisisComponent,
+        PesosMunComponent,
+        PesosPlaComponent,
+        EstadisticasMunComponent,
+        EstadisticasPlaComponent
+    ], imports: [CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule], providers: [
+        AnalisisService,
+        BdService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AnalisisModule { }

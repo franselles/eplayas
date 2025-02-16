@@ -9,9 +9,10 @@ import { VehiculosService } from './../../../shared/vehiculos.services';
 import { GlobalsPartes } from './../../../shared/globalspartes.services';
 
 @Component({
-  selector: 'app-partes-man-detalle',
-  templateUrl: './partes-man-detalle.component.html',
-  styleUrls: ['./partes-man-detalle.component.css']
+    selector: 'app-partes-man-detalle',
+    templateUrl: './partes-man-detalle.component.html',
+    styleUrls: ['./partes-man-detalle.component.css'],
+    standalone: false
 })
 export class PartesManDetalleComponent implements OnInit {
 

@@ -9,6 +9,7 @@ import { OperariosService } from "./../../../shared/operarios.services";
     selector: "app-operarios-detalle",
     templateUrl: "./operarios-detalle.component.html",
     styleUrls: ["./operarios-detalle.component.css"],
+    standalone: false
 })
 export class OperariosDetalleComponent implements OnInit {
     public operariosForm: UntypedFormGroup;

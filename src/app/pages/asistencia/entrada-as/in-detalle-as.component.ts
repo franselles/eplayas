@@ -4,9 +4,10 @@ import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia, Operario } from '../../../shared/models';
 
 @Component({
-  selector: 'app-in-detalle-as',
-  templateUrl: './in-detalle-as.component.html',
-  styleUrls: ['./in-detalle-as.component.css']
+    selector: 'app-in-detalle-as',
+    templateUrl: './in-detalle-as.component.html',
+    styleUrls: ['./in-detalle-as.component.css'],
+    standalone: false
 })
 export class InDetalleAsComponent implements OnInit {
 

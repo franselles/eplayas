@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { HamacasService } from '../../../shared/hamacas.service';
 
 @Component({
-  selector: 'app-hamacas-lista',
-  templateUrl: './hamacas-lista.component.html',
-  styleUrls: ['./hamacas-lista.component.css']
+    selector: 'app-hamacas-lista',
+    templateUrl: './hamacas-lista.component.html',
+    styleUrls: ['./hamacas-lista.component.css'],
+    standalone: false
 })
 export class HamacasListaComponent implements OnInit {
 

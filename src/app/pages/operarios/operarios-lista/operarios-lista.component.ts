@@ -4,9 +4,10 @@ import { Operario } from './../../../shared/models';
 import { OperariosService } from './../../../shared/operarios.services';
 
 @Component({
-  selector: 'app-operarios-lista',
-  templateUrl: './operarios-lista.component.html',
-  styleUrls: ['./operarios-lista.component.css']
+    selector: 'app-operarios-lista',
+    templateUrl: './operarios-lista.component.html',
+    styleUrls: ['./operarios-lista.component.css'],
+    standalone: false
 })
 export class OperariosListaComponent implements OnInit {
 

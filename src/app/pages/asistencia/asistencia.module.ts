@@ -4,7 +4,7 @@ import { ControlAsComponent } from "./control-as/control-as.component";
 import { Routes } from "@angular/router";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { registerLocaleData } from "@angular/common";
 
 import { EntradaAsComponent } from "./entrada-as/entrada-as.component";
@@ -51,15 +51,7 @@ const routes: Routes = [
     },
 ];
 
-@NgModule({
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-    ],
-    declarations: [
+@NgModule({ declarations: [
         ControlAsComponent,
         EntradaAsComponent,
         DetalleAsComponent,
@@ -69,12 +61,14 @@ const routes: Routes = [
         InDetalleAsComponent,
         AcumuladoAsComponent,
         DetalleAcuComponent,
-    ],
-    providers: [
+    ], imports: [CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule,
+        ReactiveFormsModule], providers: [
         BdService,
         AsistenciaService,
         GlobalsPartes,
         { provide: LOCALE_ID, useValue: "es" },
-    ],
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AsistenciaModule {}

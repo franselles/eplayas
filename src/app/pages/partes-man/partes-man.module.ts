@@ -11,7 +11,7 @@ import { BdService } from '../../shared/bd.services';
 import { GlobalsPartes } from '../../shared/globalspartes.services';
 import { OperariosService } from '../../shared/operarios.services';
 import { VehiculosService } from '../../shared/vehiculos.services';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const routes: Routes = [
   {path: '', component: PartesManListaComponent, canActivate: [LoggedInGuard]},
@@ -19,25 +19,19 @@ const routes: Routes = [
   {path: 'detalle/:id', component: PartesManDetalleComponent, canActivate: [LoggedInGuard]}
 ];
 
-@NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [
-    PartesManComponent,
-    PartesManListaComponent,
-    PartesManDetalleComponent
-  ],
-  providers: [
-    BdService,
-    GlobalsPartes,
-    OperariosService,
-    VehiculosService,
-    MantenimientoService
-  ]
-})
+@NgModule({ declarations: [
+        PartesManComponent,
+        PartesManListaComponent,
+        PartesManDetalleComponent
+    ], imports: [CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule.forChild(routes)], providers: [
+        BdService,
+        GlobalsPartes,
+        OperariosService,
+        VehiculosService,
+        MantenimientoService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class PartesManModule { }

@@ -8,6 +8,7 @@ import { GlobalsPartes } from "./../../../shared/globalspartes.services";
     selector: "app-entrada-as",
     templateUrl: "./entrada-as.component.html",
     styleUrls: ["./entrada-as.component.css"],
+    standalone: false
 })
 export class EntradaAsComponent implements OnInit {
     public operarios: Operario[] = [];

@@ -4,9 +4,10 @@ import { AsistenciaService } from '../../../shared/asistencia.services';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
 
 @Component({
-  selector: 'app-seguimiento-as',
-  templateUrl: './seguimiento-as.component.html',
-  styleUrls: ['./seguimiento-as.component.css']
+    selector: 'app-seguimiento-as',
+    templateUrl: './seguimiento-as.component.html',
+    styleUrls: ['./seguimiento-as.component.css'],
+    standalone: false
 })
 export class SeguimientoAsComponent implements OnInit {
 

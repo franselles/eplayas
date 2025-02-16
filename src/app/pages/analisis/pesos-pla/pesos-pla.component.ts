@@ -5,9 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { Total } from './../../../shared/models';
 
 @Component({
-  selector: 'app-pesos-pla',
-  templateUrl: './pesos-pla.component.html',
-  styleUrls: ['./pesos-pla.component.css']
+    selector: 'app-pesos-pla',
+    templateUrl: './pesos-pla.component.html',
+    styleUrls: ['./pesos-pla.component.css'],
+    standalone: false
 })
 export class PesosPlaComponent implements OnInit {
 
