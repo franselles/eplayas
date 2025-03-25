@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="form-group col-md-3">
+    <label for="fechai">Desde fecha</label>
+    <input id="fechai" type="date" name="fechai" placeholder="dia inicial" [(ngModel)]="fechai" class="form-control">
+  </div>
+  <div class="form-group col-md-3">
+    <label for="fechaf">Hasta fecha</label>
+    <input id="fechaf" type="date" name="fechaf" placeholder="dia final" [(ngModel)]="fechaf" class="form-control">
+  </div>
+  <div class="form-group col">
+    <button type="button" class="btn btn-primary" (click)="datosCuadrante()">
+      Cuadrante
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <app-cuadrante-det [cuadrante]="cuadrante"></app-cuadrante-det>
+  </div>
+</div>

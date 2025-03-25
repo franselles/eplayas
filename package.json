@@ -1,6 +1,6 @@
 {
   "name": "eplayas",
-  "version": "1.1.194",
+  "version": "1.1.195",
   "license": "MIT",
   "main": "server.js",
   "scripts": {
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.1.7",
     "@angular/cli": "^19.1.7",
+    "@biomejs/biome": "1.9.4",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^16.4.13",
     "jasmine-core": "~3.8.0",

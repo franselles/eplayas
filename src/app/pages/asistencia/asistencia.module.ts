@@ -19,6 +19,7 @@ import { AcumuladoSegComponent } from "./acumulado-as/acumulado-seg.component";
 import { InDetalleAsComponent } from "./entrada-as/in-detalle-as.component";
 import { AcumuladoAsComponent } from "./acumulado-as/acumulado-as.component";
 import { DetalleAcuComponent } from "./acumulado-as/detalle-acu.component";
+import { CuadranteAsComponent } from "./cuadrante-as/cuadrante-as.component";
 
 import localeEs from "@angular/common/locales/es";
 registerLocaleData(localeEs, "es");
@@ -47,6 +48,11 @@ const routes: Routes = [
                 component: AcumuladoAsComponent,
                 canActivate: [LoggedInGuard],
             },
+            {
+                path: "cuadrante",
+                component: CuadranteAsComponent,
+                canActivate: [LoggedInGuard],
+            },            
         ],
     },
 ];
@@ -60,7 +66,7 @@ const routes: Routes = [
         AcumuladoSegComponent,
         InDetalleAsComponent,
         AcumuladoAsComponent,
-        DetalleAcuComponent,
+        DetalleAcuComponent
     ], imports: [CommonModule,
         RouterModule.forChild(routes),
         FormsModule,

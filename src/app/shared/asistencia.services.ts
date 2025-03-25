@@ -86,4 +86,8 @@ export class AsistenciaService {
     aAsistencia() {
       const a = this.prueba.find(data => data.descanso.some(item => item.casa === 'hola'));
     }
+
+    getAsistenciaCuadrante(fechai: string, fechaf: string) {
+      return this.http.get<any[]>(this.BASE_URL_A + 'cuadrante/' + fechai + '/' + fechaf);
+    }
 }
