@@ -135,24 +135,45 @@ app.get(
     }
 
     try {
-      // 1. Obtener todos los operarios activos
+      /*
       const fndOperarios = db
         .collection(OPERARIOS_COLLECTION)
         .find({ activo: true })
         .sort({ nombre: 1 });
+      */
+
+      const fndOperarios = db.collection(ASISTENCIA_COLLECTION).aggregate([
+        {
+          $match: {
+            fecha: {
+              $gte: req.params.fechad,
+              $lte: req.params.fechah,
+            },
+          },
+        },
+        {
+          $group: {
+              _id: {
+                _id_op: '$id_op',
+                nombre: '$nombre'
+              },
+          }        
+        },
+        {
+          $sort: {'_id.nombre': 1}
+        },
+      ])
 
       operarios = await fndOperarios.toArray();
+
       
-      // 2. Para cada operario, crear un array con sus datos de asistencia
       for (let i = 0; i < operarios.length; i++) {
         const cuadranteOperario = [];
         
-        // Inicializar array con valores del 1 al 31 (días del mes)
         for (let n = 0; n <= 31; n++) {
           cuadranteOperario[n] = "_"; // Usar n-1 como índice para empezar desde 0
         }
         
-        // Obtener datos de asistencia para este operario
         const aggCursor = db.collection(ASISTENCIA_COLLECTION).aggregate([
           {
             $match: {
@@ -160,7 +181,7 @@ app.get(
                 $gte: req.params.fechad,
                 $lte: req.params.fechah,
               },
-              id_op: operarios[i]._id.toString(), // Usar el ID del operario actual
+              id_op: operarios[i]._id._id_op.toString(), // Usar el ID del operario actual
             },
           },
           {
@@ -170,15 +191,6 @@ app.get(
         
         const asistencias = await aggCursor.toArray();
         
-        // Asignar datos de asistencia al cuadrante del operario
-        // (Aquí deberías procesar los datos de asistencia según tus necesidades)
-        
-        // Agregar información del operario al cuadrante
-
-
-        // Bucle de asistencias y cogiendo el dia de la fecha 1/xx/nnnn lo insertamos
-        // en el cuadranteOperario[x], el objeto trabajado, descanso, etc
-
         asistencias.forEach(dia => {
           let numeroDia = Number(dia.fecha.split('-')[2]);
           let stateDia = "";
@@ -226,11 +238,9 @@ app.get(
           }
         });
 
-        // console.log(asistencias);
-
         cuadrante.push({
-          operario: operarios[i].nombre,
-          id_op: operarios[i]._id,
+          operario: operarios[i]._id.nombre,
+          id_op: operarios[i]._id._id_op,
           dias: cuadranteOperario.slice(1),
           // asistencias: asistencias,
           // trabajado: asistencias.trabajado
