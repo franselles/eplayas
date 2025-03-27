@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
 import { CuadranteDetComponent } from "./cuadrante-det.component";
+import { Cuadrante } from "../../../shared/models"
 
 @Component({
   selector: 'app-cuadrante-as',
@@ -19,7 +20,7 @@ export class CuadranteAsComponent implements OnInit {
   asistenciaService = inject(AsistenciaService);
   globalPartes = inject(GlobalsPartes);
 
-  cuadrante = [];
+  cuadrante: Cuadrante[] = [];
   fechai: string;
   fechaf: string;
 

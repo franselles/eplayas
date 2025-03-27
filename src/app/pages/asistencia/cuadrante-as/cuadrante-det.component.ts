@@ -1,5 +1,5 @@
-import { Component, inject, input } from '@angular/core';
-import { AsistenciaService } from '../../../shared/asistencia.services';
+import { Component, input } from '@angular/core';
+import { Cuadrante } from "../../../shared/models"
 
 @Component({
   selector: 'app-cuadrante-det',
@@ -7,9 +7,7 @@ import { AsistenciaService } from '../../../shared/asistencia.services';
   templateUrl: './cuadrante-det.component.html',
   styleUrl: './cuadrante-det.component.css',
 })
+
 export class CuadranteDetComponent {
-  cuadrante = input<any[]>();
-
-  asistenciaService = inject(AsistenciaService);
-
+  cuadrante = input<Cuadrante[]>();
 }

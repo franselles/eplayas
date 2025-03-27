@@ -145,3 +145,16 @@ export interface Mantenimiento {
     coste: number;
     horarios: Horario;
 }
+
+export interface DiaCuadrante {
+    fecha: string;
+    estado: string;
+    color: string;
+}
+
+export interface Cuadrante {
+    operario: string;
+    id_op: string;
+    dias: DiaCuadrante[];
+    totales: string;
+}

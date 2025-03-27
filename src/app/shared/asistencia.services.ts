@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Operario, Asistencia, TotalAsistencia } from './../shared/models';
+import { Asistencia, TotalAsistencia, Cuadrante } from './../shared/models';
 
 import { BdService } from './../shared/bd.services';
 
@@ -88,6 +88,6 @@ export class AsistenciaService {
     }
 
     getAsistenciaCuadrante(fechai: string, fechaf: string) {
-      return this.http.get<any[]>(this.BASE_URL_A + 'cuadrante/' + fechai + '/' + fechaf);
+      return this.http.get<Cuadrante[]>(this.BASE_URL_A + 'cuadrante/' + fechai + '/' + fechaf);
     }
 }
