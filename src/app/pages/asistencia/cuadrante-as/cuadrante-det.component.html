@@ -7,6 +7,7 @@
                 @for (d of [].constructor(31); track $index){
                 <th>{{$index + 1}}</th>
                 }
+                <th>Totales</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,7 @@
                 @for (dia of item.dias; track $index) {
                 <td [style.background-color]="dia.color">{{dia.estado}}</td>
                 }
+                <td class="text-nowrap">{{item.totales}}</td>
             </tr>
             }
         </tbody>

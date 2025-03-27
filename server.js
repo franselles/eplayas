@@ -170,6 +170,16 @@ app.get(
       for (let i = 0; i < operarios.length; i++) {
         const cuadranteOperario = [];
         
+        const totales = {
+          trabajado: 0,
+          festivo: 0,
+          descanso: 0,
+          baja: 0,
+          disfrutadas: 0,
+          justificado: 0,
+          injustificado:0
+        };
+        
         for (let n = 0; n <= 31; n++) {
           cuadranteOperario[n] = "_"; // Usar n-1 como índice para empezar desde 0
         }
@@ -199,36 +209,43 @@ app.get(
           if (dia.trabajado > 0) {
             stateDia = "X";
             color = colors.trabajado; 
+            totales.trabajado++;
           }
 
           if (dia.festivo > 0) {
             stateDia = "F";
             color = colors.festivo;
+            totales.festivo++;
           }
 
           if (dia.descanso > 0) {
             stateDia = "D";
             color = colors.descanso;
+            totales.descanso++;
           }          
 
           if (dia.baja > 0) {
             stateDia = "E";
             color = colors.baja;
+            totales.baja++;
           }          
 
           if (dia.disfrutadas > 0) {
             stateDia = "V";
             color = colors.disfrutadas;
+            totales.disfrutadas++;
           }   
 
           if (dia.justificado > 0) {
             stateDia = "J";
             color = colors.justificado;
+            totales.justificado++;
           }
           
           if (dia.injustificado > 0) {
             stateDia = "I";
             color = colors.injustificado;
+            totales.injustificado++;
           }          
 
           cuadranteOperario[numeroDia]={
@@ -242,6 +259,8 @@ app.get(
           operario: operarios[i]._id.nombre,
           id_op: operarios[i]._id._id_op,
           dias: cuadranteOperario.slice(1),
+          totales: `X: ${totales.trabajado} F: ${totales.festivo} D: ${totales.descanso}
+             E: ${totales.baja} V: ${totales.disfrutadas} J: ${totales.justificado} I: ${totales.injustificado}`
           // asistencias: asistencias,
           // trabajado: asistencias.trabajado
         });
