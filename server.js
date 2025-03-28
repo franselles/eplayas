@@ -216,6 +216,7 @@ app.get(
             stateDia = "F";
             color = colors.festivo;
             totales.festivo++;
+            totales.trabajado--;
           }
 
           if (dia.descanso > 0) {
