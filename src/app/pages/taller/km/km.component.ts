@@ -26,7 +26,6 @@ export class KmComponent implements OnInit{
     this.vehicles = [];
 
     this.form = this.fb.group({
-      titulo: this.fb.control(''),
       arreglo: this.fb.array([])
     });
   }
@@ -34,13 +33,30 @@ export class KmComponent implements OnInit{
   ngOnInit(): void {
     this.vehiclesService.getVehiculos().subscribe((data: Vehiculo[]) => {
       this.vehicles = data;
+
       console.log(this.vehicles);
-     
+
+      this.vehicles.forEach((vehiculo) => {
+        this.insertaVehiculo(vehiculo);
+      })
     });
   }
 
   get arreglo(): FormArray {
     return this.form.get('arreglo') as FormArray;
+  }
+
+  insertaVehiculo(vehiculo: Vehiculo) {
+    const arreglo = this.form.get('arreglo') as FormArray;
+
+    const grupo = this.fb.group({
+      id: this.fb.control(vehiculo._id),
+      matricula: this.fb.control(vehiculo.matricula),
+      nombre: this.fb.control(vehiculo.nombre),
+      km: this.fb.control(vehiculo.km),
+    })
+
+    arreglo.push(grupo);
   }
 
   agregarVehiculo() {

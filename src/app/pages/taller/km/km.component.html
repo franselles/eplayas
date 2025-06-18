@@ -1,22 +1,23 @@
-<form [formGroup]="form" class="w-50 container mt-3 card p-3">
-
-  <input type="text" class="form-control my-2" formControlName="titulo" placeholder="Título">
+<form [formGroup]="form" class="container mt-3 card p-3">
 
   @if (arreglo.length > 0) {
     <div formArrayName="arreglo">
       @for (item of arreglo.controls; track item.value.id; let i = $index) {
-        <div class="row mb-2 col-12" [formGroupName]="i">
+        <div class="row mb-2" [formGroupName]="i">
 
-          <div class="col">
-            <input type="text" class="form-control" formControlName="id" placeholder="ID">
+          <div>
+            <input type="text" class="form-control" formControlName="id" placeholder="ID" hidden>
           </div>
 
           <div class="col">
-            <input type="text" class="form-control" formControlName="matricula" placeholder="Matrícula">
+            <input type="text" class="form-control" formControlName="matricula" placeholder="Matrícula" readonly>
           </div>
 
           <div class="col">
-            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" readonly>
+          </div>
+          <div class="col">
+            <input type="number" class="form-control" formControlName="km" placeholder="KM">
           </div>
 
           <div class="col-auto">
@@ -28,7 +29,7 @@
     </div>
   }
 
-  <button type="button" class="btn btn-primary mt-3" (click)="agregarVehiculo()">
+  <button type="button" class="btn btn-primary mt-3" (click)="agregarVehiculo()" disabled>
     Agregar nuevo vehículo
   </button>
 
