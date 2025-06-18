@@ -3,12 +3,13 @@ import { ActivatedRoute } from "@angular/router";
 
 import { Total } from "./../../../shared/models";
 import { ResumenService } from "./../../../shared/resumen.services";
+import { NgFor, NgIf, UpperCasePipe, DatePipe } from "@angular/common";
 
 @Component({
     selector: "app-resumen-dia",
     templateUrl: "./resumen-dia.component.html",
     styleUrls: ["./resumen-dia.component.css"],
-    standalone: false
+    imports: [NgFor, NgIf, UpperCasePipe, DatePipe]
 })
 export class ResumenDiaComponent implements OnInit {
     public fecha: string;

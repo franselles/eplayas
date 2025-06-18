@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Operario } from '../../../shared/models';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgFor } from '@angular/common';
+import { DetalleSegComponent } from './detalle-seg.component';
 
 @Component({
     selector: 'app-seguimiento-as',
     templateUrl: './seguimiento-as.component.html',
     styleUrls: ['./seguimiento-as.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule, FormsModule, NgFor, DetalleSegComponent]
 })
 export class SeguimientoAsComponent implements OnInit {
 

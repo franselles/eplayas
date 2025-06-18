@@ -20,15 +20,14 @@ const routes: Routes = [
   ]}
 ];
 
-@NgModule({ declarations: [
-        AnalisisComponent,
+@NgModule({
+    imports: [CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule, AnalisisComponent,
         PesosMunComponent,
         PesosPlaComponent,
         EstadisticasMunComponent,
-        EstadisticasPlaComponent
-    ], imports: [CommonModule,
-        RouterModule.forChild(routes),
-        FormsModule], providers: [
+        EstadisticasPlaComponent], providers: [
         AnalisisService,
         BdService,
         provideHttpClient(withInterceptorsFromDi())

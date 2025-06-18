@@ -1,6 +1,7 @@
 import { AnalisisService } from '../../../shared/analisis.services';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { NgFor, UpperCasePipe } from '@angular/common';
 
 // import { Total } from './../../../shared/models';
 
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-estadisticas-mun',
     templateUrl: './estadisticas-mun.component.html',
     styleUrls: ['./estadisticas-mun.component.css'],
-    standalone: false
+    imports: [NgFor, UpperCasePipe]
 })
 export class EstadisticasMunComponent implements OnInit {
 

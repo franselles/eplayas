@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Total } from './../../../shared/models';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
     selector: 'app-pesos-mun',
     templateUrl: './pesos-mun.component.html',
     styleUrls: ['./pesos-mun.component.css'],
-    standalone: false
+    imports: [UpperCasePipe]
 })
 export class PesosMunComponent implements OnInit {
 

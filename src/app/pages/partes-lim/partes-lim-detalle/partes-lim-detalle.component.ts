@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { Parte } from "./../../../shared/models";
@@ -8,12 +8,13 @@ import { EstadisticasService } from "./../../../shared/estadisticas.services";
 import { OperariosService } from "./../../../shared/operarios.services";
 import { VehiculosService } from "./../../../shared/vehiculos.services";
 import { GlobalsPartes } from "./../../../shared/globalspartes.services";
+import { NgIf, NgFor } from "@angular/common";
 
 @Component({
     selector: "app-partes-lim-detalle",
     templateUrl: "./partes-lim-detalle.component.html",
     styleUrls: ["./partes-lim-detalle.component.css"],
-    standalone: false
+    imports: [ReactiveFormsModule, NgIf, NgFor]
 })
 export class PartesLimDetalleComponent implements OnInit {
     public parteForm: UntypedFormGroup;

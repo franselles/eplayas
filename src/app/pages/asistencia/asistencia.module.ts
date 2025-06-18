@@ -57,8 +57,11 @@ const routes: Routes = [
     },
 ];
 
-@NgModule({ declarations: [
-        ControlAsComponent,
+@NgModule({
+    imports: [CommonModule,
+        RouterModule.forChild(routes),
+        FormsModule,
+        ReactiveFormsModule, ControlAsComponent,
         EntradaAsComponent,
         DetalleAsComponent,
         SeguimientoAsComponent,
@@ -66,11 +69,7 @@ const routes: Routes = [
         AcumuladoSegComponent,
         InDetalleAsComponent,
         AcumuladoAsComponent,
-        DetalleAcuComponent
-    ], imports: [CommonModule,
-        RouterModule.forChild(routes),
-        FormsModule,
-        ReactiveFormsModule], providers: [
+        DetalleAcuComponent], providers: [
         BdService,
         AsistenciaService,
         GlobalsPartes,

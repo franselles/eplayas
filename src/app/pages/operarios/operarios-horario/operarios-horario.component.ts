@@ -1,12 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { OperariosService } from "../../../shared/operarios.services";
 import { Operario } from "../../../shared/models";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { NgFor, UpperCasePipe } from "@angular/common";
 
 @Component({
     selector: "app-operarios-horario",
     templateUrl: "./operarios-horario.component.html",
     styleUrls: ["./operarios-horario.component.css"],
-    standalone: false
+    imports: [ReactiveFormsModule, FormsModule, NgFor, UpperCasePipe]
 })
 export class OperariosHorarioComponent implements OnInit {
     fecha: string;

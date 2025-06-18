@@ -3,13 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { Mantenimiento } from './../../../shared/models';
 import { MantenimientoService } from './../../../shared/mantenimiento.services';
 import { GlobalsPartes } from './../../../shared/globalspartes.services';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'app-partes-man-lista',
     templateUrl: './partes-man-lista.component.html',
     styleUrls: ['./partes-man-lista.component.css'],
-    standalone: false
+    imports: [RouterLink, ReactiveFormsModule, FormsModule, NgFor]
 })
 export class PartesManListaComponent implements OnInit {
 

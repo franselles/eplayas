@@ -19,14 +19,13 @@ const routes: Routes = [
   {path: 'detalle/:id', component: PartesManDetalleComponent, canActivate: [LoggedInGuard]}
 ];
 
-@NgModule({ declarations: [
-        PartesManComponent,
-        PartesManListaComponent,
-        PartesManDetalleComponent
-    ], imports: [CommonModule,
+@NgModule({
+    imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterModule.forChild(routes)], providers: [
+        RouterModule.forChild(routes), PartesManComponent,
+        PartesManListaComponent,
+        PartesManDetalleComponent], providers: [
         BdService,
         GlobalsPartes,
         OperariosService,

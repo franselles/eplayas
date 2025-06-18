@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Hamaca, Acumulados } from '../../../shared/models';
 import { HamacasService } from '../../../shared/hamacas.service';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgFor, DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-hamacas-historico',
     templateUrl: './hamacas-historico.component.html',
     styleUrls: ['./hamacas-historico.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule, FormsModule, NgFor, RouterLink, DatePipe]
 })
 export class HamacasHistoricoComponent implements OnInit {
 

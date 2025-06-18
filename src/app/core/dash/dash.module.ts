@@ -78,7 +78,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [CommonModule, RouterModule.forChild(routes)],
-    declarations: [TopBarComponent, MainContentComponent, DashComponent],
+    imports: [CommonModule, RouterModule.forChild(routes), TopBarComponent, MainContentComponent, DashComponent],
 })
 export class DashModule {}

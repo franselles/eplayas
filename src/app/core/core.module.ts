@@ -18,10 +18,10 @@ const routes: Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forRoot(routes, { enableTracing: false, useHash: true })
+        RouterModule.forRoot(routes, { enableTracing: false, useHash: true }),
+        CoreComponent
     ],
     exports: [CoreComponent],
-    declarations: [CoreComponent],
     providers: [LoggedInGuard, AuthenticationService]
 })
 export class CoreModule {}

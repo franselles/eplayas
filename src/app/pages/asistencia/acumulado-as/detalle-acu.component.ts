@@ -1,12 +1,14 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia } from '../../../shared/models';
+import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { InDetalleAsComponent } from '../entrada-as/in-detalle-as.component';
 
 @Component({
     selector: 'app-detalle-acu',
     templateUrl: './detalle-acu.component.html',
     styleUrls: ['./detalle-acu.component.css'],
-    standalone: false
+    imports: [NgFor, NgIf, InDetalleAsComponent, DatePipe]
 })
 export class DetalleAcuComponent implements OnInit, OnChanges {
 

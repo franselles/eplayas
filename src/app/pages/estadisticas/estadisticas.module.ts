@@ -17,13 +17,12 @@ const routes: Routes = [
   { path: '**', redirectTo: 'lista', pathMatch: 'full' }
 ];
 
-@NgModule({ declarations: [
-        EstadisticasListaComponent,
-        EstadisticasDetalleComponent
-    ], imports: [CommonModule,
+@NgModule({
+    imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterModule.forChild(routes)], providers: [
+        RouterModule.forChild(routes), EstadisticasListaComponent,
+        EstadisticasDetalleComponent], providers: [
         EstadisticasService,
         BdService,
         provideHttpClient(withInterceptorsFromDi())

@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 import { Operario } from './../../../shared/models';
 import { OperariosService } from './../../../shared/operarios.services';
+import { RouterLink } from '@angular/router';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'app-operarios-lista',
     templateUrl: './operarios-lista.component.html',
     styleUrls: ['./operarios-lista.component.css'],
-    standalone: false
+    imports: [RouterLink, NgFor]
 })
 export class OperariosListaComponent implements OnInit {
 

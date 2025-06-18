@@ -33,14 +33,13 @@ const routes: Routes = [
     }
 ];
 
-@NgModule({ declarations: [
-        PartesLimComponent,
-        PartesLimDetalleComponent,
-        PartesLimListaComponent
-    ], imports: [CommonModule,
+@NgModule({
+    imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterModule.forChild(routes)], providers: [
+        RouterModule.forChild(routes), PartesLimComponent,
+        PartesLimDetalleComponent,
+        PartesLimListaComponent], providers: [
         BdService,
         VehiculosService,
         EstadisticasService,

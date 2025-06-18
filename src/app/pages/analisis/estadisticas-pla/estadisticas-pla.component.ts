@@ -1,12 +1,13 @@
 import { AnalisisService } from '../../../shared/analisis.services';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { NgFor, UpperCasePipe } from '@angular/common';
 
 @Component({
     selector: 'app-estadisticas-pla',
     templateUrl: './estadisticas-pla.component.html',
     styleUrls: ['./estadisticas-pla.component.css'],
-    standalone: false
+    imports: [NgFor, UpperCasePipe]
 })
 export class EstadisticasPlaComponent implements OnInit {
 

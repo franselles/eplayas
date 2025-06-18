@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 import { GlobalsPartes } from './../../../shared/globalspartes.services';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-resumen',
     templateUrl: './resumen.component.html',
     styleUrls: ['./resumen.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule, FormsModule, RouterOutlet]
 })
 export class ResumenComponent implements OnInit {
     public fecha: string;

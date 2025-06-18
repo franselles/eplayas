@@ -3,12 +3,13 @@ import { Component, OnInit } from "@angular/core";
 
 // import { Parte } from './../../../shared/models';
 import { ResumenService } from "./../../../shared/resumen.services";
+import { NgFor, UpperCasePipe, DatePipe } from "@angular/common";
 
 @Component({
     selector: "app-resumen-mes",
     templateUrl: "./resumen-mes.component.html",
     styleUrls: ["./resumen-mes.component.css"],
-    standalone: false
+    imports: [NgFor, UpperCasePipe, DatePipe]
 })
 export class ResumenMesComponent implements OnInit {
     public resumen: any[];

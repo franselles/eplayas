@@ -19,15 +19,14 @@ const routes: Routes = [
   {path: 'historico', component: HamacasHistoricoComponent, canActivate: [LoggedInGuard]}
 ];
 
-@NgModule({ declarations: [
-        HamacasComponent,
-        HamacasDetalleComponent,
-        HamacasListaComponent,
-        HamacasHistoricoComponent
-    ], imports: [CommonModule,
+@NgModule({
+    imports: [CommonModule,
         RouterModule.forChild(routes),
         FormsModule,
-        ReactiveFormsModule], providers: [
+        ReactiveFormsModule, HamacasComponent,
+        HamacasDetalleComponent,
+        HamacasListaComponent,
+        HamacasHistoricoComponent], providers: [
         HamacasService,
         BdService,
         GlobalsPartes,

@@ -33,12 +33,11 @@ const routes: Routes = [
     },
 ];
 
-@NgModule({ declarations: [
-        OperariosDetalleComponent,
-        OperariosListaComponent,
-        OperariosHorarioComponent,
-    ], imports: [CommonModule,
+@NgModule({
+    imports: [CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterModule.forChild(routes)], providers: [OperariosService, BdService, provideHttpClient(withInterceptorsFromDi())] })
+        RouterModule.forChild(routes), OperariosDetalleComponent,
+        OperariosListaComponent,
+        OperariosHorarioComponent], providers: [OperariosService, BdService, provideHttpClient(withInterceptorsFromDi())] })
 export class OperariosModule {}

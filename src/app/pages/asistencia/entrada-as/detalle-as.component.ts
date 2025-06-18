@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia, Operario } from '../../../shared/models';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-detalle-as',
     templateUrl: './detalle-as.component.html',
     styleUrls: ['./detalle-as.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule, NgIf]
 })
 export class DetalleAsComponent implements OnInit {
 

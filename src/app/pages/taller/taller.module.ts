@@ -2,16 +2,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TallerComponent } from './taller/taller.component';
+import { KmComponent } from './km/km.component';
+import { VehiculosService } from '../../shared/vehiculos.services';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { BdService } from '../../shared/bd.services';
 
 const routes: Routes = [
-  {path: '', component: TallerComponent}
+  {path: '', component: TallerComponent},
+  {path: 'km', component: KmComponent}
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [TallerComponent]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        TallerComponent
+    ],
+    providers: [VehiculosService, BdService, provideHttpClient(withInterceptorsFromDi())]
 })
 export class TallerModule { }

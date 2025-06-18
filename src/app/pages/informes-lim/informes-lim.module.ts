@@ -18,13 +18,12 @@ const routes: Routes = [
   ]}
 ];
 
-@NgModule({ declarations: [
-        ResumenDiaComponent,
-        ResumenMesComponent,
-        ResumenComponent
-    ], imports: [CommonModule,
+@NgModule({
+    imports: [CommonModule,
         RouterModule.forChild(routes),
-        FormsModule], providers: [
+        FormsModule, ResumenDiaComponent,
+        ResumenMesComponent,
+        ResumenComponent], providers: [
         ResumenService,
         BdService,
         GlobalsPartes,

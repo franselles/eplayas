@@ -1,15 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { Operario } from "./../../../shared/models";
 import { OperariosService } from "./../../../shared/operarios.services";
+import { NgIf } from "@angular/common";
 
 @Component({
     selector: "app-operarios-detalle",
     templateUrl: "./operarios-detalle.component.html",
     styleUrls: ["./operarios-detalle.component.css"],
-    standalone: false
+    imports: [ReactiveFormsModule, NgIf]
 })
 export class OperariosDetalleComponent implements OnInit {
     public operariosForm: UntypedFormGroup;

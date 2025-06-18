@@ -1,14 +1,15 @@
 import { Estadistica } from '../../../shared/models';
 import { EstadisticasService } from '../../../shared/estadisticas.services';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-estadisticas-detalle',
     templateUrl: './estadisticas-detalle.component.html',
     styleUrls: ['./estadisticas-detalle.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule, NgIf]
 })
 export class EstadisticasDetalleComponent implements OnInit {
 

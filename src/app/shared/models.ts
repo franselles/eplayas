@@ -25,6 +25,9 @@ export interface Vehiculo {
     prx_itv: string;
     int_itv: string;
     nota: string;
+    km: number;
+    km_tramo: number;
+    km_sig_rev: number;
 }
 
 export interface Estadistica {

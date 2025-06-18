@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Mantenimiento } from './../../../shared/models';
@@ -7,12 +7,13 @@ import { MantenimientoService } from './../../../shared/mantenimiento.services';
 import { OperariosService } from './../../../shared/operarios.services';
 import { VehiculosService } from './../../../shared/vehiculos.services';
 import { GlobalsPartes } from './../../../shared/globalspartes.services';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
     selector: 'app-partes-man-detalle',
     templateUrl: './partes-man-detalle.component.html',
     styleUrls: ['./partes-man-detalle.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule, NgIf, NgFor]
 })
 export class PartesManDetalleComponent implements OnInit {
 

@@ -5,8 +5,7 @@ import { TotalAsistencia } from '../../../shared/models';
 @Component({
     selector: 'app-acumulado-seg',
     templateUrl: './acumulado-seg.component.html',
-    styleUrls: ['./acumulado-seg.component.css'],
-    standalone: false
+    styleUrls: ['./acumulado-seg.component.css']
 })
 export class AcumuladoSegComponent implements OnInit, OnChanges {
 
