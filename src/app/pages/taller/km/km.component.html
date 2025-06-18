@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="container mt-3 card p-3">
+<form [formGroup]="form" class="container mt-3 card p-3" (ngSubmit)="onSubmit()">
 
   @if (arreglo.length > 0) {
     <div formArrayName="arreglo">
@@ -19,18 +19,11 @@
           <div class="col">
             <input type="number" class="form-control" formControlName="km" placeholder="KM">
           </div>
-
-          <div class="col-auto">
-            <button type="button" class="btn btn-danger" (click)="borrarGrupo(i)">Borrar</button>
-          </div>
-
         </div>
       }
     </div>
   }
 
-  <button type="button" class="btn btn-primary mt-3" (click)="agregarVehiculo()" disabled>
-    Agregar nuevo vehículo
-  </button>
+  <button type="submit" class="btn btn-primary mt-3">Grabar KMs</button>
 
 </form>

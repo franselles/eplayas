@@ -76,4 +76,8 @@ export class KmComponent implements OnInit{
     arreglo.removeAt(i);
  }
 
+ onSubmit(){
+  console.log(this.form.value);
+ }
+
 }
