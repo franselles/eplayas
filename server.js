@@ -3,8 +3,8 @@ var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var ObjectID = mongodb.ObjectID;
 // const ObjectId = mongodb.ObjectId;
-const { MongoClient, ObjectId } = require('mongodb');
-const cors = require('cors');
+// const { MongoClient, ObjectId } = require('mongodb');
+// const cors = require('cors');
 
 var PARTES_COLLECTION = 'partes';
 var OPERARIOS_COLLECTION = 'operarios';
@@ -1993,7 +1993,7 @@ app.put('/api/vehiculos/km', function (req, res) {
   const updatedKM = updateKm.map( eachObj => {
     return {
         updateOne: {
-            filter: { _id: new ObjectId(eachObj.id) },
+            filter: { _id: new ObjectID(eachObj.id) },
             update: { $set: { km: parseInt(eachObj.km) } }
         }
     }
