@@ -2,18 +2,22 @@ import { Component, inject, OnInit } from '@angular/core';
 
 import { Vehiculo } from '../../../shared/models';
 import { VehiculosService } from '../../../shared/vehiculos.services';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-km',
   templateUrl: './km.component.html',
   styleUrl: './km.component.css',
-  imports:[ReactiveFormsModule, CommonModule],
-  standalone: true
+  imports: [ReactiveFormsModule, CommonModule],
+  standalone: true,
 })
-export class KmComponent implements OnInit{
-
+export class KmComponent implements OnInit {
   private vehiclesService = inject(VehiculosService);
   public fb = inject(FormBuilder);
 
@@ -22,11 +26,11 @@ export class KmComponent implements OnInit{
 
   private idCounter = 0;
 
-  constructor(){
+  constructor() {
     this.vehicles = [];
 
     this.form = this.fb.group({
-      arreglo: this.fb.array([])
+      arreglo: this.fb.array([]),
     });
   }
 
@@ -38,7 +42,7 @@ export class KmComponent implements OnInit{
 
       this.vehicles.forEach((vehiculo) => {
         this.insertaVehiculo(vehiculo);
-      })
+      });
     });
   }
 
@@ -54,7 +58,7 @@ export class KmComponent implements OnInit{
       matricula: this.fb.control(vehiculo.matricula),
       nombre: this.fb.control(vehiculo.nombre),
       km: this.fb.control(vehiculo.km),
-    })
+    });
 
     arreglo.push(grupo);
   }
@@ -66,18 +70,17 @@ export class KmComponent implements OnInit{
       id: this.fb.control(this.idCounter++),
       matricula: this.fb.control(''),
       nombre: this.fb.control(''),
-    })
+    });
 
     arreglo.push(grupo);
   }
 
-   borrarGrupo(i: number) {
+  borrarGrupo(i: number) {
     const arreglo = this.form.get('arreglo') as FormArray;
     arreglo.removeAt(i);
- }
+  }
 
- onSubmit(){
-  console.log(this.form.value);
- }
-
+  onSubmit() {
+    console.log(this.form.value);
+  }
 }
