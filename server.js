@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
-// var ObjectID = mongodb.ObjectID;
+var ObjectID = mongodb.ObjectID;
 // const ObjectId = mongodb.ObjectId;
 const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
@@ -17,7 +17,7 @@ var CONSTANTES_COLLECTION = 'constantes';
 
 var app = express();
 
-app.use(cors());
+// app.use(cors());
 
 app.use(bodyParser.json());
 
