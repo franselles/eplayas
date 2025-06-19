@@ -38,8 +38,6 @@ export class KmComponent implements OnInit {
     this.vehiclesService.getVehiculos().subscribe((data: Vehiculo[]) => {
       this.vehicles = data;
 
-      console.log(this.vehicles);
-
       this.vehicles.forEach((vehiculo) => {
         this.insertaVehiculo(vehiculo);
       });
@@ -81,6 +79,12 @@ export class KmComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    console.log(this.form.value.arreglo);
+    this.vehiclesService.updateKm(this.form.value.arreglo).subscribe(
+    () => {
+        console.log("Actualizado");
+    },
+    (error) => console.error("Error actualizacion : " + error)
+    );
   }
 }

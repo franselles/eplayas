@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BdService } from './../shared/bd.services';
+import { Vehiculo } from './models';
 
 
 @Injectable()
@@ -30,9 +31,9 @@ export class VehiculosService {
   removeOperario(id: number | string) {
     return this.http.delete(this.BASE_URL + id);
   }
-
-  updateOperario(id: string | number, operario: Operario) {
-    return this.http.put(this.BASE_URL + id, operario);
-  }
   */
+  updateKm(vehiculos: Vehiculo[]) {
+    return this.http.put(this.BASE_URL + 'km', vehiculos);
+  }
+
 }

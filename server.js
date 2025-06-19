@@ -1,7 +1,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
-var ObjectID = mongodb.ObjectID;
+// var ObjectID = mongodb.ObjectID;
+// const ObjectId = mongodb.ObjectId;
+const { MongoClient, ObjectId } = require('mongodb');
+const cors = require('cors');
 
 var PARTES_COLLECTION = 'partes';
 var OPERARIOS_COLLECTION = 'operarios';
@@ -13,6 +16,9 @@ var MANTENIMIENTO_COLLECTION = 'mantenimiento';
 var CONSTANTES_COLLECTION = 'constantes';
 
 var app = express();
+
+app.use(cors());
+
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
@@ -1971,7 +1977,7 @@ app.get(
 app.get('/api/vehiculos', function (req, res) {
   db.collection(VEHICULOS_COLLECTION)
     .find({})
-    .sort({ matricula: 1 })
+    .sort({ nombre: 1 })
     .toArray(function (err, docs) {
       if (err) {
         handleError(res, err.message, 'Failed to get vehiculos.');
@@ -1979,6 +1985,30 @@ app.get('/api/vehiculos', function (req, res) {
         res.status(200).json(docs);
       }
     });
+});
+
+app.put('/api/vehiculos/km', function (req, res) {
+  const updateKm = req.body;
+
+  const updatedKM = updateKm.map( eachObj => {
+    return {
+        updateOne: {
+            filter: { _id: new ObjectId(eachObj.id) },
+            update: { $set: { km: parseInt(eachObj.km) } }
+        }
+    }
+  })
+
+
+  db.collection(VEHICULOS_COLLECTION).bulkWrite(updatedKM, { ordered: false })
+  .then((result) => {   
+    res.json({ 
+      success: true
+    });
+  }).catch(err => {
+    console.log("=== ERROR BULKWRITE ===", err);
+    res.status(500).json({ error: err.message });
+  });
 });
 
 // CALCULA ESTADISTICAS API ROUTES BELOW
