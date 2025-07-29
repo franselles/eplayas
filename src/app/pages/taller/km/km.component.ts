@@ -27,6 +27,7 @@ export class KmComponent implements OnInit {
   form: FormGroup;
 
   private idCounter = 0;
+  public actualizado: boolean = false;
 
   constructor() {
     this.vehicles = [];
@@ -89,7 +90,10 @@ export class KmComponent implements OnInit {
     console.log(this.form.value.arreglo);
     this.vehiclesService.updateKm(this.form.value.arreglo).subscribe(
       () => {
-        console.log('Actualizado');
+        this.actualizado = true;
+        setTimeout(() => {
+          this.actualizado = false;
+        }, 3000);
       },
       (error) => console.error('Error actualizacion : ' + error),
     );
