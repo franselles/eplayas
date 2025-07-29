@@ -1994,7 +1994,13 @@ app.put('/api/vehiculos/km', function (req, res) {
     return {
         updateOne: {
             filter: { _id: new ObjectID(eachObj.id) },
-            update: { $set: { km: parseInt(eachObj.km) } }
+            update: { $set: {
+               km: parseInt(eachObj.km),
+               km_tramo: parseInt(eachObj.km_tramo),
+               km_sig_rev: parseInt(eachObj.km_sig_rev),
+               ult_itv: eachObj.ult_itv,
+               prx_itv: eachObj.prx_itv,
+             } }
         }
     }
   })
@@ -2009,6 +2015,54 @@ app.put('/api/vehiculos/km', function (req, res) {
     console.log("=== ERROR BULKWRITE ===", err);
     res.status(500).json({ error: err.message });
   });
+});
+
+// API para alertas de cita ITV (30 días de antelación)
+
+app.get('/api/vehiculos/cita-itv', function(req, res) {
+  const hoy = new Date();
+  const en30Dias = new Date();
+  en30Dias.setDate(hoy.getDate() + 30);
+  
+  const fechaHoy = hoy.toISOString().split('T')[0];
+  const fechaLimite = en30Dias.toISOString().split('T')[0];
+  
+  // Buscar vehículos cuya próxima ITV esté entre hoy y 30 días
+  const query = {
+    prx_itv: {
+      $gte: fechaHoy,     // Desde hoy
+      $lte: fechaLimite,  // Hasta 30 días
+      $ne: ''             // Que no esté vacío
+    }
+  };
+  
+  db.collection(VEHICULOS_COLLECTION)
+    .find(query)
+    .sort({ prx_itv: 1 })  // Ordenar por fecha de ITV (más urgente primero)
+    .toArray(function(err, docs) {
+      if (err) {
+        handleError(res, err.message, 'Failed to get vehiculos for ITV appointment.');
+      } else {
+        // Mapear solo los campos necesarios y calcular días restantes
+        const vehiculosParaCita = docs.map(vehiculo => {
+          const fechaItv = new Date(vehiculo.prx_itv);
+          const diasRestantes = Math.ceil((fechaItv - hoy) / (1000 * 60 * 60 * 24));
+          
+          return {
+            matricula: vehiculo.matricula,
+            nombre: vehiculo.nombre,
+            fecha_limite_itv: vehiculo.prx_itv,
+            dias_restantes: diasRestantes,
+            urgencia: diasRestantes <= 7 ? 'alta' : diasRestantes <= 15 ? 'media' : 'baja'
+          };
+        });
+        
+        res.status(200).json({
+          total: vehiculosParaCita.length,
+          vehiculos: vehiculosParaCita
+        });
+      }
+    });
 });
 
 // CALCULA ESTADISTICAS API ROUTES BELOW

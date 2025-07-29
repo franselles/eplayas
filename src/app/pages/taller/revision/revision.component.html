@@ -1,0 +1,36 @@
+<p>revision works!</p>
+<form [formGroup]="form" class="container mt-3 card p-3" (ngSubmit)="onSubmit()">
+
+  @if (arreglo.length > 0) {
+    <div formArrayName="arreglo">
+      @for (item of arreglo.controls; track item.value.id; let i = $index) {
+        <div class="row mb-2" [formGroupName]="i">
+
+          <div>
+            <input type="text" class="form-control" formControlName="id" placeholder="ID" hidden>
+          </div>
+
+          <div class="col">
+            <input type="text" class="form-control" formControlName="matricula" placeholder="Matrícula" readonly>
+          </div>
+
+          <div class="col">
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" readonly>
+          </div>
+          <div class="col">
+            <input type="number" class="form-control" formControlName="km" placeholder="KM">
+          </div>
+          <div class="col">
+            <input type="number" class="form-control" formControlName="km_tramo" placeholder="Tramo" readonly>
+          </div>          
+          <div class="col">
+            <input type="number" class="form-control" formControlName="km_sig_rev" placeholder="Siguiente Revisión">
+          </div>          
+        </div>
+      }
+    </div>
+  }
+
+  <button type="submit" class="btn btn-primary mt-3">Grabar KMs</button>
+
+</form>

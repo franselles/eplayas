@@ -161,3 +161,11 @@ export interface Cuadrante {
     dias: DiaCuadrante[];
     totales: string;
 }
+
+export interface ItvAlert {
+    matricula: string;
+    nombre: string;
+    fecha_limite_itv: string;
+    dias_restantes: number;
+    urgencia: string;
+}

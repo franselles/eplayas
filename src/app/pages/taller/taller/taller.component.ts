@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { VehiculosService } from '../../../shared/vehiculos.services';
+import { ItvAlert } from '../../../shared/models';
 
 @Component({
     selector: 'app-taller',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TallerComponent implements OnInit {
 
-  constructor() { }
+  private vehicleService = inject(VehiculosService);
+
+  itvs: ItvAlert[] = [];
+
+  constructor() {
+        this.vehicleService.getItvAlert().subscribe((data: ItvAlert[]) => {
+          this.itvs = data;
+          console.log(this.itvs);
+        });
+   }
 
   ngOnInit() {
   }

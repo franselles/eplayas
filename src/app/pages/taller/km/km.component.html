@@ -1,29 +1,71 @@
 <form [formGroup]="form" class="container mt-3 card p-3" (ngSubmit)="onSubmit()">
-
   @if (arreglo.length > 0) {
     <div formArrayName="arreglo">
       @for (item of arreglo.controls; track item.value.id; let i = $index) {
-        <div class="row mb-2" [formGroupName]="i">
-
-          <div>
-            <input type="text" class="form-control" formControlName="id" placeholder="ID" hidden>
+        <div class="mb-4 border-bottom pb-3" [formGroupName]="i">
+          <!-- Campos ocultos y de solo lectura -->
+          <div class="row mb-3">
+            <div class="d-none">
+              <input type="text" class="form-control" formControlName="id" placeholder="ID">
+            </div>
+            <div class="col-12 col-md-4 mb-2 mb-md-0">
+              <label class="form-label fw-bold">Matrícula</label>
+              <input type="text" class="form-control" formControlName="matricula" placeholder="Matrícula" readonly>
+            </div>
+            <div class="col-12 col-md-8">
+              <label class="form-label fw-bold">Nombre</label>
+              <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" readonly>
+            </div>
           </div>
 
-          <div class="col">
-            <input type="text" class="form-control" formControlName="matricula" placeholder="Matrícula" readonly>
-          </div>
+          <!-- Campos editables organizados responsivamente -->
+          <div class="row g-3">
+            <!-- KM -->
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="km_{{i}}" class="form-label">KM</label>
+              <input type="number" id="km_{{i}}" class="form-control" formControlName="km" placeholder="KM">
+            </div>
 
-          <div class="col">
-            <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" readonly>
-          </div>
-          <div class="col">
-            <input type="number" class="form-control" formControlName="km" placeholder="KM">
+            <!-- KM TRAMO -->
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="km_tramo_{{i}}" class="form-label">KM TRAMO</label>
+              <input type="number" id="km_tramo_{{i}}" class="form-control" formControlName="km_tramo" placeholder="KM Tramo">
+            </div>
+
+            <!-- KM SIG REV -->
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="km_sig_rev_{{i}}" class="form-label">KM SIG REV</label>
+              <input type="number" id="km_sig_rev_{{i}}" class="form-control" formControlName="km_sig_rev" placeholder="KM Siguiente Revisión">
+            </div>
+
+            <!-- ULT ITV -->
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="ult_itv_{{i}}" class="form-label">ÚLTIMA ITV</label>
+              <input type="date" id="ult_itv_{{i}}" class="form-control" formControlName="ult_itv">
+            </div>
+
+            <!-- PROX ITV -->
+            <div class="col-12 col-sm-6 col-lg-4">
+              <label for="prx_itv_{{i}}" class="form-label">PRÓXIMA ITV</label>
+              <input type="date" id="prx_itv_{{i}}" class="form-control" formControlName="prx_itv">
+            </div>
+
+            <!-- Enlace Reparación -->
+            <div class="col-12 col-sm-6 col-lg-4 d-flex align-items-end">
+              <a [routerLink]="['/dash/taller/reparacion/', item.value.id]" 
+                 class="btn btn-outline-secondary w-100">
+                <i class="bi bi-tools me-2"></i>Reparación
+              </a>
+            </div>
           </div>
         </div>
       }
     </div>
   }
 
-  <button type="submit" class="btn btn-primary mt-3">Grabar KMs</button>
-
+  <div class="text-center mt-4">
+    <button type="submit" class="btn btn-primary btn-lg px-4">
+      <i class="bi bi-save me-2"></i>Grabar KMs
+    </button>
+  </div>
 </form>
