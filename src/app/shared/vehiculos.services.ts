@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BdService } from './../shared/bd.services';
-import { ItvAlert, Vehiculo } from './models';
+import { RespuestaAlertasITV, Vehiculo } from './models';
 import { Observable } from 'rxjs';
 
 
@@ -38,8 +38,8 @@ export class VehiculosService {
   }
 
   //api/vehiculos/cita-itv
-  getItvAlert(): Observable<ItvAlert[]> {
-    return this.http.get<ItvAlert[]>(this.BASE_URL + 'cita-itv');
+  getItvAlert(): Observable<RespuestaAlertasITV> {
+    return this.http.get<RespuestaAlertasITV>(this.BASE_URL + 'cita-itv');
   }
 
 }

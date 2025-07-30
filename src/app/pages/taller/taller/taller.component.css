@@ -1,0 +1,77 @@
+/* Estilos para las diferentes versiones */
+
+/* Colores por urgencia */
+.border-vencida { border-color: #dc3545 !important; }
+.border-alta { border-color: #fd7e14 !important; }
+.border-media { border-color: #ffc107 !important; }
+.border-baja { border-color: #28a745 !important; }
+
+.bg-vencida { background-color: #dc3545 !important; }
+.bg-alta { background-color: #fd7e14 !important; }
+.bg-media { background-color: #ffc107 !important; }
+.bg-baja { background-color: #28a745 !important; }
+
+/* Badges */
+.badge-vencida { background-color: #dc3545; color: white; }
+.badge-alta { background-color: #fd7e14; color: white; }
+.badge-media { background-color: #ffc107; color: #000; }
+.badge-baja { background-color: #28a745; color: white; }
+
+/* Colores de texto para días */
+.text-danger { color: #dc3545 !important; }
+.text-warning { color: #fd7e14 !important; }
+.text-success { color: #28a745 !important; }
+
+/* Timeline styles */
+.timeline {
+  position: relative;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 30px;
+  width: 2px;
+  height: calc(100% + 16px);
+  background-color: #e9ecef;
+}
+
+.timeline-content {
+  margin-top: -5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-item {
+    padding-left: 35px;
+  }
+  
+  .timeline-marker {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
+  }
+  
+  .timeline-item:not(:last-child)::before {
+    left: 12px;
+  }
+}

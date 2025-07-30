@@ -2030,7 +2030,7 @@ app.get('/api/vehiculos/cita-itv', function(req, res) {
   // Buscar vehículos cuya próxima ITV esté entre hoy y 30 días
   const query = {
     prx_itv: {
-      $gte: fechaHoy,     // Desde hoy
+      //$gte: fechaHoy,     // Desde hoy
       $lte: fechaLimite,  // Hasta 30 días
       $ne: ''             // Que no esté vacío
     }
@@ -2053,7 +2053,7 @@ app.get('/api/vehiculos/cita-itv', function(req, res) {
             nombre: vehiculo.nombre,
             fecha_limite_itv: vehiculo.prx_itv,
             dias_restantes: diasRestantes,
-            urgencia: diasRestantes <= 7 ? 'alta' : diasRestantes <= 15 ? 'media' : 'baja'
+            urgencia: diasRestantes <= 0 ? 'vencida' : diasRestantes <= 7 ? 'alta' : diasRestantes <= 15 ? 'media' : 'baja'
           };
         });
         

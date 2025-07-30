@@ -162,10 +162,15 @@ export interface Cuadrante {
     totales: string;
 }
 
-export interface ItvAlert {
-    matricula: string;
-    nombre: string;
-    fecha_limite_itv: string;
-    dias_restantes: number;
-    urgencia: string;
+export interface VehiculoAlertaITV {
+  matricula: string;
+  nombre: string;
+  fecha_limite_itv: string;
+  dias_restantes: number;
+  urgencia: 'vencida' | 'alta' | 'media' | 'baja';
+}
+
+export interface RespuestaAlertasITV {
+  total: number;
+  vehiculos: VehiculoAlertaITV[];
 }

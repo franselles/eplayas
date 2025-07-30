@@ -1,5 +1,58 @@
-<p>
-  Gestion del taller
-</p>
 
-
+<p></p>
+<!-- Versión 4: Timeline vertical -->
+@if (itvs.total > 0) {
+  <div class="col-md-12">
+    <div class="card shadow-sm">
+      <div class="card-header bg-gradient-primary text-black">
+        <h5 class="mb-0">
+          <i class="fas fa-timeline me-2"></i>
+          Próximas ITVs
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="timeline">
+          @for(itv of itvs.vehiculos; track itv.matricula; let i = $index){
+            <div class="timeline-item mb-4" [ngClass]="'timeline-' + itv.urgencia">
+              <div class="timeline-marker" [ngClass]="'bg-' + getColorByUrgencia(itv.urgencia)">
+                <i class="fas fa-car text-white"></i>
+              </div>
+              <div class="timeline-content">
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-md-4">
+                        <h6 class="mb-1 text-primary fw-bold">{{itv.matricula}}</h6>
+                        <p class="mb-0 text-muted small">{{itv.nombre}}</p>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="text-center">
+                          <i class="fas fa-calendar-alt text-muted me-1"></i>
+                          <span class="fw-semibold">{{itv.fecha_limite_itv | date:'dd/MM/yyyy'}}</span>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="text-center">
+                          <span class="fw-bold" [ngClass]="getTextColorByDays(itv.dias_restantes)">
+                            {{getDiasTexto(itv.dias_restantes)}}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="d-flex justify-content-end align-items-center">
+                          <span class="badge me-2" [ngClass]="getBadgeClass(itv.urgencia)">
+                            {{itv.urgencia | titlecase}}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
