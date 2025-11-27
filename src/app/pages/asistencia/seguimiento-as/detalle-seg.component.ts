@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia } from '../../../shared/models';
-import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { InDetalleAsComponent } from '../entrada-as/in-detalle-as.component';
 
 @Component({
     selector: 'app-detalle-seg',
     templateUrl: './detalle-seg.component.html',
     styleUrls: ['./detalle-seg.component.css'],
-    imports: [NgFor, NgIf, InDetalleAsComponent, DatePipe]
+    imports: [InDetalleAsComponent, DatePipe]
 })
 export class DetalleSegComponent implements OnInit, OnChanges {
 

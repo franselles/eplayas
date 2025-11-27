@@ -3,13 +3,13 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule }
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hamaca } from '../../../shared/models';
 import { HamacasService } from '../../../shared/hamacas.service';
-import { Location, NgIf } from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-hamacas-detalle',
     templateUrl: './hamacas-detalle.component.html',
     styleUrls: ['./hamacas-detalle.component.css'],
-    imports: [ReactiveFormsModule, NgIf]
+    imports: [ReactiveFormsModule]
 })
 export class HamacasDetalleComponent implements OnInit {
 

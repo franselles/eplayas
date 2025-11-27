@@ -7,13 +7,13 @@ import { MantenimientoService } from './../../../shared/mantenimiento.services';
 import { OperariosService } from './../../../shared/operarios.services';
 import { VehiculosService } from './../../../shared/vehiculos.services';
 import { GlobalsPartes } from './../../../shared/globalspartes.services';
-import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-partes-man-detalle',
     templateUrl: './partes-man-detalle.component.html',
     styleUrls: ['./partes-man-detalle.component.css'],
-    imports: [ReactiveFormsModule, NgIf, NgFor]
+    imports: [ReactiveFormsModule]
 })
 export class PartesManDetalleComponent implements OnInit {
 

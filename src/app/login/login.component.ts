@@ -3,13 +3,13 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule }
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './../shared/authentication.services';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    imports: [ReactiveFormsModule, NgIf]
+    imports: [ReactiveFormsModule]
 })
 export class LoginComponent implements OnInit {
 

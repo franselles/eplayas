@@ -5,13 +5,13 @@ import { Parte } from "./../../../shared/models";
 import { PartesService } from "./../../../shared/partes.services";
 import { GlobalsPartes } from "./../../../shared/globalspartes.services";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { NgIf, NgFor } from "@angular/common";
+
 
 @Component({
     selector: "app-partes-lim-lista",
     templateUrl: "./partes-lim-lista.component.html",
     styleUrls: ["./partes-lim-lista.component.css"],
-    imports: [RouterLink, ReactiveFormsModule, FormsModule, NgIf, NgFor]
+    imports: [RouterLink, ReactiveFormsModule, FormsModule]
 })
 export class PartesLimListaComponent implements OnInit {
     public listaPartes: Parte[] = [];

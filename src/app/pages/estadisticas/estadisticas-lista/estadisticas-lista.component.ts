@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { Estadistica } from './../../../shared/models';
 import { RouterLink } from '@angular/router';
-import { NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-estadisticas-lista',
     templateUrl: './estadisticas-lista.component.html',
     styleUrls: ['./estadisticas-lista.component.css'],
-    imports: [RouterLink, NgFor]
+    imports: [RouterLink]
 })
 export class EstadisticasListaComponent implements OnInit {
 

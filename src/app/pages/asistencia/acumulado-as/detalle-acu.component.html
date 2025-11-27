@@ -9,26 +9,48 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of asistencia; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>
-          {{ item.fecha }} - {{ item.fecha | date: 'EEEE'}}
-          <button type="button" class="btn btn-primary btn-sm" (click)="ventanaClick(i, 'e')">Editar</button>
-        </td>
-        <td>
-          <div *ngIf="item.trabajado > 0" style="background-color: #24e9f7;">Dia trabajado: {{ item.trabajado }}</div>
-          <div *ngIf="item.descanso > 0" style="background-color: #21f77a;">Dia descanso: {{ item.descanso }}</div>
-          <div *ngIf="item.festivo > 0" style="background-color: #f860f8; color: white;">Dia festivo: {{ item.festivo }}</div>
-          <div *ngIf="item.vacaciones > 0" style="background-color: #f7ee70;">Dias vacaciones pendientes: {{ item.vacaciones }}</div>
-          <div *ngIf="item.disfrutadas > 0" style="background-color: #f7bc3c;">Dias vacaciones disfrutadas: {{ item.disfrutadas }}</div>
-          <div *ngIf="item.baja > 0" style="background-color: #f73c3c; color: white;">Baja: {{ item.baja }}</div>
-          <div *ngIf="item.justificado > 0">Dia justificado: {{ item.justificado }}</div>
-          <div *ngIf="item.injustificado > 0" style="background-color: #7c7c7c; color: white;">Dia no justificado: {{ item.injustificado }}</div>
-          <div *ngIf="(item.fecha_inicio != '') && (item.fecha_inicio != null)">Desde {{ item.fecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ item.fecha_fin | date:'dd/MM/yyyy' }}</div>
-          <app-in-detalle-as [ffecha]="item.fecha" [idd]="item.id_op" (upventana)="ventanaClick($event, 'e')" *ngIf="ventana == i && tipoVentana === 'e'"></app-in-detalle-as>
-        </td>
-        <td><pre>{{ item.observacion }}</pre></td>
-      </tr>
+      @for (item of asistencia; track item; let i = $index) {
+        <tr>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            {{ item.fecha }} - {{ item.fecha | date: 'EEEE'}}
+            <button type="button" class="btn btn-primary btn-sm" (click)="ventanaClick(i, 'e')">Editar</button>
+          </td>
+          <td>
+            @if (item.trabajado > 0) {
+              <div style="background-color: #24e9f7;">Dia trabajado: {{ item.trabajado }}</div>
+            }
+            @if (item.descanso > 0) {
+              <div style="background-color: #21f77a;">Dia descanso: {{ item.descanso }}</div>
+            }
+            @if (item.festivo > 0) {
+              <div style="background-color: #f860f8; color: white;">Dia festivo: {{ item.festivo }}</div>
+            }
+            @if (item.vacaciones > 0) {
+              <div style="background-color: #f7ee70;">Dias vacaciones pendientes: {{ item.vacaciones }}</div>
+            }
+            @if (item.disfrutadas > 0) {
+              <div style="background-color: #f7bc3c;">Dias vacaciones disfrutadas: {{ item.disfrutadas }}</div>
+            }
+            @if (item.baja > 0) {
+              <div style="background-color: #f73c3c; color: white;">Baja: {{ item.baja }}</div>
+            }
+            @if (item.justificado > 0) {
+              <div>Dia justificado: {{ item.justificado }}</div>
+            }
+            @if (item.injustificado > 0) {
+              <div style="background-color: #7c7c7c; color: white;">Dia no justificado: {{ item.injustificado }}</div>
+            }
+            @if ((item.fecha_inicio != '') && (item.fecha_inicio != null)) {
+              <div>Desde {{ item.fecha_inicio | date:'dd/MM/yyyy' }}<br>Hasta {{ item.fecha_fin | date:'dd/MM/yyyy' }}</div>
+            }
+            @if (ventana == i && tipoVentana === 'e') {
+              <app-in-detalle-as [ffecha]="item.fecha" [idd]="item.id_op" (upventana)="ventanaClick($event, 'e')"></app-in-detalle-as>
+            }
+          </td>
+          <td><pre>{{ item.observacion }}</pre></td>
+        </tr>
+      }
     </tbody>
   </table>
 </div>

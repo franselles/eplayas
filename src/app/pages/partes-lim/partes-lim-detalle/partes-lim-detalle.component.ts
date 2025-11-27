@@ -8,13 +8,13 @@ import { EstadisticasService } from "./../../../shared/estadisticas.services";
 import { OperariosService } from "./../../../shared/operarios.services";
 import { VehiculosService } from "./../../../shared/vehiculos.services";
 import { GlobalsPartes } from "./../../../shared/globalspartes.services";
-import { NgIf, NgFor } from "@angular/common";
+
 
 @Component({
     selector: "app-partes-lim-detalle",
     templateUrl: "./partes-lim-detalle.component.html",
     styleUrls: ["./partes-lim-detalle.component.css"],
-    imports: [ReactiveFormsModule, NgIf, NgFor]
+    imports: [ReactiveFormsModule]
 })
 export class PartesLimDetalleComponent implements OnInit {
     public parteForm: UntypedFormGroup;

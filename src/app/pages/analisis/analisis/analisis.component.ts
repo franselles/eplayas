@@ -1,13 +1,13 @@
 import { Router, RouterOutlet } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-analisis',
     templateUrl: './analisis.component.html',
     styleUrls: ['./analisis.component.css'],
-    imports: [ReactiveFormsModule, FormsModule, NgIf, RouterOutlet]
+    imports: [ReactiveFormsModule, FormsModule, RouterOutlet]
 })
 export class AnalisisComponent implements OnInit {
     public tipo: string;

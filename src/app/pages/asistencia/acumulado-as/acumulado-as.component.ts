@@ -3,7 +3,7 @@ import { AsistenciaService } from '../../../shared/asistencia.services';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
 import { Operario } from '../../../shared/models';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+
 import { AcumuladoSegComponent } from './acumulado-seg.component';
 import { DetalleAcuComponent } from './detalle-acu.component';
 
@@ -11,7 +11,7 @@ import { DetalleAcuComponent } from './detalle-acu.component';
     selector: 'app-acumulado-as',
     templateUrl: './acumulado-as.component.html',
     styleUrls: ['./acumulado-as.component.css'],
-    imports: [ReactiveFormsModule, FormsModule, NgFor, AcumuladoSegComponent, DetalleAcuComponent]
+    imports: [ReactiveFormsModule, FormsModule, AcumuladoSegComponent, DetalleAcuComponent]
 })
 export class AcumuladoAsComponent implements OnInit {
 

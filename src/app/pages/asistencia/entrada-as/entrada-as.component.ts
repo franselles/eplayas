@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Operario, Asistencia } from "../../../shared/models";
 import { GlobalsPartes } from "./../../../shared/globalspartes.services";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { NgFor, NgIf, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 import { InDetalleAsComponent } from "./in-detalle-as.component";
 
 @Component({
     selector: "app-entrada-as",
     templateUrl: "./entrada-as.component.html",
     styleUrls: ["./entrada-as.component.css"],
-    imports: [ReactiveFormsModule, FormsModule, NgFor, NgIf, InDetalleAsComponent, DatePipe]
+    imports: [ReactiveFormsModule, FormsModule, InDetalleAsComponent, DatePipe]
 })
 export class EntradaAsComponent implements OnInit {
     public operarios: Operario[] = [];

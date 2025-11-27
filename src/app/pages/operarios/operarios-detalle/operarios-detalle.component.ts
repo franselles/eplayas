@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { Operario } from "./../../../shared/models";
 import { OperariosService } from "./../../../shared/operarios.services";
-import { NgIf } from "@angular/common";
+
 
 @Component({
     selector: "app-operarios-detalle",
     templateUrl: "./operarios-detalle.component.html",
     styleUrls: ["./operarios-detalle.component.css"],
-    imports: [ReactiveFormsModule, NgIf]
+    imports: [ReactiveFormsModule]
 })
 export class OperariosDetalleComponent implements OnInit {
     public operariosForm: UntypedFormGroup;

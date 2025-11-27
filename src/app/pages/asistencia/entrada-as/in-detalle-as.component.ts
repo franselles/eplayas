@@ -2,13 +2,13 @@ import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia, Operario } from '../../../shared/models';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-in-detalle-as',
     templateUrl: './in-detalle-as.component.html',
     styleUrls: ['./in-detalle-as.component.css'],
-    imports: [ReactiveFormsModule, NgIf]
+    imports: [ReactiveFormsModule]
 })
 export class InDetalleAsComponent implements OnInit {
 

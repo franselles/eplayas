@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 import {
   FormArray,
@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-km',
   templateUrl: './km.component.html',
   styleUrl: './km.component.css',
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   standalone: true,
 })
 export class KmComponent implements OnInit {
