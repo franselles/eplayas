@@ -12,14 +12,16 @@
                     "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "outputPath": {
-                          "base": "dist"
+                            "base": "dist"
                         },
                         "index": "src/index.html",
                         "tsConfig": "src/tsconfig.app.json",
-                        "polyfills": [
-                          "src/polyfills.ts"
+                        "polyfills": ["src/polyfills.ts"],
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico",
+                            "src/robots.txt"
                         ],
-                        "assets": ["src/assets", "src/favicon.ico"],
                         "styles": [
                             "src/styles.css",
                             "src/assets/b4/css/bootstrap.min.css"
@@ -61,18 +63,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                      "buildTarget": "peaceful:build"
+                        "buildTarget": "peaceful:build"
                     },
                     "configurations": {
                         "production": {
-                          "buildTarget": "peaceful:build:production"
+                            "buildTarget": "peaceful:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                      "buildTarget": "peaceful:build"
+                        "buildTarget": "peaceful:build"
                     }
                 },
                 "test": {
@@ -92,7 +94,11 @@
                             "src/styles.css",
                             "src/assets/b4/css/bootstrap.min.css"
                         ],
-                        "assets": ["src/assets", "src/favicon.ico"]
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico",
+                            "src/robots.txt"
+                        ]
                     }
                 },
                 "lint": {
@@ -140,25 +146,25 @@
             "type": "directive"
         },
         "@schematics/angular:service": {
-          "type": "service"
+            "type": "service"
         },
         "@schematics/angular:guard": {
-          "typeSeparator": "."
+            "typeSeparator": "."
         },
         "@schematics/angular:interceptor": {
-          "typeSeparator": "."
+            "typeSeparator": "."
         },
         "@schematics/angular:module": {
-          "typeSeparator": "."
+            "typeSeparator": "."
         },
         "@schematics/angular:pipe": {
-          "typeSeparator": "."
+            "typeSeparator": "."
         },
         "@schematics/angular:resolver": {
-          "typeSeparator": "."
+            "typeSeparator": "."
         }
     },
     "cli": {
-      "analytics": false
+        "analytics": false
     }
 }
