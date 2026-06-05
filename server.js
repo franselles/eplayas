@@ -44,11 +44,6 @@ app.all("/api/*", function (req, res, next) {
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
 var db;
 
-if (!process.env.MONGODB_URI) {
-    console.error("❌ MONGODB_URI no definida");
-    process.exit(1);
-}
-
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(
     process.env.MONGODB_URI || process.env.DB_HOST,
