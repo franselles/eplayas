@@ -50,4 +50,4 @@ Thumbs.db
 .angular
 
 #npm
-package-lock.json
+#package-lock.json
