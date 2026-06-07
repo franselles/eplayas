@@ -4,7 +4,10 @@ import { ControlAsComponent } from "./control-as/control-as.component";
 import { Routes } from "@angular/router";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import {
+    provideHttpClient,
+    withInterceptorsFromDi,
+} from "@angular/common/http";
 import { registerLocaleData } from "@angular/common";
 
 import { EntradaAsComponent } from "./entrada-as/entrada-as.component";
@@ -22,6 +25,7 @@ import { DetalleAcuComponent } from "./acumulado-as/detalle-acu.component";
 import { CuadranteAsComponent } from "./cuadrante-as/cuadrante-as.component";
 
 import localeEs from "@angular/common/locales/es";
+import { GlobalsAsistencia } from "../../shared/globalasistencia.services";
 registerLocaleData(localeEs, "es");
 
 const routes: Routes = [
@@ -52,16 +56,18 @@ const routes: Routes = [
                 path: "cuadrante",
                 component: CuadranteAsComponent,
                 canActivate: [LoggedInGuard],
-            },            
+            },
         ],
     },
 ];
 
 @NgModule({
-    imports: [CommonModule,
+    imports: [
+        CommonModule,
         RouterModule.forChild(routes),
         FormsModule,
-        ReactiveFormsModule, ControlAsComponent,
+        ReactiveFormsModule,
+        ControlAsComponent,
         EntradaAsComponent,
         DetalleAsComponent,
         SeguimientoAsComponent,
@@ -69,11 +75,15 @@ const routes: Routes = [
         AcumuladoSegComponent,
         InDetalleAsComponent,
         AcumuladoAsComponent,
-        DetalleAcuComponent], providers: [
+        DetalleAcuComponent,
+    ],
+    providers: [
         BdService,
         AsistenciaService,
         GlobalsPartes,
+        GlobalsAsistencia,
         { provide: LOCALE_ID, useValue: "es" },
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
+    ],
+})
 export class AsistenciaModule {}

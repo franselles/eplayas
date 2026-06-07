@@ -1,17 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { AsistenciaService } from "../../../shared/asistencia.services";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { Operario, Asistencia } from "../../../shared/models";
 import { GlobalsPartes } from "./../../../shared/globalspartes.services";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { DatePipe } from "@angular/common";
 import { InDetalleAsComponent } from "./in-detalle-as.component";
+import { GlobalsAsistencia } from "./../../../shared/globalasistencia.services";
 
 @Component({
     selector: "app-entrada-as",
     templateUrl: "./entrada-as.component.html",
     styleUrls: ["./entrada-as.component.css"],
-    imports: [ReactiveFormsModule, FormsModule, InDetalleAsComponent, DatePipe]
+    imports: [ReactiveFormsModule, FormsModule, InDetalleAsComponent, DatePipe],
 })
 export class EntradaAsComponent implements OnInit {
     public operarios: Operario[] = [];
@@ -24,12 +25,12 @@ export class EntradaAsComponent implements OnInit {
 
     constructor(
         public asistenciaService: AsistenciaService,
-        private globalPartes: GlobalsPartes,
-        private router: Router
+        private globalAsistencia: GlobalsAsistencia,
+        private router: Router,
     ) {}
 
     ngOnInit() {
-        this.fecha = this.globalPartes.fecha;
+        this.fecha = this.globalAsistencia.fecha;
 
         this.asistenciaService.listaAsistenciasDia(this.fecha);
         this.asistenciaService.listaAsistenciasUltimas(this.fecha);
@@ -38,18 +39,19 @@ export class EntradaAsComponent implements OnInit {
             (data: Operario[]) => {
                 this.operarios = data;
             },
-            (err) => console.log(err)
+            (err) => console.log(err),
         );
     }
 
     actualizaLista() {
         this.asistenciaService.listaAsistenciasDia(this.fecha);
         this.asistenciaService.listaAsistenciasUltimas(this.fecha);
+        this.globalAsistencia.setFecha(this.fecha);
     }
 
     yaExiste(id_op: string) {
         this.asDeldia = this.asistenciaService.asistencias.find(
-            (x) => x.id_op === id_op
+            (x) => x.id_op === id_op,
         );
 
         if (this.asDeldia) {
@@ -59,7 +61,7 @@ export class EntradaAsComponent implements OnInit {
 
     elUltimo(id_op: string) {
         this.asUltimo = this.asistenciaService.asUltimos.find(
-            (x) => x._id === id_op
+            (x) => x._id === id_op,
         );
         if (this.asUltimo) {
             return this.asUltimo;
@@ -182,7 +184,7 @@ export class EntradaAsComponent implements OnInit {
                 this.asistenciaService.listaAsistenciasDia(this.fecha);
                 // this.router.navigate(['/dash/asistencia/entrada']);
             },
-            (error) => console.error("Error creating : " + error)
+            (error) => console.error("Error creating : " + error),
         );
     }
 
