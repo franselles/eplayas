@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 
 /*
  export class User {
@@ -15,51 +15,51 @@ import {Router} from '@angular/router';
  */
 
 export class User {
-  constructor(public password: string) {
-  }
+    constructor(public password: string) {}
 }
 
 const users = [
-  new User('adm1n'),
-  new User('29022037'),
-  new User('user1'),
-  new User('Super')
+    new User("adm1n"),
+    new User("29022037"),
+    new User("user1"),
+    new User("Super"),
+    new User("1234"),
 ];
 
 @Injectable()
 export class AuthenticationService {
+    public loggedIn = false;
 
-  public loggedIn = false;
+    constructor(private router: Router) {}
 
-  constructor(private router: Router) {
-  }
-
-  logout() {
-    // localStorage.removeItem('user');
-    // sessionStorage.removeItem('user');
-    sessionStorage.clear();
-    this.loggedIn = false;
-    this.router.navigate(['login']);
-  }
-
-  login(user) {
-    const authenticatedUser: any = users.find(p => p.password === user.password);
-
-    // if (authenticatedUser && authenticatedUser.password === user.password){
-    if (authenticatedUser) {
-      this.loggedIn = true;
-      sessionStorage.setItem('uset', authenticatedUser);
-      // localStorage.setItem('user', authenticatedUser);
-      // this.router.navigate(['home']);
-      return true;
+    logout() {
+        // localStorage.removeItem('user');
+        // sessionStorage.removeItem('user');
+        sessionStorage.clear();
+        this.loggedIn = false;
+        this.router.navigate(["login"]);
     }
-    return false;
-  }
 
-  checkCredentials() {
-    // return this.loggedIn;
-    if (sessionStorage.length > 0) {
-      return true;
+    login(user) {
+        const authenticatedUser: any = users.find(
+            (p) => p.password === user.password,
+        );
+
+        // if (authenticatedUser && authenticatedUser.password === user.password){
+        if (authenticatedUser) {
+            this.loggedIn = true;
+            sessionStorage.setItem("uset", authenticatedUser);
+            // localStorage.setItem('user', authenticatedUser);
+            // this.router.navigate(['home']);
+            return true;
+        }
+        return false;
     }
-  }
+
+    checkCredentials() {
+        // return this.loggedIn;
+        if (sessionStorage.length > 0) {
+            return true;
+        }
+    }
 }
