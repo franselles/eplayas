@@ -55,40 +55,7 @@
                         class="dropdown-item"
                         [routerLink]="['/dash/asistencia/cuadrante']"
                         >Cuadrante</a
-                    >                    
-                </div>
-            </li>            
-            <li class="nav-item dropdown">
-                <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Taller
-                </a>
-                <div
-                    class="dropdown-menu"
-                    aria-labelledby="navbarDropdownMenuLink"
-                >
-                    <a
-                        class="dropdown-item"
-                        [routerLink]="['/dash/taller/km']"
-                        >KM</a>
-                    <a
-                        class="dropdown-item"
-                        [routerLink]="['/dash/taller']"
-                        >Vehiculos</a>
-                    <a
-                        class="dropdown-item"
-                        [routerLink]="['/dash/taller']"
-                        >ITV</a>
-                    <a
-                        class="dropdown-item"
-                        [routerLink]="['/dash/taller/revision']"
-                        >Revisiones</a>                  
+                    >
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -155,39 +122,6 @@
                     >
                 </div>
             </li>
-            <li class="nav-item">
-                <a
-                    class="nav-link"
-                    [routerLink]="['/dash/mantenimiento']"
-                    routerLinkActive="active"
-                    >Mantenimiento</a
-                >
-            </li>  
-            <li class="nav-item dropdown">
-                <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    Hamacas
-                </a>
-                <div
-                    class="dropdown-menu"
-                    aria-labelledby="navbarDropdownMenuLink"
-                >
-                    <a class="dropdown-item" [routerLink]="['/dash/hamacas']"
-                        >Hamacas</a
-                    >
-                    <a
-                        class="dropdown-item"
-                        [routerLink]="['/dash/hamacas/historico']"
-                        >Historico</a
-                    >
-                </div>
-            </li>                      
         </ul>
         <form class="form-inline ml-auto">
             <button class="btn btn-danger" (click)="logOut()">Salir</button>
