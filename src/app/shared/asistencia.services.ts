@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Asistencia, TotalAsistencia, Cuadrante } from './../shared/models';
 
 import { BdService } from './../shared/bd.services';
+import { Observable } from 'rxjs';
 
 @Injectable()
 
@@ -14,54 +15,54 @@ export class AsistenciaService {
 
     public asistencias: Asistencia[] = [];
     public asUltimos: Asistencia[] = [];
-    public prueba: any[];
+    public prueba: any[] = [];
 
     constructor(private http: HttpClient, private bdService: BdService) {
       this.BASE_URL_A = this.bdService.dir_bd_ + 'asistencia/';
       this.BASE_URL_O = this.bdService.dir_bd_ + 'operarios/';
     }
 
-    getAsistencia(fecha: string, id_op: string) {
+    getAsistencia(fecha: string, id_op: string):Observable<Asistencia> {
       return this.http.get<Asistencia>(this.BASE_URL_A + fecha + '/' + id_op);
     }
 
-    getAsistenciaSegimiento(fechai: string, fechaf: string, id_op: string) {
+    getAsistenciaSegimiento(fechai: string, fechaf: string, id_op: string):Observable<Asistencia[]> {
       return this.http.get<Asistencia[]>(this.BASE_URL_A + 'seguimiento/' + fechai + '/' + fechaf + '/' + id_op);
     }
 
-    getAsistenciaSegimientoAcumulado(fechai: string, fechaf: string, id_op: string, concepto: string) {
+    getAsistenciaSegimientoAcumulado(fechai: string, fechaf: string, id_op: string, concepto: string):Observable<Asistencia[]> {
       return this.http.get<Asistencia[]>(this.BASE_URL_A + 'seguimiento/acumulado/' + fechai + '/' + fechaf + '/' + id_op + '/' + concepto);
     }
 
-    getAsistenciaSegAcumulado(fechai: string, fechaf: string, id_op: string) {
+    getAsistenciaSegAcumulado(fechai: string, fechaf: string, id_op: string):Observable<TotalAsistencia> {
       return this.http.get<TotalAsistencia>(this.BASE_URL_A + 'acumulado/' + fechai + '/' + fechaf + '/' + id_op);
     }
 
-    getAsistenciasDia(fecha: string) {
+    getAsistenciasDia(fecha: string):Observable<any> {
       return this.http.get(this.BASE_URL_A + 'lista/dia/' + fecha);
     }
 
-    getOperarios() {
+    getOperarios():Observable<any> {
       return this.http.get(this.BASE_URL_O + 'estado/activo');
     }
 
-    getAsistenciaUltimos(fecha: string) {
+    getAsistenciaUltimos(fecha: string):Observable<any> {
       return this.http.get(this.BASE_URL_A + 'ultimos/' + fecha);
     }
 
-    getOperario(id: string | number) {
+    getOperario(id: string | number):Observable<any> {
       return this.http.get(this.BASE_URL_O + id);
     }
 
-    addAsistencia(asistencia: Asistencia) {
+    addAsistencia(asistencia: Asistencia):Observable<any> {
       return this.http.post(this.BASE_URL_A, asistencia);
     }
 
-    removeAsistencia(id: number | string, asistencia: Asistencia) {
+    removeAsistencia(id: number | string, asistencia: Asistencia):Observable<any> {
       return this.http.delete(this.BASE_URL_A + id);
     }
 
-    updateAsistencia(id: number | string, asistencia: Asistencia) {
+    updateAsistencia(id: number | string, asistencia: Asistencia):Observable<any> {
       return this.http.put(this.BASE_URL_A + id, asistencia);
     }
 
@@ -83,11 +84,7 @@ export class AsistenciaService {
       );
     }
 
-    aAsistencia() {
-      const a = this.prueba.find(data => data.descanso.some(item => item.casa === 'hola'));
-    }
-
-    getAsistenciaCuadrante(fechai: string, fechaf: string) {
+    getAsistenciaCuadrante(fechai: string, fechaf: string):Observable<Cuadrante[]> {
       return this.http.get<Cuadrante[]>(this.BASE_URL_A + 'cuadrante/' + fechai + '/' + fechaf);
     }
 }

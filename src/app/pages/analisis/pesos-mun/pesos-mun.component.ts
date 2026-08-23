@@ -13,10 +13,10 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class PesosMunComponent implements OnInit {
 
-  private fechad: string;
-  private fechah: string;
-  private lugar: string;
-  public  municipio: string;
+  private fechad: string = '';
+  private fechah: string = '';
+  private lugar: string = '';
+  public  municipio: string = '';
 
   public pesos: Total = {
     total_rsu_manual: 0,
@@ -30,8 +30,11 @@ export class PesosMunComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.fechad = params['fechad'];
-      this.fechah = params['fechah'];
+
+      let [year, month, day] = params['fechad'].split("-");
+      this.fechad = new Date(year, month - 1, day).toISOString().split('T')[0]; 
+      [year, month, day] = params['fechah'].split("-");
+      this.fechah = new Date(year, month - 1, day).toISOString().split('T')[0];
       // this.lugar = params['lugar'];
       this.municipio = params['municipio'];
 
@@ -41,9 +44,13 @@ export class PesosMunComponent implements OnInit {
 
   abrePesosMun(fechad: string, fechah: string, municipio: string) {
     this.analisisServices.getPesosMunicipio(fechad, fechah, municipio).
-      subscribe(data =>  {
-        this.pesos = data[0];
-      }, err => console.log(err));
+      subscribe({
+        next: (data) => {
+          this.pesos = data[0];
+          console.log('Pesos Municipio:', this.pesos);
+        },
+        error: (err) => console.log(err)
+      });
   }
 
 }

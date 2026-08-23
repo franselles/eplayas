@@ -13,12 +13,12 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class EstadisticasMunComponent implements OnInit {
 
-  private fechad: string;
-  private fechah: string;
-  private lugar: string;
-  public municipio: string;
+  private fechad: string = "";
+  private fechah: string = "";
+  private lugar: string = "";
+  public municipio: string = "";
 
-  public estadisticas: any[];
+  public estadisticas: any[] = [];
 
   constructor(private route: ActivatedRoute, private analisisServices: AnalisisService) { }
 
@@ -29,15 +29,18 @@ export class EstadisticasMunComponent implements OnInit {
       // this.lugar = params['lugar'];
       this.municipio = params['municipio'];
 
-      this.abreEstadisticasMun(this.fechad, this.fechah, this.municipio, );
+      this.abreEstadisticasMun(this.fechad, this.fechah, this.municipio);
     });
   }
 
   abreEstadisticasMun(fechad: string, fechah: string, municipio: string) {
     this.analisisServices.getEstadisticasMunicipio(fechad, fechah, municipio).
-      subscribe((data: any[]) =>  {
-        this.estadisticas = data;
-      }, err => console.log(err));
+      subscribe({
+        next: (data) => {
+          this.estadisticas = data;
+        },
+        error: (err) => console.log(err)
+      });
   }
 
 }

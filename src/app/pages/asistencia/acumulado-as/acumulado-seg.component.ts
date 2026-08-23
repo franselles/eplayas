@@ -9,13 +9,13 @@ import { TotalAsistencia } from '../../../shared/models';
 })
 export class AcumuladoSegComponent implements OnInit, OnChanges {
 
-  @Input() idop: string;
-  @Input() fechai: string;
-  @Input() fechaf: string;
+  @Input() idop: string = '';
+  @Input() fechai: string = '';
+  @Input() fechaf: string = '';
 
   @Output() concepto = new EventEmitter();
 
-  public totales: TotalAsistencia;
+  public totales!: TotalAsistencia;
 
   constructor(private asistenciaService: AsistenciaService) { }
 
@@ -45,12 +45,13 @@ export class AcumuladoSegComponent implements OnInit, OnChanges {
   }
 
   actualizaData() {
-    this.asistenciaService.getAsistenciaSegAcumulado(this.fechai, this.fechaf, this.idop).subscribe(
-      (data: TotalAsistencia) => {
-        this.totales = data[0];
+    this.asistenciaService.getAsistenciaSegAcumulado(this.fechai, this.fechaf, this.idop).subscribe({
+      next: (data: TotalAsistencia) => {
+        this.totales = data;
+        console.log('Totales:', this.totales);
       },
-      err => console.log(err)
-    );
+      error: (err) => console.log(err)
+    });
   }
 
 }

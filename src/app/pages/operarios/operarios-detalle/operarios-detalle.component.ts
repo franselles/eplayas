@@ -13,9 +13,9 @@ import { OperariosService } from "./../../../shared/operarios.services";
     imports: [ReactiveFormsModule]
 })
 export class OperariosDetalleComponent implements OnInit {
-    public operariosForm: UntypedFormGroup;
-    public operario: Operario;
-    public enEdicion: boolean;
+    public operariosForm!: UntypedFormGroup;
+    public operario!: Operario;
+    public enEdicion!: boolean;
 
     constructor(
         private router: Router,
@@ -78,21 +78,26 @@ export class OperariosDetalleComponent implements OnInit {
     onSubmit(data: any) {
         if (this.enEdicion === true) {
             this.operariosService
-                .updateOperario(this.operario._id, data.value)
+                .updateOperario(this.operario._id!, data.value)
                 .subscribe(
-                    () => {
-                        console.log("Actializado");
-                        this.router.navigate(["/dash/operarios"]);
-                    },
-                    (err) => console.log("Error updating : " + err)
+                    {
+                        next: () => {
+                            console.log("Actializado");
+                            this.router.navigate(["/dash/operarios"]);
+                        },
+                        error: (err) => console.log("Error updating : " + err)
+                    }
                 );
+
         } else {
             this.operariosService.addOperario(data.value).subscribe(
-                () => {
-                    console.log("Creado");
-                    this.router.navigate(["/dash/operarios"]);
-                },
-                (err) => console.log("Error creating : " + err)
+                {
+                    next: () => {
+                        console.log("Creado");
+                        this.router.navigate(["/dash/operarios"]);
+                    },
+                    error: (err) => console.log("Error creating : " + err)
+                }
             );
         }
     }
@@ -110,12 +115,14 @@ export class OperariosDetalleComponent implements OnInit {
    */
 
     onBorrar(datos: any) {
-        this.operariosService.removeOperario(this.operario._id).subscribe(
-            () => {
-                console.log("Borrado");
-                this.router.navigate(["/dash/operarios"]);
-            },
-            (error) => console.error("Error removing : " + error)
+        this.operariosService.removeOperario(this.operario._id!).subscribe(
+            {
+                next: () => {
+                    console.log("Borrado");
+                    this.router.navigate(["/dash/operarios"]);
+                },
+                error: (err) => console.log("Error removing : " + err)
+            }
         );
     }
 }

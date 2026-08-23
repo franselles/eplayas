@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
-import { Parte } from "./../../../shared/models";
+import { Estadistica, Operario, Parte, Vehiculo } from "./../../../shared/models";
 import { PartesService } from "./../../../shared/partes.services";
 import { EstadisticasService } from "./../../../shared/estadisticas.services";
 import { OperariosService } from "./../../../shared/operarios.services";
@@ -17,13 +17,13 @@ import { GlobalsPartes } from "./../../../shared/globalspartes.services";
     imports: [ReactiveFormsModule]
 })
 export class PartesLimDetalleComponent implements OnInit {
-    public parteForm: UntypedFormGroup;
-    public parte: Parte;
-    public listaEstadisticas = [];
-    public listaOperarios = [];
-    public listaVehiculos = [];
-    public enEdicion: boolean;
-    public enviado: boolean;
+    public parteForm!: UntypedFormGroup;
+    public parte!: Parte;
+    public listaEstadisticas: Estadistica[] = [];
+    public listaOperarios: Operario[] = [];
+    public listaVehiculos: Vehiculo[] = [];
+    public enEdicion: boolean = false;
+    public enviado: boolean = false;
 
     constructor(
         private router: Router,
@@ -74,36 +74,45 @@ export class PartesLimDetalleComponent implements OnInit {
         this.enviado = false;
 
         this.estadisticasService.getEstadisticas().subscribe(
-            (data: any[]) => (this.listaEstadisticas = data),
-            (error) => console.log(error)
-        );
+            {
+                next: (data: any[]) => (this.listaEstadisticas = data),
+                error: (error) => console.log(error)
+            }
+            );
         this.operariosService.getOperariosActCond().subscribe(
-            (data: any[]) => {
+            {
+                next: (data: any[]) => {
                 this.listaOperarios = data;
                 this.listaOperarios.forEach((x) => {
                     // x.nombre = x.nombre.toUpperCase();
                     x.nombre = this.capitalize(x.nombre);
                 });
             },
-            (error) => console.log(error)
+            error: (error) => console.log(error)           
+            }
+
         );
         this.vehiculosService.getVehiculos().subscribe(
-            (data: any[]) => (this.listaVehiculos = data),
-            (error) => console.log(error)
-        );
-
+            {
+                next: (data: any[]) => (this.listaVehiculos = data),
+                error: (error) => console.log(error)
+            }
+            );
         const id = this.activatedRoute.snapshot.params["id"];
 
         if (id) {
             this.partesService.getParte(id).subscribe(
-                (parte: Parte) => {
-                    this.parte = parte;
-                    // this.parte.operario = parte.operario.toUpperCase();
-                    this.parte.operario = this.capitalize(parte.operario);
-                    this.cargaDatosFormulario(this.parte);
-                    this.enEdicion = true;
+                {
+                    next: (parte: Parte) => {
+                        this.parte = parte;
+                        // this.parte.operario = parte.operario.toUpperCase();
+                        this.parte.operario = this.capitalize(parte.operario);
+                        this.cargaDatosFormulario(this.parte);
+                        this.enEdicion = true;
                 },
-                (err) => console.log(err)
+                    error: (err) => console.log(err)            
+                }
+
             );
         } else {
             this.enEdicion = false;
@@ -231,13 +240,13 @@ export class PartesLimDetalleComponent implements OnInit {
                 });
                 break;
             case 13:
-                const texto1 = this.parteForm.get("observacion_ayto").value;
+                const texto1 = this.parteForm.get("observacion_ayto")?.value;
                 this.parteForm.patchValue({
                     observacion_ayto: texto1 + "\n" + "MANTENIMIENTO:\n",
                 });
                 break;
             case 14:
-                const texto2 = this.parteForm.get("observacion_ayto").value;
+                const texto2 = this.parteForm.get("observacion_ayto")?.value;
                 this.parteForm.patchValue({
                     observacion_ayto:
                         texto2 +
@@ -246,7 +255,7 @@ export class PartesLimDetalleComponent implements OnInit {
                 });
                 break;
             case 15:
-                const texto3 = this.parteForm.get("observacion_ayto").value;
+                const texto3 = this.parteForm.get("observacion_ayto")?.value;
                 this.parteForm.patchValue({
                     observacion_ayto:
                         texto3 +
@@ -311,7 +320,7 @@ Se rastilla filo, pasarelas, palmeras y cambian papeleras.`,
 
         if (this.enEdicion === true) {
             this.partesService
-                .updateParte(this.parte._id, datos.value)
+                .updateParte(this.parte._id!, datos.value)
                 .subscribe(
                     () => {
                         console.log("Actualizado");
@@ -345,7 +354,7 @@ Se rastilla filo, pasarelas, palmeras y cambian papeleras.`,
     onBorrar(datos: any) {
         this.enviado = true;
 
-        this.partesService.removeParte(this.parte._id, datos.value).subscribe(
+        this.partesService.removeParte(this.parte._id!, datos.value).subscribe(
             () => {
                 console.log("Borrado");
                 this.router.navigate(["/dash/limpieza"]);

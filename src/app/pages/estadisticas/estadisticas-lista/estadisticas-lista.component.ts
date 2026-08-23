@@ -19,9 +19,13 @@ export class EstadisticasListaComponent implements OnInit {
 
   ngOnInit() {
     this.estadisticasService.getEstadisticas()
-      .subscribe((data: Estadistica[]) => {
-        this.estadisticas = data;
-      });
+      .subscribe(
+        {
+          next: (data: Estadistica[]) => {
+            this.estadisticas = data;
+          },
+          error: (err) => console.log(err)
+        }
+      );  
   }
-
 }

@@ -10,11 +10,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     imports: [ReactiveFormsModule, FormsModule, RouterOutlet]
 })
 export class AnalisisComponent implements OnInit {
-    public tipo: string;
-    public municipio: string;
-    public lugar: string;
-    public fechade: any;
-    public fechaha: any;
+    public tipo: string = "";
+    public municipio: string = "";
+    public lugar: string = "";
+    public fechade: any = "";
+    public fechaha: any = "";
 
     constructor(private router: Router) {}
 

@@ -11,12 +11,12 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class EstadisticasPlaComponent implements OnInit {
 
-  private fechad: string;
-  private fechah: string;
-  public  lugar: string;
-  public municipio: string;
+  private fechad: string = '';
+  private fechah: string = '';
+  public  lugar: string = '';
+  public municipio: string = '';
 
-  public estadisticas: any[];
+  public estadisticas: any[] = [];
 
   constructor(private route: ActivatedRoute, private analisisServices: AnalisisService) { }
 
@@ -33,9 +33,12 @@ export class EstadisticasPlaComponent implements OnInit {
 
   abreEstadisticasPla(fechad: string, fechah: string, lugar: string, municipio: string) {
     this.analisisServices.getEstadisticasPlaya(fechad, fechah, lugar, municipio).
-      subscribe((data: any[]) =>  {
-        this.estadisticas = data;
-      }, err => console.log(err));
+      subscribe({
+        next: (data) => {
+          this.estadisticas = data;
+        },
+        error: (err) => console.log(err)
+      });
   }
 
 }

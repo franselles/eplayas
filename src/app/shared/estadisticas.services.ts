@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Estadistica } from './../shared/models';
 import { BdService } from './../shared/bd.services';
+import { Observable } from 'rxjs';
 
 @Injectable()
 
@@ -14,23 +15,23 @@ export class EstadisticasService {
     this.BASE_URL = this.bdService.dir_bd_ + 'estadisticas/';
   }
 
-  getEstadisticas() {
-    return this.http.get(this.BASE_URL);
+  getEstadisticas(): Observable<Estadistica[]> {
+    return this.http.get<Estadistica[]>(this.BASE_URL);
   }
 
-  getEstadistica(id: string | number) {
-    return this.http.get(this.BASE_URL + id);
+  getEstadistica(id: string | number): Observable<Estadistica> {
+    return this.http.get<Estadistica>(this.BASE_URL + id);
   }
 
-  addEstadistica(estadistica: Estadistica) {
+  addEstadistica(estadistica: Estadistica): Observable<any> {
     return this.http.post(this.BASE_URL, estadistica);
   }
 
-  removeEstadistica(id: number | string) {
+  removeEstadistica(id: number | string): Observable<any> {
     return this.http.delete(this.BASE_URL + id);
   }
 
-  updateEstadistica(id: string | number, estadistica: Estadistica) {
+  updateEstadistica(id: string | number, estadistica: Estadistica): Observable<any> {
     return this.http.put(this.BASE_URL + id, estadistica);
   }
 }

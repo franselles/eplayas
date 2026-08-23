@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { BdService } from "./../shared/bd.services";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class ResumenService {
@@ -17,18 +18,18 @@ export class ResumenService {
         );
     }
 
-    getResPlaya(dia: string, municipio: string) {
-        return this.http.get(this.BASE_URL + "dia/" + dia + "/" + municipio);
+    getResPlaya(dia: string, municipio: string): Observable<any> {
+        return this.http.get<any>(this.BASE_URL + "dia/" + dia + "/" + municipio);
     }
 
-    getResbas(dia: string, municipio: string) {
-        return this.http.get(
+    getResbas(dia: string, municipio: string): Observable<any> {
+        return this.http.get<any>(
             this.BASE_URL + "dia/basura/total/" + dia + "/" + municipio
         );
     }
 
     // getMesPlaya(year: string, month: string, turno: string, lugar: string, municipio: string) {
-    getMesPlaya(year: string, month: string, lugar: string, municipio: string) {
+    getMesPlaya(year: string, month: string, lugar: string, municipio: string): Observable<any> {
         /*         return this.http.get(
             this.BASE_URL +
                 "mes/" +
@@ -42,7 +43,7 @@ export class ResumenService {
                 "/" +
                 municipio
         ); */
-        return this.http.get(
+        return this.http.get<any>(
             this.BASE_URL +
                 "mes/" +
                 year +
@@ -55,7 +56,7 @@ export class ResumenService {
         );
     }
 
-    getConstantes(seccion: string) {
-        return this.http.get(this.bdService.dir_bd_ + "constantes/" + seccion);
+    getConstantes(seccion: string): Observable<any> {
+        return this.http.get<any>(this.bdService.dir_bd_ + "constantes/" + seccion);
     }
 }

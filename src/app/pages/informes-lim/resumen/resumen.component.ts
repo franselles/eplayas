@@ -11,10 +11,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     imports: [ReactiveFormsModule, FormsModule, RouterOutlet]
 })
 export class ResumenComponent implements OnInit {
-    public fecha: string;
-    public lugar: string;
-    public municipio: string;
-    public turno: string;
+    public fecha: string = '';
+    public lugar: string = '';
+    public municipio: string = '';
+    public turno: string = '';
 
     constructor(private router: Router, private globalPartes: GlobalsPartes) {}
 

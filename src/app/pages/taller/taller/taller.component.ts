@@ -12,7 +12,7 @@ import { RespuestaAlertasITV } from '../../../shared/models';
 export class TallerComponent implements OnInit {
   private vehicleService = inject(VehiculosService);
 
-  itvs: RespuestaAlertasITV;
+  itvs!: RespuestaAlertasITV;
 
   constructor() {
     this.vehicleService.getItvAlert().subscribe((data: RespuestaAlertasITV) => {

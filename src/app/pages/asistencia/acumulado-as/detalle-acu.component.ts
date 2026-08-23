@@ -12,10 +12,10 @@ import { InDetalleAsComponent } from '../entrada-as/in-detalle-as.component';
 })
 export class DetalleAcuComponent implements OnInit, OnChanges {
 
-  @Input() idop: string;
-  @Input() fechai: string;
-  @Input() fechaf: string;
-  @Input() concepto: string;
+  @Input() idop: string= '';
+  @Input() fechai: string= '';
+  @Input() fechaf: string= '';
+  @Input() concepto: string= '';
 
 
   public ventana = -1;

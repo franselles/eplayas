@@ -15,8 +15,8 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 })
 export class PartesLimListaComponent implements OnInit {
     public listaPartes: Parte[] = [];
-    public fecha: string;
-    public clonFecha: string;
+    public fecha: string = "";
+    public clonFecha: string = "";
     public clonado: boolean = false;
 
     constructor(
@@ -80,10 +80,10 @@ export class PartesLimListaComponent implements OnInit {
 
     actualizaLista() {
         this.globalPartes.setFecha(this.fecha);
-        this.partesService.getPartesDia(this.fecha).subscribe(
-            (partes: Parte[]) => (this.listaPartes = partes),
-            (err) => console.log(err)
-        );
+        this.partesService.getPartesDia(this.fecha).subscribe({
+            next: (partes) => {this.listaPartes = partes},
+            error: (err) => console.log(err)
+    });
 
         this.globalPartes.setFecha(this.fecha);
     }

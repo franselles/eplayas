@@ -13,8 +13,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstadisticasDetalleComponent implements OnInit {
 
-  public estadisticasForm: UntypedFormGroup;
-  public estadistica: Estadistica;
+  public estadisticasForm!: UntypedFormGroup;
+  public estadistica!: Estadistica;
   public enEdicion = false;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
@@ -30,12 +30,14 @@ export class EstadisticasDetalleComponent implements OnInit {
 
     if (id) {
       this.estadisticasService.getEstadistica(id)
-        .subscribe((data: Estadistica) => {
+        .subscribe({
+          next: (data: Estadistica) => {
           this.estadistica = data;
           this.enEdicion = true;
           this.cargaFormulario(this.estadistica);
         },
-        err => console.log(err));
+        error: (err) => console.log(err)
+      });     
     } else {
       this.enEdicion = false;
     }
@@ -54,17 +56,23 @@ export class EstadisticasDetalleComponent implements OnInit {
 
   onSubmit(data: any) {
     if (this.enEdicion === true) {
-      this.estadisticasService.updateEstadistica(this.estadistica._id, data.value)
-        .subscribe(() => {
-          console.log('Actializado');
-          this.router.navigate(['/dash/incidencias']);
-        }, err => console.log('Error updating : ' + err));
+      this.estadisticasService.updateEstadistica(this.estadistica._id!, data.value)
+        .subscribe({
+          next: () => {
+            console.log('Actualizado');
+            this.router.navigate(['/dash/incidencias']);
+          },
+          error: (err) => console.log('Error updating : ' + err)
+        });
     } else {
       this.estadisticasService.addEstadistica(data.value)
-        .subscribe(() => {
-          console.log('Creado');
-          this.router.navigate(['/dash/incidencias']);
-        }, err => console.log('Error creating : ' + err));
+        .subscribe({
+          next: () => {
+            console.log('Creado');
+            this.router.navigate(['/dash/incidencias']);
+          },
+          error: (err) => console.log('Error creating : ' + err)
+        });
     }
   }
 
@@ -83,10 +91,15 @@ export class EstadisticasDetalleComponent implements OnInit {
 
 
   onBorrar(datos: any) {
-    this.estadisticasService.removeEstadistica(this.estadistica._id).subscribe(() => {
-      console.log('Borrado');
-      this.router.navigate(['/dash/incidencias']);
-    }, error => console.error('Error removing : ' + error));
+    this.estadisticasService.removeEstadistica(this.estadistica._id!).subscribe(
+      {
+        next: () => {
+          console.log('Borrado');
+          this.router.navigate(['/dash/incidencias']);
+        },
+        error: (error) => console.error('Error removing : ' + error)
+      }
+    );
   }
 
 }

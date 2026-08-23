@@ -16,7 +16,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 export class PartesManListaComponent implements OnInit {
 
   public listaMante: Mantenimiento[] = [];
-  public fecha: string;
+  public fecha: string = '';
 
   constructor(private mantenimientoService: MantenimientoService, private globalPartes: GlobalsPartes, private router: Router) { }
 
@@ -32,8 +32,11 @@ export class PartesManListaComponent implements OnInit {
   actualizaLista() {
     this.globalPartes.setFecha(this.fecha);
     this.mantenimientoService.getMantenimientoDia(this.fecha).subscribe(
-      (data: Mantenimiento[]) => this.listaMante = data,
-      err => console.log(err)
+      {
+        next: (data: any) => this.listaMante = data,
+        error: (err) => console.log(err)
+      }
+
     );
 
     this.globalPartes.setFecha(this.fecha);

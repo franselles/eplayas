@@ -12,14 +12,14 @@ import { UpperCasePipe, DatePipe } from "@angular/common";
     imports: [UpperCasePipe, DatePipe]
 })
 export class ResumenDiaComponent implements OnInit {
-    public fecha: string;
-    public turno: string;
-    public municipio: string;
+    public fecha: string = '';
+    public turno: string = '';
+    public municipio: string = '';
 
-    public totalBas: Total;
+    public totalBas!: Total;
     // public listaPlayas: any[];
 
-    public datos: any[];
+    public datos: any[] = [];
     public noche = "Noche";
     public textos = {};
 
@@ -41,26 +41,34 @@ export class ResumenDiaComponent implements OnInit {
 
     getConstantes(seccion: string) {
         this.resumenService.getConstantes(seccion).subscribe(
-            (data) => {
-                this.textos = data[0];
-            },
-            (err) => console.log(err)
+            {
+                next: (data) => {
+                    this.textos = data[0];
+                },
+                error: (err) => console.log(err)
+            }
         );
     }
 
     abreRes(fecha: string, municipio: string) {
         this.resumenService.getResPlaya(fecha, municipio).subscribe(
-            (data: any[]) => {
-                this.datos = data;
-            },
-            (err) => console.log(err)
-        );
+
+            {
+                next: (data) => {
+                    this.datos = data;
+                },
+                error: (err) => console.log(err)
+            }
+        );          
+            
 
         this.resumenService.getResbas(fecha, municipio).subscribe(
-            (data) => {
-                this.totalBas = data[0];
-            },
-            (err) => console.log(err)
+            {
+                next: (data) => {
+                    this.totalBas = data[0];
+                },
+                error: (err) => console.log(err)
+            }
         );
     }
 }

@@ -11,7 +11,7 @@ import { UpperCasePipe } from "@angular/common";
     imports: [ReactiveFormsModule, FormsModule, UpperCasePipe]
 })
 export class OperariosHorarioComponent implements OnInit {
-    fecha: string;
+    fecha: string = new Date().toISOString().slice(0, 10);
 
     fechaLabel: string = "";
 
@@ -38,10 +38,12 @@ export class OperariosHorarioComponent implements OnInit {
 
     ngOnInit(): void {
         this.operariosService.getOperariosHorario().subscribe(
-            (data: Operario[]) => {
-                this.operarios = data;
-            },
-            (err) => console.log(err)
+            {
+                next: (data: Operario[]) => {
+                    this.operarios = data;
+                },
+                error: (err) => console.log(err)
+            }
         );
     }
 

@@ -13,20 +13,28 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class PesosPlaComponent implements OnInit {
 
-  private fechad: string;
-  private fechah: string;
-  public lugar: string;
-  public municipio: string;
+  private fechad: string = '';
+  private fechah: string = '';
+  public lugar: string = '';
+  public municipio: string = '';
 
-  public pesos: Total;
+  public pesos: Total = {
+    total_rsu_manual: 0,
+    total_rsu_criba: 0,
+    total_selectivo: 0,
+    total_algas_pesadas: 0,
+    total_algas_teoricas: 0
+  };
 
 
   constructor(private route: ActivatedRoute, private analisisServices: AnalisisService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.fechad = params['fechad'];
-      this.fechah = params['fechah'];
+      let [year, month, day] = params['fechad'].split("-");
+      this.fechad = new Date(year, month - 1, day).toISOString().split('T')[0]; 
+      [year, month, day] = params['fechah'].split("-");
+      this.fechah = new Date(year, month - 1, day).toISOString().split('T')[0];
       this.lugar = params['lugar'];
       this.municipio = params['municipio'];
 
@@ -36,8 +44,11 @@ export class PesosPlaComponent implements OnInit {
 
   abrePesosPla(fechad: string, fechah: string, lugar: string, municipio: string) {
     this.analisisServices.getPesosPlaya(fechad, fechah, lugar, municipio).
-      subscribe(data =>  {
-        this.pesos = data[0];
-      }, err => console.log(err));
+      subscribe({
+        next: (data) => {
+          this.pesos = data[0];
+        },
+        error: (err) => console.log(err)
+      });
   }
 }

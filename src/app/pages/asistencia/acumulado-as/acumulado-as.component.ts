@@ -15,10 +15,10 @@ import { DetalleAcuComponent } from './detalle-acu.component';
 })
 export class AcumuladoAsComponent implements OnInit {
 
-  public fechai: string;
-  public fechaf: string;
-  public idop: string;
-  public concepto: string;
+  public fechai: string = '';
+  public fechaf: string = '';
+  public idop: string = '';
+  public concepto: string = '';
   public listaOperarios: Operario[] = [];
 
   constructor(private asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes) {
@@ -33,15 +33,15 @@ export class AcumuladoAsComponent implements OnInit {
 
     this.fechaf = this.globalPartes.fecha;
 
-    this.asistenciaService.getOperarios().subscribe(
-      (data: Operario[]) => {
+    this.asistenciaService.getOperarios().subscribe({
+      next: (data: Operario[]) => {
         this.listaOperarios = data;
       },
-      err => console.log(err)
-    );
+      error: (err) => console.log(err)
+    });
   }
 
-  cargaConcepto(event) {
+  cargaConcepto(event: any) {
     this.concepto = event;
   }
 

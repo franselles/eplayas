@@ -12,14 +12,14 @@ import { UpperCasePipe, DatePipe } from "@angular/common";
     imports: [UpperCasePipe, DatePipe]
 })
 export class ResumenMesComponent implements OnInit {
-    public resumen: any[];
+    public resumen: any[] = [];
 
-    private fecha: string;
-    public month: string;
-    public year: string;
-    public turno: string;
-    public lugar: string;
-    public municipio: string;
+    private fecha: string = '';
+    public month: string = '';
+    public year: string = '';
+    public turno: string = '';
+    public lugar: string = '';
+    public municipio: string = '';
 
     constructor(
         private resumenService: ResumenService,
@@ -62,10 +62,12 @@ export class ResumenMesComponent implements OnInit {
         this.resumenService
             .getMesPlaya(year, month, lugar, municipio)
             .subscribe(
-                (data: any[]) => {
-                    this.resumen = data;
-                },
-                (err) => console.log(err)
+                {
+                    next: (data: any[]) => {
+                        this.resumen = data;
+                    },
+                    error: (err) => console.log(err)
+                }
             );
     }
 }

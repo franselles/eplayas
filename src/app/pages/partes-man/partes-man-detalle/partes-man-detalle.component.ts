@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Mantenimiento } from './../../../shared/models';
+import { Mantenimiento, Operario, Vehiculo } from './../../../shared/models';
 import { MantenimientoService } from './../../../shared/mantenimiento.services';
 import { OperariosService } from './../../../shared/operarios.services';
 import { VehiculosService } from './../../../shared/vehiculos.services';
@@ -17,11 +17,11 @@ import { GlobalsPartes } from './../../../shared/globalspartes.services';
 })
 export class PartesManDetalleComponent implements OnInit {
 
-  public manteForm: UntypedFormGroup;
-  public mante: Mantenimiento;
-  public listaOperarios = [];
-  public listaVehiculos = [];
-  public enEdicion: boolean;
+  public manteForm!: UntypedFormGroup;
+  public mante!: Mantenimiento;
+  public listaOperarios: Operario[] = [];
+  public listaVehiculos: Vehiculo[] = [];
+  public enEdicion: boolean = false;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: UntypedFormBuilder,
     private mantenimientoService: MantenimientoService,
@@ -52,17 +52,34 @@ export class PartesManDetalleComponent implements OnInit {
       })
     });
 
-    this.operariosService.getOperariosActCond().subscribe((data: any[]) => this.listaOperarios = data, error => console.log(error));
-    this.vehiculosService.getVehiculos().subscribe((data: any[]) => this.listaVehiculos = data, error => console.log(error));
+    this.operariosService.getOperariosActCond().subscribe(
+      {
+        next: (data: any[]) => this.listaOperarios = data,
+        error: (error) => console.log(error)
+      }
+    );
+
+    this.vehiculosService.getVehiculos().subscribe(
+      {
+        next: (data: any[]) => this.listaVehiculos = data,
+        error: (error) => console.log(error)
+      }
+    );
 
     const id = this.activatedRoute.snapshot.params['id'];
 
     if (id) {
-      this.mantenimientoService.getMantenimiento(id).subscribe((data: Mantenimiento) => {
-        this.mante = data;
-        this.cargaDatosFormulario(this.mante);
-        this.enEdicion = true;
-      }, err => console.log(err));
+      this.mantenimientoService.getMantenimiento(id).subscribe(
+        {
+          next: (data: any) => {
+            this.mante = data;
+            this.cargaDatosFormulario(this.mante);
+            this.enEdicion = true;
+          },
+          error: (err) => console.log(err)
+        }
+      );
+ 
     } else {
       this.enEdicion = false;
     }
@@ -105,7 +122,7 @@ export class PartesManDetalleComponent implements OnInit {
 
   onSubmit(datos: any) {
     if (this.enEdicion === true) {
-      this.mantenimientoService.updateMantenimiento(this.mante._id, datos.value).subscribe(() => {
+      this.mantenimientoService.updateMantenimiento(this.mante._id!, datos.value).subscribe(() => {
         console.log('Actualizado');
         this.router.navigate(['/dash/mantenimiento']);
       }, error => console.error('Error updating : ' + error));
@@ -130,7 +147,7 @@ export class PartesManDetalleComponent implements OnInit {
    */
 
   onBorrar(datos: any) {
-    this.mantenimientoService.removeMantenimiento(this.mante._id, datos.value).subscribe(() => {
+    this.mantenimientoService.removeMantenimiento(this.mante._id!, datos.value).subscribe(() => {
       console.log('Borrado');
       this.router.navigate(['/dash/mantenimiento']);
     }, error => console.error('Error removing : ' + error));
