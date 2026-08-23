@@ -1,5 +1,5 @@
 import { Router, RouterOutlet } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     selector: 'app-analisis',
     templateUrl: './analisis.component.html',
     styleUrls: ['./analisis.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, FormsModule, RouterOutlet]
 })
 export class AnalisisComponent implements OnInit {

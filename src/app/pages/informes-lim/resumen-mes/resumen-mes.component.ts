@@ -1,5 +1,5 @@
 import { ActivatedRoute } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 
 // import { Parte } from './../../../shared/models';
 import { ResumenService } from "./../../../shared/resumen.services";
@@ -9,6 +9,7 @@ import { UpperCasePipe, DatePipe } from "@angular/common";
     selector: "app-resumen-mes",
     templateUrl: "./resumen-mes.component.html",
     styleUrls: ["./resumen-mes.component.css"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [UpperCasePipe, DatePipe]
 })
 export class ResumenMesComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 // import { Hamaca } from '../../../shared/models';
 import { HamacasService } from '../../../shared/hamacas.service';
 import { RouterLink } from '@angular/router';
@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
     selector: 'app-hamacas-lista',
     templateUrl: './hamacas-lista.component.html',
     styleUrls: ['./hamacas-lista.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [RouterLink, DatePipe]
 })
 export class HamacasListaComponent implements OnInit {

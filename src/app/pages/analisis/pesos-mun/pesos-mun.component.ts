@@ -1,6 +1,6 @@
 import { AnalisisService } from '../../../shared/analisis.services';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Total } from './../../../shared/models';
 import { UpperCasePipe } from '@angular/common';
@@ -9,6 +9,7 @@ import { UpperCasePipe } from '@angular/common';
     selector: 'app-pesos-mun',
     templateUrl: './pesos-mun.component.html',
     styleUrls: ['./pesos-mun.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [UpperCasePipe]
 })
 export class PesosMunComponent implements OnInit {

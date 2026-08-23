@@ -40,7 +40,7 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ item.nombre }}</td>
                 <td>
-                  @if (elUltimo(item._id)) {
+                  @if (elUltimo(item._id!)) {
                     <div
                       class="alert alert-warning"
                       role="alert"
@@ -48,7 +48,7 @@
                       <div>
                         Fecha:
                         {{
-                        asUltimo?.lastFecha | date: "dd/MM/yyyy"
+                        $safeNavigationMigration(asUltimo?.lastFecha) | date: "dd/MM/yyyy"
                         }}
                       </div>
                       @if (asUltimo?.lastTrabajado > 0) {
@@ -125,12 +125,12 @@
                           >
                           Desde
                           {{
-                          asUltimo?.lastFecha_inicio
+                          $safeNavigationMigration(asUltimo?.lastFecha_inicio)
                           | date: "dd/MM/yyyy"
                           }}
                           <br />Hasta
                           {{
-                          asUltimo?.lastFecha_fin
+                          $safeNavigationMigration(asUltimo?.lastFecha_fin)
                           | date: "dd/MM/yyyy"
                           }}
                         </div>
@@ -149,8 +149,8 @@
                       </button>
                       @if (ventana == i && tipoVentana === 'e') {
                         <app-in-detalle-as
-                          [ffecha]="asUltimo?.lastFecha"
-                          [idd]="asUltimo?._id"
+                          [ffecha]="$safeNavigationMigration(asUltimo?.lastFecha)"
+                          [idd]="$safeNavigationMigration(asUltimo?._id)"
                           (upventana)="ventanaClick($event, 'e')"
                         ></app-in-detalle-as>
                       }
@@ -162,7 +162,7 @@
                     type="button"
                     class="btn btn-primary btn-sm"
                                 (click)="
-                                    insertaRapido(item._id, item.nombre, 1)
+                                    insertaRapido(item._id!, item.nombre, 1)
                                 "
                     >
                     TRA
@@ -171,7 +171,7 @@
                     type="button"
                     class="btn btn-success btn-sm"
                                 (click)="
-                                    insertaRapido(item._id, item.nombre, 2)
+                                    insertaRapido(item._id!, item.nombre, 2)
                                 "
                     >
                     DES
@@ -180,7 +180,7 @@
                     type="button"
                     class="btn btn-warning btn-sm"
                                 (click)="
-                                    insertaRapido(item._id, item.nombre, 3)
+                                    insertaRapido(item._id!, item.nombre, 3)
                                 "
                     >
                     FES
@@ -189,7 +189,7 @@
                     type="button"
                     class="btn btn-danger btn-sm"
                                 (click)="
-                                    insertaRapido(item._id, item.nombre, 4)
+                                    insertaRapido(item._id!, item.nombre, 4)
                                 "
                     >
                     BAJ
@@ -198,7 +198,7 @@
                     type="button"
                     class="btn btn-light btn-sm"
                                 (click)="
-                                    insertaRapido(item._id, item.nombre, 5)
+                                    insertaRapido(item._id!, item.nombre, 5)
                                 "
                     >
                     VAC
@@ -207,7 +207,7 @@
                     type="button"
                     class="btn btn-light btn-sm"
                                 (click)="
-                                    insertaRapido(item._id, item.nombre, 6)
+                                    insertaRapido(item._id!, item.nombre, 6)
                                 "
                     >
                     COR
@@ -216,7 +216,7 @@
                     type="button"
                     class="btn btn-light btn-sm"
                                 (click)="
-                                    insertaRapido(item._id, item.nombre, 7)
+                                    insertaRapido(item._id!, item.nombre, 7)
                                 "
                     >
                     VAA
@@ -228,26 +228,26 @@
                     >
                     Otro
                   </button>
-                  @if (yaExiste(item._id)) {
+                  @if (yaExiste(item._id!)) {
                     <div
                       class="alert alert-primary"
                       role="alert"
                       >
-                      @if (asDeldia?.trabajado > 0) {
+                      @if ((asDeldia?.trabajado ?? 0) > 0) {
                         <div
                           style="background-color: #24e9f7"
                           >
                           Trabajado: {{ asDeldia?.trabajado }}
                         </div>
                       }
-                      @if (asDeldia?.descanso > 0) {
+                      @if ((asDeldia?.descanso ?? 0) > 0) {
                         <div
                           style="background-color: #21f77a"
                           >
                           Descanso: {{ asDeldia?.descanso }}
                         </div>
                       }
-                      @if (asDeldia?.festivo > 0) {
+                      @if ((asDeldia?.festivo ?? 0) > 0) {
                         <div
                                     style="
                                         background-color: #f860f8;
@@ -257,14 +257,14 @@
                           Festivo: {{ asDeldia?.festivo }}
                         </div>
                       }
-                      @if (asDeldia?.vacaciones > 0) {
+                      @if ((asDeldia?.vacaciones ?? 0) > 0) {
                         <div
                           style="background-color: #f7ee70"
                           >
                           Vacaciones pend.: {{ asDeldia?.vacaciones }}
                         </div>
                       }
-                      @if (asDeldia?.disfrutadas > 0) {
+                      @if ((asDeldia?.disfrutadas ?? 0) > 0) {
                         <div
                           style="background-color: #f7bc3c"
                           >
@@ -272,7 +272,7 @@
                           {{ asDeldia?.disfrutadas }}
                         </div>
                       }
-                      @if (asDeldia?.baja > 0) {
+                      @if ((asDeldia?.baja ?? 0) > 0) {
                         <div
                                     style="
                                         background-color: #f73c3c;
@@ -282,12 +282,12 @@
                           Baja: {{ asDeldia?.baja }}
                         </div>
                       }
-                      @if (asDeldia?.justificado > 0) {
+                      @if ((asDeldia?.justificado ?? 0) > 0) {
                         <div>
                           Justificado: {{ asDeldia?.justificado }}
                         </div>
                       }
-                      @if (asDeldia?.injustificado > 0) {
+                      @if ((asDeldia?.injustificado ?? 0) > 0) {
                         <div
                                     style="
                                         background-color: #7c7c7c;
@@ -306,12 +306,12 @@
                           >
                           Desde
                           {{
-                          asDeldia?.fecha_inicio
+                          $safeNavigationMigration(asDeldia?.fecha_inicio)
                           | date: "dd/MM/yyyy"
                           }}
                           <br />Hasta
                           {{
-                          asDeldia?.fecha_fin | date: "dd/MM/yyyy"
+                          $safeNavigationMigration(asDeldia?.fecha_fin) | date: "dd/MM/yyyy"
                           }}
                         </div>
                       }
@@ -325,7 +325,7 @@
                   @if (ventana == i && tipoVentana === 'n') {
                     <app-in-detalle-as
                       [ffecha]="fecha"
-                      [idd]="item._id"
+                      [idd]="item._id!"
                       (upventana)="ventanaClick($event, 'n')"
                     ></app-in-detalle-as>
                   }

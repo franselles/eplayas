@@ -109,8 +109,8 @@
         <div class="card-body">
           <p class="card-text">
             <span class="like-pre">
-              {{ textos["texto_1"] }}
-              {{ textos["texto_2"] }}
+              {{ $any(textos)["texto_1"] }}
+              {{ $any(textos)["texto_2"] }}
             </span>
           </p>
         </div>

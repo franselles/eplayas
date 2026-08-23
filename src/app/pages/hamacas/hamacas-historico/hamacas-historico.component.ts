@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Hamaca, Acumulados } from '../../../shared/models';
 import { HamacasService } from '../../../shared/hamacas.service';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
@@ -10,16 +10,17 @@ import { RouterLink } from '@angular/router';
     selector: 'app-hamacas-historico',
     templateUrl: './hamacas-historico.component.html',
     styleUrls: ['./hamacas-historico.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, FormsModule, RouterLink, DatePipe]
 })
 export class HamacasHistoricoComponent implements OnInit {
 
-  public fecha1: string;
-  public fecha2: string;
-  public sector: number;
+  public fecha1: string = '';
+  public fecha2: string = '';
+  public sector: number = 1;
 
   public listaHamacas: Hamaca[] = [];
-  public acumuladoHamacas: Acumulados;
+  public acumuladoHamacas!: Acumulados;
 
   constructor(private hamacasService: HamacasService, private global: GlobalsPartes) { }
 
@@ -47,11 +48,13 @@ export class HamacasHistoricoComponent implements OnInit {
 
       this.hamacasService.getHamacasHistoricoRotas(this.fecha1, this.fecha2, this.sector)
       .subscribe(
-        (data: Acumulados) => {
+        {
+        next: (data: any) => {
           this.acumuladoHamacas = data[0];
         },
-        err => console.log(err)
-      );
+        error: (err) => console.log(err)
+      }
+    );
   }
 
 }

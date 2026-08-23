@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ import { GlobalsPartes } from './../../../shared/globalspartes.services';
     selector: 'app-partes-man-detalle',
     templateUrl: './partes-man-detalle.component.html',
     styleUrls: ['./partes-man-detalle.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule]
 })
 export class PartesManDetalleComponent implements OnInit {

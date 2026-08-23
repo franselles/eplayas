@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -10,6 +10,7 @@ import { OperariosService } from "./../../../shared/operarios.services";
     selector: "app-operarios-detalle",
     templateUrl: "./operarios-detalle.component.html",
     styleUrls: ["./operarios-detalle.component.css"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule]
 })
 export class OperariosDetalleComponent implements OnInit {

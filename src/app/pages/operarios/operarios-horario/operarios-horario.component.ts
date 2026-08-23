@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { OperariosService } from "../../../shared/operarios.services";
 import { Operario } from "../../../shared/models";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
@@ -8,6 +8,7 @@ import { UpperCasePipe } from "@angular/common";
     selector: "app-operarios-horario",
     templateUrl: "./operarios-horario.component.html",
     styleUrls: ["./operarios-horario.component.css"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, FormsModule, UpperCasePipe]
 })
 export class OperariosHorarioComponent implements OnInit {

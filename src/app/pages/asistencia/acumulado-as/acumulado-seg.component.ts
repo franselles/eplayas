@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { TotalAsistencia } from '../../../shared/models';
 
 @Component({
     selector: 'app-acumulado-seg',
     templateUrl: './acumulado-seg.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./acumulado-seg.component.css']
 })
 export class AcumuladoSegComponent implements OnInit, OnChanges {

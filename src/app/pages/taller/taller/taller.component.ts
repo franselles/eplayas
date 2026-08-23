@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VehiculosService } from '../../../shared/vehiculos.services';
 import { RespuestaAlertasITV } from '../../../shared/models';
@@ -7,6 +7,7 @@ import { RespuestaAlertasITV } from '../../../shared/models';
   selector: 'app-taller',
   imports: [CommonModule],
   templateUrl: './taller.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./taller.component.css'],
 })
 export class TallerComponent implements OnInit {

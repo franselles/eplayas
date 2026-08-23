@@ -7,7 +7,7 @@ import { HamacasListaComponent } from './hamacas-lista/hamacas-lista.component';
 import { LoggedInGuard } from '../../shared/logged-in.guard';
 import { HamacasService } from '../../shared/hamacas.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { BdService } from '../../shared/bd.services';
 import { HamacasHistoricoComponent } from './hamacas-historico/hamacas-historico.component';
 import { GlobalsPartes } from '../../shared/globalspartes.services';
@@ -30,6 +30,6 @@ const routes: Routes = [
         HamacasService,
         BdService,
         GlobalsPartes,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withXhr(), withInterceptorsFromDi())
     ] })
 export class HamacasModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia, Operario } from '../../../shared/models';
@@ -8,19 +8,20 @@ import { Asistencia, Operario } from '../../../shared/models';
     selector: 'app-in-detalle-as',
     templateUrl: './in-detalle-as.component.html',
     styleUrls: ['./in-detalle-as.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule]
 })
 export class InDetalleAsComponent implements OnInit {
 
-  @Input() ffecha: string;
-  @Input() idd: string;
+  @Input() ffecha: string = '';
+  @Input() idd: string = '';
   @Output() upventana: EventEmitter<number> = new EventEmitter<number>();
 
-  public asForm: UntypedFormGroup;
-  public asistencia: Asistencia;
+  public asForm!: UntypedFormGroup;
+  public asistencia!: Asistencia;
 
-  public enEdicion: boolean;
-  public id: string;
+  public enEdicion: boolean = false;
+  public id: string = '';
 
   constructor(private fb: UntypedFormBuilder, private asistenciaSercice: AsistenciaService) { }
 
@@ -52,29 +53,32 @@ export class InDetalleAsComponent implements OnInit {
 
 
 abreDatos(fe: string, id: string) {
-  this.asistenciaSercice.getAsistencia(fe, id).subscribe(
-    (data: Asistencia) => {
-      this.asistencia = data[0];
-      if (data[0] === undefined) {
+  this.asistenciaSercice.getAsistencia(fe, id).subscribe({
+    next: (data: any) => {
+      const asistenciaActual = data[0];
+      this.asistencia = asistenciaActual;
+
+      if (asistenciaActual === undefined) {
         this.enEdicion = false;
         this.asForm.reset();
         this.iniciaDatosForm();
-        this.asForm.patchValue({fecha: fe});
-        this.asistenciaSercice.getOperario(id).subscribe(
-          (ope: Operario) => {
-            this.asForm.patchValue({nombre: ope.nombre});
-          }, err => console.log(err)
-        );
+        this.asForm.patchValue({ fecha: fe });
+        this.asistenciaSercice.getOperario(id).subscribe({
+          next: (ope: Operario) => {
+            this.asForm.patchValue({ nombre: ope.nombre });
+          },
+          error: (err) => console.log(err)
+        });
       } else {
         this.enEdicion = true;
         this.cargaDatosForm(this.asistencia);
       }
     },
-    err => console.log(err)
-  );
+    error: (err) => console.log(err)
+  });
 }
 
-isEmpty(obj) {
+isEmpty(obj: any) {
   for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         return false;
@@ -120,12 +124,16 @@ cargaDatosForm(asis: Asistencia) {
 onSubmit(datos: any) {
   if (this.enEdicion === true) {
     datos.value.id_op = this.id;
-    this.asistenciaSercice.updateAsistencia(this.asistencia._id, datos.value).subscribe(() => {
+    this.asistenciaSercice.updateAsistencia(this.asistencia._id!, datos.value).subscribe(
+      {
+       next:  () => {
       console.log('Actualizado');
       this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
       this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
       this.upventana.emit(-1);
-    }, error => console.error('Error updating : ' + error));
+      },
+     error: error => console.error('Error updating : ' + error)
+     });
   } else {
     datos.value.id_op = this.id;
     this.asistenciaSercice.addAsistencia(datos.value).subscribe(() => {
@@ -150,12 +158,18 @@ onCancelar() {
  */
 
 onBorrar(datos: any) {
-  this.asistenciaSercice.removeAsistencia(this.asistencia._id, datos.value).subscribe(() => {
+  this.asistenciaSercice.removeAsistencia(this.asistencia._id!, datos.value).subscribe(
+    {
+     next:   () => {
     console.log('Borrado');
     this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
     this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
     this.upventana.emit(-1);
-  }, error => console.error('Error removing : ' + error));
-}
+  }, error: error => console.error('Error removing : ' + error) 
+    });
+  }}
+    
 
-}
+
+
+

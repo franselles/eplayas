@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
 import { LoggedInGuard } from "../../shared/logged-in.guard";
 import { OperariosDetalleComponent } from "./operarios-detalle/operarios-detalle.component";
 import { OperariosListaComponent } from "./operarios-lista/operarios-lista.component";
@@ -39,5 +39,5 @@ const routes: Routes = [
         FormsModule,
         RouterModule.forChild(routes), OperariosDetalleComponent,
         OperariosListaComponent,
-        OperariosHorarioComponent], providers: [OperariosService, BdService, provideHttpClient(withInterceptorsFromDi())] })
+        OperariosHorarioComponent], providers: [OperariosService, BdService, provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class OperariosModule {}

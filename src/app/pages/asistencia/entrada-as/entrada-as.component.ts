@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { AsistenciaService } from "../../../shared/asistencia.services";
 import { Router } from "@angular/router";
 import { Operario, Asistencia } from "../../../shared/models";
@@ -12,13 +12,14 @@ import { GlobalsAsistencia } from "./../../../shared/globalasistencia.services";
     selector: "app-entrada-as",
     templateUrl: "./entrada-as.component.html",
     styleUrls: ["./entrada-as.component.css"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, FormsModule, InDetalleAsComponent, DatePipe],
 })
 export class EntradaAsComponent implements OnInit {
     public operarios: Operario[] = [];
-    public fecha: string;
-    private asistencia: Asistencia;
-    public asDeldia: Asistencia;
+    public fecha: string = "";
+    private asistencia!: Asistencia;
+    public asDeldia: Asistencia | undefined;
     public asUltimo: any;
     public ventana = -1;
     public tipoVentana = "n";

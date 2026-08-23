@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia } from '../../../shared/models';
 import { DatePipe } from '@angular/common';
@@ -8,6 +8,7 @@ import { InDetalleAsComponent } from '../entrada-as/in-detalle-as.component';
     selector: 'app-detalle-acu',
     templateUrl: './detalle-acu.component.html',
     styleUrls: ['./detalle-acu.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [InDetalleAsComponent, DatePipe]
 })
 export class DetalleAcuComponent implements OnInit, OnChanges {

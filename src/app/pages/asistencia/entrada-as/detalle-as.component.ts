@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsistenciaService } from '../../../shared/asistencia.services';
@@ -9,15 +9,16 @@ import { Asistencia, Operario } from '../../../shared/models';
     selector: 'app-detalle-as',
     templateUrl: './detalle-as.component.html',
     styleUrls: ['./detalle-as.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule]
 })
 export class DetalleAsComponent implements OnInit {
 
-  public asForm: UntypedFormGroup;
-  public asistencia: Asistencia;
+  public asForm!: UntypedFormGroup;
+  public asistencia!: Asistencia;
 
-  public enEdicion: boolean;
-  public id: string;
+  public enEdicion: boolean = false;
+  public id: string = "";
 
   constructor(private router: Router, private fb: UntypedFormBuilder, private route: ActivatedRoute,
     private asistenciaSercice: AsistenciaService) { }
@@ -57,33 +58,36 @@ export class DetalleAsComponent implements OnInit {
 
 
   abreDatos(fe: string, id: string) {
-    this.asistenciaSercice.getAsistencia(fe, id).subscribe(
-      (data: Asistencia) => {
+    this.asistenciaSercice.getAsistencia(fe, id).subscribe({
+      next: (data: any) => {
         this.asistencia = data[0];
+
         if (data[0] === undefined) {
           this.enEdicion = false;
           this.asForm.reset();
           this.iniciaDatosForm();
-          this.asForm.patchValue({fecha: fe});
-          this.asistenciaSercice.getOperario(id).subscribe(
-            (ope: Operario) => {
-              this.asForm.patchValue({nombre: ope.nombre});
-            }, err => console.log(err)
-          );
+          this.asForm.patchValue({ fecha: fe });
+
+          this.asistenciaSercice.getOperario(id).subscribe({
+            next: (ope: Operario) => {
+              this.asForm.patchValue({ nombre: ope.nombre });
+            },
+            error: (err) => console.log(err)
+          });
         } else {
           this.enEdicion = true;
           this.cargaDatosForm(this.asistencia);
         }
       },
-      err => console.log(err)
-    );
+      error: (err) => console.log(err)
+    });
   }
 
-  isEmpty(obj) {
+  isEmpty(obj: any) {
     for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          return false;
-        }
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        return false;
+      }
     }
     return true;
   }
@@ -97,7 +101,8 @@ export class DetalleAsComponent implements OnInit {
       disfrutadas: 0,
       baja: 0,
       justificado: 0,
-      injustificado: 0});
+      injustificado: 0
+    });
   }
 
   cargaDatosForm(asis: Asistencia) {
@@ -115,7 +120,8 @@ export class DetalleAsComponent implements OnInit {
       injustificado: asis.injustificado,
       fecha_inicio: asis.fecha_inicio,
       fecha_fin: asis.fecha_fin,
-      observacion: asis.observacion});
+      observacion: asis.observacion
+    });
   }
 
   /*
@@ -125,20 +131,26 @@ export class DetalleAsComponent implements OnInit {
   onSubmit(datos: any) {
     if (this.enEdicion === true) {
       datos.value.id_op = this.id;
-      this.asistenciaSercice.updateAsistencia(this.asistencia._id, datos.value).subscribe(() => {
-        console.log('Actualizado');
-        this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-        this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
-        this.router.navigate(['/dash/asistencia/entrada']);
-      }, error => console.error('Error updating : ' + error));
+      this.asistenciaSercice.updateAsistencia(this.asistencia._id!, datos.value).subscribe(
+        () => {
+          console.log('Actualizado');
+          this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
+          this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
+          this.router.navigate(['/dash/asistencia/entrada']);
+        },
+        (error) => console.error('Error updating : ' + error)
+      );
     } else {
       datos.value.id_op = this.id;
-      this.asistenciaSercice.addAsistencia(datos.value).subscribe(() => {
-        console.log('Salvado');
-        this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-        this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
-        this.router.navigate(['/dash/asistencia/entrada']);
-      }, error => console.error('Error creating : ' + error));
+      this.asistenciaSercice.addAsistencia(datos.value).subscribe(
+        () => {
+          console.log('Salvado');
+          this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
+          this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
+          this.router.navigate(['/dash/asistencia/entrada']);
+        },
+        (error) => console.error('Error creating : ' + error)
+      );
     }
   }
 
@@ -155,12 +167,14 @@ export class DetalleAsComponent implements OnInit {
    */
 
   onBorrar(datos: any) {
-    this.asistenciaSercice.removeAsistencia(this.asistencia._id, datos.value).subscribe(() => {
-      console.log('Borrado');
-      this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
-      this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
-      this.router.navigate(['/dash/asistencia/entrada']);
-    }, error => console.error('Error removing : ' + error));
+    this.asistenciaSercice.removeAsistencia(this.asistencia._id!, datos.value).subscribe({
+      next: () => {
+        console.log('Borrado');
+        this.asistenciaSercice.listaAsistenciasDia(datos.value.fecha);
+        this.asistenciaSercice.listaAsistenciasUltimas(datos.value.fecha);
+        this.router.navigate(['/dash/asistencia/entrada']);
+      },
+      error: (error) => console.error('Error removing : ' + error)
+    });
   }
-
 }

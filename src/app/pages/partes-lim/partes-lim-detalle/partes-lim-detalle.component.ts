@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -14,6 +14,7 @@ import { GlobalsPartes } from "./../../../shared/globalspartes.services";
     selector: "app-partes-lim-detalle",
     templateUrl: "./partes-lim-detalle.component.html",
     styleUrls: ["./partes-lim-detalle.component.css"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule]
 })
 export class PartesLimDetalleComponent implements OnInit {

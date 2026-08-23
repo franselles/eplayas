@@ -40,7 +40,7 @@ export class AuthenticationService {
         this.router.navigate(["login"]);
     }
 
-    login(user) {
+    login(user: User): boolean {
         const authenticatedUser: any = users.find(
             (p) => p.password === user.password,
         );

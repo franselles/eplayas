@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 
 import {
@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './km.component.html',
   styleUrl: './km.component.css',
   imports: [ReactiveFormsModule, RouterLink],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class KmComponent implements OnInit {

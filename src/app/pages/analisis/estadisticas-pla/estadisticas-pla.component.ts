@@ -1,12 +1,13 @@
 import { AnalisisService } from '../../../shared/analisis.services';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
 
 @Component({
     selector: 'app-estadisticas-pla',
     templateUrl: './estadisticas-pla.component.html',
     styleUrls: ['./estadisticas-pla.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [UpperCasePipe]
 })
 export class EstadisticasPlaComponent implements OnInit {

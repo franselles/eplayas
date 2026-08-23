@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 import { Total } from "./../../../shared/models";
@@ -9,6 +9,7 @@ import { UpperCasePipe, DatePipe } from "@angular/common";
     selector: "app-resumen-dia",
     templateUrl: "./resumen-dia.component.html",
     styleUrls: ["./resumen-dia.component.css"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [UpperCasePipe, DatePipe]
 })
 export class ResumenDiaComponent implements OnInit {

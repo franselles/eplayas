@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { Asistencia } from '../../../shared/models';
 import { DatePipe } from '@angular/common';
@@ -8,13 +8,14 @@ import { InDetalleAsComponent } from '../entrada-as/in-detalle-as.component';
     selector: 'app-detalle-seg',
     templateUrl: './detalle-seg.component.html',
     styleUrls: ['./detalle-seg.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [InDetalleAsComponent, DatePipe]
 })
 export class DetalleSegComponent implements OnInit, OnChanges {
 
-  @Input() idop: string;
-  @Input() fechai: string;
-  @Input() fechaf: string;
+  @Input() idop: string = '';
+  @Input() fechai: string = '';
+  @Input() fechaf: string = '';
 
   public ventana = -1;
   public tipoVentana = 'n';

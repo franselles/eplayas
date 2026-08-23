@@ -5,8 +5,9 @@ import { Routes } from "@angular/router";
 import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {
-    provideHttpClient,
-    withInterceptorsFromDi,
+  provideHttpClient,
+  withInterceptorsFromDi,
+  withXhr
 } from "@angular/common/http";
 import { registerLocaleData } from "@angular/common";
 
@@ -83,7 +84,7 @@ const routes: Routes = [
         GlobalsPartes,
         GlobalsAsistencia,
         { provide: LOCALE_ID, useValue: "es" },
-        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClient(withXhr(), withInterceptorsFromDi()),
     ],
 })
 export class AsistenciaModule {}

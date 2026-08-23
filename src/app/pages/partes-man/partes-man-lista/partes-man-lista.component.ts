@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Mantenimiento } from './../../../shared/models';
 import { MantenimientoService } from './../../../shared/mantenimiento.services';
@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     selector: 'app-partes-man-lista',
     templateUrl: './partes-man-lista.component.html',
     styleUrls: ['./partes-man-lista.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [RouterLink, ReactiveFormsModule, FormsModule]
 })
 export class PartesManListaComponent implements OnInit {

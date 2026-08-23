@@ -1,5 +1,5 @@
 import { BdService } from '../../shared/bd.services';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { AnalisisService } from '../../shared/analisis.services';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -30,6 +30,6 @@ const routes: Routes = [
         EstadisticasPlaComponent], providers: [
         AnalisisService,
         BdService,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withXhr(), withInterceptorsFromDi())
     ] })
 export class AnalisisModule { }

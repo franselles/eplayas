@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Vehiculo } from '../../../shared/models';
 import { VehiculosService } from '../../../shared/vehiculos.services';
@@ -14,6 +14,7 @@ import {
   selector: 'app-revision',
   imports: [ReactiveFormsModule],
   templateUrl: './revision.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './revision.component.css',
 })
 export class RevisionComponent implements OnInit {

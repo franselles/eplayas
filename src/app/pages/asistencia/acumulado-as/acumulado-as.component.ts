@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
 import { Operario } from '../../../shared/models';
@@ -11,6 +11,7 @@ import { DetalleAcuComponent } from './detalle-acu.component';
     selector: 'app-acumulado-as',
     templateUrl: './acumulado-as.component.html',
     styleUrls: ['./acumulado-as.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, FormsModule, AcumuladoSegComponent, DetalleAcuComponent]
 })
 export class AcumuladoAsComponent implements OnInit {

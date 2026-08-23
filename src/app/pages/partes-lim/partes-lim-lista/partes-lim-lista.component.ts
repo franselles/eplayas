@@ -1,5 +1,5 @@
 import { Router, RouterLink } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 
 import { Parte } from "./../../../shared/models";
 import { PartesService } from "./../../../shared/partes.services";
@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     selector: "app-partes-lim-lista",
     templateUrl: "./partes-lim-lista.component.html",
     styleUrls: ["./partes-lim-lista.component.css"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [RouterLink, ReactiveFormsModule, FormsModule]
 })
 export class PartesLimListaComponent implements OnInit {

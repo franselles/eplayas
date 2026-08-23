@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
@@ -9,6 +9,7 @@ import { Cuadrante } from "../../../shared/models"
   selector: 'app-cuadrante-as',
   imports: [FormsModule, CuadranteDetComponent],
   templateUrl: './cuadrante-as.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './cuadrante-as.component.css',
 })
 
@@ -21,8 +22,8 @@ export class CuadranteAsComponent implements OnInit {
   globalPartes = inject(GlobalsPartes);
 
   cuadrante: Cuadrante[] = [];
-  fechai: string;
-  fechaf: string;
+  fechai: string = '';
+  fechaf: string = '';
 
   ngOnInit() {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Operario } from '../../../shared/models';
 import { AsistenciaService } from '../../../shared/asistencia.services';
 import { GlobalsPartes } from '../../../shared/globalspartes.services';
@@ -10,14 +10,15 @@ import { DetalleSegComponent } from './detalle-seg.component';
     selector: 'app-seguimiento-as',
     templateUrl: './seguimiento-as.component.html',
     styleUrls: ['./seguimiento-as.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ReactiveFormsModule, FormsModule, DetalleSegComponent]
 })
 export class SeguimientoAsComponent implements OnInit {
 
 
-  public fechai: string;
-  public fechaf: string;
-  public idop: string;
+  public fechai: string = '';
+  public fechaf: string = '';
+  public idop: string = '';
   public listaOperarios: Operario[] = [];
 
   constructor(private asistenciaService: AsistenciaService, private globalPartes: GlobalsPartes) {

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TallerComponent } from './taller/taller.component';
 import { KmComponent } from './km/km.component';
 import { VehiculosService } from '../../shared/vehiculos.services';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { BdService } from '../../shared/bd.services';
 import { RevisionComponent } from './revision/revision.component';
 import { ReparacionComponent } from './reparacion/reparacion.component';
@@ -23,6 +23,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         TallerComponent
     ],
-    providers: [VehiculosService, BdService, provideHttpClient(withInterceptorsFromDi())]
+    providers: [VehiculosService, BdService, provideHttpClient(withXhr(), withInterceptorsFromDi())]
 })
 export class TallerModule { }

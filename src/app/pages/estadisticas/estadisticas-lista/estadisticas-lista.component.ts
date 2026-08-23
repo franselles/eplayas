@@ -1,5 +1,5 @@
 import { EstadisticasService } from '../../../shared/estadisticas.services';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Estadistica } from './../../../shared/models';
 import { RouterLink } from '@angular/router';
@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
     selector: 'app-estadisticas-lista',
     templateUrl: './estadisticas-lista.component.html',
     styleUrls: ['./estadisticas-lista.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [RouterLink]
 })
 export class EstadisticasListaComponent implements OnInit {
