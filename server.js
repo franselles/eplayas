@@ -817,6 +817,7 @@ app.post("/api/partes", async function (req, res) {
 
     newParte.year = splitFecha[0];
     newParte.month = splitFecha[1];
+    delete newParte._id;
 
     try {
         const doc = await db.collection(PARTES_COLLECTION).insertOne(newParte);
@@ -885,6 +886,7 @@ app.post("/api/partes/duplica", async function (req, res) {
     var partes = req.body;
 
     partes.forEach((item) => {
+        delete item._id;
         item.createfecha = new Date();
         let splitFecha = item.fecha.split("-");
         item.year = splitFecha[0];

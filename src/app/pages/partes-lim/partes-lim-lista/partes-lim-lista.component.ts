@@ -46,7 +46,7 @@ export class PartesLimListaComponent implements OnInit {
 
     clonarParte(parte: Parte) {
         let clonParte: Parte = { ...parte };
-        delete clonParte._id;
+        // delete clonParte._id; // No hace falta borrar el _id, ya que al ser un objeto independiente, no se comparte el mismo _id.
         clonParte.fecha = this.clonFecha;
         this.partesService.addParte(clonParte).subscribe(
             () => {
@@ -65,7 +65,7 @@ export class PartesLimListaComponent implements OnInit {
 
         clonListaPartes.forEach((item) => {
             item.fecha = this.clonFecha;
-            delete item._id;
+            // delete item._id; // No hace falta borrar el _id, ya que al ser un array de objetos, cada objeto es independiente y no se comparte el mismo _id.
         });
 
         this.partesService.addPartes(clonListaPartes).subscribe(
