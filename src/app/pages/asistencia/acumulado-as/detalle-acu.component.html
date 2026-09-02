@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (item of asistencia; track item; let i = $index) {
+      @for (item of asistencia; track item._id; let i = $index) {
         <tr>
           <th scope="row">{{ i + 1 }}</th>
           <td>

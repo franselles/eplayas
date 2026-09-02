@@ -43,6 +43,9 @@ export class DetalleSegComponent implements OnInit, OnChanges {
   }
 
   actualizaData() {
+    if (!this.idop) {
+      return;
+    }
     this.asistenciaService.getAsistenciaSegimiento(this.fechai, this.fechaf, this.idop).subscribe(
       (data: Asistencia[]) => {
         this.asistencia = data;
