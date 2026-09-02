@@ -529,7 +529,7 @@ app.get(
         ]);
         try {
             const data = await aggCursor.toArray();
-            res.status(200).json(data);
+            res.status(200).json(data[0]);
         } catch (error) {
             handleError(res, error.message, "Failed to get aggregate del dia.");
         }

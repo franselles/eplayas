@@ -46,10 +46,12 @@ export class AcumuladoSegComponent implements OnInit, OnChanges {
   }
 
   actualizaData() {
+    if (!this.idop) {
+      return
+    }
     this.asistenciaService.getAsistenciaSegAcumulado(this.fechai, this.fechaf, this.idop).subscribe({
       next: (data: TotalAsistencia) => {
         this.totales = data;
-        console.log('Totales:', this.totales);
       },
       error: (err) => console.log(err)
     });

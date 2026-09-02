@@ -49,6 +49,9 @@ export class DetalleAcuComponent implements OnInit, OnChanges {
   }
 
   actualizaData() {
+    if (!this.idop || !this.concepto) {
+      return
+    }
     this.asistenciaService.getAsistenciaSegimientoAcumulado(this.fechai, this.fechaf, this.idop, this.concepto).subscribe(
       (data: Asistencia[]) => {
         this.asistencia = data;
